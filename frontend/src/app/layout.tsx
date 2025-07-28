@@ -5,6 +5,8 @@ import { Providers } from '@/components/Providers';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Toaster } from 'react-hot-toast';
+import { StagewiseToolbar } from '@stagewise/toolbar-next';
+import ReactPlugin from '@stagewise-plugins/react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -99,6 +101,11 @@ export default function RootLayout({
                   secondary: '#fff',
                 },
               },
+            }}
+          />
+          <StagewiseToolbar 
+            config={{
+              plugins: [ReactPlugin],
             }}
           />
         </Providers>

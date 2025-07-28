@@ -7,7 +7,9 @@ import { Button } from '@/components/ui/Button';
 import { ArrowRight, Star, ShoppingBag, Heart, Truck, Shield, RotateCcw } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
 import { useWishlist } from '@/lib/hooks/useWishlist';
+import { useCart } from '@/lib/hooks/useCart';
 import OptimizedImageCarousel from '@/components/HeroSection/OptimizedImageCarousel';
+import toast from 'react-hot-toast';
 
 // Données temporaires pour la démo
 const featuredProducts = [
@@ -259,6 +261,30 @@ const categories = [
 
 export default function HomePage() {
   const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist();
+  const { addToCart } = useCart();
+
+  const handleAddToCart = (product: any, e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    // Utiliser les valeurs par défaut pour la démo
+    const defaultSize = product.sizes?.[0] || 'Unique';
+    const defaultColor = product.colors?.[0]?.name || 'Standard';
+    
+    addToCart(product, 1, defaultSize, defaultColor);
+    
+    // Afficher une notification de confirmation
+    toast.success(`${product.name} ajouté au panier !`, {
+      duration: 2000,
+      position: 'top-center',
+      style: {
+        background: '#10B981',
+        color: '#fff',
+        borderRadius: '8px',
+        fontSize: '14px',
+      },
+    });
+  };
 
   return (
     <div className="min-h-screen-mobile">
@@ -389,6 +415,7 @@ export default function HomePage() {
                   </div>
                   <div className="absolute bottom-3 left-3 right-3">
                     <button 
+                      onClick={(e) => handleAddToCart(product, e)}
                       className="w-full bg-black text-white py-2 px-4 rounded-lg text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center mobile-button"
                       aria-label={`Ajouter ${product.name} au panier`}
                     >
