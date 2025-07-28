@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/Input';
 import { ProductImage } from '@/components/ui/ProductImage';
 import { ProductModal } from '@/components/ui/ProductModal';
 import { useCart } from '@/lib/hooks/useCart';
+import { useWishlist } from '@/lib/hooks/useWishlist';
 import { 
   Filter, 
   Grid, 
@@ -42,6 +43,7 @@ const priceRanges = [
 function ProductsPageContent() {
   const searchParams = useSearchParams();
   const { addToCart } = useCart();
+  const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist();
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [showFilters, setShowFilters] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
@@ -306,10 +308,21 @@ function ProductsPageContent() {
                   />
                   <div className="absolute top-2 xs:top-3 right-2 xs:right-3 z-10">
                     <button 
-                      className="p-1.5 xs:p-2 bg-white rounded-full shadow-sm hover:bg-gray-50 transition-colors h-8 w-8 xs:h-10 xs:w-10 flex items-center justify-center"
-                      aria-label="Ajouter aux favoris"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (isInWishlist(product.id)) {
+                          removeFromWishlist(product.id);
+                        } else {
+                          addToWishlist(product);
+                        }
+                      }}
+                      className={`p-1.5 xs:p-2 bg-white rounded-full shadow-sm hover:bg-gray-50 transition-colors h-8 w-8 xs:h-10 xs:w-10 flex items-center justify-center ${
+                        isInWishlist(product.id) ? 'text-red-500' : 'text-gray-600'
+                      }`}
+                      aria-label={isInWishlist(product.id) ? 'Retirer des favoris' : 'Ajouter aux favoris'}
                     >
-                      <Heart className="h-3 w-3 xs:h-4 xs:w-4 text-gray-600" />
+                      <Heart className={`h-3 w-3 xs:h-4 xs:w-4 ${isInWishlist(product.id) ? 'fill-current' : 'fill-none'}`} />
                     </button>
                   </div>
                   <div className="absolute bottom-2 xs:bottom-3 left-2 xs:left-3 right-2 xs:right-3">
@@ -378,7 +391,26 @@ function ProductsPageContent() {
                   />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-medium text-gray-900 mb-1 text-xs xs:text-sm sm:text-base">{product.name}</h3>
+                  <div className="flex items-start justify-between mb-1">
+                    <h3 className="font-medium text-gray-900 text-xs xs:text-sm sm:text-base flex-1">{product.name}</h3>
+                    <button 
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (isInWishlist(product.id)) {
+                          removeFromWishlist(product.id);
+                        } else {
+                          addToWishlist(product);
+                        }
+                      }}
+                      className={`p-1.5 bg-white rounded-full shadow-sm hover:bg-gray-50 transition-colors h-8 w-8 flex items-center justify-center ml-2 ${
+                        isInWishlist(product.id) ? 'text-red-500' : 'text-gray-600'
+                      }`}
+                      aria-label={isInWishlist(product.id) ? 'Retirer des favoris' : 'Ajouter aux favoris'}
+                    >
+                      <Heart className={`h-3 w-3 ${isInWishlist(product.id) ? 'fill-current' : 'fill-none'}`} />
+                    </button>
+                  </div>
                   <div className="flex items-center mb-2">
                     <div className="flex items-center">
                       {[...Array(5)].map((_, i) => (

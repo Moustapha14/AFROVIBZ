@@ -1,171 +1,231 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
 import { ArrowRight, Star, ShoppingBag, Heart, Truck, Shield, RotateCcw } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
+import { useWishlist } from '@/lib/hooks/useWishlist';
 import OptimizedImageCarousel from '@/components/HeroSection/OptimizedImageCarousel';
-import type { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: 'AFRO🗼VIBZ - Mode Africaine Moderne & Tech | Livraison Rapide au Gabon',
-  description: 'Découvrez notre collection unique de mode africaine contemporaine et d\'accessoires tech. Livraison rapide partout au Gabon. Vêtements traditionnels et modernes, smartphones, ordinateurs.',
-  keywords: ['mode africaine', 'vêtements', 'tech', 'smartphones', 'ordinateurs', 'Gabon', 'livraison', 'fashion', 'afrovibz', 'wax', 'pagne', 'boubou'],
-  authors: [{ name: 'AFRO🗼VIBZ' }],
-  creator: 'AFRO🗼VIBZ',
-  publisher: 'AFRO🗼VIBZ',
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
-  metadataBase: new URL('https://afrovibz.ga'),
-  alternates: {
-    canonical: '/',
-  },
-  openGraph: {
-    title: 'AFRO🗼VIBZ - Mode Africaine Moderne & Tech',
-    description: 'Collection exclusive de mode africaine contemporaine et d\'accessoires tech. Livraison rapide au Gabon.',
-    type: 'website',
-    locale: 'fr_FR',
-    siteName: 'AFRO🗼VIBZ',
-    images: [
-      {
-        url: '/images/og-homepage.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'AFRO🗼VIBZ - Mode Africaine Moderne & Tech',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'AFRO🗼VIBZ - Mode Africaine Moderne & Tech',
-    description: 'Collection exclusive de mode africaine contemporaine et d\'accessoires tech. Livraison rapide au Gabon.',
-    images: ['/images/og-homepage.jpg'],
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-};
 
 // Données temporaires pour la démo
 const featuredProducts = [
   {
     id: '1',
     name: 'Sac Hexagonal Élégant',
+    description: 'Un sac élégant avec une forme hexagonale unique',
     price: 25000,
     originalPrice: 35000,
-    image: '/images/products/sac-hexagonal.jpg',
+    category: 'accessoires',
+    images: ['/images/products/sac-hexagonal.jpg'],
+    colors: [{ name: 'Noir', hex: '#000000', stock: 10 }],
+    sizes: ['Unique'],
+    stock: 15,
+    tags: ['sac', 'élégant', 'hexagonal'],
+    isActive: true,
     rating: 4.5,
     reviews: 128,
+    createdAt: new Date('2024-01-01'),
+    updatedAt: new Date('2024-01-01'),
   },
   {
     id: '2',
     name: 'Sac Noir Moderne',
+    description: 'Sac moderne en cuir noir de qualité',
     price: 18000,
     originalPrice: 25000,
-    image: '/images/products/sac-noir.jpg',
+    category: 'accessoires',
+    images: ['/images/products/sac-noir.jpg'],
+    colors: [{ name: 'Noir', hex: '#000000', stock: 8 }],
+    sizes: ['Unique'],
+    stock: 12,
+    tags: ['sac', 'moderne', 'cuir'],
+    isActive: true,
     rating: 4.8,
     reviews: 95,
+    createdAt: new Date('2024-01-01'),
+    updatedAt: new Date('2024-01-01'),
   },
   {
     id: '3',
     name: 'Sac Blanc Poignée Dorée',
+    description: 'Sac blanc avec poignée dorée élégante',
     price: 12000,
     originalPrice: 18000,
-    image: '/images/products/sac-blanc.jpg',
+    category: 'accessoires',
+    images: ['/images/products/sac-blanc.jpg'],
+    colors: [{ name: 'Blanc', hex: '#FFFFFF', stock: 6 }],
+    sizes: ['Unique'],
+    stock: 10,
+    tags: ['sac', 'blanc', 'doré'],
+    isActive: true,
     rating: 4.3,
     reviews: 67,
+    createdAt: new Date('2024-01-01'),
+    updatedAt: new Date('2024-01-01'),
   },
   {
     id: '4',
     name: 'Sac Rouge Charme Cerise',
+    description: 'Sac rouge charmant avec finitions soignées',
     price: 45000,
     originalPrice: 60000,
-    image: '/images/products/sac-rouge.jpg',
+    category: 'accessoires',
+    images: ['/images/products/sac-rouge.jpg'],
+    colors: [{ name: 'Rouge', hex: '#FF0000', stock: 4 }],
+    sizes: ['Unique'],
+    stock: 8,
+    tags: ['sac', 'rouge', 'charmant'],
+    isActive: true,
     rating: 4.7,
     reviews: 156,
+    createdAt: new Date('2024-01-01'),
+    updatedAt: new Date('2024-01-01'),
   },
   {
     id: '5',
     name: 'Sac Rose Élégant',
+    description: 'Sac rose élégant avec finitions soignées',
     price: 85000,
     originalPrice: 95000,
-    image: '/images/products/sac-rose.jpg',
+    category: 'accessoires',
+    images: ['/images/products/sac-rose.jpg'],
+    colors: [{ name: 'Rose', hex: '#FFC0CB', stock: 7 }],
+    sizes: ['Unique'],
+    stock: 9,
+    tags: ['sac', 'rose', 'élégant'],
+    isActive: true,
     rating: 4.9,
     reviews: 342,
+    createdAt: new Date('2024-01-01'),
+    updatedAt: new Date('2024-01-01'),
   },
   {
     id: '6',
     name: 'Sac Vert Naturel',
+    description: 'Sac vert naturel avec matériaux écologiques',
     price: 120000,
     originalPrice: 135000,
-    image: '/images/products/sac-vert.jpg',
+    category: 'accessoires',
+    images: ['/images/products/sac-vert.jpg'],
+    colors: [{ name: 'Vert', hex: '#228B22', stock: 5 }],
+    sizes: ['Unique'],
+    stock: 6,
+    tags: ['sac', 'vert', 'naturel'],
+    isActive: true,
     rating: 4.8,
     reviews: 189,
+    createdAt: new Date('2024-01-01'),
+    updatedAt: new Date('2024-01-01'),
   },
   {
     id: '7',
     name: 'Robe Africaine Élégante',
+    description: 'Robe africaine élégante aux motifs traditionnels',
     price: 45000,
     originalPrice: 55000,
-    image: '/images/products/WhatsApp Image 2025-07-27 at 14.52.58 (1).jpeg',
+    category: 'femmes',
+    images: ['/images/products/WhatsApp Image 2025-07-27 at 14.52.58 (1).jpeg'],
+    colors: [{ name: 'Multicolore', hex: '#FFD700', stock: 12 }],
+    sizes: ['S', 'M', 'L', 'XL'],
+    stock: 20,
+    tags: ['robe', 'africain', 'élégant'],
+    isActive: true,
     rating: 4.6,
     reviews: 89,
+    createdAt: new Date('2024-01-01'),
+    updatedAt: new Date('2024-01-01'),
   },
   {
     id: '8',
     name: 'Boubou Traditionnel',
+    description: 'Boubou traditionnel africain de qualité',
     price: 35000,
     originalPrice: 45000,
-    image: '/images/products/WhatsApp Image 2025-07-27 at 14.52.58 (2).jpeg',
+    category: 'hommes',
+    images: ['/images/products/WhatsApp Image 2025-07-27 at 14.52.58 (2).jpeg'],
+    colors: [{ name: 'Bleu', hex: '#0000FF', stock: 8 }],
+    sizes: ['S', 'M', 'L', 'XL'],
+    stock: 15,
+    tags: ['boubou', 'traditionnel', 'africain'],
+    isActive: true,
     rating: 4.4,
     reviews: 156,
+    createdAt: new Date('2024-01-01'),
+    updatedAt: new Date('2024-01-01'),
   },
   {
     id: '9',
     name: 'Tenue Enfant Moderne',
+    description: 'Tenue moderne pour enfants avec style africain',
     price: 15000,
     originalPrice: 20000,
-    image: '/images/products/WhatsApp Image 2025-07-27 at 14.52.58 (3).jpeg',
+    category: 'enfants',
+    images: ['/images/products/WhatsApp Image 2025-07-27 at 14.52.58 (3).jpeg'],
+    colors: [{ name: 'Rouge', hex: '#FF0000', stock: 10 }],
+    sizes: ['2A', '4A', '6A', '8A'],
+    stock: 25,
+    tags: ['enfant', 'moderne', 'africain'],
+    isActive: true,
     rating: 4.7,
     reviews: 78,
+    createdAt: new Date('2024-01-01'),
+    updatedAt: new Date('2024-01-01'),
   },
   {
     id: '10',
     name: 'Accessoires Élégants',
+    description: 'Collection d\'accessoires élégants africains',
     price: 8000,
     originalPrice: 12000,
-    image: '/images/products/WhatsApp Image 2025-07-27 at 14.52.58 (4).jpeg',
+    category: 'accessoires',
+    images: ['/images/products/WhatsApp Image 2025-07-27 at 14.52.58 (4).jpeg'],
+    colors: [{ name: 'Or', hex: '#FFD700', stock: 15 }],
+    sizes: ['Unique'],
+    stock: 30,
+    tags: ['accessoires', 'élégant', 'africain'],
+    isActive: true,
     rating: 4.5,
     reviews: 234,
+    createdAt: new Date('2024-01-01'),
+    updatedAt: new Date('2024-01-01'),
   },
   {
     id: '11',
     name: 'Smartphone Premium',
+    description: 'Smartphone premium dernière génération',
     price: 250000,
     originalPrice: 300000,
-    image: '/images/products/WhatsApp Image 2025-07-27 at 14.52.58 (5).jpeg',
+    category: 'tech',
+    images: ['/images/products/WhatsApp Image 2025-07-27 at 14.52.58 (5).jpeg'],
+    colors: [{ name: 'Noir', hex: '#000000', stock: 6 }],
+    sizes: ['128GB', '256GB', '512GB'],
+    stock: 12,
+    tags: ['smartphone', 'premium', 'tech'],
+    isActive: true,
     rating: 4.9,
     reviews: 445,
+    createdAt: new Date('2024-01-01'),
+    updatedAt: new Date('2024-01-01'),
   },
   {
     id: '12',
     name: 'Collection Spéciale',
+    description: 'Collection spéciale limitée AFROVIBZ',
     price: 75000,
     originalPrice: 90000,
-    image: '/images/products/WhatsApp Image 2025-07-27 at 14.52.58 (6).jpeg',
+    category: 'femmes',
+    images: ['/images/products/WhatsApp Image 2025-07-27 at 14.52.58 (6).jpeg'],
+    colors: [{ name: 'Multicolore', hex: '#FFD700', stock: 3 }],
+    sizes: ['S', 'M', 'L'],
+    stock: 8,
+    tags: ['collection', 'spéciale', 'limitée'],
+    isActive: true,
     rating: 4.8,
     reviews: 167,
+    createdAt: new Date('2024-01-01'),
+    updatedAt: new Date('2024-01-01'),
   },
 ];
 
@@ -198,6 +258,8 @@ const categories = [
 ];
 
 export default function HomePage() {
+  const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist();
+
   return (
     <div className="min-h-screen-mobile">
       {/* Hero Section - Mobile First */}
@@ -296,7 +358,7 @@ export default function HomePage() {
               <div key={product.id} className="mobile-card group hover:shadow-mobile-elevated transition-all duration-300">
                 <div className="relative mobile-aspect-square overflow-hidden bg-gray-200">
                   <Image
-                    src={product.image}
+                    src={product.images[0]}
                     alt={product.name}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -308,10 +370,21 @@ export default function HomePage() {
                   />
                   <div className="absolute top-3 right-3 z-10">
                     <button 
-                      className="p-2 bg-white rounded-full shadow-sm hover:bg-gray-50 transition-colors action-button"
-                      aria-label="Ajouter aux favoris"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        if (isInWishlist(product.id)) {
+                          removeFromWishlist(product.id);
+                        } else {
+                          addToWishlist(product);
+                        }
+                      }}
+                      className={`p-2 bg-white rounded-full shadow-sm hover:bg-gray-50 transition-colors action-button ${
+                        isInWishlist(product.id) ? 'text-red-500' : 'text-gray-600'
+                      }`}
+                      aria-label={isInWishlist(product.id) ? 'Retirer des favoris' : 'Ajouter aux favoris'}
                     >
-                      <Heart className="h-4 w-4 text-gray-600" />
+                      <Heart className={`h-4 w-4 ${isInWishlist(product.id) ? 'fill-current' : 'fill-none'}`} />
                     </button>
                   </div>
                   <div className="absolute bottom-3 left-3 right-3">

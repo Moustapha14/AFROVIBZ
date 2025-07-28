@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/lib/hooks/useAuth';
 import { useCart } from '@/lib/hooks/useCart';
+import { useWishlist } from '@/lib/hooks/useWishlist';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { 
@@ -24,6 +25,7 @@ import { formatPrice } from '@/lib/utils';
 export function Header() {
   const { user, logout } = useAuth();
   const { getCartCount } = useCart();
+  const { wishlist } = useWishlist();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
@@ -154,11 +156,16 @@ export function Header() {
           <div className="flex items-center space-x-1 sm:space-x-2 lg:space-x-4">
             {/* Wishlist - Desktop */}
             <Link 
-              href="/wishlist" 
-              className="hidden md:block p-2 text-gray-700 hover:text-black transition-colors action-button" 
+              href="/client/wishlist" 
+              className="hidden md:block relative p-2 text-gray-700 hover:text-black transition-colors action-button" 
               aria-label="Favoris"
             >
               <Heart className="h-5 w-5" />
+              {wishlist.length > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center font-medium">
+                  {wishlist.length > 99 ? '99+' : wishlist.length}
+                </span>
+              )}
             </Link>
 
             {/* Cart - Mobile First */}
@@ -394,12 +401,12 @@ export function Header() {
                   <span>Accessoires</span>
                 </Link>
                 <Link
-                  href="/wishlist"
+                  href="/client/wishlist"
                   className="flex items-center space-x-3 px-3 py-3 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors font-medium"
                   onClick={closeMobileMenu}
                 >
                   <Heart className="h-5 w-5" />
-                  <span>Favoris</span>
+                  <span>Favoris {wishlist.length > 0 && `(${wishlist.length})`}</span>
                 </Link>
               </div>
 

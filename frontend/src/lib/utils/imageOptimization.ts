@@ -9,8 +9,8 @@ import crypto from 'crypto';
  */
 
 export interface ImageOptimizationConfig {
-  src: string;
-  alt: string;
+  src?: string;
+  alt?: string;
   width?: number;
   height?: number;
   quality?: number;
@@ -18,6 +18,9 @@ export interface ImageOptimizationConfig {
   sizes?: string;
   placeholder?: 'blur' | 'empty';
   blurDataURL?: string;
+  format?: string;
+  removeExif?: boolean;
+  compressionLevel?: number;
 }
 
 // Configuration des breakpoints responsive
