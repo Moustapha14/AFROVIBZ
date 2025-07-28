@@ -1,16 +1,24 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/lib/hooks/useAuth';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
-import { User } from '@/types';
-import { Search, Edit, Trash2, UserPlus, Shield, User as UserIcon } from 'lucide-react';
+import { 
+  UserPlus, 
+  Search, 
+  UserIcon, 
+  Edit, 
+  Trash2,
+  Shield,
+  ShoppingBag
+} from 'lucide-react';
+import Image from 'next/image';
 import { toast } from 'react-hot-toast';
 
 // Données mockées pour les utilisateurs
-const mockUsers: User[] = [
+const mockUsers: any[] = [
   {
     id: '1',
     email: 'superadmin@afrovibz.com',
@@ -43,7 +51,7 @@ const mockUsers: User[] = [
 export default function AdminUsersPage() {
   const { user, loading } = useAuth();
   const router = useRouter();
-  const [users, setUsers] = useState<User[]>(mockUsers);
+  const [users, setUsers] = useState<any[]>(mockUsers);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedRole, setSelectedRole] = useState('all');
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -170,10 +178,12 @@ export default function AdminUsersPage() {
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <div className="h-10 w-10 flex-shrink-0">
-                          <img
-                            className="h-10 w-10 rounded-full object-cover"
+                          <Image
                             src={userItem.photoURL || '/images/avatar-placeholder.svg'}
                             alt={userItem.displayName || 'Utilisateur'}
+                            width={40}
+                            height={40}
+                            className="h-10 w-10 rounded-full object-cover"
                           />
                         </div>
                         <div className="ml-4">

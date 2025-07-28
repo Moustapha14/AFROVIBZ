@@ -21,246 +21,8 @@ import {
 import { formatPrice } from '@/lib/utils';
 import { Pagination } from '@/components/ui/Pagination';
 import { Product } from '@/types';
+import { ProductsService, ProductsResponse } from '@/lib/api/products';
 
-// Données temporaires pour la démo
-const products: Product[] = [
-  {
-    id: '1',
-    name: 'Robe Africaine Élégante',
-    description: 'Une robe élégante aux motifs africains traditionnels',
-    price: 25000,
-    originalPrice: 35000,
-    category: 'femmes',
-    images: ['/images/products/product-1.svg'],
-    colors: [
-      { name: 'Rouge', hex: '#FF0000', stock: 10 },
-      { name: 'Bleu', hex: '#0000FF', stock: 8 },
-      { name: 'Vert', hex: '#00FF00', stock: 12 }
-    ],
-    sizes: ['S', 'M', 'L', 'XL'],
-    stock: 30,
-    tags: ['robe', 'africain', 'élégant'],
-    isActive: true,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    id: '2',
-    name: 'Chemise Wax Traditionnelle',
-    description: 'Chemise en wax traditionnel pour hommes',
-    price: 18000,
-    originalPrice: 25000,
-    category: 'hommes',
-    images: ['/images/products/product-2.svg'],
-    colors: [
-      { name: 'Jaune', hex: '#FFFF00', stock: 15 },
-      { name: 'Orange', hex: '#FFA500', stock: 10 }
-    ],
-    sizes: ['M', 'L', 'XL'],
-    stock: 25,
-    tags: ['chemise', 'wax', 'traditionnel'],
-    isActive: true,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    id: '3',
-    name: 'Pagne Moderne',
-    description: 'Pagne moderne aux couleurs vives',
-    price: 12000,
-    originalPrice: 18000,
-    category: 'femmes',
-    images: ['/images/products/product-3.svg'],
-    colors: [
-      { name: 'Multicolore', hex: '#FFD700', stock: 20 }
-    ],
-    sizes: ['Unique'],
-    stock: 20,
-    tags: ['pagne', 'moderne', 'multicolore'],
-    isActive: true,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    id: '4',
-    name: 'Boubou Traditionnel',
-    description: 'Boubou traditionnel pour cérémonies',
-    price: 45000,
-    originalPrice: 60000,
-    category: 'hommes',
-    images: ['/images/products/product-4.svg'],
-    colors: [
-      { name: 'Blanc', hex: '#FFFFFF', stock: 5 },
-      { name: 'Bleu', hex: '#0000FF', stock: 8 }
-    ],
-    sizes: ['L', 'XL'],
-    stock: 13,
-    tags: ['boubou', 'traditionnel', 'cérémonie'],
-    isActive: true,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    id: '5',
-    name: 'Jupe Wax Colorée',
-    description: 'Jupe en wax aux couleurs éclatantes',
-    price: 15000,
-    originalPrice: 22000,
-    category: 'femmes',
-    images: ['/images/products/product-5.svg'],
-    colors: [
-      { name: 'Rouge', hex: '#FF0000', stock: 12 },
-      { name: 'Jaune', hex: '#FFFF00', stock: 10 },
-      { name: 'Vert', hex: '#00FF00', stock: 8 }
-    ],
-    sizes: ['S', 'M', 'L'],
-    stock: 30,
-    tags: ['jupe', 'wax', 'colorée'],
-    isActive: true,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    id: '6',
-    name: 'Pantalon Africain',
-    description: 'Pantalon africain confortable et élégant',
-    price: 22000,
-    originalPrice: 30000,
-    category: 'hommes',
-    images: ['/images/products/product-6.svg'],
-    colors: [
-      { name: 'Noir', hex: '#000000', stock: 15 },
-      { name: 'Marron', hex: '#8B4513', stock: 12 }
-    ],
-    sizes: ['M', 'L', 'XL'],
-    stock: 27,
-    tags: ['pantalon', 'africain', 'confortable'],
-    isActive: true,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  // Produits Tech
-  {
-    id: '7',
-    name: 'iPhone 15 Pro Max',
-    description: 'Smartphone Apple dernière génération avec appareil photo professionnel',
-    price: 850000,
-    originalPrice: 950000,
-    category: 'tech',
-    images: ['/images/products/iphone-15.svg'],
-    colors: [
-      { name: 'Titanium Naturel', hex: '#8B7355', stock: 8 },
-      { name: 'Titanium Bleu', hex: '#4A90E2', stock: 6 },
-      { name: 'Titanium Blanc', hex: '#F5F5F5', stock: 10 },
-      { name: 'Titanium Noir', hex: '#1A1A1A', stock: 7 }
-    ],
-    sizes: ['128GB', '256GB', '512GB', '1TB'],
-    stock: 31,
-    tags: ['iphone', 'smartphone', 'apple', '5g'],
-    isActive: true,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    id: '8',
-    name: 'MacBook Air M2',
-    description: 'Ordinateur portable Apple avec puce M2, ultra-léger et performant',
-    price: 1200000,
-    originalPrice: 1350000,
-    category: 'tech',
-    images: ['/images/products/macbook-air.svg'],
-    colors: [
-      { name: 'Gris Sidéral', hex: '#8E8E93', stock: 5 },
-      { name: 'Argent', hex: '#E5E5E7', stock: 8 },
-      { name: 'Or', hex: '#F4E4BC', stock: 4 },
-      { name: 'Minuit', hex: '#1D1D1F', stock: 6 }
-    ],
-    sizes: ['8GB RAM', '16GB RAM'],
-    stock: 23,
-    tags: ['macbook', 'laptop', 'apple', 'm2'],
-    isActive: true,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    id: '9',
-    name: 'Samsung Galaxy S24 Ultra',
-    description: 'Smartphone Android premium avec S Pen intégré',
-    price: 750000,
-    originalPrice: 850000,
-    category: 'tech',
-    images: ['/images/products/galaxy-s24.svg'],
-    colors: [
-      { name: 'Titanium Noir', hex: '#1A1A1A', stock: 12 },
-      { name: 'Titanium Jaune', hex: '#FFD700', stock: 8 },
-      { name: 'Titanium Violet', hex: '#8B5CF6', stock: 10 },
-      { name: 'Titanium Gris', hex: '#6B7280', stock: 9 }
-    ],
-    sizes: ['256GB', '512GB', '1TB'],
-    stock: 39,
-    tags: ['samsung', 'smartphone', 'android', 's-pen'],
-    isActive: true,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    id: '10',
-    name: 'iPad Pro 12.9"',
-    description: 'Tablette professionnelle Apple avec puce M2 et écran Liquid Retina XDR',
-    price: 950000,
-    originalPrice: 1100000,
-    category: 'tech',
-    images: ['/images/products/ipad-pro.svg'],
-    colors: [
-      { name: 'Argent', hex: '#F5F5F7', stock: 7 },
-      { name: 'Gris Sidéral', hex: '#8E8E93', stock: 5 }
-    ],
-    sizes: ['128GB', '256GB', '512GB', '1TB', '2TB'],
-    stock: 25,
-    tags: ['ipad', 'tablette', 'apple', 'pro'],
-    isActive: true,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    id: '11',
-    name: 'AirPods Pro 2',
-    description: 'Écouteurs sans fil Apple avec réduction de bruit active',
-    price: 180000,
-    originalPrice: 220000,
-    category: 'tech',
-    images: ['/images/products/airpods-pro.svg'],
-    colors: [
-      { name: 'Blanc', hex: '#FFFFFF', stock: 25 },
-      { name: 'Noir', hex: '#1A1A1A', stock: 20 }
-    ],
-    sizes: ['Unique'],
-    stock: 45,
-    tags: ['airpods', 'écouteurs', 'apple', 'bluetooth'],
-    isActive: true,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    id: '12',
-    name: 'PlayStation 5',
-    description: 'Console de jeux nouvelle génération Sony avec DualSense',
-    price: 450000,
-    originalPrice: 500000,
-    category: 'tech',
-    images: ['/images/products/ps5.svg'],
-    colors: [
-      { name: 'Blanc', hex: '#FFFFFF', stock: 15 },
-      { name: 'Noir', hex: '#1A1A1A', stock: 12 }
-    ],
-    sizes: ['Disque', 'Digital'],
-    stock: 27,
-    tags: ['playstation', 'console', 'gaming', 'sony'],
-    isActive: true,
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-];
 
 const categories = [
   { id: 'femmes', name: 'Femmes' },
@@ -289,6 +51,10 @@ function ProductsPageContent() {
   const productsPerPage = 12;
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [totalProducts, setTotalProducts] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
 
   // Get category from URL params
   useEffect(() => {
@@ -298,12 +64,38 @@ function ProductsPageContent() {
     }
   }, [searchParams]);
 
-  // Filter and sort products
+  // Charger les produits depuis l'API
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        setLoading(true);
+        const response = await ProductsService.getAllProducts({
+          page: currentPage,
+          limit: productsPerPage,
+          category: selectedCategory || undefined,
+          sortBy: sortBy,
+        });
+        
+        setProducts(response.products);
+        setTotalProducts(response.total);
+        setTotalPages(response.totalPages);
+      } catch (error) {
+        console.error('Erreur lors du chargement des produits:', error);
+        // Fallback vers les données statiques en cas d'erreur
+        const { products: staticProducts } = await import('@/lib/data/products');
+        setProducts(staticProducts);
+        setTotalProducts(staticProducts.length);
+        setTotalPages(Math.ceil(staticProducts.length / productsPerPage));
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadProducts();
+  }, [currentPage, selectedCategory, sortBy]);
+
+  // Filtrer par prix (côté client pour la démo)
   const filteredProducts = products.filter(product => {
-    if (selectedCategory && product.category !== selectedCategory) {
-      return false;
-    }
-    
     if (selectedPriceRange) {
       const range = priceRanges.find(r => r.label === selectedPriceRange);
       if (range) {
@@ -315,27 +107,8 @@ function ProductsPageContent() {
         }
       }
     }
-    
     return true;
   });
-
-  // Sort products
-  const sortedProducts = [...filteredProducts].sort((a, b) => {
-    switch (sortBy) {
-      case 'price-low':
-        return a.price - b.price;
-      case 'price-high':
-        return b.price - a.price;
-      case 'newest':
-      default:
-        return 0; // Keep original order for demo
-    }
-  });
-
-  // Pagination
-  const totalPages = Math.ceil(sortedProducts.length / productsPerPage);
-  const startIndex = (currentPage - 1) * productsPerPage;
-  const paginatedProducts = sortedProducts.slice(startIndex, startIndex + productsPerPage);
 
   const handleAddToCart = (product: Product, quantity: number, size: string, color: string) => {
     addToCart(product, quantity, size, color);
@@ -501,14 +274,29 @@ function ProductsPageContent() {
         {/* Results count */}
         <div className="mb-4 xs:mb-6">
           <p className="text-xs xs:text-sm sm:text-base text-gray-600">
-            {filteredProducts.length} produit{filteredProducts.length !== 1 ? 's' : ''} trouvé{filteredProducts.length !== 1 ? 's' : ''}
+            {loading ? 'Chargement...' : `${totalProducts} produit${totalProducts !== 1 ? 's' : ''} trouvé${totalProducts !== 1 ? 's' : ''}`}
           </p>
         </div>
 
-        {/* Products Grid */}
-        {viewMode === 'grid' ? (
+        {/* Loading State */}
+        {loading && (
           <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 xs:gap-4 sm:gap-6">
-            {paginatedProducts.map((product) => (
+            {[...Array(8)].map((_, i) => (
+              <div key={i} className="bg-white rounded-lg shadow-sm animate-pulse">
+                <div className="aspect-square bg-gray-200 rounded-t-lg"></div>
+                <div className="p-4">
+                  <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                  <div className="h-3 bg-gray-200 rounded w-3/4"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Products Grid */}
+        {!loading && viewMode === 'grid' && (
+          <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 xs:gap-4 sm:gap-6">
+            {filteredProducts.map((product) => (
               <div key={product.id} className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 group">
                 <div className="relative aspect-square overflow-hidden rounded-t-lg bg-gray-200">
                   <ProductImage
@@ -575,9 +363,12 @@ function ProductsPageContent() {
               </div>
             ))}
           </div>
-        ) : (
+        )}
+
+        {/* Products List View */}
+        {!loading && viewMode === 'list' && (
           <div className="space-y-3 xs:space-y-4">
-            {paginatedProducts.map((product) => (
+            {filteredProducts.map((product) => (
               <div key={product.id} className="bg-white rounded-lg shadow-sm p-3 xs:p-4 flex space-x-3 xs:space-x-4">
                 <div className="w-16 h-16 xs:w-20 xs:h-20 sm:w-24 sm:h-24 bg-gray-200 rounded-lg flex-shrink-0 overflow-hidden">
                   <ProductImage

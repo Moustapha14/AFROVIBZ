@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '@/lib/hooks/useAuth';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
+import { toast } from 'react-hot-toast';
 import { 
   TrendingUp, 
   TrendingDown, 
@@ -133,28 +134,28 @@ export default function SuperAdminAnalyticsPage() {
             <h2 className="text-lg font-semibold text-gray-900">Période d'analyse</h2>
             <div className="flex space-x-2">
               <Button
-                variant={selectedPeriod === 'week' ? 'default' : 'outline'}
+                variant={selectedPeriod === 'week' ? 'primary' : 'outline'}
                 size="sm"
                 onClick={() => setSelectedPeriod('week')}
               >
                 Semaine
               </Button>
               <Button
-                variant={selectedPeriod === 'month' ? 'default' : 'outline'}
+                variant={selectedPeriod === 'month' ? 'primary' : 'outline'}
                 size="sm"
                 onClick={() => setSelectedPeriod('month')}
               >
                 Mois
               </Button>
               <Button
-                variant={selectedPeriod === 'quarter' ? 'default' : 'outline'}
+                variant={selectedPeriod === 'quarter' ? 'primary' : 'outline'}
                 size="sm"
                 onClick={() => setSelectedPeriod('quarter')}
               >
                 Trimestre
               </Button>
               <Button
-                variant={selectedPeriod === 'year' ? 'default' : 'outline'}
+                variant={selectedPeriod === 'year' ? 'primary' : 'outline'}
                 size="sm"
                 onClick={() => setSelectedPeriod('year')}
               >

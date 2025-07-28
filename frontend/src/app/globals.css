@@ -5,6 +5,10 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --mobile-safe-area-top: env(safe-area-inset-top);
+  --mobile-safe-area-bottom: env(safe-area-inset-bottom);
+  --mobile-safe-area-left: env(safe-area-inset-left);
+  --mobile-safe-area-right: env(safe-area-inset-right);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -14,70 +18,176 @@
   }
 }
 
+/* Reset et optimisations de base */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  /* Empêcher le zoom sur les inputs sur iOS */
+  font-size: 16px;
+  /* Améliorer le scroll sur mobile */
+  scroll-behavior: smooth;
+  /* Optimiser pour les écrans tactiles */
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   /* Empêcher le débordement horizontal */
   overflow-x: hidden;
   /* Améliorer le rendu sur mobile */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Optimiser pour les écrans tactiles */
+  touch-action: manipulation;
+  /* Améliorer les performances de scroll */
+  will-change: scroll-position;
+  /* Empêcher le zoom sur double-tap */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
-/* Améliorer les tap targets sur mobile */
-@media (max-width: 768px) {
-  button, a, [role="button"] {
+/* Permettre la sélection de texte dans les zones de contenu */
+p, h1, h2, h3, h4, h5, h6, span, div {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+/* Optimisations Mobile First */
+@media (max-width: 767px) {
+  /* Améliorer les tap targets sur mobile */
+  button, a, [role="button"], input[type="button"], input[type="submit"] {
     min-height: 44px;
     min-width: 44px;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
   }
-}
 
-/* Optimisations pour très petits écrans */
-@media (max-width: 475px) {
-  /* Réduire les paddings sur très petits écrans */
-  .container {
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
+  /* Optimiser les inputs pour mobile */
+  input, select, textarea {
+    font-size: 16px !important; /* Empêche le zoom sur iOS */
+    -webkit-appearance: none;
+    border-radius: 0;
   }
-  
+
   /* Améliorer la lisibilité des textes */
   h1 {
-    font-size: 1.5rem;
+    font-size: clamp(1.5rem, 5vw, 2rem);
     line-height: 1.2;
+    font-weight: 700;
   }
   
   h2 {
-    font-size: 1.25rem;
+    font-size: clamp(1.25rem, 4vw, 1.75rem);
     line-height: 1.3;
+    font-weight: 600;
   }
-  
+
+  h3 {
+    font-size: clamp(1.125rem, 3.5vw, 1.5rem);
+    line-height: 1.4;
+    font-weight: 600;
+  }
+
+  /* Optimiser les paragraphes */
+  p {
+    font-size: clamp(0.875rem, 2.5vw, 1rem);
+    line-height: 1.6;
+  }
+
   /* Optimiser les boutons pour le touch */
   button {
     padding: 0.75rem 1rem;
     font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease-in-out;
+  }
+
+  /* Améliorer les liens */
+  a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.2s ease-in-out;
+  }
+
+  /* Optimiser les images */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Améliorer les listes */
+  ul, ol {
+    padding-left: 1.25rem;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
   }
 }
 
-/* Empêcher le zoom sur les inputs sur iOS */
-@media screen and (max-width: 768px) {
-  input, select, textarea {
-    font-size: 16px;
+/* Optimisations pour très petits écrans (320px - 375px) */
+@media (max-width: 375px) {
+  /* Réduire les paddings sur très petits écrans */
+  .container, .mobile-container {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  
+  /* Ajuster les tailles de police */
+  h1 {
+    font-size: 1.5rem;
+  }
+  
+  h2 {
+    font-size: 1.25rem;
+  }
+
+  /* Optimiser les boutons */
+  button {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.8125rem;
   }
 }
 
-/* Améliorer la lisibilité sur mobile */
-@media (max-width: 768px) {
-  body {
-    font-size: 16px;
-    line-height: 1.5;
+/* Optimisations pour tablettes (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Améliorer l'espacement */
+  .container, .mobile-container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  /* Optimiser les grilles */
+  .mobile-grid {
+    gap: 1.5rem;
   }
 }
 
-/* Optimiser les images */
-img {
-  max-width: 100%;
-  height: auto;
+/* Optimisations pour desktop (1024px+) */
+@media (min-width: 1024px) {
+  /* Améliorer l'espacement */
+  .container, .mobile-container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  /* Optimiser les grilles */
+  .mobile-grid {
+    gap: 2rem;
+  }
 }
 
 /* Améliorer l'accessibilité du focus */
@@ -107,5 +217,146 @@ img {
   img {
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
+  }
+}
+
+/* Améliorer le scroll sur mobile */
+@media (max-width: 767px) {
+  /* Optimiser le scroll horizontal */
+  .scroll-container {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    overscroll-behavior: contain;
+  }
+
+  /* Améliorer les modales et overlays */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 50;
+    backdrop-filter: blur(4px);
+  }
+
+  /* Optimiser les cartes de produits */
+  .product-card {
+    background: white;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease-in-out;
+  }
+
+  .product-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+
+  /* Améliorer les boutons d'action */
+  .action-button {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Optimiser les formulaires */
+  .form-input {
+    width: 100%;
+    min-height: 44px;
+    padding: 0.75rem 1rem;
+    font-size: 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    background: white;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: #000;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Optimisations pour les écrans très larges */
+@media (min-width: 1920px) {
+  .container, .mobile-container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+}
+
+/* Améliorer la performance des animations */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Optimisations pour les appareils avec notch */
+@supports (padding: max(0px)) {
+  .safe-area-top {
+    padding-top: max(1rem, var(--mobile-safe-area-top));
+  }
+  
+  .safe-area-bottom {
+    padding-bottom: max(1rem, var(--mobile-safe-area-bottom));
+  }
+  
+  .safe-area-left {
+    padding-left: max(1rem, var(--mobile-safe-area-left));
+  }
+  
+  .safe-area-right {
+    padding-right: max(1rem, var(--mobile-safe-area-right));
+  }
+}
+
+/* Améliorer la lisibilité sur mobile */
+@media (max-width: 767px) {
+  body {
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.01em;
+  }
+}
+
+/* Optimiser les images */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Améliorer l'accessibilité */
+@media (prefers-contrast: high) {
+  * {
+    border-color: currentColor !important;
+  }
+}
+
+/* Optimisations pour les écrans tactiles */
+@media (pointer: coarse) {
+  /* Augmenter la taille des éléments interactifs */
+  button, a, [role="button"] {
+    min-height: 48px;
+    min-width: 48px;
+  }
+  
+  /* Améliorer l'espacement entre les éléments */
+  .touch-spacing > * + * {
+    margin-top: 1rem;
   }
 }

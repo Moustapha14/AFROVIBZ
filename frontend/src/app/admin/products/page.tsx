@@ -1,14 +1,24 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/lib/hooks/useAuth';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
-import { Product } from '@/types';
-import { Plus, Edit, Trash2, Search, Filter } from 'lucide-react';
-import { toast } from 'react-hot-toast';
 import ProductModal from '@/components/admin/ProductModal';
+import { 
+  Plus, 
+  Search, 
+  Filter, 
+  Edit, 
+  Trash2,
+  Package,
+  Image as ImageIcon
+} from 'lucide-react';
+import { Product } from '@/types';
+import { ProductsService } from '@/lib/api/products';
+import Image from 'next/image';
+import { toast } from 'react-hot-toast';
 
 // Données mockées pour les produits
 const mockProducts: Product[] = [
@@ -25,6 +35,8 @@ const mockProducts: Product[] = [
     stock: 30,
     tags: ['robe', 'africain', 'élégant'],
     isActive: true,
+    rating: 4.5,
+    reviews: 128,
     createdAt: new Date('2024-01-01'),
     updatedAt: new Date('2024-01-01'),
   },
@@ -41,6 +53,8 @@ const mockProducts: Product[] = [
     stock: 31,
     tags: ['iphone', 'smartphone', 'apple', '5g'],
     isActive: true,
+    rating: 4.8,
+    reviews: 95,
     createdAt: new Date('2024-01-01'),
     updatedAt: new Date('2024-01-01'),
   },
@@ -55,6 +69,26 @@ export default function AdminProductsPage() {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [productsLoading, setProductsLoading] = useState(false);
+
+  // Charger les produits depuis l'API
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        setProductsLoading(true);
+        const response = await ProductsService.getAllProducts({ limit: 100 });
+        setProducts(response.products);
+      } catch (error) {
+        console.error('Erreur lors du chargement des produits:', error);
+        // Garder les produits mockés en cas d'erreur
+        toast.error('Erreur lors du chargement des produits');
+      } finally {
+        setProductsLoading(false);
+      }
+    };
+
+    loadProducts();
+  }, []);
 
   useEffect(() => {
     if (!loading && (!user || user.role !== 'super_admin')) {
@@ -83,14 +117,19 @@ export default function AdminProductsPage() {
     toast.success('Statut du produit mis à jour');
   };
 
-  const handleAddProduct = (productData: Omit<Product, 'id' | 'createdAt' | 'updatedAt'>) => {
-    const newProduct: Product = {
-      ...productData,
-      id: Date.now().toString(),
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-    setProducts([...products, newProduct]);
+  const handleAddProduct = async (productData: Omit<Product, 'id' | 'createdAt' | 'updatedAt'>) => {
+    try {
+      const response = await ProductsService.createProduct(productData);
+      if (response.success) {
+        setProducts([...products, response.product]);
+        toast.success('Produit ajouté avec succès');
+      } else {
+        toast.error('Erreur lors de l\'ajout du produit');
+      }
+    } catch (error) {
+      console.error('Erreur lors de l\'ajout du produit:', error);
+      toast.error('Erreur lors de l\'ajout du produit');
+    }
   };
 
   const handleEditProduct = (productData: Omit<Product, 'id' | 'createdAt' | 'updatedAt'>) => {
@@ -108,8 +147,8 @@ export default function AdminProductsPage() {
     setIsEditModalOpen(true);
   };
 
-  if (loading) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Chargement...</div>;
+  if (loading || productsLoading || !user) {
+    return <div className="flex items-center justify-center min-h-[400px]">Chargement...</div>;
   }
 
   if (!user || user.role !== 'super_admin') {
@@ -117,8 +156,8 @@ export default function AdminProductsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="space-y-6">
+      <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Gestion des Produits</h1>
@@ -199,10 +238,12 @@ export default function AdminProductsPage() {
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
                         <div className="h-10 w-10 flex-shrink-0">
-                          <img
-                            className="h-10 w-10 rounded-full object-cover"
+                          <Image
                             src={product.images[0] || '/images/placeholder.svg'}
                             alt={product.name}
+                            width={40}
+                            height={40}
+                            className="h-10 w-10 rounded-full object-cover"
                           />
                         </div>
                         <div className="ml-4">
@@ -234,20 +275,30 @@ export default function AdminProductsPage() {
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <div className="flex items-center space-x-2">
                         <button
+                          onClick={() => router.push(`/admin/products/${product.id}/images`)}
+                          className="text-green-600 hover:text-green-900"
+                          title="Gérer les images"
+                        >
+                          <ImageIcon className="h-4 w-4" />
+                        </button>
+                        <button
                           onClick={() => handleToggleActive(product.id)}
                           className="text-indigo-600 hover:text-indigo-900"
+                          title={product.isActive ? 'Désactiver' : 'Activer'}
                         >
                           {product.isActive ? 'Désactiver' : 'Activer'}
                         </button>
                         <button
                           onClick={() => handleOpenEditModal(product)}
                           className="text-blue-600 hover:text-blue-900"
+                          title="Modifier"
                         >
                           <Edit className="h-4 w-4" />
                         </button>
                         <button
                           onClick={() => handleDeleteProduct(product.id)}
                           className="text-red-600 hover:text-red-900"
+                          title="Supprimer"
                         >
                           <Trash2 className="h-4 w-4" />
                         </button>

@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/hooks/useAuth';
 import { Button } from '@/components/ui/Button';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
+import Image from 'next/image';
 import { 
   Package, 
   Truck, 
@@ -235,10 +236,12 @@ export default function VendeuseDashboard() {
                       <div className="flex items-center space-x-4">
                         <div className="w-12 h-12 bg-gray-200 rounded-lg flex-shrink-0">
                           {order.items[0]?.product.images[0] ? (
-                            <img
+                            <Image
                               src={order.items[0].product.images[0]}
                               alt={order.items[0].product.name}
-                              className="w-full h-full object-cover rounded-lg"
+                              width={48}
+                              height={48}
+                              className="object-cover rounded-lg"
                             />
                           ) : (
                             <div className="w-full h-full bg-gradient-to-br from-gray-300 to-gray-400 flex items-center justify-center rounded-lg">

@@ -2,28 +2,41 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger';
-  size?: 'sm' | 'md' | 'lg';
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'success';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   loading?: boolean;
   children: React.ReactNode;
+  fullWidth?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'primary', size = 'md', loading = false, children, disabled, ...props }, ref) => {
-    const baseStyles = 'inline-flex items-center justify-center rounded-md font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none active:scale-95 touch-manipulation';
+  ({ 
+    className, 
+    variant = 'primary', 
+    size = 'md', 
+    loading = false, 
+    children, 
+    disabled, 
+    fullWidth = false,
+    ...props 
+  }, ref) => {
+    const baseStyles = 'inline-flex items-center justify-center rounded-lg font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none active:scale-95 touch-manipulation tap-highlight-none';
     
     const variants = {
-      primary: 'bg-black text-white hover:bg-gray-800 shadow-sm hover:shadow-md',
-      secondary: 'bg-gray-100 text-gray-900 hover:bg-gray-200 shadow-sm hover:shadow-md',
-      outline: 'border border-gray-300 bg-transparent hover:bg-gray-50 shadow-sm hover:shadow-md',
-      ghost: 'hover:bg-gray-100',
-      danger: 'bg-red-600 text-white hover:bg-red-700 shadow-sm hover:shadow-md',
+      primary: 'bg-black text-white hover:bg-gray-800 shadow-sm hover:shadow-md active:bg-gray-900',
+      secondary: 'bg-gray-100 text-gray-900 hover:bg-gray-200 shadow-sm hover:shadow-md active:bg-gray-300',
+      outline: 'border border-gray-300 bg-transparent hover:bg-gray-50 shadow-sm hover:shadow-md active:bg-gray-100',
+      ghost: 'hover:bg-gray-100 active:bg-gray-200',
+      danger: 'bg-red-600 text-white hover:bg-red-700 shadow-sm hover:shadow-md active:bg-red-800',
+      success: 'bg-green-600 text-white hover:bg-green-700 shadow-sm hover:shadow-md active:bg-green-800',
     };
 
     const sizes = {
-      sm: 'h-9 px-3 text-sm min-h-[36px]',
-      md: 'h-10 px-4 py-2 min-h-[40px]',
-      lg: 'h-12 px-6 text-lg min-h-[48px]',
+      xs: 'h-8 px-2 text-xs min-h-[32px] min-w-[32px]',
+      sm: 'h-10 px-3 text-sm min-h-[40px] min-w-[40px]',
+      md: 'h-12 px-4 py-2 text-base min-h-[48px] min-w-[48px]',
+      lg: 'h-14 px-6 py-3 text-lg min-h-[56px] min-w-[56px]',
+      xl: 'h-16 px-8 py-4 text-xl min-h-[64px] min-w-[64px]',
     };
 
     return (
@@ -32,6 +45,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           baseStyles,
           variants[variant],
           sizes[size],
+          fullWidth && 'w-full',
           className
         )}
         ref={ref}

@@ -23,6 +23,8 @@ export interface Product {
   stock: number;
   tags: string[];
   isActive: boolean;
+  rating: number;
+  reviews: number;
   createdAt: Date;
   updatedAt: Date;
 }

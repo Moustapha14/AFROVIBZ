@@ -23,6 +23,7 @@ import {
 import { formatPrice } from '@/lib/utils';
 import toast from 'react-hot-toast';
 
+
 interface CheckoutStep {
   id: string;
   title: string;

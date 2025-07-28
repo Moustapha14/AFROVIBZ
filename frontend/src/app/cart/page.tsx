@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
 
+
 export default function CartPage() {
   const { 
     cart, 

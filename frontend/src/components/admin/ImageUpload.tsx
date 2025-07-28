@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useRef } from 'react';
-import { Upload, X, Image as ImageIcon, Camera } from 'lucide-react';
+import React, { useRef, useState } from 'react';
 import { Button } from '@/components/ui/Button';
+import { ImageIcon, Camera, X, Upload } from 'lucide-react';
+import Image from 'next/image';
 
 interface ImageUploadProps {
   images: string[];
@@ -191,13 +192,13 @@ export default function ImageUpload({
             {images.map((image, index) => (
               <div key={index} className="relative group">
                 <div className="aspect-square rounded-lg overflow-hidden bg-gray-100">
-                  <img
+                  <Image
                     src={image}
                     alt={`Image ${index + 1}`}
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = '/images/placeholder-image.svg';
+                    layout="fill"
+                    objectFit="cover"
+                    onError={() => {
+                      // Fallback handled by Next.js Image component
                     }}
                   />
                 </div>

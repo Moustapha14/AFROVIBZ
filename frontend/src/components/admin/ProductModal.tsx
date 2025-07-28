@@ -115,6 +115,8 @@ export default function ProductModal({ isOpen, onClose, onSave, product, mode }:
       sizes: formData.sizes.filter(size => size.trim()),
       tags: formData.tags.filter(tag => tag.trim()),
       isActive: formData.isActive,
+      rating: 0, // Nouveau produit commence avec 0 étoiles
+      reviews: 0, // Nouveau produit commence avec 0 avis
     };
 
     onSave(productData);
