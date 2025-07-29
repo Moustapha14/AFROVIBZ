@@ -405,7 +405,7 @@ export default function HomePage() {
                           addToWishlist(product);
                         }
                       }}
-                      className={`p-2 bg-white rounded-full shadow-sm hover:bg-gray-50 transition-colors action-button ${
+                      className={`p-3 bg-white rounded-full shadow-sm hover:bg-gray-50 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center ${
                         isInWishlist(product.id) ? 'text-red-500' : 'text-gray-600'
                       }`}
                       aria-label={isInWishlist(product.id) ? 'Retirer des favoris' : 'Ajouter aux favoris'}

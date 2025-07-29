@@ -252,7 +252,7 @@ export function SheinHeader() {
           {/* Right side actions */}
           <div className="flex items-center space-x-4">
             {/* Language Selector - Desktop */}
-            <button className="hidden lg:flex items-center space-x-1 text-gray-700 hover:text-black transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded p-1" aria-label="Sélectionner la langue">
+            <button className="hidden lg:flex items-center space-x-1 text-gray-700 hover:text-black transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded p-3 min-h-[44px] min-w-[44px]" aria-label="Sélectionner la langue">
               <Globe className="h-4 w-4" aria-hidden="true" />
               <span className="text-sm">FR</span>
               <ChevronDown className="h-3 w-3" aria-hidden="true" />
@@ -330,7 +330,7 @@ export function SheinHeader() {
             {/* Mobile menu button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 text-gray-700 hover:text-black transition-colors"
+              className="lg:hidden p-3 text-gray-700 hover:text-black transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
               aria-label="Menu mobile"
             >
               {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -448,4 +448,4 @@ export function SheinHeader() {
       )}
     </header>
   );
-} 
+}

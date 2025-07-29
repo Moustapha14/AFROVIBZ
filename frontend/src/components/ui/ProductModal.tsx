@@ -49,7 +49,7 @@ export function ProductModal({ product, isOpen, onClose, onAddToCart }: ProductM
           <h2 className="text-base xs:text-lg font-semibold">Ajouter au panier</h2>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors h-10 w-10 flex items-center justify-center"
+            className="p-3 hover:bg-gray-100 rounded-full transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
           >
             <X className="h-4 w-4 xs:h-5 xs:w-5" />
           </button>
@@ -138,7 +138,7 @@ export function ProductModal({ product, isOpen, onClose, onAddToCart }: ProductM
                   <button
                     onClick={() => handleQuantityChange(quantity - 1)}
                     disabled={quantity <= 1}
-                    className="p-2 border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="p-3 border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed min-h-[44px] min-w-[44px] flex items-center justify-center"
                   >
                     <Minus className="h-4 w-4" />
                   </button>
@@ -146,7 +146,7 @@ export function ProductModal({ product, isOpen, onClose, onAddToCart }: ProductM
                   <button
                     onClick={() => handleQuantityChange(quantity + 1)}
                     disabled={quantity >= 10}
-                    className="p-2 border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="p-3 border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed min-h-[44px] min-w-[44px] flex items-center justify-center"
                   >
                     <Plus className="h-4 w-4" />
                   </button>
@@ -179,4 +179,4 @@ export function ProductModal({ product, isOpen, onClose, onAddToCart }: ProductM
       </div>
     </div>
   );
-} 
+}

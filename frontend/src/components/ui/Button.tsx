@@ -32,8 +32,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     };
 
     const sizes = {
-      xs: 'h-8 px-2 text-xs min-h-[32px] min-w-[32px]',
-      sm: 'h-10 px-3 text-sm min-h-[40px] min-w-[40px]',
+      xs: 'h-11 px-3 text-xs min-h-[44px] min-w-[44px]',
+      sm: 'h-11 px-4 text-sm min-h-[44px] min-w-[44px]',
       md: 'h-12 px-4 py-2 text-base min-h-[48px] min-w-[48px]',
       lg: 'h-14 px-6 py-3 text-lg min-h-[56px] min-w-[56px]',
       xl: 'h-16 px-8 py-4 text-xl min-h-[64px] min-w-[64px]',
@@ -83,4 +83,4 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
 Button.displayName = 'Button';
 
-export { Button }; 
+export { Button };

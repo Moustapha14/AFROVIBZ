@@ -456,14 +456,14 @@ export function ProductImageUpload({
                       <div className="flex space-x-2">
                         <button
                           onClick={() => setSelectedImage(image.id)}
-                          className="p-2 bg-white/90 rounded-full hover:bg-white transition-colors"
+                          className="p-3 bg-white/90 rounded-full hover:bg-white transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
                         >
                           <Eye className="h-4 w-4 text-gray-700" />
                         </button>
                         
                       <button
                         onClick={() => removeImage(image.id)}
-                          className="p-2 bg-red-500/90 rounded-full hover:bg-red-500 transition-colors"
+                          className="p-3 bg-red-500/90 rounded-full hover:bg-red-500 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
                       >
                           <Trash2 className="h-4 w-4 text-white" />
                       </button>
@@ -584,4 +584,4 @@ export function ProductImageUpload({
       )}
     </div>
   );
-} 
+}

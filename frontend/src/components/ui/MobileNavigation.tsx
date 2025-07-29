@@ -72,7 +72,7 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
       {trigger || (
         <button
           onClick={() => setIsOpen(true)}
-          className="p-2 text-gray-700 hover:text-black transition-colors action-button"
+          className="p-3 text-gray-700 hover:text-black transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
           aria-label="Ouvrir le menu"
           aria-expanded={isOpen}
         >
@@ -104,7 +104,7 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
             <h2 className="text-lg font-semibold text-gray-900">Menu</h2>
             <button
               onClick={handleClose}
-              className="p-2 text-gray-500 hover:text-gray-700 action-button"
+              className="p-3 text-gray-500 hover:text-gray-700 min-h-[44px] min-w-[44px] flex items-center justify-center"
               aria-label="Fermer le menu"
             >
               <X className="h-6 w-6" />
@@ -123,4 +123,4 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({
   );
 };
 
-export { MobileNavigation }; 
+export { MobileNavigation };

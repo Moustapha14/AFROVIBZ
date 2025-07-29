@@ -157,13 +157,13 @@ export default function ProductDetailPage() {
                   <div className="flex items-center space-x-2">
                     <button
                       onClick={() => setIsWishlisted(!isWishlisted)}
-                      className={`p-2 rounded-full ${
+                      className={`p-3 rounded-full min-h-[44px] min-w-[44px] flex items-center justify-center ${
                         isWishlisted ? 'bg-red-100 text-red-600' : 'bg-gray-100 text-gray-600'
                       } hover:bg-gray-200 transition-colors`}
                     >
                       <Heart className={`h-5 w-5 ${isWishlisted ? 'fill-current' : ''}`} />
                     </button>
-                    <button className="p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors">
+                    <button className="p-3 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center">
                       <Share2 className="h-5 w-5" />
                     </button>
                   </div>
@@ -297,4 +297,4 @@ export default function ProductDetailPage() {
       </div>
     </div>
   );
-} 
+}

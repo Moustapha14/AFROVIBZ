@@ -353,7 +353,7 @@ export default function VendeuseProfilePage() {
                       e.currentTarget.src = '/images/avatar-vendeuse.png';
                     }}
                   />
-                  <button className="absolute bottom-0 right-0 bg-blue-500 text-white p-2 rounded-full hover:bg-blue-600 transition-colors">
+                  <button className="absolute bottom-0 right-0 bg-blue-500 text-white p-3 rounded-full hover:bg-blue-600 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center">
                     <Camera className="h-4 w-4" />
                   </button>
                 </div>
@@ -446,4 +446,4 @@ export default function VendeuseProfilePage() {
       </div>
     </div>
   );
-} 
+}
