@@ -317,7 +317,7 @@ function ProductsPageContent() {
                           addToWishlist(product);
                         }
                       }}
-                      className={`p-1.5 xs:p-2 bg-white rounded-full shadow-sm hover:bg-gray-50 transition-colors h-8 w-8 xs:h-10 xs:w-10 flex items-center justify-center ${
+                      className={`p-3 bg-white rounded-full shadow-sm hover:bg-gray-50 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center ${
                         isInWishlist(product.id) ? 'text-red-500' : 'text-gray-600'
                       }`}
                       aria-label={isInWishlist(product.id) ? 'Retirer des favoris' : 'Ajouter aux favoris'}
@@ -482,4 +482,4 @@ export default function ProductsPage() {
       <ProductsPageContent />
     </Suspense>
   );
-} 
+}
