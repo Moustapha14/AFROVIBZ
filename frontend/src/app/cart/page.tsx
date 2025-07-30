@@ -95,7 +95,7 @@ export default function CartPage() {
                         <h3 className="font-medium text-gray-900 truncate text-sm sm:text-base">
                           {item.product.name}
                         </h3>
-                        <p className="text-xs sm:text-sm text-gray-500">
+                        <p className="text-sm text-gray-500">
                           Taille: {item.selectedSize} | Couleur: {item.selectedColor}
                         </p>
                         <p className="text-base sm:text-lg font-bold text-gray-900 mt-1">
@@ -203,7 +203,7 @@ export default function CartPage() {
                   <Truck className="h-5 w-5 text-gray-600 flex-shrink-0" />
                   <div>
                     <p className="font-medium text-gray-900 text-sm">Livraison</p>
-                    <p className="text-xs sm:text-sm text-gray-600">2-4 jours ouvrables</p>
+                    <p className="text-sm text-gray-600">2-4 jours ouvrables</p>
                   </div>
                 </div>
                 
@@ -211,7 +211,7 @@ export default function CartPage() {
                   <Shield className="h-5 w-5 text-gray-600 flex-shrink-0" />
                   <div>
                     <p className="font-medium text-gray-900 text-sm">Garantie</p>
-                    <p className="text-xs sm:text-sm text-gray-600">Retours gratuits sous 30 jours</p>
+                    <p className="text-sm text-gray-600">Retours gratuits sous 30 jours</p>
                   </div>
                 </div>
               </div>
@@ -244,4 +244,4 @@ export default function CartPage() {
       </div>
     </div>
   );
-} 
+}

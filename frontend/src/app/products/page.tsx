@@ -135,7 +135,7 @@ function ProductsPageContent() {
           <h1 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-1 xs:mb-2">
             Nos Produits
           </h1>
-          <p className="text-xs xs:text-sm sm:text-base text-gray-600">
+          <p className="text-base sm:text-lg text-gray-600">
             Découvrez notre collection de vêtements africains
           </p>
         </div>
@@ -194,11 +194,11 @@ function ProductsPageContent() {
             {/* Sort and view */}
             <div className="flex flex-col xs:flex-row items-start xs:items-center space-y-3 xs:space-y-0 xs:space-x-4">
               <div className="flex flex-col xs:flex-row items-start xs:items-center space-y-2 xs:space-y-0 xs:space-x-2 w-full xs:w-auto">
-                <span className="text-xs xs:text-sm font-medium text-gray-700">Trier par:</span>
+                <span className="text-sm font-medium text-gray-700">Trier par:</span>
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="w-full xs:w-auto border border-gray-300 rounded-md px-3 py-2 text-xs xs:text-sm focus:ring-2 focus:ring-black focus:border-transparent h-10"
+                  className="w-full xs:w-auto border border-gray-300 rounded-md px-3 py-2 text-base focus:ring-2 focus:ring-black focus:border-transparent h-10"
                 >
                   <option value="newest">Plus récents</option>
                   <option value="price-low">Prix croissant</option>
@@ -338,7 +338,7 @@ function ProductsPageContent() {
                 </div>
                 
                 <div className="p-2 xs:p-3 sm:p-4">
-                  <h3 className="font-medium text-gray-900 mb-2 line-clamp-2 text-xs xs:text-sm sm:text-base">
+                  <h3 className="font-medium text-gray-900 mb-2 line-clamp-2 text-base sm:text-lg">
                     {product.name}
                   </h3>
                   
@@ -355,7 +355,7 @@ function ProductsPageContent() {
                         />
                       ))}
                     </div>
-                    <span className="text-xs text-gray-500 ml-1 xs:ml-2">
+                    <span className="text-sm text-gray-500 ml-1 xs:ml-2">
                       (4.5)
                     </span>
                   </div>
@@ -366,7 +366,7 @@ function ProductsPageContent() {
                         {formatPrice(product.price)}
                       </span>
                       {product.originalPrice && (
-                        <span className="text-xs text-gray-500 line-through">
+                        <span className="text-sm text-gray-500 line-through">
                           {formatPrice(product.originalPrice)}
                         </span>
                       )}

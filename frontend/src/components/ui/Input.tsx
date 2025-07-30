@@ -23,7 +23,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
 
     const sizes = {
-      sm: 'h-10 px-3 py-2 text-sm min-h-[40px]',
+      sm: 'h-10 px-3 py-2 text-base min-h-[40px]',
       md: 'h-12 px-4 py-3 text-base min-h-[48px]',
       lg: 'h-14 px-6 py-4 text-lg min-h-[56px]',
     };
@@ -73,4 +73,4 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
 Input.displayName = 'Input';
 
-export { Input }; 
+export { Input };

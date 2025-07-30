@@ -443,7 +443,7 @@ export default function HomePage() {
                         />
                       ))}
                     </div>
-                    <span className="text-xs text-gray-500 ml-2">
+                    <span className="text-sm text-gray-500 ml-2">
                       ({product.reviews})
                     </span>
                   </div>
@@ -454,7 +454,7 @@ export default function HomePage() {
                         {formatPrice(product.price)}
                       </span>
                       {product.originalPrice && (
-                        <span className="text-xs sm:text-sm text-gray-500 line-through">
+                        <span className="text-sm text-gray-500 line-through">
                           {formatPrice(product.originalPrice)}
                         </span>
                       )}

@@ -53,7 +53,7 @@ export default function LoginPage() {
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="email" className="block text-xs xs:text-sm font-medium text-gray-700">
+              <label htmlFor="email" className="block text-base font-medium text-gray-700">
                 Adresse email
               </label>
               <div className="mt-1">
@@ -71,7 +71,7 @@ export default function LoginPage() {
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-xs xs:text-sm font-medium text-gray-700">
+              <label htmlFor="password" className="block text-base font-medium text-gray-700">
                 Mot de passe
               </label>
               <div className="mt-1">
@@ -170,4 +170,4 @@ export default function LoginPage() {
       </div>
     </div>
   );
-} 
+}
