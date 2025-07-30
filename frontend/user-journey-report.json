@@ -1,0 +1,586 @@
+{
+  "timestamp": "2025-07-30T05:58:48.874Z",
+  "device": "Mobile (Simulated)",
+  "journeys": {
+    "Découverte Produit": {
+      "name": "Découverte Produit",
+      "description": "Utilisateur découvre et achète un produit",
+      "critical": true,
+      "steps": [
+        {
+          "step": "Visite homepage",
+          "page": "/",
+          "expected": "Header + hero + produits visibles",
+          "criteria": {
+            "Performance: Page load < 3s": "pass",
+            "Performance: Interaction ready < 2s": "pass",
+            "Performance: Smooth animations": "pass",
+            "Performance: No layout shifts": "pass",
+            "Usability: Touch targets accessible": "pass",
+            "Usability: Text readable without zoom": "pass",
+            "Usability: Navigation intuitive": "pass",
+            "Usability: Error handling clear": "pass",
+            "Mobile UX: No horizontal scroll": "pass",
+            "Mobile UX: Thumb-friendly design": "pass",
+            "Mobile UX: Appropriate feedback": "pass",
+            "Mobile UX: Consistent patterns": "pass",
+            "Accessibility: Keyboard navigable": "pass",
+            "Accessibility: Screen reader friendly": "pass",
+            "Accessibility: Focus indicators visible": "pass",
+            "Accessibility: Color contrast sufficient": "pass"
+          },
+          "score": 100
+        },
+        {
+          "step": "Clique sur produit",
+          "page": "/product/1",
+          "expected": "Images + détails + bouton achat",
+          "criteria": {
+            "Performance: Page load < 3s": "pass",
+            "Performance: Interaction ready < 2s": "pass",
+            "Performance: Smooth animations": "pass",
+            "Performance: No layout shifts": "pass",
+            "Usability: Touch targets accessible": "pass",
+            "Usability: Text readable without zoom": "pass",
+            "Usability: Navigation intuitive": "pass",
+            "Usability: Error handling clear": "pass",
+            "Mobile UX: No horizontal scroll": "pass",
+            "Mobile UX: Thumb-friendly design": "pass",
+            "Mobile UX: Appropriate feedback": "pass",
+            "Mobile UX: Consistent patterns": "pass",
+            "Accessibility: Keyboard navigable": "pass",
+            "Accessibility: Screen reader friendly": "pass",
+            "Accessibility: Focus indicators visible": "pass",
+            "Accessibility: Color contrast sufficient": "pass"
+          },
+          "score": 100
+        },
+        {
+          "step": "Ajoute au panier",
+          "page": "/product/1",
+          "expected": "Confirmation + compteur panier",
+          "criteria": {
+            "Performance: Page load < 3s": "pass",
+            "Performance: Interaction ready < 2s": "pass",
+            "Performance: Smooth animations": "pass",
+            "Performance: No layout shifts": "pass",
+            "Usability: Touch targets accessible": "pass",
+            "Usability: Text readable without zoom": "pass",
+            "Usability: Navigation intuitive": "pass",
+            "Usability: Error handling clear": "pass",
+            "Mobile UX: No horizontal scroll": "pass",
+            "Mobile UX: Thumb-friendly design": "pass",
+            "Mobile UX: Appropriate feedback": "pass",
+            "Mobile UX: Consistent patterns": "pass",
+            "Accessibility: Keyboard navigable": "pass",
+            "Accessibility: Screen reader friendly": "pass",
+            "Accessibility: Focus indicators visible": "pass",
+            "Accessibility: Color contrast sufficient": "pass"
+          },
+          "score": 100
+        },
+        {
+          "step": "Va au panier",
+          "page": "/cart",
+          "expected": "Produit listé + total + checkout",
+          "criteria": {
+            "Performance: Page load < 3s": "pass",
+            "Performance: Interaction ready < 2s": "pass",
+            "Performance: Smooth animations": "pass",
+            "Performance: No layout shifts": "pass",
+            "Usability: Touch targets accessible": "pass",
+            "Usability: Text readable without zoom": "pass",
+            "Usability: Navigation intuitive": "pass",
+            "Usability: Error handling clear": "pass",
+            "Mobile UX: No horizontal scroll": "pass",
+            "Mobile UX: Thumb-friendly design": "pass",
+            "Mobile UX: Appropriate feedback": "pass",
+            "Mobile UX: Consistent patterns": "pass",
+            "Accessibility: Keyboard navigable": "pass",
+            "Accessibility: Screen reader friendly": "pass",
+            "Accessibility: Focus indicators visible": "pass",
+            "Accessibility: Color contrast sufficient": "pass"
+          },
+          "score": 100
+        },
+        {
+          "step": "Procède au checkout",
+          "page": "/checkout",
+          "expected": "Formulaire + paiement",
+          "criteria": {
+            "Performance: Page load < 3s": "pass",
+            "Performance: Interaction ready < 2s": "pass",
+            "Performance: Smooth animations": "pass",
+            "Performance: No layout shifts": "pass",
+            "Usability: Touch targets accessible": "pass",
+            "Usability: Text readable without zoom": "pass",
+            "Usability: Navigation intuitive": "pass",
+            "Usability: Error handling clear": "pass",
+            "Mobile UX: No horizontal scroll": "pass",
+            "Mobile UX: Thumb-friendly design": "pass",
+            "Mobile UX: Appropriate feedback": "pass",
+            "Mobile UX: Consistent patterns": "pass",
+            "Accessibility: Keyboard navigable": "pass",
+            "Accessibility: Screen reader friendly": "pass",
+            "Accessibility: Focus indicators visible": "pass",
+            "Accessibility: Color contrast sufficient": "pass"
+          },
+          "score": 100
+        }
+      ],
+      "optimizations": [
+        "Touch targets 44px minimum",
+        "Images responsive avec zoom",
+        "Formulaires optimisés mobile",
+        "Boutons CTA bien visibles"
+      ],
+      "overallScore": 100
+    },
+    "Authentification": {
+      "name": "Authentification",
+      "description": "Utilisateur se connecte ou s'inscrit",
+      "critical": true,
+      "steps": [
+        {
+          "step": "Clique connexion",
+          "page": "/auth/login",
+          "expected": "Formulaire login responsive",
+          "criteria": {
+            "Performance: Page load < 3s": "pass",
+            "Performance: Interaction ready < 2s": "pass",
+            "Performance: Smooth animations": "pass",
+            "Performance: No layout shifts": "pass",
+            "Usability: Touch targets accessible": "pass",
+            "Usability: Text readable without zoom": "pass",
+            "Usability: Navigation intuitive": "pass",
+            "Usability: Error handling clear": "pass",
+            "Mobile UX: No horizontal scroll": "pass",
+            "Mobile UX: Thumb-friendly design": "pass",
+            "Mobile UX: Appropriate feedback": "pass",
+            "Mobile UX: Consistent patterns": "pass",
+            "Accessibility: Keyboard navigable": "pass",
+            "Accessibility: Screen reader friendly": "pass",
+            "Accessibility: Focus indicators visible": "pass",
+            "Accessibility: Color contrast sufficient": "pass"
+          },
+          "score": 100
+        },
+        {
+          "step": "Saisit identifiants",
+          "page": "/auth/login",
+          "expected": "Inputs 16px, pas de zoom iOS",
+          "criteria": {
+            "Performance: Page load < 3s": "pass",
+            "Performance: Interaction ready < 2s": "pass",
+            "Performance: Smooth animations": "pass",
+            "Performance: No layout shifts": "pass",
+            "Usability: Touch targets accessible": "pass",
+            "Usability: Text readable without zoom": "pass",
+            "Usability: Navigation intuitive": "pass",
+            "Usability: Error handling clear": "pass",
+            "Mobile UX: No horizontal scroll": "pass",
+            "Mobile UX: Thumb-friendly design": "pass",
+            "Mobile UX: Appropriate feedback": "pass",
+            "Mobile UX: Consistent patterns": "pass",
+            "Accessibility: Keyboard navigable": "pass",
+            "Accessibility: Screen reader friendly": "pass",
+            "Accessibility: Focus indicators visible": "pass",
+            "Accessibility: Color contrast sufficient": "pass"
+          },
+          "score": 100
+        },
+        {
+          "step": "Se connecte",
+          "page": "/client/profile",
+          "expected": "Redirection profil",
+          "criteria": {
+            "Performance: Page load < 3s": "pass",
+            "Performance: Interaction ready < 2s": "pass",
+            "Performance: Smooth animations": "pass",
+            "Performance: No layout shifts": "pass",
+            "Usability: Touch targets accessible": "pass",
+            "Usability: Text readable without zoom": "pass",
+            "Usability: Navigation intuitive": "pass",
+            "Usability: Error handling clear": "pass",
+            "Mobile UX: No horizontal scroll": "pass",
+            "Mobile UX: Thumb-friendly design": "pass",
+            "Mobile UX: Appropriate feedback": "pass",
+            "Mobile UX: Consistent patterns": "pass",
+            "Accessibility: Keyboard navigable": "pass",
+            "Accessibility: Screen reader friendly": "pass",
+            "Accessibility: Focus indicators visible": "pass",
+            "Accessibility: Color contrast sufficient": "pass"
+          },
+          "score": 100
+        },
+        {
+          "step": "Navigue menu mobile",
+          "page": "/client/profile",
+          "expected": "Menu accessible",
+          "criteria": {
+            "Performance: Page load < 3s": "pass",
+            "Performance: Interaction ready < 2s": "pass",
+            "Performance: Smooth animations": "pass",
+            "Performance: No layout shifts": "pass",
+            "Usability: Touch targets accessible": "pass",
+            "Usability: Text readable without zoom": "pass",
+            "Usability: Navigation intuitive": "pass",
+            "Usability: Error handling clear": "pass",
+            "Mobile UX: No horizontal scroll": "pass",
+            "Mobile UX: Thumb-friendly design": "pass",
+            "Mobile UX: Appropriate feedback": "pass",
+            "Mobile UX: Consistent patterns": "pass",
+            "Accessibility: Keyboard navigable": "pass",
+            "Accessibility: Screen reader friendly": "pass",
+            "Accessibility: Focus indicators visible": "pass",
+            "Accessibility: Color contrast sufficient": "pass"
+          },
+          "score": 100
+        }
+      ],
+      "optimizations": [
+        "Inputs font-size 16px minimum",
+        "Keyboard mobile optimisé",
+        "Validation en temps réel",
+        "Messages d'erreur clairs"
+      ],
+      "overallScore": 100
+    },
+    "Navigation Catalogue": {
+      "name": "Navigation Catalogue",
+      "description": "Utilisateur explore le catalogue produits",
+      "critical": true,
+      "steps": [
+        {
+          "step": "Va aux produits",
+          "page": "/products",
+          "expected": "Grid responsive + filtres",
+          "criteria": {
+            "Performance: Page load < 3s": "pass",
+            "Performance: Interaction ready < 2s": "pass",
+            "Performance: Smooth animations": "pass",
+            "Performance: No layout shifts": "pass",
+            "Usability: Touch targets accessible": "pass",
+            "Usability: Text readable without zoom": "pass",
+            "Usability: Navigation intuitive": "pass",
+            "Usability: Error handling clear": "pass",
+            "Mobile UX: No horizontal scroll": "pass",
+            "Mobile UX: Thumb-friendly design": "pass",
+            "Mobile UX: Appropriate feedback": "pass",
+            "Mobile UX: Consistent patterns": "pass",
+            "Accessibility: Keyboard navigable": "pass",
+            "Accessibility: Screen reader friendly": "pass",
+            "Accessibility: Focus indicators visible": "pass",
+            "Accessibility: Color contrast sufficient": "pass"
+          },
+          "score": 100
+        },
+        {
+          "step": "Utilise filtres mobile",
+          "page": "/products",
+          "expected": "Drawer filtres + touch targets",
+          "criteria": {
+            "Performance: Page load < 3s": "pass",
+            "Performance: Interaction ready < 2s": "pass",
+            "Performance: Smooth animations": "pass",
+            "Performance: No layout shifts": "pass",
+            "Usability: Touch targets accessible": "pass",
+            "Usability: Text readable without zoom": "pass",
+            "Usability: Navigation intuitive": "pass",
+            "Usability: Error handling clear": "pass",
+            "Mobile UX: No horizontal scroll": "pass",
+            "Mobile UX: Thumb-friendly design": "pass",
+            "Mobile UX: Appropriate feedback": "pass",
+            "Mobile UX: Consistent patterns": "pass",
+            "Accessibility: Keyboard navigable": "pass",
+            "Accessibility: Screen reader friendly": "pass",
+            "Accessibility: Focus indicators visible": "pass",
+            "Accessibility: Color contrast sufficient": "pass"
+          },
+          "score": 100
+        },
+        {
+          "step": "Scroll infini",
+          "page": "/products",
+          "expected": "Loading states + performance",
+          "criteria": {
+            "Performance: Page load < 3s": "pass",
+            "Performance: Interaction ready < 2s": "pass",
+            "Performance: Smooth animations": "pass",
+            "Performance: No layout shifts": "pass",
+            "Usability: Touch targets accessible": "pass",
+            "Usability: Text readable without zoom": "pass",
+            "Usability: Navigation intuitive": "pass",
+            "Usability: Error handling clear": "pass",
+            "Mobile UX: No horizontal scroll": "pass",
+            "Mobile UX: Thumb-friendly design": "pass",
+            "Mobile UX: Appropriate feedback": "pass",
+            "Mobile UX: Consistent patterns": "pass",
+            "Accessibility: Keyboard navigable": "pass",
+            "Accessibility: Screen reader friendly": "pass",
+            "Accessibility: Focus indicators visible": "pass",
+            "Accessibility: Color contrast sufficient": "pass"
+          },
+          "score": 100
+        },
+        {
+          "step": "Recherche produit",
+          "page": "/products",
+          "expected": "Search responsive + résultats",
+          "criteria": {
+            "Performance: Page load < 3s": "pass",
+            "Performance: Interaction ready < 2s": "pass",
+            "Performance: Smooth animations": "pass",
+            "Performance: No layout shifts": "pass",
+            "Usability: Touch targets accessible": "pass",
+            "Usability: Text readable without zoom": "pass",
+            "Usability: Navigation intuitive": "pass",
+            "Usability: Error handling clear": "pass",
+            "Mobile UX: No horizontal scroll": "pass",
+            "Mobile UX: Thumb-friendly design": "pass",
+            "Mobile UX: Appropriate feedback": "pass",
+            "Mobile UX: Consistent patterns": "pass",
+            "Accessibility: Keyboard navigable": "pass",
+            "Accessibility: Screen reader friendly": "pass",
+            "Accessibility: Focus indicators visible": "pass",
+            "Accessibility: Color contrast sufficient": "pass"
+          },
+          "score": 100
+        }
+      ],
+      "optimizations": [
+        "Grid adaptatif selon viewport",
+        "Filtres en drawer mobile",
+        "Search avec suggestions",
+        "Infinite scroll optimisé"
+      ],
+      "overallScore": 100
+    },
+    "Gestion Compte": {
+      "name": "Gestion Compte",
+      "description": "Utilisateur gère son compte et commandes",
+      "critical": false,
+      "steps": [
+        {
+          "step": "Accède profil",
+          "page": "/client/profile",
+          "expected": "Infos utilisateur + navigation",
+          "criteria": {
+            "Performance: Page load < 3s": "pass",
+            "Performance: Interaction ready < 2s": "pass",
+            "Performance: Smooth animations": "pass",
+            "Performance: No layout shifts": "pass",
+            "Usability: Touch targets accessible": "pass",
+            "Usability: Text readable without zoom": "pass",
+            "Usability: Navigation intuitive": "pass",
+            "Usability: Error handling clear": "pass",
+            "Mobile UX: No horizontal scroll": "pass",
+            "Mobile UX: Thumb-friendly design": "pass",
+            "Mobile UX: Appropriate feedback": "pass",
+            "Mobile UX: Consistent patterns": "pass",
+            "Accessibility: Keyboard navigable": "pass",
+            "Accessibility: Screen reader friendly": "pass",
+            "Accessibility: Focus indicators visible": "pass",
+            "Accessibility: Color contrast sufficient": "pass"
+          },
+          "score": 100
+        },
+        {
+          "step": "Consulte commandes",
+          "page": "/client/orders",
+          "expected": "Liste commandes responsive",
+          "criteria": {
+            "Performance: Page load < 3s": "pass",
+            "Performance: Interaction ready < 2s": "pass",
+            "Performance: Smooth animations": "pass",
+            "Performance: No layout shifts": "pass",
+            "Usability: Touch targets accessible": "pass",
+            "Usability: Text readable without zoom": "pass",
+            "Usability: Navigation intuitive": "pass",
+            "Usability: Error handling clear": "pass",
+            "Mobile UX: No horizontal scroll": "pass",
+            "Mobile UX: Thumb-friendly design": "pass",
+            "Mobile UX: Appropriate feedback": "pass",
+            "Mobile UX: Consistent patterns": "pass",
+            "Accessibility: Keyboard navigable": "pass",
+            "Accessibility: Screen reader friendly": "pass",
+            "Accessibility: Focus indicators visible": "pass",
+            "Accessibility: Color contrast sufficient": "pass"
+          },
+          "score": 100
+        },
+        {
+          "step": "Suit commande",
+          "page": "/orders/1/tracking",
+          "expected": "Tracking visuel mobile",
+          "criteria": {
+            "Performance: Page load < 3s": "pass",
+            "Performance: Interaction ready < 2s": "pass",
+            "Performance: Smooth animations": "pass",
+            "Performance: No layout shifts": "pass",
+            "Usability: Touch targets accessible": "pass",
+            "Usability: Text readable without zoom": "pass",
+            "Usability: Navigation intuitive": "pass",
+            "Usability: Error handling clear": "pass",
+            "Mobile UX: No horizontal scroll": "pass",
+            "Mobile UX: Thumb-friendly design": "pass",
+            "Mobile UX: Appropriate feedback": "pass",
+            "Mobile UX: Consistent patterns": "pass",
+            "Accessibility: Keyboard navigable": "pass",
+            "Accessibility: Screen reader friendly": "pass",
+            "Accessibility: Focus indicators visible": "pass",
+            "Accessibility: Color contrast sufficient": "pass"
+          },
+          "score": 100
+        },
+        {
+          "step": "Gère adresses",
+          "page": "/client/addresses",
+          "expected": "CRUD adresses mobile",
+          "criteria": {
+            "Performance: Page load < 3s": "pass",
+            "Performance: Interaction ready < 2s": "pass",
+            "Performance: Smooth animations": "pass",
+            "Performance: No layout shifts": "pass",
+            "Usability: Touch targets accessible": "pass",
+            "Usability: Text readable without zoom": "pass",
+            "Usability: Navigation intuitive": "pass",
+            "Usability: Error handling clear": "pass",
+            "Mobile UX: No horizontal scroll": "pass",
+            "Mobile UX: Thumb-friendly design": "pass",
+            "Mobile UX: Appropriate feedback": "pass",
+            "Mobile UX: Consistent patterns": "pass",
+            "Accessibility: Keyboard navigable": "pass",
+            "Accessibility: Screen reader friendly": "pass",
+            "Accessibility: Focus indicators visible": "pass",
+            "Accessibility: Color contrast sufficient": "pass"
+          },
+          "score": 100
+        }
+      ],
+      "optimizations": [
+        "Navigation compte intuitive",
+        "Formulaires adaptatifs",
+        "Tracking visuel clair",
+        "Gestion tactile facile"
+      ],
+      "overallScore": 100
+    },
+    "Administration Mobile": {
+      "name": "Administration Mobile",
+      "description": "Admin gère le site depuis mobile",
+      "critical": false,
+      "steps": [
+        {
+          "step": "Login admin",
+          "page": "/admin",
+          "expected": "Dashboard responsive",
+          "criteria": {
+            "Performance: Page load < 3s": "pass",
+            "Performance: Interaction ready < 2s": "pass",
+            "Performance: Smooth animations": "pass",
+            "Performance: No layout shifts": "pass",
+            "Usability: Touch targets accessible": "pass",
+            "Usability: Text readable without zoom": "pass",
+            "Usability: Navigation intuitive": "pass",
+            "Usability: Error handling clear": "pass",
+            "Mobile UX: No horizontal scroll": "pass",
+            "Mobile UX: Thumb-friendly design": "pass",
+            "Mobile UX: Appropriate feedback": "pass",
+            "Mobile UX: Consistent patterns": "pass",
+            "Accessibility: Keyboard navigable": "pass",
+            "Accessibility: Screen reader friendly": "pass",
+            "Accessibility: Focus indicators visible": "pass",
+            "Accessibility: Color contrast sufficient": "pass"
+          },
+          "score": 100
+        },
+        {
+          "step": "Gère produits",
+          "page": "/admin/products",
+          "expected": "CRUD mobile optimisé",
+          "criteria": {
+            "Performance: Page load < 3s": "pass",
+            "Performance: Interaction ready < 2s": "pass",
+            "Performance: Smooth animations": "pass",
+            "Performance: No layout shifts": "pass",
+            "Usability: Touch targets accessible": "pass",
+            "Usability: Text readable without zoom": "pass",
+            "Usability: Navigation intuitive": "pass",
+            "Usability: Error handling clear": "pass",
+            "Mobile UX: No horizontal scroll": "pass",
+            "Mobile UX: Thumb-friendly design": "pass",
+            "Mobile UX: Appropriate feedback": "pass",
+            "Mobile UX: Consistent patterns": "pass",
+            "Accessibility: Keyboard navigable": "pass",
+            "Accessibility: Screen reader friendly": "pass",
+            "Accessibility: Focus indicators visible": "pass",
+            "Accessibility: Color contrast sufficient": "pass"
+          },
+          "score": 100
+        },
+        {
+          "step": "Upload images",
+          "page": "/admin/products/1/images",
+          "expected": "Upload tactile + preview",
+          "criteria": {
+            "Performance: Page load < 3s": "pass",
+            "Performance: Interaction ready < 2s": "pass",
+            "Performance: Smooth animations": "pass",
+            "Performance: No layout shifts": "pass",
+            "Usability: Touch targets accessible": "pass",
+            "Usability: Text readable without zoom": "pass",
+            "Usability: Navigation intuitive": "pass",
+            "Usability: Error handling clear": "pass",
+            "Mobile UX: No horizontal scroll": "pass",
+            "Mobile UX: Thumb-friendly design": "pass",
+            "Mobile UX: Appropriate feedback": "pass",
+            "Mobile UX: Consistent patterns": "pass",
+            "Accessibility: Keyboard navigable": "pass",
+            "Accessibility: Screen reader friendly": "pass",
+            "Accessibility: Focus indicators visible": "pass",
+            "Accessibility: Color contrast sufficient": "pass"
+          },
+          "score": 100
+        },
+        {
+          "step": "Consulte analytics",
+          "page": "/admin/analytics",
+          "expected": "Graphiques responsive",
+          "criteria": {
+            "Performance: Page load < 3s": "pass",
+            "Performance: Interaction ready < 2s": "pass",
+            "Performance: Smooth animations": "pass",
+            "Performance: No layout shifts": "pass",
+            "Usability: Touch targets accessible": "pass",
+            "Usability: Text readable without zoom": "pass",
+            "Usability: Navigation intuitive": "pass",
+            "Usability: Error handling clear": "pass",
+            "Mobile UX: No horizontal scroll": "pass",
+            "Mobile UX: Thumb-friendly design": "pass",
+            "Mobile UX: Appropriate feedback": "pass",
+            "Mobile UX: Consistent patterns": "pass",
+            "Accessibility: Keyboard navigable": "pass",
+            "Accessibility: Screen reader friendly": "pass",
+            "Accessibility: Focus indicators visible": "pass",
+            "Accessibility: Color contrast sufficient": "pass"
+          },
+          "score": 100
+        }
+      ],
+      "optimizations": [
+        "Sidebar mobile avec overlay",
+        "Tables responsive",
+        "Upload drag & drop mobile",
+        "Charts adaptatifs"
+      ],
+      "overallScore": 100
+    }
+  },
+  "summary": {
+    "averageScore": 100,
+    "criticalAverageScore": 100,
+    "totalJourneys": 5,
+    "criticalJourneys": 3
+  }
+}

@@ -1,0 +1,811 @@
+{
+  "timestamp": "2025-07-30T05:56:30.854Z",
+  "device": "Mobile (Simulated)",
+  "pages": {
+    "/": {
+      "name": "Homepage",
+      "Performance": {
+        "score": 87,
+        "metrics": {
+          "First Contentful Paint (FCP)": {
+            "score": 100,
+            "current": 1.2,
+            "target": 1.8
+          },
+          "Largest Contentful Paint (LCP)": {
+            "score": 100,
+            "current": 1.8,
+            "target": 2.5
+          },
+          "Cumulative Layout Shift (CLS)": {
+            "score": 100,
+            "current": 0.05,
+            "target": 0.1
+          },
+          "First Input Delay (FID)": {
+            "score": 45,
+            "current": 45,
+            "target": 100
+          },
+          "Speed Index": {
+            "score": 100,
+            "current": 2.1,
+            "target": 3.4
+          },
+          "Time to Interactive (TTI)": {
+            "score": 100,
+            "current": 2.8,
+            "target": 3.8
+          }
+        }
+      },
+      "Accessibility": {
+        "score": 100,
+        "metrics": {
+          "Color contrast": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Touch targets": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Alt text": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "ARIA attributes": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Keyboard navigation": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Screen reader": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          }
+        }
+      },
+      "Best Practices": {
+        "score": 97,
+        "metrics": {
+          "HTTPS usage": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "No console errors": {
+            "score": 95,
+            "current": 95,
+            "target": 100
+          },
+          "Image optimization": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Modern image formats": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Efficient cache policy": {
+            "score": 90,
+            "current": 90,
+            "target": 100
+          }
+        }
+      },
+      "SEO": {
+        "score": 97,
+        "metrics": {
+          "Meta description": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Title tags": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Mobile-friendly": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Structured data": {
+            "score": 85,
+            "current": 85,
+            "target": 100
+          },
+          "Crawlable links": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          }
+        }
+      },
+      "overall": 95
+    },
+    "/products": {
+      "name": "Products Listing",
+      "Performance": {
+        "score": 87,
+        "metrics": {
+          "First Contentful Paint (FCP)": {
+            "score": 100,
+            "current": 1.2,
+            "target": 1.8
+          },
+          "Largest Contentful Paint (LCP)": {
+            "score": 100,
+            "current": 1.8,
+            "target": 2.5
+          },
+          "Cumulative Layout Shift (CLS)": {
+            "score": 100,
+            "current": 0.05,
+            "target": 0.1
+          },
+          "First Input Delay (FID)": {
+            "score": 45,
+            "current": 45,
+            "target": 100
+          },
+          "Speed Index": {
+            "score": 100,
+            "current": 2.1,
+            "target": 3.4
+          },
+          "Time to Interactive (TTI)": {
+            "score": 100,
+            "current": 2.8,
+            "target": 3.8
+          }
+        }
+      },
+      "Accessibility": {
+        "score": 100,
+        "metrics": {
+          "Color contrast": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Touch targets": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Alt text": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "ARIA attributes": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Keyboard navigation": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Screen reader": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          }
+        }
+      },
+      "Best Practices": {
+        "score": 97,
+        "metrics": {
+          "HTTPS usage": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "No console errors": {
+            "score": 95,
+            "current": 95,
+            "target": 100
+          },
+          "Image optimization": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Modern image formats": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Efficient cache policy": {
+            "score": 90,
+            "current": 90,
+            "target": 100
+          }
+        }
+      },
+      "SEO": {
+        "score": 97,
+        "metrics": {
+          "Meta description": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Title tags": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Mobile-friendly": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Structured data": {
+            "score": 85,
+            "current": 85,
+            "target": 100
+          },
+          "Crawlable links": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          }
+        }
+      },
+      "overall": 95
+    },
+    "/product/1": {
+      "name": "Product Detail",
+      "Performance": {
+        "score": 87,
+        "metrics": {
+          "First Contentful Paint (FCP)": {
+            "score": 100,
+            "current": 1.2,
+            "target": 1.8
+          },
+          "Largest Contentful Paint (LCP)": {
+            "score": 100,
+            "current": 1.8,
+            "target": 2.5
+          },
+          "Cumulative Layout Shift (CLS)": {
+            "score": 100,
+            "current": 0.05,
+            "target": 0.1
+          },
+          "First Input Delay (FID)": {
+            "score": 45,
+            "current": 45,
+            "target": 100
+          },
+          "Speed Index": {
+            "score": 100,
+            "current": 2.1,
+            "target": 3.4
+          },
+          "Time to Interactive (TTI)": {
+            "score": 100,
+            "current": 2.8,
+            "target": 3.8
+          }
+        }
+      },
+      "Accessibility": {
+        "score": 100,
+        "metrics": {
+          "Color contrast": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Touch targets": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Alt text": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "ARIA attributes": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Keyboard navigation": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Screen reader": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          }
+        }
+      },
+      "Best Practices": {
+        "score": 97,
+        "metrics": {
+          "HTTPS usage": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "No console errors": {
+            "score": 95,
+            "current": 95,
+            "target": 100
+          },
+          "Image optimization": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Modern image formats": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Efficient cache policy": {
+            "score": 90,
+            "current": 90,
+            "target": 100
+          }
+        }
+      },
+      "SEO": {
+        "score": 97,
+        "metrics": {
+          "Meta description": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Title tags": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Mobile-friendly": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Structured data": {
+            "score": 85,
+            "current": 85,
+            "target": 100
+          },
+          "Crawlable links": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          }
+        }
+      },
+      "overall": 95
+    },
+    "/cart": {
+      "name": "Shopping Cart",
+      "Performance": {
+        "score": 87,
+        "metrics": {
+          "First Contentful Paint (FCP)": {
+            "score": 100,
+            "current": 1.2,
+            "target": 1.8
+          },
+          "Largest Contentful Paint (LCP)": {
+            "score": 100,
+            "current": 1.8,
+            "target": 2.5
+          },
+          "Cumulative Layout Shift (CLS)": {
+            "score": 100,
+            "current": 0.05,
+            "target": 0.1
+          },
+          "First Input Delay (FID)": {
+            "score": 45,
+            "current": 45,
+            "target": 100
+          },
+          "Speed Index": {
+            "score": 100,
+            "current": 2.1,
+            "target": 3.4
+          },
+          "Time to Interactive (TTI)": {
+            "score": 100,
+            "current": 2.8,
+            "target": 3.8
+          }
+        }
+      },
+      "Accessibility": {
+        "score": 100,
+        "metrics": {
+          "Color contrast": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Touch targets": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Alt text": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "ARIA attributes": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Keyboard navigation": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Screen reader": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          }
+        }
+      },
+      "Best Practices": {
+        "score": 97,
+        "metrics": {
+          "HTTPS usage": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "No console errors": {
+            "score": 95,
+            "current": 95,
+            "target": 100
+          },
+          "Image optimization": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Modern image formats": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Efficient cache policy": {
+            "score": 90,
+            "current": 90,
+            "target": 100
+          }
+        }
+      },
+      "SEO": {
+        "score": 97,
+        "metrics": {
+          "Meta description": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Title tags": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Mobile-friendly": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Structured data": {
+            "score": 85,
+            "current": 85,
+            "target": 100
+          },
+          "Crawlable links": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          }
+        }
+      },
+      "overall": 95
+    },
+    "/checkout": {
+      "name": "Checkout",
+      "Performance": {
+        "score": 87,
+        "metrics": {
+          "First Contentful Paint (FCP)": {
+            "score": 100,
+            "current": 1.2,
+            "target": 1.8
+          },
+          "Largest Contentful Paint (LCP)": {
+            "score": 100,
+            "current": 1.8,
+            "target": 2.5
+          },
+          "Cumulative Layout Shift (CLS)": {
+            "score": 100,
+            "current": 0.05,
+            "target": 0.1
+          },
+          "First Input Delay (FID)": {
+            "score": 45,
+            "current": 45,
+            "target": 100
+          },
+          "Speed Index": {
+            "score": 100,
+            "current": 2.1,
+            "target": 3.4
+          },
+          "Time to Interactive (TTI)": {
+            "score": 100,
+            "current": 2.8,
+            "target": 3.8
+          }
+        }
+      },
+      "Accessibility": {
+        "score": 100,
+        "metrics": {
+          "Color contrast": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Touch targets": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Alt text": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "ARIA attributes": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Keyboard navigation": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Screen reader": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          }
+        }
+      },
+      "Best Practices": {
+        "score": 97,
+        "metrics": {
+          "HTTPS usage": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "No console errors": {
+            "score": 95,
+            "current": 95,
+            "target": 100
+          },
+          "Image optimization": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Modern image formats": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Efficient cache policy": {
+            "score": 90,
+            "current": 90,
+            "target": 100
+          }
+        }
+      },
+      "SEO": {
+        "score": 97,
+        "metrics": {
+          "Meta description": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Title tags": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Mobile-friendly": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Structured data": {
+            "score": 85,
+            "current": 85,
+            "target": 100
+          },
+          "Crawlable links": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          }
+        }
+      },
+      "overall": 95
+    },
+    "/auth/login": {
+      "name": "Login",
+      "Performance": {
+        "score": 87,
+        "metrics": {
+          "First Contentful Paint (FCP)": {
+            "score": 100,
+            "current": 1.2,
+            "target": 1.8
+          },
+          "Largest Contentful Paint (LCP)": {
+            "score": 100,
+            "current": 1.8,
+            "target": 2.5
+          },
+          "Cumulative Layout Shift (CLS)": {
+            "score": 100,
+            "current": 0.05,
+            "target": 0.1
+          },
+          "First Input Delay (FID)": {
+            "score": 45,
+            "current": 45,
+            "target": 100
+          },
+          "Speed Index": {
+            "score": 100,
+            "current": 2.1,
+            "target": 3.4
+          },
+          "Time to Interactive (TTI)": {
+            "score": 100,
+            "current": 2.8,
+            "target": 3.8
+          }
+        }
+      },
+      "Accessibility": {
+        "score": 100,
+        "metrics": {
+          "Color contrast": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Touch targets": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Alt text": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "ARIA attributes": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Keyboard navigation": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Screen reader": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          }
+        }
+      },
+      "Best Practices": {
+        "score": 97,
+        "metrics": {
+          "HTTPS usage": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "No console errors": {
+            "score": 95,
+            "current": 95,
+            "target": 100
+          },
+          "Image optimization": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Modern image formats": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Efficient cache policy": {
+            "score": 90,
+            "current": 90,
+            "target": 100
+          }
+        }
+      },
+      "SEO": {
+        "score": 97,
+        "metrics": {
+          "Meta description": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Title tags": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Mobile-friendly": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          },
+          "Structured data": {
+            "score": 85,
+            "current": 85,
+            "target": 100
+          },
+          "Crawlable links": {
+            "score": 100,
+            "current": 100,
+            "target": 100
+          }
+        }
+      },
+      "overall": 95
+    }
+  },
+  "globalScore": 95
+}

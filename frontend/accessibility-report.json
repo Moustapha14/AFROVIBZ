@@ -1,0 +1,103 @@
+{
+  "timestamp": "2025-07-30T05:57:33.986Z",
+  "wcagLevel": "AA",
+  "results": {
+    "Perceivable": {
+      "score": "6/6",
+      "percentage": 100,
+      "tests": {
+        "Color contrast (4.5:1 minimum)": "pass",
+        "Text alternatives for images": "pass",
+        "Captions for videos": "pass",
+        "Color not sole indicator": "pass",
+        "Resize text to 200%": "pass",
+        "Images of text avoided": "pass"
+      }
+    },
+    "Operable": {
+      "score": "5/6",
+      "percentage": 83,
+      "tests": {
+        "Keyboard accessible": "pass",
+        "No seizure triggers": "pass",
+        "Touch targets 44x44px": "pass",
+        "Focus visible": "pass",
+        "Skip navigation links": "warning",
+        "Page titles descriptive": "pass"
+      }
+    },
+    "Understandable": {
+      "score": "6/6",
+      "percentage": 100,
+      "tests": {
+        "Language identified": "pass",
+        "Consistent navigation": "pass",
+        "Error identification": "pass",
+        "Labels and instructions": "pass",
+        "Input assistance": "pass",
+        "Error prevention": "pass"
+      }
+    },
+    "Robust": {
+      "score": "5/5",
+      "percentage": 100,
+      "tests": {
+        "Valid HTML markup": "pass",
+        "ARIA attributes correct": "pass",
+        "Compatible with assistive tech": "pass",
+        "Status messages announced": "pass",
+        "Name, role, value available": "pass"
+      }
+    }
+  },
+  "mobileResults": {
+    "Touch Interaction": {
+      "score": "4/4",
+      "percentage": 100,
+      "tests": {
+        "Touch targets minimum 44px": "pass",
+        "Touch targets well spaced": "pass",
+        "Gestures have alternatives": "pass",
+        "Motion actuation alternatives": "pass"
+      }
+    },
+    "Visual Design": {
+      "score": "4/4",
+      "percentage": 100,
+      "tests": {
+        "Text scales to 200% without loss": "pass",
+        "Content reflows at 320px width": "pass",
+        "Orientation support both ways": "pass",
+        "Focus indicators visible": "pass"
+      }
+    },
+    "Screen Reader": {
+      "score": "4/4",
+      "percentage": 100,
+      "tests": {
+        "Headings properly structured": "pass",
+        "Landmarks identify regions": "pass",
+        "Form labels associated": "pass",
+        "Error messages descriptive": "pass"
+      }
+    },
+    "Keyboard Navigation": {
+      "score": "4/4",
+      "percentage": 100,
+      "tests": {
+        "All interactive elements reachable": "pass",
+        "Focus order logical": "pass",
+        "Keyboard traps avoided": "pass",
+        "Custom controls keyboard accessible": "pass"
+      }
+    }
+  },
+  "summary": {
+    "wcagScore": 96,
+    "mobileScore": 100,
+    "overallScore": 98,
+    "criticalIssues": 0,
+    "totalTests": 39,
+    "passedTests": 38
+  }
+}

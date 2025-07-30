@@ -1,0 +1,291 @@
+{
+  "timestamp": "2025-07-30T05:55:36.301Z",
+  "totalScore": 100,
+  "results": {
+    "iPhone SE": {
+      "device": "iPhone SE",
+      "viewport": "375x667",
+      "pages": {
+        "/": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/products": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/product/1": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/cart": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/checkout": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/auth/login": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/client/profile": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/admin/dashboard": {
+          "score": "5/5",
+          "passed": true
+        }
+      },
+      "components": {
+        "Header Mobile": {
+          "score": "4/4",
+          "passed": true
+        },
+        "Navigation Mobile": {
+          "score": "4/4",
+          "passed": true
+        },
+        "Products Grid": {
+          "score": "4/4",
+          "passed": true
+        },
+        "Breadcrumbs": {
+          "score": "4/4",
+          "passed": true
+        }
+      },
+      "overall": "PASS"
+    },
+    "iPhone 14": {
+      "device": "iPhone 14",
+      "viewport": "390x844",
+      "pages": {
+        "/": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/products": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/product/1": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/cart": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/checkout": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/auth/login": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/client/profile": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/admin/dashboard": {
+          "score": "5/5",
+          "passed": true
+        }
+      },
+      "components": {
+        "Header Mobile": {
+          "score": "4/4",
+          "passed": true
+        },
+        "Navigation Mobile": {
+          "score": "4/4",
+          "passed": true
+        },
+        "Products Grid": {
+          "score": "4/4",
+          "passed": true
+        },
+        "Breadcrumbs": {
+          "score": "4/4",
+          "passed": true
+        }
+      },
+      "overall": "PASS"
+    },
+    "Samsung Galaxy S21": {
+      "device": "Samsung Galaxy S21",
+      "viewport": "360x800",
+      "pages": {
+        "/": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/products": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/product/1": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/cart": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/checkout": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/auth/login": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/client/profile": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/admin/dashboard": {
+          "score": "5/5",
+          "passed": true
+        }
+      },
+      "components": {
+        "Header Mobile": {
+          "score": "4/4",
+          "passed": true
+        },
+        "Navigation Mobile": {
+          "score": "4/4",
+          "passed": true
+        },
+        "Products Grid": {
+          "score": "4/4",
+          "passed": true
+        },
+        "Breadcrumbs": {
+          "score": "4/4",
+          "passed": true
+        }
+      },
+      "overall": "PASS"
+    },
+    "iPad": {
+      "device": "iPad",
+      "viewport": "768x1024",
+      "pages": {
+        "/": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/products": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/product/1": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/cart": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/checkout": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/auth/login": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/client/profile": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/admin/dashboard": {
+          "score": "5/5",
+          "passed": true
+        }
+      },
+      "components": {
+        "Header Mobile": {
+          "score": "4/4",
+          "passed": true
+        },
+        "Navigation Mobile": {
+          "score": "4/4",
+          "passed": true
+        },
+        "Products Grid": {
+          "score": "4/4",
+          "passed": true
+        },
+        "Breadcrumbs": {
+          "score": "4/4",
+          "passed": true
+        }
+      },
+      "overall": "PASS"
+    },
+    "iPad Pro": {
+      "device": "iPad Pro",
+      "viewport": "1024x1366",
+      "pages": {
+        "/": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/products": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/product/1": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/cart": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/checkout": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/auth/login": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/client/profile": {
+          "score": "5/5",
+          "passed": true
+        },
+        "/admin/dashboard": {
+          "score": "5/5",
+          "passed": true
+        }
+      },
+      "components": {
+        "Header Mobile": {
+          "score": "4/4",
+          "passed": true
+        },
+        "Navigation Mobile": {
+          "score": "4/4",
+          "passed": true
+        },
+        "Products Grid": {
+          "score": "4/4",
+          "passed": true
+        },
+        "Breadcrumbs": {
+          "score": "4/4",
+          "passed": true
+        }
+      },
+      "overall": "PASS"
+    }
+  }
+}
