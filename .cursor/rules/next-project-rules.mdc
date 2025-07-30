@@ -1,0 +1,199 @@
+---
+description: Fontend web development in Next.js+Tailwind.css
+alwaysApply: false
+---
+# CURSOR RULES - Intelligent Mobile-First Expert
+
+## Context Awareness
+Analyze the current project structure and adapt behavior:
+- If working in `/app` → Use App Router patterns
+- If working in `/pages` → Use Pages Router patterns  
+- If editing component → Focus on reusability and mobile-first
+- If creating new page → Use standard template with SEO
+- If fixing bug → Prioritize non-regression testing
+
+## Intelligent Mobile-First Standards
+
+### Typography (Auto-detect and suggest)
+- If text < 16px on mobile → Auto-suggest `text-base sm:text-lg`
+- If heading without responsive scale → Suggest `text-2xl sm:text-3xl lg:text-4xl`
+- Always check contrast ratios and suggest improvements
+
+### Layout Intelligence
+- If fixed width detected → Suggest fluid alternative
+- If grid without mobile stacking → Auto-add `grid-cols-1 md:grid-cols-X`
+- If flex without wrap → Suggest responsive flex patterns
+- Monitor viewport overflow and suggest fixes
+
+### Component Intelligence
+```tsx
+// Auto-detect patterns and suggest improvements
+// If sees this pattern:
+<button className="py-1 px-2">Click</button>
+
+// Intelligent suggestion:
+<button className="min-h-[44px] py-3 px-4 text-base font-medium rounded-lg 
+                   bg-blue-600 hover:bg-blue-700 text-white
+                   focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+                   transition-colors">
+  Click
+</button>
+```
+
+## Context-Aware Page Creation
+
+### Smart Template Selection
+- Blog post → SEO-heavy template with structured data
+- Landing page → Conversion-focused with CTAs
+- Dashboard → Data-dense responsive layout
+- Form page → Accessibility-first with validation
+
+### Intelligent Imports
+Auto-suggest relevant imports based on context:
+```tsx
+// If creating image-heavy page
+import Image from 'next/image'
+
+// If creating interactive page  
+import { useState, useEffect } from 'react'
+
+// If creating form
+import { useRouter } from 'next/navigation'
+```
+
+## Smart Testing Strategy
+
+### Context-Based Test Suggestions
+- New component → Unit test template
+- New page → Integration test with routing
+- Form component → Accessibility test focus
+- Mobile fix → Viewport test scenarios
+
+### Intelligent Error Prevention
+```bash
+# Before suggesting changes, auto-check:
+1. TypeScript compilation status
+2. Existing test coverage
+3. Mobile viewport implications
+4. Performance impact estimation
+```
+
+## Adaptive Workflow
+
+### Project Phase Detection
+- **Setup Phase**: Focus on architecture and standards
+- **Development Phase**: Emphasize component patterns and reusability  
+- **Optimization Phase**: Prioritize performance and mobile UX
+- **Maintenance Phase**: Focus on non-regression and documentation
+
+### Smart Suggestions Based on File Context
+
+#### In `/components/ui/`
+- Emphasize reusability and prop interfaces
+- Suggest Storybook stories if detected
+- Focus on accessibility and variant patterns
+
+#### In `/app/*/page.tsx`
+- Prioritize SEO metadata
+- Suggest loading states and error boundaries
+- Emphasize mobile-first responsive design
+
+#### In `/lib/` or `/utils/`
+- Focus on type safety an# CURSOR RULES - Intelligent Mobile-First Expert
+
+## Context Awareness
+Analyze the current project structure and adapt behavior:
+- If working in `/app` → Use App Router patterns
+- If working in `/pages` → Use Pages Router patterns  
+- If editing component → Focus on reusability and mobile-first
+- If creating new page → Use standard template with SEO
+- If fixing bug → Prioritize non-regression testing
+
+## Intelligent Mobile-First Standards
+
+### Typography (Auto-detect and suggest)
+- If text < 16px on mobile → Auto-suggest `text-base sm:text-lg`
+- If heading without responsive scale → Suggest `text-2xl sm:text-3xl lg:text-4xl`
+- Always check contrast ratios and suggest improvements
+
+### Layout Intelligence
+- If fixed width detected → Suggest fluid alternative
+- If grid without mobile stacking → Auto-add `grid-cols-1 md:grid-cols-X`
+- If flex without wrap → Suggest responsive flex patterns
+- Monitor viewport overflow and suggest fixes
+
+### Component Intelligence
+```tsx
+// Auto-detect patterns and suggest improvements
+// If sees this pattern:
+<button className="py-1 px-2">Click</button>
+
+// Intelligent suggestion:
+<button className="min-h-[44px] py-3 px-4 text-base font-medium rounded-lg 
+                   bg-blue-600 hover:bg-blue-700 text-white
+                   focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+                   transition-colors">
+  Click
+</button>
+```
+
+## Context-Aware Page Creation
+
+### Smart Template Selection
+- Blog post → SEO-heavy template with structured data
+- Landing page → Conversion-focused with CTAs
+- Dashboard → Data-dense responsive layout
+- Form page → Accessibility-first with validation
+
+### Intelligent Imports
+Auto-suggest relevant imports based on context:
+```tsx
+// If creating image-heavy page
+import Image from 'next/image'
+
+// If creating interactive page  
+import { useState, useEffect } from 'react'
+
+// If creating form
+import { useRouter } from 'next/navigation'
+```
+
+## Smart Testing Strategy
+
+### Context-Based Test Suggestions
+- New component → Unit test template
+- New page → Integration test with routing
+- Form component → Accessibility test focus
+- Mobile fix → Viewport test scenarios
+
+### Intelligent Error Prevention
+```bash
+# Before suggesting changes, auto-check:
+1. TypeScript compilation status
+2. Existing test coverage
+3. Mobile viewport implications
+4. Performance impact estimation
+```
+
+## Adaptive Workflow
+
+### Project Phase Detection
+- **Setup Phase**: Focus on architecture and standards
+- **Development Phase**: Emphasize component patterns and reusability  
+- **Optimization Phase**: Prioritize performance and mobile UX
+- **Maintenance Phase**: Focus on non-regression and documentation
+
+### Smart Suggestions Based on File Context
+
+#### In `/components/ui/`
+- Emphasize reusability and prop interfaces
+- Suggest Storybook stories if detected
+- Focus on accessibility and variant patterns
+
+#### In `/app/*/page.tsx`
+- Prioritize SEO metadata
+- Suggest loading states and error boundaries
+- Emphasize mobile-first responsive design
+
+#### In `/lib/` or `/utils/`
+- Focus on type safety an

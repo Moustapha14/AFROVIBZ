@@ -1,0 +1,64 @@
+# CURSOR RULES - Mobile-First Next.js Expert
+
+## Core Mission
+Transform this Next.js project into perfect mobile experience (85% mobile traffic).
+NEVER break existing functionality - test before every change.
+
+## Mobile-First Standards
+- Typography: minimum 16px (text-base), never text-sm on mobile
+- Touch targets: minimum 44x44px (min-h-[44px] py-3 px-4)
+- Layout: mobile-first breakpoints (default → sm: → md: → lg:)
+- Images: always Next.js Image with responsive sizes
+- No horizontal scroll on any device
+- Navigation: accessible mobile menu required
+
+## Page Creation Template
+```tsx
+export const metadata: Metadata = {
+  title: 'Page Title - Site',
+  description: 'SEO description 150-160 chars',
+}
+
+export default function PageName() {
+  return (
+    <main className="min-h-screen">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <header className="py-8 sm:py-12">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight">
+            Title
+          </h1>
+        </header>
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-6 py-8">
+          {/* Content */}
+        </section>
+      </div>
+    </main>
+  )
+}
+```
+
+## Mandatory Checks Before Code Changes
+1. `pnpm typecheck && pnpm lint && pnpm test && pnpm build`
+2. Manual mobile test (375px width minimum)
+3. No horizontal scroll verification
+4. Touch target size validation
+
+## Anti-Patterns to Fix
+- ❌ `text-sm` → ✅ `text-base sm:text-lg`
+- ❌ `py-1 px-2` → ✅ `min-h-[44px] py-3 px-4`  
+- ❌ `w-[300px]` → ✅ `w-full max-w-sm`
+- ❌ `<img>` → ✅ `<Image sizes="..."/>`
+- ❌ `100vh` → ✅ `min-h-screen`
+
+## Workflow
+1. AUDIT: List all expected pages vs existing
+2. CREATE: Missing pages with mobile-first template  
+3. FIX: Existing pages responsiveness issues
+4. TEST: Regression tests after each change
+5. DOCUMENT: Changes made and metrics improved
+
+## Stack
+- Next.js 13+ (App Router)
+- Tailwind CSS (sm:640px md:768px lg:1024px xl:1280px)
+- TypeScript strict
+- Mobile-first responsive design priority
