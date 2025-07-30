@@ -91,7 +91,7 @@ export default function ProductDetailPage() {
                     alt={product.name}
                     fill
                     className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
+                    sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, 50vw"
                     priority
                     quality={90}
                   />
@@ -120,7 +120,7 @@ export default function ProductDetailPage() {
                         alt={`${product.name} - Vue ${index + 1}`}
                         fill
                         className="object-cover"
-                        sizes="(max-width: 768px) 25vw, 12.5vw"
+                        sizes="(max-width: 480px) 25vw, (max-width: 768px) 25vw, 12.5vw"
                         quality={75}
                       />
                     </button>

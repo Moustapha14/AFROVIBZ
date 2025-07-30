@@ -22,7 +22,7 @@ export function ProductImage({
   fallbackIcon = '👗',
   className,
   priority = false,
-  sizes = "(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw",
+  sizes = "(max-width: 480px) 100vw, (max-width: 640px) 50vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw",
   quality = 85
 }: ProductImageProps) {
   const [imageError, setImageError] = useState(false);
@@ -88,4 +88,4 @@ export function ProductImage({
       />
     </div>
   );
-} 
+}
