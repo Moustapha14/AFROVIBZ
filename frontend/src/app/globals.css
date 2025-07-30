@@ -31,6 +31,8 @@ html {
   /* Optimiser pour les écrans tactiles */
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
+  /* Améliorer les performances de scroll */
+  scroll-padding-top: 80px; /* Compenser le header sticky */
 }
 
 body {
@@ -71,6 +73,24 @@ p, h1, h2, h3, h4, h5, h6, span, div {
     min-width: 44px;
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
+    /* Feedback tactile amélioré */
+    transition: all 0.15s ease-in-out;
+  }
+
+  /* Feedback visuel au touch */
+  button:active, a:active, [role="button"]:active {
+    transform: scale(0.98);
+    opacity: 0.8;
+  }
+
+  /* Améliorer les interactions avec les cartes */
+  .card-interactive {
+    transition: all 0.2s ease-in-out;
+  }
+
+  .card-interactive:active {
+    transform: scale(0.99);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
   /* Optimiser les inputs pour mobile */
@@ -97,6 +117,22 @@ p, h1, h2, h3, h4, h5, h6, span, div {
     font-size: clamp(1.125rem, 3.5vw, 1.5rem);
     line-height: 1.4;
     font-weight: 600;
+  }
+
+  /* Optimiser le scroll sur mobile */
+  .mobile-scroll {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  /* Masquer les scrollbars sur mobile tout en gardant la fonctionnalité */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
   }
 
   p {
@@ -404,7 +440,7 @@ img {
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
-/* Animation pour le menu mobile */
+/* Animations pour le menu mobile */
 @keyframes slide-in-right {
   from {
     transform: translateX(100%);
@@ -414,8 +450,128 @@ img {
   }
 }
 
+@keyframes slide-out-right {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-out-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slide-in-top {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-out-top {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes slide-in-bottom {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-out-bottom {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Classes d'animation */
 .animate-slide-in-right {
   animation: slide-in-right 0.3s ease-out;
+}
+
+.animate-slide-out-right {
+  animation: slide-out-right 0.3s ease-in;
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 0.3s ease-out;
+}
+
+.animate-slide-out-left {
+  animation: slide-out-left 0.3s ease-in;
+}
+
+.animate-slide-in-top {
+  animation: slide-in-top 0.3s ease-out;
+}
+
+.animate-slide-out-top {
+  animation: slide-out-top 0.3s ease-in;
+}
+
+.animate-slide-in-bottom {
+  animation: slide-in-bottom 0.3s ease-out;
+}
+
+.animate-slide-out-bottom {
+  animation: slide-out-bottom 0.3s ease-in;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.2s ease-out;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.2s ease-out;
 }
 
 /* Optimisations pour les boutons de panier */

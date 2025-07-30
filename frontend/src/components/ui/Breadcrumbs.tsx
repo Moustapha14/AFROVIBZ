@@ -18,18 +18,22 @@ interface BreadcrumbsProps {
 export function Breadcrumbs({ 
   items, 
   className,
-  separator = <ChevronRight className="h-4 w-4 text-gray-400" />
+  separator = <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4 text-gray-400 flex-shrink-0" />
 }: BreadcrumbsProps) {
   return (
-    <nav className={cn("flex items-center space-x-1 text-sm", className)} aria-label="Breadcrumb">
-      <ol className="flex items-center space-x-1">
+    <nav 
+      className={cn("flex items-center space-x-1 text-sm text-gray-500 mb-4 sm:mb-6 overflow-x-auto scrollbar-hide", className)} 
+      aria-label="Fil d'Ariane"
+    >
+      <ol className="flex items-center space-x-1 min-w-max">
         <li>
           <Link 
             href="/" 
-            className="flex items-center text-gray-500 hover:text-gray-700 transition-colors"
+            className="flex items-center text-gray-500 hover:text-gray-700 transition-colors min-h-[44px] min-w-[44px] justify-center sm:min-h-auto sm:min-w-auto sm:justify-start"
             aria-label="Accueil"
           >
-            <Home className="h-4 w-4" />
+            <Home className="h-4 w-4 sm:mr-1" />
+            <span className="hidden sm:inline text-sm">Accueil</span>
           </Link>
         </li>
         
@@ -38,7 +42,7 @@ export function Breadcrumbs({
             {separator}
             {item.current ? (
               <span 
-                className="ml-1 text-gray-900 font-medium truncate"
+                className="ml-1 text-gray-900 font-medium truncate max-w-[120px] sm:max-w-none"
                 aria-current="page"
               >
                 {item.label}
@@ -46,12 +50,12 @@ export function Breadcrumbs({
             ) : item.href ? (
               <Link 
                 href={item.href}
-                className="ml-1 text-gray-500 hover:text-gray-700 transition-colors truncate"
+                className="ml-1 text-gray-500 hover:text-gray-700 transition-colors truncate max-w-[120px] sm:max-w-none min-h-[44px] flex items-center sm:min-h-auto"
               >
                 {item.label}
               </Link>
             ) : (
-              <span className="ml-1 text-gray-500 truncate">
+              <span className="ml-1 text-gray-500 truncate max-w-[120px] sm:max-w-none">
                 {item.label}
               </span>
             )}
@@ -84,4 +88,4 @@ export function useBreadcrumbs(pathname: string) {
   });
   
   return breadcrumbs;
-} 
+}
