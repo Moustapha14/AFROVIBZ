@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X, Minus, Plus, ShoppingBag } from 'lucide-react';
 import { Button } from './Button';
 import { ProductImage } from './ProductImage';
@@ -18,6 +18,28 @@ export function ProductModal({ product, isOpen, onClose, onAddToCart }: ProductM
   const [selectedSize, setSelectedSize] = useState<string>('');
   const [selectedColor, setSelectedColor] = useState<string>('');
   const [quantity, setQuantity] = useState(1);
+
+  // Gérer le scroll du body
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
+  // Réinitialiser les sélections quand le modal s'ouvre avec un nouveau produit
+  useEffect(() => {
+    if (isOpen && product) {
+      setSelectedSize('');
+      setSelectedColor('');
+      setQuantity(1);
+    }
+  }, [isOpen, product]);
 
   if (!product || !isOpen) return null;
 
@@ -41,26 +63,38 @@ export function ProductModal({ product, isOpen, onClose, onAddToCart }: ProductM
     }
   };
 
+  const handleBackdropClick = (e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-2 xs:p-4">
-      <div className="bg-white rounded-lg max-w-2xl w-full max-h-[95vh] xs:max-h-[90vh] overflow-y-auto">
+    <div 
+      className="fixed inset-0 bg-black bg-opacity-50 z-[9999] flex items-end sm:items-center justify-center"
+      onClick={handleBackdropClick}
+    >
+      <div 
+        className="bg-white rounded-t-2xl sm:rounded-lg max-w-2xl w-full h-[85vh] sm:h-auto sm:max-h-[90vh] overflow-hidden flex flex-col relative"
+        onClick={(e) => e.stopPropagation()}
+      >
         {/* Header */}
         <div className="flex items-center justify-between p-3 xs:p-4 border-b">
           <h2 className="text-base xs:text-lg font-semibold">Ajouter au panier</h2>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors h-10 w-10 flex items-center justify-center"
+            className="min-h-[44px] min-w-[44px] p-2 hover:bg-gray-100 rounded-full transition-colors flex items-center justify-center"
           >
-            <X className="h-4 w-4 xs:h-5 xs:w-5" />
+            <X className="h-5 w-5" />
           </button>
         </div>
 
         {/* Content */}
-        <div className="p-3 xs:p-4">
-          <div className="flex flex-col md:flex-row gap-4 xs:gap-6">
+        <div className="p-4 overflow-y-auto flex-1">
+          <div className="flex flex-col md:flex-row gap-4">
             {/* Product Image */}
-            <div className="w-full md:w-1/2">
-              <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
+            <div className="w-full md:w-1/2 flex-shrink-0">
+              <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden max-h-[300px] sm:max-h-none">
                 <ProductImage
                   src={product.images[0]}
                   alt={product.name}
@@ -70,7 +104,7 @@ export function ProductModal({ product, isOpen, onClose, onAddToCart }: ProductM
             </div>
 
             {/* Product Details */}
-            <div className="w-full md:w-1/2 space-y-3 xs:space-y-4">
+            <div className="w-full md:w-1/2 space-y-4 pb-safe sm:pb-0">
               <div>
                 <h3 className="text-lg xs:text-xl font-semibold text-gray-900">{product.name}</h3>
                 <p className="text-xs xs:text-sm text-gray-600 mt-1">{product.description}</p>
@@ -91,18 +125,19 @@ export function ProductModal({ product, isOpen, onClose, onAddToCart }: ProductM
               {/* Color Selection */}
               <div>
                 <h4 className="text-sm font-medium text-gray-900 mb-2">Couleur</h4>
-                <div className="flex space-x-2">
+                <div className="flex flex-wrap gap-2">
                   {product.colors.map((color) => (
                     <button
                       key={color.name}
                       onClick={() => setSelectedColor(color.name)}
-                      className={`w-8 h-8 rounded-full border-2 transition-all ${
+                      className={`min-w-[44px] min-h-[44px] rounded-full border-2 transition-all ${
                         selectedColor === color.name
                           ? 'border-black scale-110'
                           : 'border-gray-300 hover:border-gray-400'
                       }`}
                       style={{ backgroundColor: color.hex }}
                       title={color.name}
+                      type="button"
                     />
                   ))}
                 </div>
@@ -114,16 +149,17 @@ export function ProductModal({ product, isOpen, onClose, onAddToCart }: ProductM
               {/* Size Selection */}
               <div>
                 <h4 className="text-sm font-medium text-gray-900 mb-2">Taille</h4>
-                <div className="grid grid-cols-4 gap-2">
+                <div className="grid grid-cols-3 xs:grid-cols-4 gap-2">
                   {product.sizes.map((size) => (
                     <button
                       key={size}
                       onClick={() => setSelectedSize(size)}
-                      className={`py-2 px-3 text-sm font-medium rounded-md border transition-colors ${
+                      className={`min-h-[44px] py-2 px-3 text-sm font-medium rounded-md border transition-colors ${
                         selectedSize === size
                           ? 'border-black bg-black text-white'
                           : 'border-gray-300 hover:border-gray-400'
                       }`}
+                      type="button"
                     >
                       {size}
                     </button>
@@ -138,7 +174,8 @@ export function ProductModal({ product, isOpen, onClose, onAddToCart }: ProductM
                   <button
                     onClick={() => handleQuantityChange(quantity - 1)}
                     disabled={quantity <= 1}
-                    className="p-2 border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="min-h-[44px] min-w-[44px] p-3 border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                    type="button"
                   >
                     <Minus className="h-4 w-4" />
                   </button>
@@ -146,7 +183,8 @@ export function ProductModal({ product, isOpen, onClose, onAddToCart }: ProductM
                   <button
                     onClick={() => handleQuantityChange(quantity + 1)}
                     disabled={quantity >= 10}
-                    className="p-2 border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="min-h-[44px] min-w-[44px] p-3 border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                    type="button"
                   >
                     <Plus className="h-4 w-4" />
                   </button>

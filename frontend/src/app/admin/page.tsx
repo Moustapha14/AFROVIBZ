@@ -17,7 +17,8 @@ import {
   Truck,
   Gift,
   Shield,
-  LogOut
+  LogOut,
+  HelpCircle
 } from 'lucide-react';
 
 interface AdminStats {
@@ -144,6 +145,13 @@ export default function AdminPage() {
           icon: <Gift className="h-6 w-6" />,
           href: '/admin/promotions',
           color: 'bg-pink-500'
+        },
+        {
+          title: 'Gestion FAQ',
+          description: 'Gérer les questions fréquemment posées',
+          icon: <HelpCircle className="h-6 w-6" />,
+          href: '/admin/content/faq',
+          color: 'bg-blue-500'
         },
         {
           title: 'Analytics & Rapports',

@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useContent } from '@/lib/context/ContentContext';
 import { 
   ChevronDown, 
   ChevronUp, 
@@ -10,120 +11,43 @@ import {
   ShoppingBag,
   Truck,
   CreditCard,
-  RotateCcw,
   Phone,
-  Mail
+  Mail,
+  Package,
+  User
 } from 'lucide-react';
 
 // Metadata défini dans layout parent ou via next/head
 
-interface FAQItem {
-  id: string;
-  question: string;
-  answer: string;
-  category: string;
-}
 
-const faqData: FAQItem[] = [
-  // Commandes
-  {
-    id: '1',
-    category: 'Commandes',
-    question: 'Comment passer une commande ?',
-    answer: 'Pour passer commande, ajoutez vos produits au panier, accédez au panier, cliquez sur "Commander" et suivez les étapes. Vous pouvez payer par carte bancaire ou Mobile Money.'
-  },
-  {
-    id: '2',
-    category: 'Commandes',
-    question: 'Puis-je modifier ou annuler ma commande ?',
-    answer: 'Vous pouvez modifier ou annuler votre commande dans les 30 minutes suivant la commande en nous contactant directement. Après ce délai, la commande entre en préparation.'
-  },
-  {
-    id: '3',
-    category: 'Commandes',
-    question: 'Quels sont les modes de paiement acceptés ?',
-    answer: 'Nous acceptons les cartes bancaires (Visa, Mastercard), Mobile Money (Airtel Money, Moov Money) et le paiement à la livraison dans certaines zones.'
-  },
-  
-  // Livraison
-  {
-    id: '4',
-    category: 'Livraison',
-    question: 'Quels sont les délais de livraison ?',
-    answer: 'Libreville: 24-48h, Grande Libreville: 2-3 jours, Gabon national: 3-7 jours. Les délais peuvent être prolongés pendant les fêtes.'
-  },
-  {
-    id: '5',
-    category: 'Livraison',
-    question: 'La livraison est-elle vraiment gratuite ?',
-    answer: 'Oui ! Livraison gratuite dès 50,000 FCFA dans Libreville et dès 75,000 FCFA dans tout le Gabon. En dessous, des frais de livraison s\'appliquent.'
-  },
-  {
-    id: '6',
-    category: 'Livraison',
-    question: 'Comment suivre ma commande ?',
-    answer: 'Dès l\'expédition, vous recevez un SMS avec le numéro de suivi. Vous pouvez aussi consulter le statut dans votre espace client ou sur notre page de suivi.'
-  },
-  
-  // Retours
-  {
-    id: '7',
-    category: 'Retours',
-    question: 'Puis-je retourner un produit ?',
-    answer: 'Oui, vous avez 14 jours pour retourner un produit non utilisé dans son emballage d\'origine. Les frais de retour sont à votre charge sauf défaut de fabrication.'
-  },
-  {
-    id: '8',
-    category: 'Retours',
-    question: 'Comment procéder à un échange ?',
-    answer: 'Contactez notre service client avec votre numéro de commande. Nous vous guiderons pour l\'échange. Les frais d\'expédition du nouvel article sont offerts.'
-  },
-  
-  // Produits
-  {
-    id: '9',
-    category: 'Produits',
-    question: 'Les tailles correspondent-elles aux standards européens ?',
-    answer: 'Nos tailles peuvent varier selon les marques. Consultez notre guide des tailles détaillé sur chaque fiche produit et mesurez-vous avant de commander.'
-  },
-  {
-    id: '10',
-    category: 'Produits',
-    question: 'Les produits tech ont-ils une garantie ?',
-    answer: 'Tous nos produits tech bénéficient d\'une garantie constructeur de 12 mois minimum. La garantie couvre les défauts de fabrication, pas les dommages accidentels.'
-  },
-  
-  // Compte
-  {
-    id: '11',
-    category: 'Compte',
-    question: 'Dois-je créer un compte pour commander ?',
-    answer: 'Non, vous pouvez commander en tant qu\'invité. Cependant, un compte vous permet de suivre vos commandes, gérer vos favoris et accéder à des offres exclusives.'
-  },
-  {
-    id: '12',
-    category: 'Compte',
-    question: 'J\'ai oublié mon mot de passe, que faire ?',
-    answer: 'Cliquez sur "Mot de passe oublié" sur la page de connexion, entrez votre email et suivez les instructions pour réinitialiser votre mot de passe.'
-  }
-];
 
-const categories = [
-  { id: 'all', name: 'Toutes', icon: HelpCircle },
-  { id: 'Commandes', name: 'Commandes', icon: ShoppingBag },
-  { id: 'Livraison', name: 'Livraison', icon: Truck },
-  { id: 'Retours', name: 'Retours', icon: RotateCcw },
-  { id: 'Produits', name: 'Produits', icon: CreditCard },
-  { id: 'Compte', name: 'Compte', icon: HelpCircle }
-];
+// Mapping des icônes pour les catégories
+const iconMap = {
+  'ShoppingBag': ShoppingBag,
+  'Truck': Truck,
+  'CreditCard': CreditCard,
+  'User': User,
+  'Package': Package,
+  'HelpCircle': HelpCircle
+};
 
 export default function FAQPage() {
+  const { faqItems, faqCategories } = useContent();
   const [activeCategory, setActiveCategory] = useState('all');
   const [openItems, setOpenItems] = useState<string[]>([]);
 
+  // Filtrer les questions actives seulement
+  const activeFAQs = faqItems.filter(item => item.isActive);
+  
   const filteredFAQs = activeCategory === 'all' 
-    ? faqData 
-    : faqData.filter(faq => faq.category === activeCategory);
+    ? activeFAQs 
+    : activeFAQs.filter(faq => faq.category === activeCategory);
+
+  // Créer les catégories avec l'icône "Toutes" en premier
+  const allCategories = [
+    { id: 'all', name: 'Toutes', icon: 'HelpCircle', isActive: true },
+    ...faqCategories.filter(cat => cat.isActive)
+  ];
 
   const toggleItem = (id: string) => {
     setOpenItems(prev => 
@@ -160,8 +84,8 @@ export default function FAQPage() {
         {/* Category Filter - Mobile First */}
         <div className="mb-8">
           <div className="flex flex-wrap gap-2 sm:gap-3 justify-center">
-            {categories.map((category) => {
-              const Icon = category.icon;
+            {allCategories.map((category) => {
+              const Icon = iconMap[category.icon as keyof typeof iconMap] || HelpCircle;
               return (
                 <button
                   key={category.id}
@@ -262,14 +186,7 @@ export default function FAQPage() {
             <Truck className="h-6 w-6 text-black mx-auto mb-2" />
             <span className="text-sm font-medium text-gray-900">Livraison</span>
           </Link>
-          
-          <Link 
-            href="/returns"
-            className="block bg-white rounded-lg shadow-sm p-4 hover:shadow-md transition-shadow text-center border border-gray-200"
-          >
-            <RotateCcw className="h-6 w-6 text-black mx-auto mb-2" />
-            <span className="text-sm font-medium text-gray-900">Retours</span>
-          </Link>
+
           
           <Link 
             href="/size-guide"

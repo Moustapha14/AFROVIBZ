@@ -136,14 +136,7 @@ export function Footer() {
                   Livraison
                 </Link>
               </li>
-              <li>
-                <Link 
-                  href="/returns" 
-                  className="text-gray-300 hover:text-white transition-colors text-sm sm:text-base block py-1"
-                >
-                  Retours & Échanges
-                </Link>
-              </li>
+
               <li>
                 <Link 
                   href="/faq" 

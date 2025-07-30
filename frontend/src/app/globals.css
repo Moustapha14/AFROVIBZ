@@ -505,3 +505,27 @@ img {
     border-radius: 8px;
   }
 }
+
+/* Styles pour le modal mobile */
+@layer utilities {
+  /* Améliorer le comportement du scroll dans les modals */
+  .overscroll-contain {
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Empêcher le scroll bounce sur iOS */
+  .modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+  }
+  
+  /* Padding pour les zones de sécurité (iPhone X et plus récents) */
+  .pb-safe {
+    padding-bottom: calc(1.25rem + env(safe-area-inset-bottom));
+  }
+}

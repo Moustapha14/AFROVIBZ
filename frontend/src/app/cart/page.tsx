@@ -211,7 +211,7 @@ export default function CartPage() {
                   <Shield className="h-5 w-5 text-gray-600 flex-shrink-0" />
                   <div>
                     <p className="font-medium text-gray-900 text-sm">Garantie</p>
-                    <p className="text-xs sm:text-sm text-gray-600">Retours gratuits sous 30 jours</p>
+                    <p className="text-xs sm:text-sm text-gray-600">Satisfaction garantie</p>
                   </div>
                 </div>
               </div>

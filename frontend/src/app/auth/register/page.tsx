@@ -7,6 +7,7 @@ import { useAuth } from '@/lib/hooks/useAuth';
 import { PasswordInput } from '@/components/ui/PasswordInput';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
+import { AnimatedLogo } from '@/components/ui/AnimatedLogo';
 import { toast } from 'react-hot-toast';
 
 interface FormErrors {
@@ -91,18 +92,33 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="flex justify-center">
-          <h1 className="text-3xl font-bold text-gray-900">AFRO🗼VIBZ</h1>
+    <div className="min-h-screen bg-gradient-to-br from-yellow-400 via-orange-400 to-red-500 sm:bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 relative overflow-hidden">
+      {/* Éléments décoratifs pour mobile */}
+      <div className="absolute inset-0 sm:hidden">
+        {/* Cercles décoratifs */}
+        <div className="absolute top-16 right-10 w-24 h-24 bg-white/10 rounded-full animate-pulse"></div>
+        <div className="absolute top-40 left-8 w-14 h-14 bg-white/20 rounded-full animate-bounce"></div>
+        <div className="absolute bottom-32 right-6 w-10 h-10 bg-yellow-300/30 rounded-full animate-ping"></div>
+        <div className="absolute bottom-16 left-12 w-6 h-6 bg-white/15 rounded-full"></div>
+        
+        {/* Motifs africains stylisés */}
+        <div className="absolute top-1/3 right-4">
+          <div className="w-5 h-5 border-2 border-white/20 rotate-45"></div>
         </div>
-        <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 text-center mt-6">
+        <div className="absolute bottom-1/4 left-6">
+          <div className="w-3 h-3 border-2 border-yellow-300/40 rotate-45"></div>
+        </div>
+      </div>
+      
+      <div className="sm:mx-auto sm:w-full sm:max-w-md relative z-10">
+        <AnimatedLogo className="mb-6" size="xl" />
+        <h2 className="text-xl xs:text-2xl sm:text-3xl font-bold text-white sm:text-gray-900 text-center drop-shadow-lg sm:drop-shadow-none">
           Créer un compte
         </h2>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md relative z-10">
+        <div className="bg-white/95 backdrop-blur-sm sm:bg-white py-8 px-4 shadow-2xl sm:shadow rounded-2xl sm:rounded-lg sm:px-10 border border-white/20 sm:border-transparent">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="displayName" className="block text-xs xs:text-sm font-medium text-gray-700">

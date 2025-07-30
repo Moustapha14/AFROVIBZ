@@ -1,9 +1,11 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
+import { useTracking } from '@/lib/context/TrackingContext';
+import { toast } from 'react-hot-toast';
 import { 
   Search, 
   Package, 
@@ -13,7 +15,8 @@ import {
   ArrowLeft,
   MapPin,
   Phone,
-  AlertCircle
+  AlertCircle,
+  RefreshCw
 } from 'lucide-react';
 
 // Metadata défini dans layout parent ou via next/head
@@ -40,46 +43,99 @@ interface Order {
   timeline: TrackingStatus[];
 }
 
-const mockOrder: Order = {
-  orderNumber: 'CMD-2024-001',
-  trackingNumber: 'AF24001789',
-  status: 'in_transit',
-  estimatedDelivery: '25 janvier 2024',
-  currentLocation: 'Centre de tri Libreville',
-  items: [
-    { name: 'Robe Africaine Élégante', quantity: 1 },
-    { name: 'Sac Hexagonal Noir', quantity: 1 }
-  ],
-  timeline: [
+// Fonction pour convertir LogisticsTracking vers Order
+function convertToOrder(logistics: any): Order {
+  return {
+    orderNumber: logistics.orderNumber,
+    trackingNumber: logistics.trackingNumber,
+    status: logistics.status,
+    estimatedDelivery: logistics.estimatedDelivery.toLocaleDateString('fr-FR'),
+    currentLocation: logistics.currentLocation,
+    items: [
+      { name: 'Robe Africaine Élégante', quantity: 1 },
+      { name: 'Sac Hexagonal Noir', quantity: 1 }
+    ],
+    timeline: generateTimeline(logistics)
+  };
+}
+
+function generateTimeline(logistics: any): TrackingStatus[] {
+  const timeline: TrackingStatus[] = [
     {
       status: 'preparing',
       title: 'Commande confirmée',
       description: 'Votre commande a été confirmée et est en préparation',
-      timestamp: '22 janvier 2024, 14:30',
+      timestamp: logistics.lastUpdate.toLocaleDateString('fr-FR', { 
+        year: 'numeric', month: 'long', day: 'numeric', 
+        hour: '2-digit', minute: '2-digit' 
+      }),
       location: 'Entrepôt AFROVIBZ'
-    },
-    {
+    }
+  ];
+
+  if (['shipped', 'in_transit', 'out_for_delivery', 'delivered'].includes(logistics.status)) {
+    timeline.push({
       status: 'shipped',
       title: 'Expédiée',
       description: 'Votre commande a été expédiée',
-      timestamp: '23 janvier 2024, 09:15',
+      timestamp: logistics.lastUpdate.toLocaleDateString('fr-FR', { 
+        year: 'numeric', month: 'long', day: 'numeric', 
+        hour: '2-digit', minute: '2-digit' 
+      }),
       location: 'Entrepôt AFROVIBZ'
-    },
-    {
+    });
+  }
+
+  if (['in_transit', 'out_for_delivery', 'delivered'].includes(logistics.status)) {
+    timeline.push({
       status: 'in_transit',
       title: 'En transit',
       description: 'Votre colis est en route vers sa destination',
-      timestamp: '24 janvier 2024, 11:00',
-      location: 'Centre de tri Libreville'
-    }
-  ]
-};
+      timestamp: logistics.lastUpdate.toLocaleDateString('fr-FR', { 
+        year: 'numeric', month: 'long', day: 'numeric', 
+        hour: '2-digit', minute: '2-digit' 
+      }),
+      location: logistics.currentLocation
+    });
+  }
+
+  if (['out_for_delivery', 'delivered'].includes(logistics.status)) {
+    timeline.push({
+      status: 'in_transit',
+      title: 'En livraison',
+      description: 'Votre colis est en cours de livraison',
+      timestamp: logistics.lastUpdate.toLocaleDateString('fr-FR', { 
+        year: 'numeric', month: 'long', day: 'numeric', 
+        hour: '2-digit', minute: '2-digit' 
+      }),
+      location: 'En route vers le client'
+    });
+  }
+
+  if (logistics.status === 'delivered') {
+    timeline.push({
+      status: 'delivered',
+      title: 'Livré',
+      description: 'Votre colis a été livré avec succès',
+      timestamp: logistics.lastUpdate.toLocaleDateString('fr-FR', { 
+        year: 'numeric', month: 'long', day: 'numeric', 
+        hour: '2-digit', minute: '2-digit' 
+      }),
+      location: 'Livré chez le client'
+    });
+  }
+
+  return timeline;
+}
 
 export default function TrackingPage() {
+  const { findByTrackingNumber, findByOrderNumber } = useTracking();
   const [trackingInput, setTrackingInput] = useState('');
   const [searchedOrder, setSearchedOrder] = useState<Order | null>(null);
   const [isSearching, setIsSearching] = useState(false);
   const [error, setError] = useState('');
+  const [lastRefresh, setLastRefresh] = useState(new Date());
+  const [autoRefreshEnabled, setAutoRefreshEnabled] = useState(true);
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -88,15 +144,54 @@ export default function TrackingPage() {
     setIsSearching(true);
     setError('');
 
-    // Simulation d'une recherche API
+    // Simulation d'une recherche avec délai réaliste
     setTimeout(() => {
-      if (trackingInput === 'AF24001789' || trackingInput === 'CMD-2024-001') {
-        setSearchedOrder(mockOrder);
+      const foundLogistics = findByTrackingNumber(trackingInput) || findByOrderNumber(trackingInput);
+      
+      if (foundLogistics) {
+        setSearchedOrder(convertToOrder(foundLogistics));
+        toast.success('✅ Commande trouvée !');
       } else {
-        setError('Numéro de suivi introuvable. Vérifiez votre numéro.');
+        setError('❌ Numéro de suivi introuvable. Vérifiez votre numéro.');
+        setSearchedOrder(null);
       }
       setIsSearching(false);
-    }, 1500);
+    }, 800);
+  };
+
+  // Auto-refresh toutes les 30 secondes
+  useEffect(() => {
+    if (!autoRefreshEnabled || !searchedOrder) return;
+
+    const interval = setInterval(() => {
+      const currentLogistics = findByTrackingNumber(searchedOrder.trackingNumber) || 
+                              findByOrderNumber(searchedOrder.orderNumber);
+      
+      if (currentLogistics) {
+        const newOrder = convertToOrder(currentLogistics);
+        
+        // Vérifier si le statut a changé
+        if (newOrder.status !== searchedOrder.status) {
+          setSearchedOrder(newOrder);
+          setLastRefresh(new Date());
+          toast.success(`📦 Mise à jour automatique : ${getStatusLabel(newOrder.status)}`);
+        }
+      }
+    }, 30000); // 30 secondes
+
+    return () => clearInterval(interval);
+  }, [searchedOrder, autoRefreshEnabled, findByTrackingNumber, findByOrderNumber]);
+
+  // Fonction pour obtenir le label du statut
+  const getStatusLabel = (status: string) => {
+    const labels = {
+      preparing: 'En préparation',
+      shipped: 'Expédié',
+      in_transit: 'En transit',
+      out_for_delivery: 'En livraison',
+      delivered: 'Livré',
+    };
+    return labels[status as keyof typeof labels] || status;
   };
 
   const getStatusIcon = (status: string) => {
@@ -201,6 +296,42 @@ export default function TrackingPage() {
                 )}
               </Button>
             </form>
+
+            {/* Auto-refresh Controls */}
+            {searchedOrder && (
+              <div className="mt-6 pt-6 border-t border-gray-200">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <div className="flex items-center space-x-2">
+                      <RefreshCw 
+                        className={`h-4 w-4 transition-colors ${
+                          autoRefreshEnabled ? 'text-green-600' : 'text-gray-400'
+                        }`} 
+                        style={{
+                          animation: autoRefreshEnabled ? 'spin 30s linear infinite' : 'none'
+                        }}
+                      />
+                      <span className="text-sm text-gray-600">
+                        Actualisation automatique {autoRefreshEnabled ? 'activée' : 'désactivée'}
+                      </span>
+                    </div>
+                    <button
+                      onClick={() => setAutoRefreshEnabled(!autoRefreshEnabled)}
+                      className={`px-3 py-1 text-xs rounded-full font-medium transition-colors ${
+                        autoRefreshEnabled 
+                          ? 'bg-green-100 text-green-800 hover:bg-green-200' 
+                          : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                      }`}
+                    >
+                      {autoRefreshEnabled ? 'Désactiver' : 'Activer'}
+                    </button>
+                  </div>
+                  <div className="text-xs text-gray-500">
+                    Dernière maj: {lastRefresh.toLocaleTimeString('fr-FR')}
+                  </div>
+                </div>
+              </div>
+            )}
 
             {/* Démo hint */}
             <div className="mt-6 p-3 bg-blue-50 border border-blue-200 rounded-lg">

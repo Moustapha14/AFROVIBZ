@@ -10,7 +10,6 @@ import {
   Share2, 
   Truck, 
   Shield, 
-  RotateCcw,
   Minus,
   Plus,
   ShoppingBag
@@ -285,10 +284,7 @@ export default function ProductDetailPage() {
                     <Shield className="h-5 w-5 text-green-600" />
                     <span className="text-sm text-gray-600">Garantie 30 jours</span>
                   </div>
-                  <div className="flex items-center space-x-3">
-                    <RotateCcw className="h-5 w-5 text-green-600" />
-                    <span className="text-sm text-gray-600">Retours gratuits</span>
-                  </div>
+
                 </div>
               </div>
             </div>

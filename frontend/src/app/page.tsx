@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
-import { ArrowRight, Star, ShoppingBag, Heart, Truck, Shield, RotateCcw } from 'lucide-react';
+import { ArrowRight, Star, ShoppingBag, Heart, Truck, Shield } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
 import { useWishlist } from '@/lib/hooks/useWishlist';
 import { useCart } from '@/lib/hooks/useCart';
@@ -482,7 +482,7 @@ export default function HomePage() {
       {/* Features Section - Mobile First */}
       <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-white">
         <div className="mobile-container">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12 lg:gap-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 max-w-4xl mx-auto">
             <div className="text-center">
               <div className="w-16 h-16 sm:w-20 sm:h-20 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
                 <Truck className="w-8 h-8 sm:w-10 sm:h-10 text-yellow-600" />
@@ -507,17 +507,7 @@ export default function HomePage() {
               </p>
             </div>
             
-            <div className="text-center">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
-                <RotateCcw className="w-8 h-8 sm:w-10 sm:h-10 text-blue-600" />
-              </div>
-              <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 mb-2 sm:mb-3 text-balance">
-                Retours Faciles
-              </h3>
-              <p className="text-sm sm:text-base md:text-lg text-gray-600 text-balance">
-                Retours gratuits sous 30 jours si vous n'êtes pas satisfait
-              </p>
-            </div>
+
           </div>
         </div>
       </section>

@@ -147,10 +147,7 @@ export function SheinHeader() {
             <Truck className="h-3 w-3" />
             <span>Livraison gratuite dès 29€</span>
           </div>
-          <div className="hidden sm:flex items-center space-x-1">
-            <Shield className="h-3 w-3" />
-            <span>Retours gratuits</span>
-          </div>
+
           <div className="hidden md:flex items-center space-x-1">
             <Gift className="h-3 w-3" />
             <span>Offres exclusives</span>

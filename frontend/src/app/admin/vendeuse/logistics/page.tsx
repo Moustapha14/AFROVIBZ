@@ -6,70 +6,15 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Search, Truck, MapPin, Clock, CheckCircle, AlertCircle } from 'lucide-react';
-import { toast } from 'react-hot-toast';
+import { useTracking } from '@/lib/context/TrackingContext';
 
-// Interface pour le suivi logistique
-interface LogisticsTracking {
-  id: string;
-  orderNumber: string;
-  customerName: string;
-  deliveryAddress: string;
-  deliveryOption: string;
-  status: 'preparing' | 'shipped' | 'in_transit' | 'out_for_delivery' | 'delivered';
-  trackingNumber: string;
-  estimatedDelivery: Date;
-  currentLocation: string;
-  lastUpdate: Date;
-  notes: string;
-}
-
-// Données mockées pour le suivi logistique
-const mockLogistics: LogisticsTracking[] = [
-  {
-    id: '1',
-    orderNumber: 'CMD-2024-001',
-    customerName: 'Marie Dupont',
-    deliveryAddress: '123 Rue de la Paix, Libreville, Gabon',
-    deliveryOption: 'Express',
-    status: 'in_transit',
-    trackingNumber: 'TRK-2024-001',
-    estimatedDelivery: new Date('2024-01-18'),
-    currentLocation: 'Centre de tri Libreville',
-    lastUpdate: new Date('2024-01-16'),
-    notes: 'Colis en cours de livraison',
-  },
-  {
-    id: '2',
-    orderNumber: 'CMD-2024-002',
-    customerName: 'Jean Martin',
-    deliveryAddress: '456 Avenue des Palmiers, Libreville, Gabon',
-    deliveryOption: 'Standard',
-    status: 'preparing',
-    trackingNumber: 'TRK-2024-002',
-    estimatedDelivery: new Date('2024-01-20'),
-    currentLocation: 'Entrepôt AFROVIBZ',
-    lastUpdate: new Date('2024-01-16'),
-    notes: 'Préparation en cours',
-  },
-  {
-    id: '3',
-    orderNumber: 'CMD-2024-003',
-    customerName: 'Sophie Bernard',
-    deliveryAddress: '789 Boulevard de la Mer, Libreville, Gabon',
-    deliveryOption: 'Express',
-    status: 'out_for_delivery',
-    trackingNumber: 'TRK-2024-003',
-    estimatedDelivery: new Date('2024-01-17'),
-    currentLocation: 'En route vers le client',
-    lastUpdate: new Date('2024-01-16'),
-    notes: 'Livreur en route',
-  },
-];
+// Import du type depuis le context
+import type { LogisticsTracking } from '@/lib/context/TrackingContext';
 
 export default function VendeuseLogisticsPage() {
   const { user, loading } = useAuth();
   const router = useRouter();
-  const [logistics, setLogistics] = useState<LogisticsTracking[]>(mockLogistics);
+  const { logistics, updateLogisticsStatus, getStatusCounts } = useTracking();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedStatus, setSelectedStatus] = useState('all');
 
@@ -106,11 +51,11 @@ export default function VendeuseLogisticsPage() {
   };
 
   const handleStatusUpdate = (id: string, newStatus: LogisticsTracking['status']) => {
-    setLogistics(logistics.map(item => 
-      item.id === id ? { ...item, status: newStatus, lastUpdate: new Date() } : item
-    ));
-    toast.success(`Statut logistique mis à jour vers ${newStatus}`);
+    updateLogisticsStatus(id, newStatus, 'vendeuse');
   };
+
+  // Optimiser les compteurs avec le contexte
+  const statusCounts = getStatusCounts();
 
   if (loading) {
     return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Chargement...</div>;
@@ -139,7 +84,7 @@ export default function VendeuseLogisticsPage() {
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">En préparation</p>
                 <p className="text-2xl font-bold text-gray-900">
-                  {logistics.filter(l => l.status === 'preparing').length}
+                  {statusCounts.preparing || 0}
                 </p>
               </div>
             </div>
@@ -153,7 +98,7 @@ export default function VendeuseLogisticsPage() {
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Expédiés</p>
                 <p className="text-2xl font-bold text-gray-900">
-                  {logistics.filter(l => l.status === 'shipped').length}
+                  {statusCounts.shipped || 0}
                 </p>
               </div>
             </div>
@@ -167,7 +112,7 @@ export default function VendeuseLogisticsPage() {
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">En transit</p>
                 <p className="text-2xl font-bold text-gray-900">
-                  {logistics.filter(l => l.status === 'in_transit').length}
+                  {statusCounts.in_transit || 0}
                 </p>
               </div>
             </div>
@@ -181,7 +126,7 @@ export default function VendeuseLogisticsPage() {
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">En livraison</p>
                 <p className="text-2xl font-bold text-gray-900">
-                  {logistics.filter(l => l.status === 'out_for_delivery').length}
+                  {statusCounts.out_for_delivery || 0}
                 </p>
               </div>
             </div>
@@ -195,7 +140,7 @@ export default function VendeuseLogisticsPage() {
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Livrés</p>
                 <p className="text-2xl font-bold text-gray-900">
-                  {logistics.filter(l => l.status === 'delivered').length}
+                  {statusCounts.delivered || 0}
                 </p>
               </div>
             </div>
@@ -235,28 +180,110 @@ export default function VendeuseLogisticsPage() {
           </div>
         </div>
 
-        {/* Logistics Table */}
-        <div className="bg-white rounded-lg shadow overflow-hidden">
+        {/* Logistics List - Mobile Cards + Desktop Table */}
+        {/* Mobile Cards View */}
+        <div className="block lg:hidden space-y-4">
+          {filteredLogistics.map((item) => (
+            <div key={item.id} className="bg-white rounded-lg shadow border border-gray-200 p-4">
+              {/* Header */}
+              <div className="flex items-start justify-between mb-3">
+                <div className="flex-1">
+                  <div className="text-sm font-medium text-gray-900">{item.orderNumber}</div>
+                  <div className="text-xs text-gray-500">{item.trackingNumber}</div>
+                </div>
+                {getStatusBadge(item.status)}
+              </div>
+              
+              {/* Customer & Address */}
+              <div className="mb-3">
+                <div className="text-sm font-medium text-gray-900 mb-1">{item.customerName}</div>
+                <div className="text-sm text-gray-600 line-clamp-2">{item.deliveryAddress}</div>
+                <div className="text-xs text-gray-500 mt-1">{item.deliveryOption}</div>
+              </div>
+              
+              {/* Delivery Info */}
+              <div className="mb-4 pb-3 border-b border-gray-100">
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-600">Livraison estimée:</span>
+                  <span className="font-medium text-gray-900">
+                    {item.estimatedDelivery.toLocaleDateString('fr-FR')}
+                  </span>
+                </div>
+                <div className="flex justify-between text-sm mt-1">
+                  <span className="text-gray-600">Localisation:</span>
+                  <span className="text-gray-900">{item.currentLocation}</span>
+                </div>
+              </div>
+              
+              {/* Actions */}
+              <div className="flex flex-col sm:flex-row gap-2">
+                <button
+                  onClick={() => {/* TODO: View tracking details */}}
+                  className="flex items-center justify-center p-2 text-blue-600 hover:text-blue-900 hover:bg-blue-50 rounded-lg transition-colors min-h-[44px] border border-blue-200"
+                >
+                  <Search className="h-4 w-4 mr-2" />
+                  Détails
+                </button>
+                
+                {item.status === 'preparing' && (
+                  <Button
+                    onClick={() => handleStatusUpdate(item.id, 'shipped')}
+                    className="min-h-[44px] flex-1"
+                  >
+                    Expédier
+                  </Button>
+                )}
+                {item.status === 'shipped' && (
+                  <Button
+                    onClick={() => handleStatusUpdate(item.id, 'in_transit')}
+                    className="min-h-[44px] flex-1"
+                  >
+                    En transit
+                  </Button>
+                )}
+                {item.status === 'in_transit' && (
+                  <Button
+                    onClick={() => handleStatusUpdate(item.id, 'out_for_delivery')}
+                    className="min-h-[44px] flex-1"
+                  >
+                    En livraison
+                  </Button>
+                )}
+                {item.status === 'out_for_delivery' && (
+                  <Button
+                    onClick={() => handleStatusUpdate(item.id, 'delivered')}
+                    className="min-h-[44px] flex-1"
+                  >
+                    Livré
+                  </Button>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop Table View */}
+        <div className="hidden lg:block bg-white rounded-lg shadow overflow-hidden">
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-4 xl:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Suivi
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-4 xl:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Client
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-4 xl:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Adresse
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-4 xl:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Statut
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-4 xl:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Livraison estimée
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className="px-4 xl:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Actions
                   </th>
                 </tr>
@@ -264,32 +291,32 @@ export default function VendeuseLogisticsPage() {
               <tbody className="bg-white divide-y divide-gray-200">
                 {filteredLogistics.map((item) => (
                   <tr key={item.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-4 xl:px-6 py-4 whitespace-nowrap">
                       <div>
                         <div className="text-sm font-medium text-gray-900">{item.orderNumber}</div>
                         <div className="text-sm text-gray-500">{item.trackingNumber}</div>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-4 xl:px-6 py-4 whitespace-nowrap">
                       <div className="text-sm font-medium text-gray-900">{item.customerName}</div>
                     </td>
-                    <td className="px-6 py-4">
+                    <td className="px-4 xl:px-6 py-4">
                       <div className="text-sm text-gray-900 max-w-xs truncate">
                         {item.deliveryAddress}
                       </div>
                       <div className="text-sm text-gray-500">{item.deliveryOption}</div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
+                    <td className="px-4 xl:px-6 py-4 whitespace-nowrap">
                       {getStatusBadge(item.status)}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td className="px-4 xl:px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                       {item.estimatedDelivery.toLocaleDateString('fr-FR')}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <td className="px-4 xl:px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <div className="flex items-center space-x-2">
                         <button
                           onClick={() => {/* TODO: View tracking details */}}
-                          className="text-blue-600 hover:text-blue-900"
+                          className="text-blue-600 hover:text-blue-900 p-2 hover:bg-blue-50 rounded-lg transition-colors"
                         >
                           <Search className="h-4 w-4" />
                         </button>
