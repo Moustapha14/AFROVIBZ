@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Button } from '@/components/ui/Button';
 import { ArrowRight, Star, ShoppingBag, Heart, Truck, Shield } from 'lucide-react';
-import { formatPrice } from '@/lib/utils';
+import { formatPrice, formatCompactPrice } from '@/lib/utils';
 import { useWishlist } from '@/lib/hooks/useWishlist';
 import { useCart } from '@/lib/hooks/useCart';
 import OptimizedImageCarousel from '@/components/HeroSection/OptimizedImageCarousel';
@@ -449,14 +449,19 @@ export default function HomePage() {
                   </div>
                   
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-2">
-                      <span className="text-sm sm:text-base md:text-lg font-bold text-gray-900">
+                    <div className="flex items-center space-x-2 xs:space-x-3 min-w-0 flex-1 max-w-full overflow-hidden">
+                      <span className="text-sm sm:text-base md:text-lg font-bold text-gray-900 flex-shrink-0">
                         {formatPrice(product.price)}
                       </span>
                       {product.originalPrice && (
-                        <span className="text-xs sm:text-sm text-gray-500 line-through">
-                          {formatPrice(product.originalPrice)}
-                        </span>
+                        <>
+                          <span className="sm:hidden text-base text-gray-500 line-through flex-shrink-0 font-semibold whitespace-nowrap">
+                            {formatCompactPrice(product.originalPrice)}
+                          </span>
+                          <span className="hidden sm:inline text-xs sm:text-sm text-gray-500 line-through flex-shrink-0 font-medium">
+                            {formatPrice(product.originalPrice)}
+                          </span>
+                        </>
                       )}
                     </div>
                   </div>

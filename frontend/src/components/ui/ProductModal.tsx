@@ -71,44 +71,46 @@ export function ProductModal({ product, isOpen, onClose, onAddToCart }: ProductM
 
   return (
     <div 
-      className="fixed inset-0 bg-black bg-opacity-50 z-[9999] flex items-end sm:items-center justify-center"
+      className="fixed inset-0 bg-black bg-opacity-50 z-[9999] flex items-end sm:items-center justify-center p-0 sm:p-4"
       onClick={handleBackdropClick}
     >
       <div 
-        className="bg-white rounded-t-2xl sm:rounded-lg max-w-2xl w-full h-[85vh] sm:h-auto sm:max-h-[90vh] overflow-hidden flex flex-col relative"
+        className="bg-white rounded-t-2xl sm:rounded-lg max-w-2xl w-full h-[90vh] sm:h-auto sm:max-h-[85vh] overflow-hidden flex flex-col relative overscroll-contain"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-3 xs:p-4 border-b">
-          <h2 className="text-base xs:text-lg font-semibold">Ajouter au panier</h2>
+        <div className="flex items-center justify-between p-4 sm:p-3 border-b bg-white sticky top-0 z-10">
+          <h2 className="text-lg sm:text-base font-semibold">Ajouter au panier</h2>
           <button
             onClick={onClose}
-            className="min-h-[44px] min-w-[44px] p-2 hover:bg-gray-100 rounded-full transition-colors flex items-center justify-center"
+            type="button"
+            className="min-h-[48px] min-w-[48px] p-2 hover:bg-gray-100 rounded-full transition-colors flex items-center justify-center touch-manipulation"
           >
-            <X className="h-5 w-5" />
+            <X className="h-6 w-6 sm:h-5 sm:w-5" />
           </button>
         </div>
 
         {/* Content */}
-        <div className="p-4 overflow-y-auto flex-1">
-          <div className="flex flex-col md:flex-row gap-4">
-            {/* Product Image */}
-            <div className="w-full md:w-1/2 flex-shrink-0">
-              <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden max-h-[300px] sm:max-h-none">
-                <ProductImage
-                  src={product.images[0]}
-                  alt={product.name}
-                  fallbackText={product.name}
-                />
+        <div className="overflow-y-auto flex-1 overscroll-contain">
+          <div className="p-4 sm:p-6">
+            <div className="flex flex-col md:flex-row gap-6">
+              {/* Product Image */}
+              <div className="w-full md:w-1/2 flex-shrink-0">
+                <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden max-h-[280px] sm:max-h-none">
+                  <ProductImage
+                    src={product.images[0]}
+                    alt={product.name}
+                    fallbackText={product.name}
+                  />
+                </div>
               </div>
-            </div>
 
-            {/* Product Details */}
-            <div className="w-full md:w-1/2 space-y-4 pb-safe sm:pb-0">
-              <div>
-                <h3 className="text-lg xs:text-xl font-semibold text-gray-900">{product.name}</h3>
-                <p className="text-xs xs:text-sm text-gray-600 mt-1">{product.description}</p>
-              </div>
+              {/* Product Details */}
+              <div className="w-full md:w-1/2 space-y-5 pb-safe sm:pb-0">
+                <div>
+                  <h3 className="text-xl sm:text-lg font-semibold text-gray-900 leading-tight">{product.name}</h3>
+                  <p className="text-sm sm:text-xs text-gray-600 mt-2 leading-relaxed">{product.description}</p>
+                </div>
 
               {/* Price */}
               <div className="flex items-center space-x-2">
@@ -122,96 +124,99 @@ export function ProductModal({ product, isOpen, onClose, onAddToCart }: ProductM
                 )}
               </div>
 
-              {/* Color Selection */}
-              <div>
-                <h4 className="text-sm font-medium text-gray-900 mb-2">Couleur</h4>
-                <div className="flex flex-wrap gap-2">
-                  {product.colors.map((color) => (
-                    <button
-                      key={color.name}
-                      onClick={() => setSelectedColor(color.name)}
-                      className={`min-w-[44px] min-h-[44px] rounded-full border-2 transition-all ${
-                        selectedColor === color.name
-                          ? 'border-black scale-110'
-                          : 'border-gray-300 hover:border-gray-400'
-                      }`}
-                      style={{ backgroundColor: color.hex }}
-                      title={color.name}
-                      type="button"
-                    />
-                  ))}
+                {/* Color Selection */}
+                <div>
+                  <h4 className="text-base sm:text-sm font-medium text-gray-900 mb-3">Couleur</h4>
+                  <div className="flex flex-wrap gap-3">
+                    {product.colors.map((color) => (
+                      <button
+                        key={color.name}
+                        onClick={() => setSelectedColor(color.name)}
+                        className={`min-w-[48px] min-h-[48px] w-12 h-12 sm:min-w-[44px] sm:min-h-[44px] sm:w-11 sm:h-11 rounded-full border-2 transition-all touch-manipulation ${
+                          selectedColor === color.name
+                            ? 'border-black scale-110 shadow-md'
+                            : 'border-gray-300 hover:border-gray-400 active:scale-95'
+                        }`}
+                        style={{ backgroundColor: color.hex }}
+                        title={color.name}
+                        type="button"
+                      />
+                    ))}
+                  </div>
+                  {selectedColor && (
+                    <p className="text-sm text-gray-600 mt-2">Couleur sélectionnée : {selectedColor}</p>
+                  )}
                 </div>
-                {selectedColor && (
-                  <p className="text-sm text-gray-600 mt-1">Couleur sélectionnée : {selectedColor}</p>
-                )}
-              </div>
 
-              {/* Size Selection */}
-              <div>
-                <h4 className="text-sm font-medium text-gray-900 mb-2">Taille</h4>
-                <div className="grid grid-cols-3 xs:grid-cols-4 gap-2">
-                  {product.sizes.map((size) => (
+                {/* Size Selection */}
+                <div>
+                  <h4 className="text-base sm:text-sm font-medium text-gray-900 mb-3">Taille</h4>
+                  <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                    {product.sizes.map((size) => (
+                      <button
+                        key={size}
+                        onClick={() => setSelectedSize(size)}
+                        className={`min-h-[48px] sm:min-h-[44px] py-3 sm:py-2 px-4 sm:px-3 text-base sm:text-sm font-medium rounded-lg sm:rounded-md border transition-all touch-manipulation ${
+                          selectedSize === size
+                            ? 'border-black bg-black text-white shadow-md'
+                            : 'border-gray-300 hover:border-gray-400 active:bg-gray-50'
+                        }`}
+                        type="button"
+                      >
+                        {size}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Quantity */}
+                <div>
+                  <h4 className="text-base sm:text-sm font-medium text-gray-900 mb-3">Quantité</h4>
+                  <div className="flex items-center justify-center space-x-4">
                     <button
-                      key={size}
-                      onClick={() => setSelectedSize(size)}
-                      className={`min-h-[44px] py-2 px-3 text-sm font-medium rounded-md border transition-colors ${
-                        selectedSize === size
-                          ? 'border-black bg-black text-white'
-                          : 'border-gray-300 hover:border-gray-400'
-                      }`}
+                      onClick={() => handleQuantityChange(quantity - 1)}
+                      disabled={quantity <= 1}
+                      className="min-h-[48px] min-w-[48px] sm:min-h-[44px] sm:min-w-[44px] p-3 border border-gray-300 rounded-lg sm:rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center touch-manipulation transition-colors"
                       type="button"
                     >
-                      {size}
+                      <Minus className="h-5 w-5 sm:h-4 sm:w-4" />
                     </button>
-                  ))}
+                    <span className="min-w-[60px] text-center font-semibold text-lg sm:text-base">{quantity}</span>
+                    <button
+                      onClick={() => handleQuantityChange(quantity + 1)}
+                      disabled={quantity >= 10}
+                      className="min-h-[48px] min-w-[48px] sm:min-h-[44px] sm:min-w-[44px] p-3 border border-gray-300 rounded-lg sm:rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center touch-manipulation transition-colors"
+                      type="button"
+                    >
+                      <Plus className="h-5 w-5 sm:h-4 sm:w-4" />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Total */}
+                <div className="border-t pt-4 mt-2">
+                  <div className="flex justify-between items-center">
+                    <span className="text-lg sm:text-base font-medium">Total</span>
+                    <span className="text-2xl sm:text-xl font-bold text-gray-900">
+                      {formatPrice(product.price * quantity)}
+                    </span>
+                  </div>
                 </div>
               </div>
-
-              {/* Quantity */}
-              <div>
-                <h4 className="text-sm font-medium text-gray-900 mb-2">Quantité</h4>
-                <div className="flex items-center space-x-3">
-                  <button
-                    onClick={() => handleQuantityChange(quantity - 1)}
-                    disabled={quantity <= 1}
-                    className="min-h-[44px] min-w-[44px] p-3 border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
-                    type="button"
-                  >
-                    <Minus className="h-4 w-4" />
-                  </button>
-                  <span className="w-12 text-center font-medium">{quantity}</span>
-                  <button
-                    onClick={() => handleQuantityChange(quantity + 1)}
-                    disabled={quantity >= 10}
-                    className="min-h-[44px] min-w-[44px] p-3 border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
-                    type="button"
-                  >
-                    <Plus className="h-4 w-4" />
-                  </button>
-                </div>
-              </div>
-
-              {/* Total */}
-              <div className="border-t pt-4">
-                <div className="flex justify-between items-center">
-                  <span className="text-lg font-medium">Total</span>
-                  <span className="text-xl font-bold text-gray-900">
-                    {formatPrice(product.price * quantity)}
-                  </span>
-                </div>
-              </div>
-
-              {/* Add to Cart Button */}
-              <Button
-                onClick={handleAddToCart}
-                disabled={!selectedSize || !selectedColor}
-                className="w-full"
-                size="lg"
-              >
-                <ShoppingBag className="h-5 w-5 mr-2" />
-                Ajouter au Panier
-              </Button>
             </div>
+          </div>
+          
+          {/* Fixed Bottom Button on Mobile */}
+          <div className="sticky bottom-0 bg-white border-t p-4 sm:static sm:bg-transparent sm:border-t-0 sm:p-0 sm:mt-6">
+            <Button
+              onClick={handleAddToCart}
+              disabled={!selectedSize || !selectedColor}
+              className="w-full min-h-[52px] sm:min-h-[44px] text-base sm:text-sm font-semibold touch-manipulation"
+              size="lg"
+            >
+              <ShoppingBag className="h-6 w-6 sm:h-5 sm:w-5 mr-2" />
+              Ajouter au Panier
+            </Button>
           </div>
         </div>
       </div>

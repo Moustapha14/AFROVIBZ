@@ -12,6 +12,17 @@ export function formatPrice(price: number): string {
   }).format(price);
 }
 
+export function formatCompactPrice(price: number): string {
+  const thousands = price / 1000;
+  if (thousands % 1 === 0) {
+    // Nombre entier de milliers
+    return `${thousands}k`;
+  } else {
+    // Avec une décimale
+    return `${thousands.toFixed(1)}k`;
+  }
+}
+
 export function formatPhoneNumber(phone: string): string {
   // Format Gabon phone number (+241)
   const cleaned = phone.replace(/\D/g, '');

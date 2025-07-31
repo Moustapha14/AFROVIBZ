@@ -19,7 +19,7 @@ import {
   SlidersHorizontal,
   X
 } from 'lucide-react';
-import { formatPrice } from '@/lib/utils';
+import { formatPrice, formatCompactPrice } from '@/lib/utils';
 import { Pagination } from '@/components/ui/Pagination';
 import { Product } from '@/types';
 import { ProductsService, ProductsResponse } from '@/lib/api/products';
@@ -57,12 +57,17 @@ function ProductsPageContent() {
   const [loading, setLoading] = useState(true);
   const [totalProducts, setTotalProducts] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
-  // Get category from URL params
+  // Get category and search query from URL params
   useEffect(() => {
     const category = searchParams.get('category');
+    const search = searchParams.get('search');
     if (category) {
       setSelectedCategory(category);
+    }
+    if (search) {
+      setSearchQuery(search);
     }
   }, [searchParams]);
 
@@ -96,8 +101,19 @@ function ProductsPageContent() {
     loadProducts();
   }, [currentPage, selectedCategory, sortBy]);
 
-  // Filtrer par prix (côté client pour la démo)
+  // Filtrer par prix et recherche textuelle (côté client pour la démo)
   const filteredProducts = products.filter(product => {
+    // Filtrage par recherche textuelle
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      const matchesName = product.name.toLowerCase().includes(query);
+      const matchesDescription = product.description.toLowerCase().includes(query);
+      if (!matchesName && !matchesDescription) {
+        return false;
+      }
+    }
+    
+    // Filtrage par prix
     if (selectedPriceRange) {
       const range = priceRanges.find(r => r.label === selectedPriceRange);
       if (range) {
@@ -133,10 +149,13 @@ function ProductsPageContent() {
         {/* Header */}
         <div className="mb-4 xs:mb-6 sm:mb-8">
           <h1 className="text-xl xs:text-2xl sm:text-3xl font-bold text-gray-900 mb-1 xs:mb-2">
-            Nos Produits
+            {searchQuery ? `Résultats pour "${searchQuery}"` : 'Nos Produits'}
           </h1>
           <p className="text-xs xs:text-sm sm:text-base text-gray-600">
-            Découvrez notre collection de vêtements africains
+            {searchQuery 
+              ? `${filteredProducts.length} produit${filteredProducts.length !== 1 ? 's' : ''} trouvé${filteredProducts.length !== 1 ? 's' : ''}`
+              : 'Découvrez notre collection de vêtements africains'
+            }
           </p>
         </div>
 
@@ -361,14 +380,19 @@ function ProductsPageContent() {
                   </div>
                   
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-1 xs:space-x-2">
-                      <span className="text-sm xs:text-base sm:text-lg font-bold text-gray-900">
+                    <div className="flex items-center space-x-2 xs:space-x-3 min-w-0 flex-1 max-w-full overflow-hidden">
+                      <span className="text-sm xs:text-base sm:text-lg font-bold text-gray-900 flex-shrink-0">
                         {formatPrice(product.price)}
                       </span>
                       {product.originalPrice && (
-                        <span className="text-xs text-gray-500 line-through">
-                          {formatPrice(product.originalPrice)}
-                        </span>
+                        <>
+                          <span className="sm:hidden text-base text-gray-500 line-through flex-shrink-0 font-semibold whitespace-nowrap">
+                            {formatCompactPrice(product.originalPrice)}
+                          </span>
+                          <span className="hidden sm:inline text-xs sm:text-sm text-gray-500 line-through flex-shrink-0 font-medium">
+                            {formatPrice(product.originalPrice)}
+                          </span>
+                        </>
                       )}
                     </div>
                   </div>
@@ -427,14 +451,19 @@ function ProductsPageContent() {
                     <span className="text-xs text-gray-500 ml-1 xs:ml-2">(4.5)</span>
                   </div>
                   <div className="flex flex-col xs:flex-row xs:items-center xs:justify-between gap-2">
-                    <div className="flex items-center space-x-1 xs:space-x-2">
-                      <span className="text-sm xs:text-base sm:text-lg font-bold text-gray-900">
+                    <div className="flex items-center space-x-2 xs:space-x-3 min-w-0 flex-1 overflow-hidden">
+                      <span className="text-sm xs:text-base sm:text-lg font-bold text-gray-900 flex-shrink-0">
                         {formatPrice(product.price)}
                       </span>
                       {product.originalPrice && (
-                        <span className="text-xs text-gray-500 line-through">
-                          {formatPrice(product.originalPrice)}
-                        </span>
+                        <>
+                          <span className="sm:hidden text-base text-gray-500 line-through flex-shrink-0 font-semibold whitespace-nowrap">
+                            {formatCompactPrice(product.originalPrice)}
+                          </span>
+                          <span className="hidden sm:inline text-xs sm:text-sm text-gray-500 line-through flex-shrink-0 font-medium">
+                            {formatPrice(product.originalPrice)}
+                          </span>
+                        </>
                       )}
                     </div>
                     <Button 

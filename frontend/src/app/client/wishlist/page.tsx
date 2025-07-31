@@ -356,7 +356,7 @@ export default function ClientWishlistPage() {
                         {formatCurrency(product.price)}
                       </span>
                       {product.originalPrice && product.originalPrice > product.price && (
-                        <span className="text-xs text-gray-500 line-through">
+                        <span className="text-xs sm:text-sm text-gray-500 line-through font-medium">
                           {formatCurrency(product.originalPrice)}
                         </span>
                       )}

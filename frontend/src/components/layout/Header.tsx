@@ -67,8 +67,10 @@ export function Header() {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Implement search functionality
-    console.log('Searching for:', searchQuery);
+    if (searchQuery.trim()) {
+      // Rediriger vers la page produits avec le terme de recherche
+      window.location.href = `/products?search=${encodeURIComponent(searchQuery.trim())}`;
+    }
   };
 
   const handleLogout = async () => {
@@ -135,17 +137,17 @@ export function Header() {
           </nav>
 
           {/* Search Bar - Desktop */}
-          <div className="hidden md:flex flex-1 max-w-md mx-4 lg:mx-8">
+          <div className="hidden md:flex flex-1 min-w-[280px] max-w-xl lg:max-w-2xl mx-4 lg:mx-8">
             <form onSubmit={handleSearch} className="w-full">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
                 <Input
                   ref={searchInputRef}
                   type="text"
                   placeholder="Rechercher des produits..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 mobile-input"
+                  className="mobile-input"
                   aria-label="Rechercher des produits"
                 />
               </div>
@@ -249,7 +251,7 @@ export function Header() {
         <div className="md:hidden pb-4">
           <form onSubmit={handleSearch}>
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
               <Input
                 ref={searchInputRef}
                 type="text"
@@ -258,7 +260,7 @@ export function Header() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onFocus={() => setIsSearchFocused(true)}
                 onBlur={() => setIsSearchFocused(false)}
-                className="pl-10 mobile-input"
+                className="mobile-input"
                 aria-label="Rechercher des produits"
               />
             </div>
