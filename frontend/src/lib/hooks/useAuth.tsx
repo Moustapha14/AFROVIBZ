@@ -1,4 +1,5 @@
 import { useState, useEffect, createContext, useContext } from 'react';
+
 import { User } from '@/types';
 
 // Données mockées pour les comptes de test
@@ -46,7 +47,11 @@ interface AuthContextType {
   loading: boolean;
   login: (email: string, password: string) => Promise<{ success: boolean; message: string }>;
   logout: () => void;
-  register: (email: string, password: string, displayName: string) => Promise<{ success: boolean; message: string }>;
+  register: (
+    email: string,
+    password: string,
+    displayName: string
+  ) => Promise<{ success: boolean; message: string }>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -64,13 +69,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setLoading(false);
   }, []);
 
-  const login = async (email: string, password: string): Promise<{ success: boolean; message: string }> => {
+  const login = async (
+    email: string,
+    password: string
+  ): Promise<{ success: boolean; message: string }> => {
     // Simulation d'un délai de connexion
     await new Promise(resolve => setTimeout(resolve, 1000));
 
     // Vérifier les identifiants mockés
     const mockUser = mockUsers.find(u => u.email === email);
-    
+
     if (!mockUser) {
       return { success: false, message: 'Email ou mot de passe incorrect' };
     }
@@ -90,8 +98,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // Connexion réussie
     setUser(mockUser);
     localStorage.setItem('mockUser', JSON.stringify(mockUser));
-    localStorage.setItem('mockToken', 'mock-jwt-token-' + mockUser.id);
-    
+    localStorage.setItem('mockToken', `mock-jwt-token-${mockUser.id}`);
+
     return { success: true, message: 'Connexion réussie' };
   };
 
@@ -101,7 +109,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     localStorage.removeItem('mockToken');
   };
 
-  const register = async (email: string, password: string, displayName: string): Promise<{ success: boolean; message: string }> => {
+  const register = async (
+    email: string,
+    password: string,
+    displayName: string
+  ): Promise<{ success: boolean; message: string }> => {
     // Simulation d'un délai d'inscription
     await new Promise(resolve => setTimeout(resolve, 1000));
 
@@ -113,8 +125,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // Créer un nouvel utilisateur
     const newUser: User = {
       id: Date.now().toString(),
-      email: email, // Assurer que email est défini
-      displayName: displayName, // Assurer que displayName est défini
+      email, // Assurer que email est défini
+      displayName, // Assurer que displayName est défini
       role: 'user',
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -126,7 +138,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     // Connecter automatiquement l'utilisateur
     setUser(newUser);
     localStorage.setItem('mockUser', JSON.stringify(newUser));
-    localStorage.setItem('mockToken', 'mock-jwt-token-' + newUser.id);
+    localStorage.setItem('mockToken', `mock-jwt-token-${newUser.id}`);
 
     return { success: true, message: 'Inscription réussie' };
   };
@@ -144,4 +156,4 @@ export function useAuth() {
     throw new Error('useAuth must be used within an AuthProvider');
   }
   return context;
-} 
+}

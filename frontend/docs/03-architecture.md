@@ -65,6 +65,7 @@ app/
 ```
 
 **Avantages de l'App Router :**
+
 - ✅ **Performance** : Chargement plus rapide
 - ✅ **SEO** : Meilleur référencement
 - ✅ **Simplicité** : Structure intuitive
@@ -83,6 +84,7 @@ components/
 ```
 
 **Organisation par domaine :**
+
 - **ui/** : Composants génériques réutilisables
 - **layout/** : Composants de structure (Header, Footer, etc.)
 - **[domaine]/** : Composants spécifiques à un domaine métier
@@ -104,28 +106,28 @@ lib/
 
 ### Fichiers et dossiers
 
-| Type | Convention | Exemple | Explication |
-|------|------------|---------|-------------|
-| **Composants** | PascalCase | `ProductCard.tsx` | Composants React |
-| **Pages** | kebab-case | `product-details.tsx` | Pages Next.js |
-| **Hooks** | camelCase | `useProduct.ts` | Hooks personnalisés |
-| **Utils** | camelCase | `formatPrice.ts` | Fonctions utilitaires |
-| **Types** | PascalCase | `Product.ts` | Types TypeScript |
-| **Constants** | UPPER_SNAKE_CASE | `API_ENDPOINTS.ts` | Constantes |
+| Type           | Convention       | Exemple               | Explication           |
+| -------------- | ---------------- | --------------------- | --------------------- |
+| **Composants** | PascalCase       | `ProductCard.tsx`     | Composants React      |
+| **Pages**      | kebab-case       | `product-details.tsx` | Pages Next.js         |
+| **Hooks**      | camelCase        | `useProduct.ts`       | Hooks personnalisés   |
+| **Utils**      | camelCase        | `formatPrice.ts`      | Fonctions utilitaires |
+| **Types**      | PascalCase       | `Product.ts`          | Types TypeScript      |
+| **Constants**  | UPPER_SNAKE_CASE | `API_ENDPOINTS.ts`    | Constantes            |
 
 ### Variables et fonctions
 
 ```typescript
 // ✅ Bonnes pratiques
-const productList = [];           // camelCase pour les variables
-const fetchProducts = () => {};   // camelCase pour les fonctions
-const ProductCard = () => {};     // PascalCase pour les composants
-const API_BASE_URL = '...';      // UPPER_SNAKE_CASE pour les constantes
+const productList = []; // camelCase pour les variables
+const fetchProducts = () => {}; // camelCase pour les fonctions
+const ProductCard = () => {}; // PascalCase pour les composants
+const API_BASE_URL = '...'; // UPPER_SNAKE_CASE pour les constantes
 
 // ❌ À éviter
-const ProductList = [];           // PascalCase pour une variable
-const product_card = [];          // snake_case
-const fetch_products = () => {};  // snake_case
+const ProductList = []; // PascalCase pour une variable
+const product_card = []; // snake_case
+const fetch_products = () => {}; // snake_case
 ```
 
 ### Imports et exports
@@ -179,11 +181,11 @@ export const ProductCard = ({ product }: ProductCardProps) => {
 export const useProduct = (productId: string) => {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
-  
+
   useEffect(() => {
     fetchProduct(productId).then(setProduct);
   }, [productId]);
-  
+
   return { product, loading };
 };
 
@@ -205,17 +207,17 @@ graph TB
         A[Pages] --> B[Components]
         B --> C[UI Components]
     end
-    
+
     subgraph "Logique métier"
         D[Hooks] --> E[Utils]
         E --> F[API Clients]
     end
-    
+
     subgraph "Données"
         G[API Routes] --> H[External APIs]
         I[Local Storage] --> J[State Management]
     end
-    
+
     A --> D
     B --> D
     C --> D
@@ -235,20 +237,20 @@ graph TB
         A[User Interface] --> B[React Components]
         B --> C[Next.js App Router]
     end
-    
+
     subgraph "Frontend Logic"
         C --> D[Custom Hooks]
         D --> E[State Management]
         E --> F[API Integration]
     end
-    
+
     subgraph "External Services"
         F --> G[Backend API]
         F --> H[Firebase Auth]
         F --> I[Payment Gateway]
         F --> J[CDN Images]
     end
-    
+
     subgraph "Data Flow"
         K[User Actions] --> A
         A --> L[State Updates]
@@ -265,7 +267,7 @@ sequenceDiagram
     participant H as Hook
     participant A as API
     participant S as State
-    
+
     U->>C: Clic sur "Ajouter au panier"
     C->>H: addToCart(productId)
     H->>A: POST /api/cart
@@ -290,12 +292,12 @@ const nextConfig = {
     domains: ['firebasestorage.googleapis.com'],
     formats: ['image/webp', 'image/avif'],
   },
-  
+
   // Variables d'environnement
   env: {
     CUSTOM_KEY: process.env.CUSTOM_KEY,
   },
-  
+
   // Redirections
   async redirects() {
     return [
@@ -356,4 +358,4 @@ Maintenant que vous comprenez l'architecture :
 
 **💡 Conseil** : Gardez cette architecture en tête quand vous codez. Elle vous aidera à placer vos fichiers au bon endroit !
 
-</div> 
+</div>

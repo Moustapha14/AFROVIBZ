@@ -45,7 +45,8 @@ export const products: Product[] = [
   {
     id: '1',
     name: 'Sac Hexagonal Élégant',
-    description: 'Sac hexagonal en osier avec détails dorés et chaîne décorative. Parfait pour les occasions élégantes.',
+    description:
+      'Sac hexagonal en osier avec détails dorés et chaîne décorative. Parfait pour les occasions élégantes.',
     price: 25000,
     originalPrice: 35000,
     category: 'accessoires',
@@ -54,7 +55,7 @@ export const products: Product[] = [
     sizes: ['Unique'],
     colors: [
       { name: 'Naturel', hex: '#f4e4c1', stock: 15 },
-      { name: 'Brun', hex: '#8b4513', stock: 8 }
+      { name: 'Brun', hex: '#8b4513', stock: 8 },
     ],
     stock: 23,
     tags: ['osier', 'hexagonal', 'doré', 'élégant'],
@@ -67,7 +68,8 @@ export const products: Product[] = [
   {
     id: '2',
     name: 'Sac Noir Moderne',
-    description: 'Sac noir moderne avec fermeture élégante et poignée confortable. Style contemporain et polyvalent.',
+    description:
+      'Sac noir moderne avec fermeture élégante et poignée confortable. Style contemporain et polyvalent.',
     price: 18000,
     originalPrice: 25000,
     category: 'accessoires',
@@ -76,7 +78,7 @@ export const products: Product[] = [
     sizes: ['Unique'],
     colors: [
       { name: 'Noir', hex: '#000000', stock: 20 },
-      { name: 'Gris', hex: '#808080', stock: 12 }
+      { name: 'Gris', hex: '#808080', stock: 12 },
     ],
     stock: 32,
     tags: ['noir', 'moderne', 'polyvalent', 'élégant'],
@@ -89,7 +91,8 @@ export const products: Product[] = [
   {
     id: '3',
     name: 'Sac Blanc Poignée Dorée',
-    description: 'Sac blanc avec poignée dorée sculpturale et texture plissée. Design sophistiqué et raffiné.',
+    description:
+      'Sac blanc avec poignée dorée sculpturale et texture plissée. Design sophistiqué et raffiné.',
     price: 12000,
     originalPrice: 18000,
     category: 'accessoires',
@@ -98,7 +101,7 @@ export const products: Product[] = [
     sizes: ['Unique'],
     colors: [
       { name: 'Blanc', hex: '#ffffff', stock: 18 },
-      { name: 'Crème', hex: '#f5f5dc', stock: 10 }
+      { name: 'Crème', hex: '#f5f5dc', stock: 10 },
     ],
     stock: 28,
     tags: ['blanc', 'doré', 'sculptural', 'raffiné'],
@@ -111,7 +114,8 @@ export const products: Product[] = [
   {
     id: '4',
     name: 'Sac Rouge Charme Cerise',
-    description: 'Sac rouge avec fermeture ondulée et charme cerise décoratif. Style festif et original.',
+    description:
+      'Sac rouge avec fermeture ondulée et charme cerise décoratif. Style festif et original.',
     price: 45000,
     originalPrice: 60000,
     category: 'accessoires',
@@ -120,7 +124,7 @@ export const products: Product[] = [
     sizes: ['Unique'],
     colors: [
       { name: 'Rouge', hex: '#ff0000', stock: 12 },
-      { name: 'Bordeaux', hex: '#800020', stock: 8 }
+      { name: 'Bordeaux', hex: '#800020', stock: 8 },
     ],
     stock: 20,
     tags: ['rouge', 'cerise', 'festif', 'original'],
@@ -133,7 +137,8 @@ export const products: Product[] = [
   {
     id: '5',
     name: 'Sac Rose Élégant',
-    description: 'Sac rose avec finitions délicates et design féminin. Parfait pour les occasions spéciales.',
+    description:
+      'Sac rose avec finitions délicates et design féminin. Parfait pour les occasions spéciales.',
     price: 85000,
     originalPrice: 95000,
     category: 'accessoires',
@@ -142,7 +147,7 @@ export const products: Product[] = [
     sizes: ['Unique'],
     colors: [
       { name: 'Rose', hex: '#ffc0cb', stock: 15 },
-      { name: 'Rose foncé', hex: '#ff69b4', stock: 9 }
+      { name: 'Rose foncé', hex: '#ff69b4', stock: 9 },
     ],
     stock: 24,
     tags: ['rose', 'féminin', 'élégant', 'délicat'],
@@ -164,7 +169,7 @@ export const products: Product[] = [
     sizes: ['Unique'],
     colors: [
       { name: 'Vert', hex: '#228b22', stock: 10 },
-      { name: 'Vert olive', hex: '#808000', stock: 6 }
+      { name: 'Vert olive', hex: '#808000', stock: 6 },
     ],
     stock: 16,
     tags: ['vert', 'naturel', 'bohème', 'durable'],
@@ -178,7 +183,8 @@ export const products: Product[] = [
   {
     id: '7',
     name: 'Robe Africaine Élégante',
-    description: 'Robe traditionnelle africaine avec motifs wax authentiques. Parfaite pour les cérémonies.',
+    description:
+      'Robe traditionnelle africaine avec motifs wax authentiques. Parfaite pour les cérémonies.',
     price: 45000,
     originalPrice: 55000,
     category: 'femmes',
@@ -187,7 +193,7 @@ export const products: Product[] = [
     sizes: ['S', 'M', 'L', 'XL'],
     colors: [
       { name: 'Wax Rouge', hex: '#ff0000', stock: 8 },
-      { name: 'Wax Bleu', hex: '#0000ff', stock: 6 }
+      { name: 'Wax Bleu', hex: '#0000ff', stock: 6 },
     ],
     stock: 14,
     tags: ['robe', 'africaine', 'wax', 'traditionnel'],
@@ -209,7 +215,7 @@ export const products: Product[] = [
     sizes: ['M', 'L', 'XL'],
     colors: [
       { name: 'Blanc', hex: '#ffffff', stock: 12 },
-      { name: 'Crème', hex: '#f5f5dc', stock: 8 }
+      { name: 'Crème', hex: '#f5f5dc', stock: 8 },
     ],
     stock: 20,
     tags: ['boubou', 'moderne', 'broderies', 'élégant'],
@@ -232,7 +238,7 @@ export const products: Product[] = [
     sizes: ['S', 'M', 'L', 'XL', 'XXL'],
     colors: [
       { name: 'Wax Vert', hex: '#228b22', stock: 15 },
-      { name: 'Wax Jaune', hex: '#ffff00', stock: 10 }
+      { name: 'Wax Jaune', hex: '#ffff00', stock: 10 },
     ],
     stock: 25,
     tags: ['chemise', 'africaine', 'wax', 'casual'],
@@ -254,7 +260,7 @@ export const products: Product[] = [
     sizes: ['30', '32', '34', '36', '38'],
     colors: [
       { name: 'Wax Bleu', hex: '#0000ff', stock: 18 },
-      { name: 'Wax Rouge', hex: '#ff0000', stock: 12 }
+      { name: 'Wax Rouge', hex: '#ff0000', stock: 12 },
     ],
     stock: 30,
     tags: ['pantalon', 'africain', 'wax', 'moderne'],
@@ -277,7 +283,7 @@ export const products: Product[] = [
     sizes: ['2A', '4A', '6A', '8A', '10A'],
     colors: [
       { name: 'Multicolore', hex: '#ff69b4', stock: 20 },
-      { name: 'Wax Jaune', hex: '#ffff00', stock: 15 }
+      { name: 'Wax Jaune', hex: '#ffff00', stock: 15 },
     ],
     stock: 35,
     tags: ['enfant', 'ensemble', 'coloré', 'confortable'],
@@ -299,7 +305,7 @@ export const products: Product[] = [
     sizes: ['2A', '4A', '6A', '8A'],
     colors: [
       { name: 'Rose', hex: '#ffc0cb', stock: 25 },
-      { name: 'Blanc', hex: '#ffffff', stock: 18 }
+      { name: 'Blanc', hex: '#ffffff', stock: 18 },
     ],
     stock: 43,
     tags: ['fille', 'robe', 'africaine', 'broderies'],
@@ -322,7 +328,7 @@ export const products: Product[] = [
     sizes: ['128GB', '256GB', '512GB', '1TB'],
     colors: [
       { name: 'Titanium Naturel', hex: '#8B7355', stock: 8 },
-      { name: 'Titanium Bleu', hex: '#4169E1', stock: 6 }
+      { name: 'Titanium Bleu', hex: '#4169E1', stock: 6 },
     ],
     stock: 14,
     tags: ['iphone', 'smartphone', 'apple', '5g'],
@@ -344,7 +350,7 @@ export const products: Product[] = [
     sizes: ['13"', '15"'],
     colors: [
       { name: 'Argent', hex: '#C0C0C0', stock: 5 },
-      { name: 'Or', hex: '#FFD700', stock: 3 }
+      { name: 'Or', hex: '#FFD700', stock: 3 },
     ],
     stock: 8,
     tags: ['macbook', 'apple', 'm2', 'portable'],
@@ -366,7 +372,7 @@ export const products: Product[] = [
     sizes: ['256GB', '512GB', '1TB'],
     colors: [
       { name: 'Noir', hex: '#000000', stock: 12 },
-      { name: 'Violet', hex: '#800080', stock: 8 }
+      { name: 'Violet', hex: '#800080', stock: 8 },
     ],
     stock: 20,
     tags: ['samsung', 'smartphone', 'android', '5g'],
@@ -380,7 +386,8 @@ export const products: Product[] = [
   {
     id: '16',
     name: 'Tenue Traditionnelle Premium',
-    description: 'Ensemble traditionnel africain haut de gamme avec motifs wax exceptionnels. Parfait pour les grandes occasions.',
+    description:
+      'Ensemble traditionnel africain haut de gamme avec motifs wax exceptionnels. Parfait pour les grandes occasions.',
     price: 95000,
     originalPrice: 120000,
     category: 'femmes',
@@ -389,7 +396,7 @@ export const products: Product[] = [
     sizes: ['S', 'M', 'L', 'XL'],
     colors: [
       { name: 'Wax Traditionnel', hex: '#d4af37', stock: 8 },
-      { name: 'Wax Royal', hex: '#4b0082', stock: 5 }
+      { name: 'Wax Royal', hex: '#4b0082', stock: 5 },
     ],
     stock: 13,
     tags: ['traditionnel', 'premium', 'wax', 'cérémonie'],
@@ -402,7 +409,8 @@ export const products: Product[] = [
   {
     id: '17',
     name: 'Robe Africaine Moderne',
-    description: 'Robe africaine au design contemporain avec broderies délicates. Style moderne et élégant.',
+    description:
+      'Robe africaine au design contemporain avec broderies délicates. Style moderne et élégant.',
     price: 58000,
     originalPrice: 75000,
     category: 'femmes',
@@ -411,7 +419,7 @@ export const products: Product[] = [
     sizes: ['S', 'M', 'L', 'XL'],
     colors: [
       { name: 'Bleu Royal', hex: '#0047ab', stock: 12 },
-      { name: 'Vert Émeraude', hex: '#50c878', stock: 8 }
+      { name: 'Vert Émeraude', hex: '#50c878', stock: 8 },
     ],
     stock: 20,
     tags: ['robe', 'moderne', 'broderies', 'élégant'],
@@ -424,7 +432,8 @@ export const products: Product[] = [
   {
     id: '18',
     name: 'Ensemble Homme Distinction',
-    description: 'Ensemble africain pour homme avec finitions luxueuses. Design sophistiqué et confortable.',
+    description:
+      'Ensemble africain pour homme avec finitions luxueuses. Design sophistiqué et confortable.',
     price: 72000,
     originalPrice: 90000,
     category: 'hommes',
@@ -433,7 +442,7 @@ export const products: Product[] = [
     sizes: ['M', 'L', 'XL', 'XXL'],
     colors: [
       { name: 'Wax Blanc', hex: '#ffffff', stock: 10 },
-      { name: 'Wax Noir', hex: '#000000', stock: 7 }
+      { name: 'Wax Noir', hex: '#000000', stock: 7 },
     ],
     stock: 17,
     tags: ['homme', 'ensemble', 'distinction', 'luxueux'],
@@ -446,7 +455,8 @@ export const products: Product[] = [
   {
     id: '19',
     name: 'Boubou Festif',
-    description: 'Boubou africain pour les festivités avec motifs colorés et coupe ample. Confort et style garantis.',
+    description:
+      'Boubou africain pour les festivités avec motifs colorés et coupe ample. Confort et style garantis.',
     price: 42000,
     originalPrice: 55000,
     category: 'hommes',
@@ -455,7 +465,7 @@ export const products: Product[] = [
     sizes: ['L', 'XL', 'XXL'],
     colors: [
       { name: 'Multicolore Festif', hex: '#ff6b35', stock: 15 },
-      { name: 'Wax Jaune', hex: '#ffd700', stock: 12 }
+      { name: 'Wax Jaune', hex: '#ffd700', stock: 12 },
     ],
     stock: 27,
     tags: ['boubou', 'festif', 'coloré', 'confortable'],
@@ -468,7 +478,8 @@ export const products: Product[] = [
   {
     id: '20',
     name: 'Tenue Enfant Colorée',
-    description: 'Ensemble africain pour enfant avec motifs ludiques et couleurs vives. Parfait pour les petits princes et princesses.',
+    description:
+      'Ensemble africain pour enfant avec motifs ludiques et couleurs vives. Parfait pour les petits princes et princesses.',
     price: 22000,
     originalPrice: 28000,
     category: 'enfants',
@@ -477,7 +488,7 @@ export const products: Product[] = [
     sizes: ['2A', '4A', '6A', '8A', '10A'],
     colors: [
       { name: 'Arc-en-ciel', hex: '#ff69b4', stock: 25 },
-      { name: 'Wax Enfant', hex: '#32cd32', stock: 20 }
+      { name: 'Wax Enfant', hex: '#32cd32', stock: 20 },
     ],
     stock: 45,
     tags: ['enfant', 'coloré', 'ludique', 'prince', 'princesse'],
@@ -490,7 +501,8 @@ export const products: Product[] = [
   {
     id: '21',
     name: 'Robe de Soirée Africaine',
-    description: 'Robe de soirée africaine avec broderies dorées et tissus nobles. Pour les occasions exceptionnelles.',
+    description:
+      'Robe de soirée africaine avec broderies dorées et tissus nobles. Pour les occasions exceptionnelles.',
     price: 125000,
     originalPrice: 150000,
     category: 'femmes',
@@ -499,7 +511,7 @@ export const products: Product[] = [
     sizes: ['S', 'M', 'L', 'XL'],
     colors: [
       { name: 'Or Royal', hex: '#ffd700', stock: 6 },
-      { name: 'Bordeaux Précieux', hex: '#800020', stock: 4 }
+      { name: 'Bordeaux Précieux', hex: '#800020', stock: 4 },
     ],
     stock: 10,
     tags: ['soirée', 'broderies', 'doré', 'noble', 'exceptionnel'],
@@ -512,7 +524,8 @@ export const products: Product[] = [
   {
     id: '22',
     name: 'Collection Wax Authentique',
-    description: 'Pièce de collection en wax authentique avec motifs traditionnels. Héritage culturel préservé.',
+    description:
+      'Pièce de collection en wax authentique avec motifs traditionnels. Héritage culturel préservé.',
     price: 68000,
     originalPrice: 85000,
     category: 'femmes',
@@ -521,7 +534,7 @@ export const products: Product[] = [
     sizes: ['S', 'M', 'L', 'XL'],
     colors: [
       { name: 'Wax Authentique', hex: '#8b4513', stock: 8 },
-      { name: 'Wax Vintage', hex: '#daa520', stock: 6 }
+      { name: 'Wax Vintage', hex: '#daa520', stock: 6 },
     ],
     stock: 14,
     tags: ['collection', 'wax', 'authentique', 'traditionnel', 'héritage'],
@@ -534,7 +547,8 @@ export const products: Product[] = [
   {
     id: '23',
     name: 'Ensemble Bohème Chic',
-    description: 'Ensemble bohème avec influences africaines. Style décontracté et raffiné pour un look unique.',
+    description:
+      'Ensemble bohème avec influences africaines. Style décontracté et raffiné pour un look unique.',
     price: 52000,
     originalPrice: 65000,
     category: 'femmes',
@@ -543,7 +557,7 @@ export const products: Product[] = [
     sizes: ['S', 'M', 'L', 'XL'],
     colors: [
       { name: 'Terre de Sienne', hex: '#a0522d', stock: 12 },
-      { name: 'Ocre Doré', hex: '#cc7722', stock: 9 }
+      { name: 'Ocre Doré', hex: '#cc7722', stock: 9 },
     ],
     stock: 21,
     tags: ['bohème', 'chic', 'décontracté', 'raffiné', 'unique'],
@@ -556,7 +570,8 @@ export const products: Product[] = [
   {
     id: '24',
     name: 'Tenue Cérémonie Déluxe',
-    description: 'Tenue de cérémonie haut de gamme avec broderies à la main. Excellence artisanale africaine.',
+    description:
+      'Tenue de cérémonie haut de gamme avec broderies à la main. Excellence artisanale africaine.',
     price: 98000,
     originalPrice: 125000,
     category: 'femmes',
@@ -565,7 +580,7 @@ export const products: Product[] = [
     sizes: ['S', 'M', 'L', 'XL'],
     colors: [
       { name: 'Pourpre Royal', hex: '#800080', stock: 5 },
-      { name: 'Bleu Saphir', hex: '#082567', stock: 3 }
+      { name: 'Bleu Saphir', hex: '#082567', stock: 3 },
     ],
     stock: 8,
     tags: ['cérémonie', 'déluxe', 'broderies', 'artisanal', 'excellence'],
@@ -578,7 +593,8 @@ export const products: Product[] = [
   {
     id: '25',
     name: 'Robe Printemps Africain',
-    description: 'Robe aux couleurs du printemps avec motifs floraux africains. Fraîcheur et élégance.',
+    description:
+      'Robe aux couleurs du printemps avec motifs floraux africains. Fraîcheur et élégance.',
     price: 38000,
     originalPrice: 48000,
     category: 'femmes',
@@ -587,7 +603,7 @@ export const products: Product[] = [
     sizes: ['S', 'M', 'L', 'XL'],
     colors: [
       { name: 'Vert Printemps', hex: '#9acd32', stock: 18 },
-      { name: 'Rose Pêche', hex: '#ffcba4', stock: 14 }
+      { name: 'Rose Pêche', hex: '#ffcba4', stock: 14 },
     ],
     stock: 32,
     tags: ['printemps', 'floral', 'fraîcheur', 'élégant'],
@@ -600,7 +616,8 @@ export const products: Product[] = [
   {
     id: '26',
     name: 'Ensemble Été Africain',
-    description: 'Ensemble léger pour l\'été avec tissus respirants et motifs tropicaux. Confort optimal par temps chaud.',
+    description:
+      "Ensemble léger pour l'été avec tissus respirants et motifs tropicaux. Confort optimal par temps chaud.",
     price: 44000,
     originalPrice: 55000,
     category: 'femmes',
@@ -609,7 +626,7 @@ export const products: Product[] = [
     sizes: ['S', 'M', 'L', 'XL'],
     colors: [
       { name: 'Bleu Tropical', hex: '#40e0d0', stock: 15 },
-      { name: 'Corail Vibrant', hex: '#ff6347', stock: 12 }
+      { name: 'Corail Vibrant', hex: '#ff6347', stock: 12 },
     ],
     stock: 27,
     tags: ['été', 'léger', 'respirant', 'tropical', 'confort'],
@@ -622,7 +639,8 @@ export const products: Product[] = [
   {
     id: '27',
     name: 'Robe Enfant Princesse',
-    description: 'Robe pour petite princesse avec détails dorés et tissus soyeux. Pour faire rêver les petites filles.',
+    description:
+      'Robe pour petite princesse avec détails dorés et tissus soyeux. Pour faire rêver les petites filles.',
     price: 28000,
     originalPrice: 35000,
     category: 'enfants',
@@ -631,7 +649,7 @@ export const products: Product[] = [
     sizes: ['2A', '4A', '6A', '8A'],
     colors: [
       { name: 'Rose Princesse', hex: '#ffb6c1', stock: 22 },
-      { name: 'Blanc Nacré', hex: '#f8f8ff', stock: 18 }
+      { name: 'Blanc Nacré', hex: '#f8f8ff', stock: 18 },
     ],
     stock: 40,
     tags: ['enfant', 'princesse', 'doré', 'soyeux', 'rêve'],
@@ -644,7 +662,8 @@ export const products: Product[] = [
   {
     id: '28',
     name: 'Costume Garçon Élégant',
-    description: 'Costume africain pour petit garçon avec veste et pantalon assortis. Style distingué dès le plus jeune âge.',
+    description:
+      'Costume africain pour petit garçon avec veste et pantalon assortis. Style distingué dès le plus jeune âge.',
     price: 32000,
     originalPrice: 40000,
     category: 'enfants',
@@ -653,7 +672,7 @@ export const products: Product[] = [
     sizes: ['2A', '4A', '6A', '8A', '10A'],
     colors: [
       { name: 'Bleu Marine', hex: '#000080', stock: 16 },
-      { name: 'Marron Chocolat', hex: '#7b3f00', stock: 12 }
+      { name: 'Marron Chocolat', hex: '#7b3f00', stock: 12 },
     ],
     stock: 28,
     tags: ['garçon', 'costume', 'élégant', 'distingué', 'veste'],
@@ -666,7 +685,8 @@ export const products: Product[] = [
   {
     id: '29',
     name: 'Robe Cocktail Africaine',
-    description: 'Robe de cocktail avec influences africaines. Parfaite pour les soirées et événements mondains.',
+    description:
+      'Robe de cocktail avec influences africaines. Parfaite pour les soirées et événements mondains.',
     price: 78000,
     originalPrice: 95000,
     category: 'femmes',
@@ -675,7 +695,7 @@ export const products: Product[] = [
     sizes: ['S', 'M', 'L', 'XL'],
     colors: [
       { name: 'Noir Sophistiqué', hex: '#000000', stock: 8 },
-      { name: 'Rouge Passion', hex: '#dc143c', stock: 6 }
+      { name: 'Rouge Passion', hex: '#dc143c', stock: 6 },
     ],
     stock: 14,
     tags: ['cocktail', 'soirée', 'mondain', 'sophistiqué'],
@@ -688,7 +708,8 @@ export const products: Product[] = [
   {
     id: '30',
     name: 'Ensemble Famille Assortie',
-    description: 'Ensemble familial assorti pour toute la famille. Créez des souvenirs mémorables avec style.',
+    description:
+      'Ensemble familial assorti pour toute la famille. Créez des souvenirs mémorables avec style.',
     price: 85000,
     originalPrice: 110000,
     category: 'familles',
@@ -697,7 +718,7 @@ export const products: Product[] = [
     sizes: ['Famille (S-XXL)', 'Enfant (2A-10A)'],
     colors: [
       { name: 'Wax Famille', hex: '#ff4500', stock: 10 },
-      { name: 'Harmonie Dorée', hex: '#daa520', stock: 8 }
+      { name: 'Harmonie Dorée', hex: '#daa520', stock: 8 },
     ],
     stock: 18,
     tags: ['famille', 'assorti', 'souvenirs', 'mémorable'],
@@ -710,7 +731,8 @@ export const products: Product[] = [
   {
     id: '31',
     name: 'Caftan Moderne',
-    description: 'Caftan moderne avec broderies contemporaines. Fusion parfaite entre tradition et modernité.',
+    description:
+      'Caftan moderne avec broderies contemporaines. Fusion parfaite entre tradition et modernité.',
     price: 62000,
     originalPrice: 78000,
     category: 'femmes',
@@ -719,7 +741,7 @@ export const products: Product[] = [
     sizes: ['S', 'M', 'L', 'XL'],
     colors: [
       { name: 'Turquoise Moderne', hex: '#40e0d0', stock: 12 },
-      { name: 'Violet Élégant', hex: '#9370db', stock: 9 }
+      { name: 'Violet Élégant', hex: '#9370db', stock: 9 },
     ],
     stock: 21,
     tags: ['caftan', 'moderne', 'broderies', 'tradition', 'modernité'],
@@ -732,7 +754,8 @@ export const products: Product[] = [
   {
     id: '32',
     name: 'Collection Prestige',
-    description: 'Pièce de la collection prestige avec tissus d\'exception et finitions de luxe. Pour les connaisseurs.',
+    description:
+      "Pièce de la collection prestige avec tissus d'exception et finitions de luxe. Pour les connaisseurs.",
     price: 145000,
     originalPrice: 180000,
     category: 'femmes',
@@ -741,7 +764,7 @@ export const products: Product[] = [
     sizes: ['S', 'M', 'L', 'XL'],
     colors: [
       { name: 'Or Prestige', hex: '#ffd700', stock: 4 },
-      { name: 'Platine Rare', hex: '#e5e4e2', stock: 3 }
+      { name: 'Platine Rare', hex: '#e5e4e2', stock: 3 },
     ],
     stock: 7,
     tags: ['prestige', 'luxe', 'exception', 'connaisseurs'],
@@ -754,7 +777,8 @@ export const products: Product[] = [
   {
     id: '33',
     name: 'Smartphone Dernière Génération',
-    description: 'Smartphone haut de gamme avec les dernières technologies. Performance et style réunis.',
+    description:
+      'Smartphone haut de gamme avec les dernières technologies. Performance et style réunis.',
     price: 420000,
     originalPrice: 500000,
     category: 'tech',
@@ -763,7 +787,7 @@ export const products: Product[] = [
     sizes: ['128GB', '256GB', '512GB'],
     colors: [
       { name: 'Noir Carbone', hex: '#36454f', stock: 15 },
-      { name: 'Blanc Perle', hex: '#f8f8f0', stock: 10 }
+      { name: 'Blanc Perle', hex: '#f8f8f0', stock: 10 },
     ],
     stock: 25,
     tags: ['smartphone', 'technologie', 'performance', 'style'],
@@ -785,4 +809,4 @@ export const getProductById = (id: string) => {
 
 export const getAllProducts = () => {
   return products;
-}; 
+};

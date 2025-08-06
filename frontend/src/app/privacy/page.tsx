@@ -1,33 +1,33 @@
 import React from 'react';
+
 import { Breadcrumbs } from '@/components/ui/Breadcrumbs';
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className='min-h-screen bg-gray-50'>
+      <div className='max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8'>
         {/* Header */}
-        <div className="mb-8">
-          <Breadcrumbs 
+        <div className='mb-8'>
+          <Breadcrumbs
             items={[
               { label: 'Accueil', href: '/' },
-              { label: 'Politique de confidentialité', current: true }
+              { label: 'Politique de confidentialité', current: true },
             ]}
           />
-          <h1 className="text-3xl font-bold text-gray-900 mt-4">
-            Politique de confidentialité
-          </h1>
-          <p className="text-gray-600 mt-2">
+          <h1 className='text-3xl font-bold text-gray-900 mt-4'>Politique de confidentialité</h1>
+          <p className='text-gray-600 mt-2'>
             Dernière mise à jour : {new Date().toLocaleDateString('fr-FR')}
           </p>
         </div>
 
         {/* Content */}
-        <div className="bg-white rounded-lg shadow-sm p-8">
-          <div className="prose prose-lg max-w-none">
+        <div className='bg-white rounded-lg shadow-sm p-8'>
+          <div className='prose prose-lg max-w-none'>
             <h2>1. Introduction</h2>
             <p>
-              AFRO🗼VIBZ s'engage à protéger votre vie privée et vos données personnelles. Cette politique de confidentialité 
-              explique comment nous collectons, utilisons et protégeons vos informations lorsque vous utilisez notre site web.
+              AFRO🗼VIBZ s'engage à protéger votre vie privée et vos données personnelles. Cette
+              politique de confidentialité explique comment nous collectons, utilisons et protégeons
+              vos informations lorsque vous utilisez notre site web.
             </p>
 
             <h2>2. Informations que nous collectons</h2>
@@ -63,7 +63,8 @@ export default function PrivacyPage() {
 
             <h2>4. Partage des informations</h2>
             <p>
-              Nous ne vendons, n'échangeons ni ne louons vos informations personnelles à des tiers, sauf dans les cas suivants :
+              Nous ne vendons, n'échangeons ni ne louons vos informations personnelles à des tiers,
+              sauf dans les cas suivants :
             </p>
             <ul>
               <li>Avec votre consentement explicite</li>
@@ -75,8 +76,9 @@ export default function PrivacyPage() {
 
             <h2>5. Sécurité des données</h2>
             <p>
-              Nous mettons en place des mesures de sécurité appropriées pour protéger vos données personnelles contre 
-              l'accès non autorisé, la modification, la divulgation ou la destruction.
+              Nous mettons en place des mesures de sécurité appropriées pour protéger vos données
+              personnelles contre l'accès non autorisé, la modification, la divulgation ou la
+              destruction.
             </p>
             <ul>
               <li>Chiffrement SSL/TLS</li>
@@ -87,7 +89,8 @@ export default function PrivacyPage() {
 
             <h2>6. Cookies et technologies similaires</h2>
             <p>
-              Nous utilisons des cookies pour améliorer votre expérience sur notre site. Les cookies nous aident à :
+              Nous utilisons des cookies pour améliorer votre expérience sur notre site. Les cookies
+              nous aident à :
             </p>
             <ul>
               <li>Mémoriser vos préférences</li>
@@ -109,31 +112,35 @@ export default function PrivacyPage() {
 
             <h2>8. Conservation des données</h2>
             <p>
-              Nous conservons vos données personnelles aussi longtemps que nécessaire pour les finalités pour lesquelles 
-              elles ont été collectées, ou conformément aux obligations légales.
+              Nous conservons vos données personnelles aussi longtemps que nécessaire pour les
+              finalités pour lesquelles elles ont été collectées, ou conformément aux obligations
+              légales.
             </p>
 
             <h2>9. Transferts internationaux</h2>
             <p>
-              Vos données sont principalement traitées au Gabon. En cas de transfert vers d'autres pays, nous nous 
-              assurons que des garanties appropriées sont en place pour protéger vos données.
+              Vos données sont principalement traitées au Gabon. En cas de transfert vers d'autres
+              pays, nous nous assurons que des garanties appropriées sont en place pour protéger vos
+              données.
             </p>
 
             <h2>10. Sites web tiers</h2>
             <p>
-              Notre site peut contenir des liens vers des sites web tiers. Nous ne sommes pas responsables des pratiques 
-              de confidentialité de ces sites. Nous vous encourageons à lire leurs politiques de confidentialité.
+              Notre site peut contenir des liens vers des sites web tiers. Nous ne sommes pas
+              responsables des pratiques de confidentialité de ces sites. Nous vous encourageons à
+              lire leurs politiques de confidentialité.
             </p>
 
             <h2>11. Modifications de cette politique</h2>
             <p>
-              Nous pouvons mettre à jour cette politique de confidentialité de temps à autre. Les modifications seront 
-              publiées sur cette page avec une nouvelle date de mise à jour.
+              Nous pouvons mettre à jour cette politique de confidentialité de temps à autre. Les
+              modifications seront publiées sur cette page avec une nouvelle date de mise à jour.
             </p>
 
             <h2>12. Contact</h2>
             <p>
-              Pour toute question concernant cette politique de confidentialité ou pour exercer vos droits, contactez-nous :
+              Pour toute question concernant cette politique de confidentialité ou pour exercer vos
+              droits, contactez-nous :
             </p>
             <ul>
               <li>Email : privacy@afrovibz.ga</li>
@@ -143,12 +150,12 @@ export default function PrivacyPage() {
 
             <h2>13. Autorité de contrôle</h2>
             <p>
-              Si vous n'êtes pas satisfait de notre réponse, vous pouvez contacter l'autorité de contrôle compétente 
-              au Gabon pour la protection des données personnelles.
+              Si vous n'êtes pas satisfait de notre réponse, vous pouvez contacter l'autorité de
+              contrôle compétente au Gabon pour la protection des données personnelles.
             </p>
           </div>
         </div>
       </div>
     </div>
   );
-} 
+}

@@ -1,22 +1,35 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { Providers } from '@/components/Providers';
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
 import { Toaster } from 'react-hot-toast';
-import { StagewiseToolbar } from '@stagewise/toolbar-next';
-import ReactPlugin from '@stagewise-plugins/react';
+
+import { Footer } from '@/components/layout/Footer';
+import { Header } from '@/components/layout/Header';
+import { Providers } from '@/components/Providers';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: {
     default: 'AFRO🗼VIBZ - Mode Africaine Moderne & Tech | Livraison Rapide au Gabon',
-    template: '%s | AFRO🗼VIBZ'
+    template: '%s | AFRO🗼VIBZ',
   },
-  description: 'Découvrez notre collection unique de mode africaine contemporaine et d\'accessoires tech. Livraison rapide partout au Gabon. Vêtements traditionnels et modernes, smartphones, ordinateurs.',
-  keywords: ['mode africaine', 'vêtements', 'tech', 'smartphones', 'ordinateurs', 'Gabon', 'livraison', 'fashion', 'afrovibz', 'wax', 'pagne', 'boubou'],
+  description:
+    "Découvrez notre collection unique de mode africaine contemporaine et d'accessoires tech. Livraison rapide partout au Gabon. Vêtements traditionnels et modernes, smartphones, ordinateurs.",
+  keywords: [
+    'mode africaine',
+    'vêtements',
+    'tech',
+    'smartphones',
+    'ordinateurs',
+    'Gabon',
+    'livraison',
+    'fashion',
+    'afrovibz',
+    'wax',
+    'pagne',
+    'boubou',
+  ],
   authors: [{ name: 'AFRO🗼VIBZ' }],
   creator: 'AFRO🗼VIBZ',
   publisher: 'AFRO🗼VIBZ',
@@ -31,7 +44,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'AFRO🗼VIBZ - Mode Africaine Moderne & Tech',
-    description: 'Collection exclusive de mode africaine contemporaine et d\'accessoires tech. Livraison rapide au Gabon.',
+    description:
+      "Collection exclusive de mode africaine contemporaine et d'accessoires tech. Livraison rapide au Gabon.",
     type: 'website',
     locale: 'fr_FR',
     siteName: 'AFRO🗼VIBZ',
@@ -47,7 +61,8 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'AFRO🗼VIBZ - Mode Africaine Moderne & Tech',
-    description: 'Collection exclusive de mode africaine contemporaine et d\'accessoires tech. Livraison rapide au Gabon.',
+    description:
+      "Collection exclusive de mode africaine contemporaine et d'accessoires tech. Livraison rapide au Gabon.",
     images: ['/images/og-homepage.jpg'],
   },
   robots: {
@@ -63,24 +78,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr">
+    <html lang='fr'>
       <body className={inter.className}>
         <Providers>
-          <div className="flex flex-col min-h-screen">
+          <div className='flex flex-col min-h-screen'>
             <Header />
-            <main className="flex-1">
-              {children}
-            </main>
+            <main className='flex-1'>{children}</main>
             <Footer />
           </div>
-          <Toaster 
-            position="top-center"
+          <Toaster
+            position='top-center'
             toastOptions={{
               duration: 3000,
               style: {
@@ -101,11 +110,6 @@ export default function RootLayout({
                   secondary: '#fff',
                 },
               },
-            }}
-          />
-          <StagewiseToolbar 
-            config={{
-              plugins: [ReactPlugin],
             }}
           />
         </Providers>

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { cn } from '@/lib/utils';
 
 interface MobileContainerProps {
@@ -55,4 +56,4 @@ const MobileContainer: React.FC<MobileContainerProps> = ({
   );
 };
 
-export { MobileContainer }; 
+export { MobileContainer };

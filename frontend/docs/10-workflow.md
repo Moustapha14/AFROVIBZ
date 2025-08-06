@@ -51,13 +51,13 @@ git branch -d feature/ajout-panier
 
 ### Conventions de branches
 
-| Type | Format | Exemple | Description |
-|------|--------|---------|-------------|
-| **Feature** | `feature/nom` | `feature/user-authentication` | Nouvelles fonctionnalités |
-| **Bugfix** | `fix/nom` | `fix/login-error` | Corrections de bugs |
-| **Hotfix** | `hotfix/nom` | `hotfix/security-patch` | Corrections urgentes |
-| **Release** | `release/version` | `release/v1.2.0` | Préparation de release |
-| **Chore** | `chore/nom` | `chore/update-dependencies` | Tâches de maintenance |
+| Type        | Format            | Exemple                       | Description               |
+| ----------- | ----------------- | ----------------------------- | ------------------------- |
+| **Feature** | `feature/nom`     | `feature/user-authentication` | Nouvelles fonctionnalités |
+| **Bugfix**  | `fix/nom`         | `fix/login-error`             | Corrections de bugs       |
+| **Hotfix**  | `hotfix/nom`      | `hotfix/security-patch`       | Corrections urgentes      |
+| **Release** | `release/version` | `release/v1.2.0`              | Préparation de release    |
+| **Chore**   | `chore/nom`       | `chore/update-dependencies`   | Tâches de maintenance     |
 
 ### Scripts Git utiles
 
@@ -81,12 +81,14 @@ npx commitlint --edit $1
 ### Checklist de review
 
 #### Fonctionnalité
+
 - [ ] **La fonctionnalité fonctionne** comme attendu
 - [ ] **Les tests passent** et couvrent les cas d'usage
 - [ ] **Les erreurs sont gérées** correctement
 - [ ] **La performance** n'est pas dégradée
 
 #### Code
+
 - [ ] **Le code est lisible** et bien structuré
 - [ ] **Les conventions** sont respectées
 - [ ] **Pas de duplication** de code
@@ -94,11 +96,13 @@ npx commitlint --edit $1
 - [ ] **Les imports** sont organisés
 
 #### Sécurité
+
 - [ ] **Pas de vulnérabilités** évidentes
 - [ ] **Les données sensibles** ne sont pas exposées
 - [ ] **La validation** des entrées est présente
 
 #### Documentation
+
 - [ ] **Le code est commenté** si nécessaire
 - [ ] **La documentation** est mise à jour
 - [ ] **Les changements** sont documentés
@@ -107,9 +111,11 @@ npx commitlint --edit $1
 
 ```markdown
 ## 📝 Description
+
 Bref résumé des changements apportés.
 
 ## 🎯 Type de changement
+
 - [ ] Bug fix
 - [ ] Nouvelle fonctionnalité
 - [ ] Breaking change
@@ -117,14 +123,17 @@ Bref résumé des changements apportés.
 - [ ] Refactoring
 
 ## 🔍 Tests
+
 - [ ] Tests unitaires ajoutés/mis à jour
 - [ ] Tests d'intégration ajoutés/mis à jour
 - [ ] Tests manuels effectués
 
 ## 📸 Captures d'écran (si applicable)
+
 Ajoutez des captures d'écran pour les changements UI.
 
 ## ✅ Checklist
+
 - [ ] Mon code suit les conventions du projet
 - [ ] J'ai effectué une auto-review de mon code
 - [ ] J'ai commenté mon code, particulièrement dans les zones difficiles
@@ -134,6 +143,7 @@ Ajoutez des captures d'écran pour les changements UI.
 - [ ] Mes tests passent avec mes nouveaux et anciens changements
 
 ## 🔗 Issues liées
+
 Closes #123
 Relates to #456
 ```
@@ -142,18 +152,22 @@ Relates to #456
 
 #### Exemples de commentaires constructifs
 
-```markdown
+````markdown
 # ✅ Bon commentaire
-Cette fonction pourrait être simplifiée en utilisant `Array.reduce()`. 
+
+Cette fonction pourrait être simplifiée en utilisant `Array.reduce()`.
 Voici un exemple :
 
 ```typescript
 const total = items.reduce((sum, item) => sum + item.price, 0);
 ```
+````
 
 # ❌ Mauvais commentaire
+
 Ce code est mauvais, refais-le.
-```
+
+````
 
 #### Utilisation des emojis
 
@@ -165,7 +179,7 @@ Ce code est mauvais, refais-le.
 # 💡 Idée intéressante
 # 🔍 À vérifier
 # 📝 Documentation manquante
-```
+````
 
 ---
 
@@ -173,11 +187,11 @@ Ce code est mauvais, refais-le.
 
 ### Environnements
 
-| Environnement | URL | Branche | Usage |
-|---------------|-----|---------|-------|
-| **Development** | `dev.afrovibz.com` | `develop` | Tests et développement |
-| **Staging** | `staging.afrovibz.com` | `main` | Tests finaux |
-| **Production** | `afrovibz.com` | `main` | Utilisateurs finaux |
+| Environnement   | URL                    | Branche   | Usage                  |
+| --------------- | ---------------------- | --------- | ---------------------- |
+| **Development** | `dev.afrovibz.com`     | `develop` | Tests et développement |
+| **Staging**     | `staging.afrovibz.com` | `main`    | Tests finaux           |
+| **Production**  | `afrovibz.com`         | `main`    | Utilisateurs finaux    |
 
 ### Configuration Vercel
 
@@ -230,46 +244,46 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Setup Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '18'
-        cache: 'npm'
-    
-    - name: Install dependencies
-      run: npm ci
-    
-    - name: Run linting
-      run: npm run lint
-    
-    - name: Run type checking
-      run: npm run type-check
-    
-    - name: Run tests
-      run: npm run test
-    
-    - name: Build application
-      run: npm run build
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run linting
+        run: npm run lint
+
+      - name: Run type checking
+        run: npm run type-check
+
+      - name: Run tests
+        run: npm run test
+
+      - name: Build application
+        run: npm run build
 
   deploy:
     needs: test
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
-    
+
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Deploy to Vercel
-      uses: amondnet/vercel-action@v20
-      with:
-        vercel-token: ${{ secrets.VERCEL_TOKEN }}
-        vercel-org-id: ${{ secrets.ORG_ID }}
-        vercel-project-id: ${{ secrets.PROJECT_ID }}
-        vercel-args: '--prod'
+      - uses: actions/checkout@v3
+
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v20
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.ORG_ID }}
+          vercel-project-id: ${{ secrets.PROJECT_ID }}
+          vercel-args: '--prod'
 ```
 
 ---
@@ -315,11 +329,11 @@ export interface ApiError {
 export const getProducts = async (params?: ProductFilters): Promise<PaginatedResponse<Product>> => {
   const queryString = new URLSearchParams(params as Record<string, string>).toString();
   const response = await fetch(`/api/products?${queryString}`);
-  
+
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
-  
+
   return response.json();
 };
 
@@ -328,7 +342,9 @@ export const getProducts = async (params?: ProductFilters): Promise<PaginatedRes
  * @param product - Données du produit à créer
  * @returns Promise<ApiResponse<Product>>
  */
-export const createProduct = async (product: CreateProductRequest): Promise<ApiResponse<Product>> => {
+export const createProduct = async (
+  product: CreateProductRequest
+): Promise<ApiResponse<Product>> => {
   const response = await fetch('/api/products', {
     method: 'POST',
     headers: {
@@ -336,11 +352,11 @@ export const createProduct = async (product: CreateProductRequest): Promise<ApiR
     },
     body: JSON.stringify(product),
   });
-  
+
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
-  
+
   return response.json();
 };
 ```
@@ -365,20 +381,12 @@ export const handleApiError = (error: unknown): ApiError => {
   if (error instanceof ApiError) {
     return error;
   }
-  
+
   if (error instanceof Response) {
-    return new ApiError(
-      `HTTP ${error.status}: ${error.statusText}`,
-      error.status,
-      'HTTP_ERROR'
-    );
+    return new ApiError(`HTTP ${error.status}: ${error.statusText}`, error.status, 'HTTP_ERROR');
   }
-  
-  return new ApiError(
-    'Une erreur inattendue s\'est produite',
-    500,
-    'UNKNOWN_ERROR'
-  );
+
+  return new ApiError("Une erreur inattendue s'est produite", 500, 'UNKNOWN_ERROR');
 };
 ```
 
@@ -413,12 +421,12 @@ export const handleApiError = (error: unknown): ApiError => {
 
 ### Outils recommandés
 
-| Outil | Usage | Lien |
-|-------|-------|------|
-| **VS Code** | Éditeur de code | [vscode.dev](https://vscode.dev) |
-| **Postman** | Tests API | [postman.com](https://postman.com) |
-| **Figma** | Design | [figma.com](https://figma.com) |
-| **Lighthouse** | Performance | [developers.google.com/web/tools/lighthouse](https://developers.google.com/web/tools/lighthouse) |
+| Outil          | Usage           | Lien                                                                                             |
+| -------------- | --------------- | ------------------------------------------------------------------------------------------------ |
+| **VS Code**    | Éditeur de code | [vscode.dev](https://vscode.dev)                                                                 |
+| **Postman**    | Tests API       | [postman.com](https://postman.com)                                                               |
+| **Figma**      | Design          | [figma.com](https://figma.com)                                                                   |
+| **Lighthouse** | Performance     | [developers.google.com/web/tools/lighthouse](https://developers.google.com/web/tools/lighthouse) |
 
 ---
 
@@ -426,10 +434,10 @@ export const handleApiError = (error: unknown): ApiError => {
 
 ### Équipe de développement
 
-| Rôle | Contact | Responsabilités |
-|------|---------|-----------------|
-| **Lead Frontend** | lead@afrovibz.com | Architecture, code review |
-| **Développeur Senior** | senior@afrovibz.com | Mentorat, développement |
+| Rôle                   | Contact             | Responsabilités              |
+| ---------------------- | ------------------- | ---------------------------- |
+| **Lead Frontend**      | lead@afrovibz.com   | Architecture, code review    |
+| **Développeur Senior** | senior@afrovibz.com | Mentorat, développement      |
 | **Développeur Junior** | junior@afrovibz.com | Développement, apprentissage |
 
 ### Canaux de communication
@@ -477,6 +485,6 @@ export const handleApiError = (error: unknown): ApiError => {
 
 **🎉 Félicitations ! Vous êtes maintenant prêt à contribuer efficacement au projet AFROVIBZ.**
 
-*N'hésitez pas à poser des questions et à partager vos idées d'amélioration !*
+_N'hésitez pas à poser des questions et à partager vos idées d'amélioration !_
 
-</div> 
+</div>

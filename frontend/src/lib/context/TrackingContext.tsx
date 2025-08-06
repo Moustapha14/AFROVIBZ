@@ -20,7 +20,11 @@ export interface LogisticsTracking {
 
 interface TrackingContextType {
   logistics: LogisticsTracking[];
-  updateLogisticsStatus: (id: string, newStatus: LogisticsTracking['status'], updatedBy?: 'vendeuse' | 'system') => void;
+  updateLogisticsStatus: (
+    id: string,
+    newStatus: LogisticsTracking['status'],
+    updatedBy?: 'vendeuse' | 'system'
+  ) => void;
   findByTrackingNumber: (trackingNumber: string) => LogisticsTracking | null;
   findByOrderNumber: (orderNumber: string) => LogisticsTracking | null;
   getStatusCounts: () => Record<string, number>;
@@ -108,16 +112,16 @@ export function TrackingProvider({ children }: { children: ReactNode }) {
   }, [logistics]);
 
   const updateLogisticsStatus = (
-    id: string, 
+    id: string,
     newStatus: LogisticsTracking['status'],
     updatedBy: 'vendeuse' | 'system' = 'vendeuse'
   ) => {
     setLogistics(prev => {
-      const updated = prev.map(item => 
-        item.id === id 
-          ? { 
-              ...item, 
-              status: newStatus, 
+      const updated = prev.map(item =>
+        item.id === id
+          ? {
+              ...item,
+              status: newStatus,
               lastUpdate: new Date(),
               currentLocation: getLocationForStatus(newStatus),
             }
@@ -139,22 +143,26 @@ export function TrackingProvider({ children }: { children: ReactNode }) {
   };
 
   const findByTrackingNumber = (trackingNumber: string) => {
-    return logistics.find(item => 
-      item.trackingNumber.toLowerCase() === trackingNumber.toLowerCase()
-    ) || null;
+    return (
+      logistics.find(item => item.trackingNumber.toLowerCase() === trackingNumber.toLowerCase()) ||
+      null
+    );
   };
 
   const findByOrderNumber = (orderNumber: string) => {
-    return logistics.find(item => 
-      item.orderNumber.toLowerCase() === orderNumber.toLowerCase()
-    ) || null;
+    return (
+      logistics.find(item => item.orderNumber.toLowerCase() === orderNumber.toLowerCase()) || null
+    );
   };
 
   const getStatusCounts = () => {
-    return logistics.reduce((counts, item) => {
-      counts[item.status] = (counts[item.status] || 0) + 1;
-      return counts;
-    }, {} as Record<string, number>);
+    return logistics.reduce(
+      (counts, item) => {
+        counts[item.status] = (counts[item.status] || 0) + 1;
+        return counts;
+      },
+      {} as Record<string, number>
+    );
   };
 
   return (

@@ -10,27 +10,27 @@ Cette documentation a été créée pour accompagner les **développeurs juniors
 
 ### 📋 Documents principaux
 
-| Document | Temps de lecture | Description |
-|----------|------------------|-------------|
-| **[README.md](./README.md)** | 5 min | Vue d'ensemble et table des matières |
-| **[01-introduction.md](./01-introduction.md)** | 10-15 min | Présentation du projet et stack technique |
-| **[02-getting-started.md](./02-getting-started.md)** | 30 min | Installation et configuration |
-| **[03-architecture.md](./03-architecture.md)** | 20-30 min | Structure du code et conventions |
-| **[04-components.md](./04-components.md)** | 45-60 min | Composants React et patterns |
-| **[05-routing.md](./05-routing.md)** | 20-30 min | Navigation et App Router |
-| **[06-state-management.md](./06-state-management.md)** | 30-45 min | Gestion d'état et données |
-| **[07-styling.md](./07-styling.md)** | 15-25 min | Styling et UI avec Tailwind |
-| **[08-best-practices.md](./08-best-practices.md)** | 30-40 min | Conventions et bonnes pratiques |
-| **[09-debugging.md](./09-debugging.md)** | 20-30 min | Debugging et outils |
-| **[10-workflow.md](./10-workflow.md)** | 15-20 min | Workflow et collaboration |
+| Document                                               | Temps de lecture | Description                               |
+| ------------------------------------------------------ | ---------------- | ----------------------------------------- |
+| **[README.md](./README.md)**                           | 5 min            | Vue d'ensemble et table des matières      |
+| **[01-introduction.md](./01-introduction.md)**         | 10-15 min        | Présentation du projet et stack technique |
+| **[02-getting-started.md](./02-getting-started.md)**   | 30 min           | Installation et configuration             |
+| **[03-architecture.md](./03-architecture.md)**         | 20-30 min        | Structure du code et conventions          |
+| **[04-components.md](./04-components.md)**             | 45-60 min        | Composants React et patterns              |
+| **[05-routing.md](./05-routing.md)**                   | 20-30 min        | Navigation et App Router                  |
+| **[06-state-management.md](./06-state-management.md)** | 30-45 min        | Gestion d'état et données                 |
+| **[07-styling.md](./07-styling.md)**                   | 15-25 min        | Styling et UI avec Tailwind               |
+| **[08-best-practices.md](./08-best-practices.md)**     | 30-40 min        | Conventions et bonnes pratiques           |
+| **[09-debugging.md](./09-debugging.md)**               | 20-30 min        | Debugging et outils                       |
+| **[10-workflow.md](./10-workflow.md)**                 | 15-20 min        | Workflow et collaboration                 |
 
 ### 🛠️ Outils et ressources
 
-| Document | Usage | Description |
-|----------|-------|-------------|
-| **[CHECKLIST_ONBOARDING.md](./CHECKLIST_ONBOARDING.md)** | Checklist | Guide d'onboarding étape par étape |
-| **[SNIPPETS_UTILES.md](./SNIPPETS_UTILES.md)** | Référence | Collection de snippets de code |
-| **[SUMMARY.md](./SUMMARY.md)** | Vue d'ensemble | Ce document |
+| Document                                                 | Usage          | Description                        |
+| -------------------------------------------------------- | -------------- | ---------------------------------- |
+| **[CHECKLIST_ONBOARDING.md](./CHECKLIST_ONBOARDING.md)** | Checklist      | Guide d'onboarding étape par étape |
+| **[SNIPPETS_UTILES.md](./SNIPPETS_UTILES.md)**           | Référence      | Collection de snippets de code     |
+| **[SUMMARY.md](./SUMMARY.md)**                           | Vue d'ensemble | Ce document                        |
 
 ## ⏱️ Temps de lecture total
 
@@ -91,6 +91,7 @@ Cette documentation a été créée pour accompagner les **développeurs juniors
 ## 🔧 Stack technique maîtrisée
 
 ### Frontend
+
 - **Framework** : Next.js 15.4.4
 - **UI Library** : React 18
 - **Language** : TypeScript 5
@@ -99,6 +100,7 @@ Cette documentation a été créée pour accompagner les **développeurs juniors
 - **State Management** : React Query 5.17.9
 
 ### Outils de développement
+
 - **Linting** : ESLint + Prettier
 - **Testing** : Jest + React Testing Library
 - **Build** : Next.js (Webpack)
@@ -106,6 +108,7 @@ Cette documentation a été créée pour accompagner les **développeurs juniors
 - **Version Control** : Git + GitHub
 
 ### Services externes
+
 - **Authentication** : Firebase Auth
 - **Storage** : Firebase Storage
 - **Database** : MongoDB (via API)
@@ -115,6 +118,7 @@ Cette documentation a été créée pour accompagner les **développeurs juniors
 ## 📊 Métriques de qualité
 
 ### Code
+
 - **Couverture de tests** : > 80%
 - **Linting** : 0 erreurs
 - **TypeScript** : Strict mode
@@ -122,6 +126,7 @@ Cette documentation a été créée pour accompagner les **développeurs juniors
 - **Accessibilité** : WCAG 2.1 AA
 
 ### Processus
+
 - **Code review** : 100% des PR
 - **Documentation** : Mise à jour continue
 - **Déploiement** : Automatisé
@@ -131,18 +136,21 @@ Cette documentation a été créée pour accompagner les **développeurs juniors
 ## 🎉 Résultats attendus
 
 ### Après 1 semaine
+
 - ✅ Environnement configuré et fonctionnel
 - ✅ Première contribution effectuée
 - ✅ Code review participée
 - ✅ Documentation lue et comprise
 
 ### Après 1 mois
+
 - ✅ Autonomie sur les tâches courantes
 - ✅ Code review d'autres développeurs
 - ✅ Documentation mise à jour
 - ✅ Processus maîtrisé
 
 ### Après 3 mois
+
 - ✅ Expertise sur le projet
 - ✅ Mentorat des nouveaux arrivants
 - ✅ Améliorations architecturales proposées
@@ -151,16 +159,19 @@ Cette documentation a été créée pour accompagner les **développeurs juniors
 ## 📞 Support et ressources
 
 ### Équipe
+
 - **Lead Frontend** : lead@afrovibz.com
 - **Développeur Senior** : senior@afrovibz.com
 - **Développeur Junior** : junior@afrovibz.com
 
 ### Canaux
+
 - **Slack** : #frontend-dev
 - **GitHub** : Issues et Discussions
 - **Email** : dev@afrovibz.com
 
 ### Documentation externe
+
 - **[Next.js](https://nextjs.org/docs)** - Documentation officielle
 - **[React](https://react.dev/)** - Guide React moderne
 - **[TypeScript](https://www.typescriptlang.org/docs/)** - Documentation TypeScript
@@ -169,12 +180,14 @@ Cette documentation a été créée pour accompagner les **développeurs juniors
 ## 🔄 Maintenance de la documentation
 
 ### Responsabilités
+
 - **Mise à jour** : Équipe de développement
 - **Validation** : Lead Frontend
 - **Feedback** : Tous les développeurs
 - **Amélioration** : Continue
 
 ### Processus
+
 1. **Détection** de besoins de mise à jour
 2. **Proposition** d'améliorations
 3. **Révision** et validation
@@ -187,6 +200,6 @@ Cette documentation a été créée pour accompagner les **développeurs juniors
 
 **🎯 Mission accomplie : Documentation complète et pédagogique pour les développeurs juniors !**
 
-*Cette documentation évolue avec le projet et l'équipe. N'hésitez pas à contribuer !*
+_Cette documentation évolue avec le projet et l'équipe. N'hésitez pas à contribuer !_
 
-</div> 
+</div>

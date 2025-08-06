@@ -28,23 +28,23 @@
 
 ### Frontend
 
-| Technologie | Version | Rôle | Pourquoi ce choix ? |
-|-------------|---------|------|-------------------|
-| **Next.js** | 15.4.4 | Framework React | SSR/SSG, performance, SEO |
-| **React** | 18 | UI Library | Écosystème mature, communauté active |
-| **TypeScript** | 5 | Typage statique | Qualité du code, DX améliorée |
-| **Tailwind CSS** | 3.4.17 | Framework CSS | Développement rapide, cohérence |
-| **Framer Motion** | 10.18.0 | Animations | Expérience utilisateur fluide |
-| **React Query** | 5.17.9 | Gestion d'état serveur | Cache intelligent, synchronisation |
+| Technologie       | Version | Rôle                   | Pourquoi ce choix ?                  |
+| ----------------- | ------- | ---------------------- | ------------------------------------ |
+| **Next.js**       | 15.4.4  | Framework React        | SSR/SSG, performance, SEO            |
+| **React**         | 18      | UI Library             | Écosystème mature, communauté active |
+| **TypeScript**    | 5       | Typage statique        | Qualité du code, DX améliorée        |
+| **Tailwind CSS**  | 3.4.17  | Framework CSS          | Développement rapide, cohérence      |
+| **Framer Motion** | 10.18.0 | Animations             | Expérience utilisateur fluide        |
+| **React Query**   | 5.17.9  | Gestion d'état serveur | Cache intelligent, synchronisation   |
 
 ### Outils de développement
 
-| Outil | Rôle | Configuration |
-|-------|------|---------------|
-| **ESLint** | Linting | Règles strictes pour la qualité |
-| **Prettier** | Formatage | Code cohérent |
-| **Sharp** | Optimisation images | Performance web |
-| **Firebase** | Services cloud | Auth, storage, analytics |
+| Outil        | Rôle                | Configuration                   |
+| ------------ | ------------------- | ------------------------------- |
+| **ESLint**   | Linting             | Règles strictes pour la qualité |
+| **Prettier** | Formatage           | Code cohérent                   |
+| **Sharp**    | Optimisation images | Performance web                 |
+| **Firebase** | Services cloud      | Auth, storage, analytics        |
 
 ### Pourquoi cette stack ?
 
@@ -68,18 +68,18 @@ graph TB
         C --> D[Utils]
         A --> E[API Routes]
     end
-    
+
     subgraph "Backend (Node.js/Express)"
         F[Controllers] --> G[Models]
         G --> H[Database]
     end
-    
+
     subgraph "Services externes"
         I[Firebase Auth]
         J[Payment Gateway]
         K[CDN Images]
     end
-    
+
     A --> F
     E --> F
     B --> I
@@ -90,6 +90,7 @@ graph TB
 ### Séparation des responsabilités
 
 #### Frontend (Next.js)
+
 - **Pages** : Routes et rendu des vues
 - **Components** : Interface utilisateur réutilisable
 - **Hooks** : Logique métier et gestion d'état
@@ -97,12 +98,14 @@ graph TB
 - **API Routes** : Endpoints frontend
 
 #### Backend (Node.js/Express)
+
 - **Controllers** : Logique métier
 - **Models** : Structure des données
 - **Middleware** : Authentification, validation
 - **Routes** : Définition des endpoints
 
 #### Services externes
+
 - **Firebase** : Authentification, storage
 - **Payment Gateway** : Paiements sécurisés
 - **CDN** : Optimisation des images
@@ -113,25 +116,25 @@ graph TB
 
 ### Termes techniques
 
-| Terme | Définition | Exemple dans le projet |
-|-------|------------|------------------------|
-| **SSR** | Server-Side Rendering | Pages rendues côté serveur pour le SEO |
-| **SSG** | Static Site Generation | Pages statiques pour la performance |
-| **CSR** | Client-Side Rendering | Interactivité côté client |
-| **HOC** | Higher-Order Component | Composant qui enveloppe un autre |
-| **Hook** | Fonction React personnalisée | `useAuth`, `useCart` |
-| **Context** | Partage d'état global | `AuthContext`, `CartContext` |
+| Terme       | Définition                   | Exemple dans le projet                 |
+| ----------- | ---------------------------- | -------------------------------------- |
+| **SSR**     | Server-Side Rendering        | Pages rendues côté serveur pour le SEO |
+| **SSG**     | Static Site Generation       | Pages statiques pour la performance    |
+| **CSR**     | Client-Side Rendering        | Interactivité côté client              |
+| **HOC**     | Higher-Order Component       | Composant qui enveloppe un autre       |
+| **Hook**    | Fonction React personnalisée | `useAuth`, `useCart`                   |
+| **Context** | Partage d'état global        | `AuthContext`, `CartContext`           |
 
 ### Termes métier
 
-| Terme | Définition | Contexte |
-|-------|------------|----------|
-| **SKU** | Stock Keeping Unit | Identifiant unique d'un produit |
-| **Conversion** | Transformation visiteur → client | Objectif principal |
-| **Funnel** | Parcours d'achat | Étapes vers la conversion |
-| **AOV** | Average Order Value | Panier moyen |
-| **LTV** | Lifetime Value | Valeur client sur la durée |
-| **Churn** | Taux de désabonnement | Perte de clients |
+| Terme          | Définition                       | Contexte                        |
+| -------------- | -------------------------------- | ------------------------------- |
+| **SKU**        | Stock Keeping Unit               | Identifiant unique d'un produit |
+| **Conversion** | Transformation visiteur → client | Objectif principal              |
+| **Funnel**     | Parcours d'achat                 | Étapes vers la conversion       |
+| **AOV**        | Average Order Value              | Panier moyen                    |
+| **LTV**        | Lifetime Value                   | Valeur client sur la durée      |
+| **Churn**      | Taux de désabonnement            | Perte de clients                |
 
 ### Abréviations courantes
 
@@ -159,4 +162,4 @@ Maintenant que vous avez une vue d'ensemble du projet, vous pouvez :
 
 **💡 Conseil** : Gardez cette page ouverte pendant vos premières semaines. Elle vous servira de référence !
 
-</div> 
+</div>

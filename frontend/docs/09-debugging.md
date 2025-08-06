@@ -9,6 +9,7 @@
 React DevTools est l'outil essentiel pour déboguer les composants React.
 
 #### Installation
+
 ```bash
 # Extension Chrome/Firefox
 # Téléchargez depuis le Chrome Web Store ou Firefox Add-ons
@@ -18,6 +19,7 @@ npm install -g react-devtools
 ```
 
 #### Utilisation
+
 ```typescript
 // Dans votre composant, ajoutez des points de debug
 export const ProductCard = ({ product, onAddToCart }) => {
@@ -39,6 +41,7 @@ export const ProductCard = ({ product, onAddToCart }) => {
 ```
 
 #### Fonctionnalités utiles
+
 - **Components** : Inspecter la hiérarchie des composants
 - **Profiler** : Analyser les performances
 - **Settings** : Configurer l'affichage
@@ -46,19 +49,20 @@ export const ProductCard = ({ product, onAddToCart }) => {
 ### Chrome DevTools
 
 #### Network Tab
+
 ```typescript
 // Debug des requêtes API
 const fetchProducts = async () => {
   console.log('Fetching products...');
-  
+
   try {
     const response = await fetch('/api/products');
     console.log('Response status:', response.status);
-    
+
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    
+
     const data = await response.json();
     console.log('Products data:', data);
     return data;
@@ -70,6 +74,7 @@ const fetchProducts = async () => {
 ```
 
 #### Console Tab
+
 ```typescript
 // Utilisation avancée de console
 export const debugComponent = (componentName: string, props: any) => {
@@ -81,24 +86,25 @@ export const debugComponent = (componentName: string, props: any) => {
 };
 
 // Utilisation
-export const ProductCard = (props) => {
+export const ProductCard = props => {
   debugComponent('ProductCard', props);
   // ... reste du composant
 };
 ```
 
 #### Sources Tab
+
 ```typescript
 // Points d'arrêt dans le code
 export const handleAddToCart = (productId: string) => {
   // Point d'arrêt ici pour inspecter productId
   debugger;
-  
+
   if (!productId) {
     console.warn('ProductId is missing');
     return;
   }
-  
+
   // Logique d'ajout au panier
   addToCart(productId);
 };
@@ -121,12 +127,12 @@ export const useDebug = (name: string, value: any) => {
 // Hook pour tracer les re-renders
 export const useRenderCount = (componentName: string) => {
   const renderCount = useRef(0);
-  
+
   useEffect(() => {
     renderCount.current += 1;
     console.log(`🔄 ${componentName} rendered ${renderCount.current} times`);
   });
-  
+
   return renderCount.current;
 };
 
@@ -134,7 +140,7 @@ export const useRenderCount = (componentName: string) => {
 export const ProductCard = ({ product }) => {
   useRenderCount('ProductCard');
   useDebug('ProductCard props', { product });
-  
+
   return <div>{product.name}</div>;
 };
 ```
@@ -156,7 +162,7 @@ class ErrorBoundary extends React.Component {
   componentDidCatch(error, errorInfo) {
     console.error('🚨 Error caught by boundary:', error);
     console.error('Error info:', errorInfo);
-    
+
     // Log détaillé pour le debugging
     console.group('🔍 Error Details');
     console.log('Error message:', error.message);
@@ -165,7 +171,7 @@ class ErrorBoundary extends React.Component {
     console.log('Current URL:', window.location.href);
     console.log('User agent:', navigator.userAgent);
     console.groupEnd();
-    
+
     this.setState({ error, errorInfo });
   }
 
@@ -196,13 +202,13 @@ class ErrorBoundary extends React.Component {
 // Hook pour mesurer les performances
 export const usePerformance = (name: string) => {
   const startTime = useRef(performance.now());
-  
+
   useEffect(() => {
     const endTime = performance.now();
     const duration = endTime - startTime.current;
-    
+
     console.log(`⏱️ ${name} took ${duration.toFixed(2)}ms`);
-    
+
     // Avertissement si trop lent
     if (duration > 16) { // Plus de 16ms = moins de 60fps
       console.warn(`🐌 ${name} is slow: ${duration.toFixed(2)}ms`);
@@ -214,7 +220,7 @@ export const usePerformance = (name: string) => {
 export const withProfiler = (WrappedComponent: React.ComponentType, name: string) => {
   return React.forwardRef((props, ref) => {
     usePerformance(name);
-    
+
     return (
       <React.Profiler id={name} onRender={(id, phase, actualDuration) => {
         console.log(`📊 ${id} ${phase}: ${actualDuration.toFixed(2)}ms`);
@@ -260,7 +266,7 @@ class Logger {
     };
 
     this.logs.push(entry);
-    
+
     // Limiter le nombre de logs en mémoire
     if (this.logs.length > this.maxLogs) {
       this.logs = this.logs.slice(-this.maxLogs);
@@ -268,7 +274,7 @@ class Logger {
 
     // Afficher dans la console
     console[level](`[${level.toUpperCase()}] ${message}`, data || '');
-    
+
     // Envoyer au serveur en production
     if (process.env.NODE_ENV === 'production') {
       this.sendToServer(entry);
@@ -368,7 +374,7 @@ class ErrorMonitor {
     };
 
     this.errors.push(report);
-    
+
     if (this.errors.length > this.maxErrors) {
       this.errors = this.errors.slice(-this.maxErrors);
     }
@@ -404,7 +410,7 @@ export const useErrorBoundary = () => {
     const handleError = (event: ErrorEvent) => {
       const error = new Error(event.message);
       error.stack = event.error?.stack;
-      
+
       errorMonitor.captureError(error);
       setError(error);
     };
@@ -412,7 +418,7 @@ export const useErrorBoundary = () => {
     const handleUnhandledRejection = (event: PromiseRejectionEvent) => {
       const error = new Error('Unhandled promise rejection');
       error.stack = event.reason?.stack;
-      
+
       errorMonitor.captureError(error);
       setError(error);
     };
@@ -656,7 +662,7 @@ class PerformanceMonitor {
 
   startTimer(name: string): () => void {
     const start = performance.now();
-    
+
     return () => {
       const duration = performance.now() - start;
       this.recordMetric(name, duration);
@@ -667,9 +673,9 @@ class PerformanceMonitor {
     if (!this.metrics.has(name)) {
       this.metrics.set(name, []);
     }
-    
+
     this.metrics.get(name)!.push(duration);
-    
+
     // Garder seulement les 100 dernières mesures
     const metrics = this.metrics.get(name)!;
     if (metrics.length > 100) {
@@ -690,14 +696,14 @@ class PerformanceMonitor {
 
   printReport() {
     console.group('📊 Performance Report');
-    
+
     for (const [name, metrics] of this.metrics) {
       const report = this.getMetrics(name);
       if (report) {
         console.log(`${name}:`, report);
       }
     }
-    
+
     console.groupEnd();
   }
 }
@@ -710,7 +716,7 @@ export const usePerformanceMonitor = (name: string) => {
 
   useEffect(() => {
     endTimer.current = performanceMonitor.startTimer(name);
-    
+
     return () => {
       endTimer.current?.();
     };
@@ -736,4 +742,4 @@ Maintenant que vous maîtrisez le debugging :
 
 **💡 Conseil** : Utilisez les outils de debug régulièrement. Un bon debugging fait gagner beaucoup de temps !
 
-</div> 
+</div>

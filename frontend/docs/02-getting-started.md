@@ -6,11 +6,11 @@
 
 ### Versions requises
 
-| Logiciel | Version minimale | Version recommandée | Comment vérifier |
-|----------|------------------|-------------------|------------------|
-| **Node.js** | 18.0.0 | 20.x.x | `node --version` |
-| **npm** | 8.0.0 | 10.x.x | `npm --version` |
-| **Git** | 2.30.0 | 3.x.x | `git --version` |
+| Logiciel    | Version minimale | Version recommandée | Comment vérifier |
+| ----------- | ---------------- | ------------------- | ---------------- |
+| **Node.js** | 18.0.0           | 20.x.x              | `node --version` |
+| **npm**     | 8.0.0            | 10.x.x              | `npm --version`  |
+| **Git**     | 2.30.0           | 3.x.x               | `git --version`  |
 
 ### Vérification rapide
 
@@ -26,6 +26,7 @@ git --version
 ### Installation des prérequis
 
 #### Sur Ubuntu/Debian
+
 ```bash
 # Node.js via NodeSource
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
@@ -36,6 +37,7 @@ sudo apt-get install git
 ```
 
 #### Sur macOS
+
 ```bash
 # Avec Homebrew
 brew install node@20
@@ -43,6 +45,7 @@ brew install git
 ```
 
 #### Sur Windows
+
 1. Téléchargez Node.js depuis [nodejs.org](https://nodejs.org)
 2. Téléchargez Git depuis [git-scm.com](https://git-scm.com)
 
@@ -121,6 +124,7 @@ npm run dev:full
 ### Tests rapides
 
 #### 1. Test de la page d'accueil
+
 ```bash
 # Ouvrez http://localhost:3000
 # Vérifiez que :
@@ -130,12 +134,14 @@ npm run dev:full
 ```
 
 #### 2. Test de l'authentification
+
 ```bash
 # Cliquez sur "Se connecter"
 # Vérifiez que la page de login s'affiche
 ```
 
 #### 3. Test des produits
+
 ```bash
 # Naviguez vers /products
 # Vérifiez que les produits s'affichent
@@ -172,6 +178,7 @@ npm run install:backend
 **Symptôme** : `Error: listen EADDRINUSE: address already in use :::3000`
 
 **Solution** :
+
 ```bash
 # Trouver le processus qui utilise le port
 lsof -i :3000
@@ -188,6 +195,7 @@ npm run dev -- -p 3001
 **Symptôme** : `Module not found` ou `Cannot resolve module`
 
 **Solution** :
+
 ```bash
 # Nettoyer le cache
 rm -rf node_modules package-lock.json
@@ -202,6 +210,7 @@ npm install --force
 **Symptôme** : Erreurs de typage dans la console
 
 **Solution** :
+
 ```bash
 # Vérifier les types
 npx tsc --noEmit
@@ -216,6 +225,7 @@ npm run dev
 **Symptôme** : Images cassées ou qui ne s'affichent pas
 
 **Solution** :
+
 ```bash
 # Vérifier la configuration Next.js
 cat next.config.js
@@ -229,6 +239,7 @@ cat .env.local
 **Symptôme** : Erreurs d'authentification ou de configuration Firebase
 
 **Solution** :
+
 ```bash
 # Vérifier la configuration Firebase
 cat src/lib/firebase/config.ts
@@ -264,6 +275,6 @@ Si vous rencontrez des problèmes non résolus :
 
 **🎉 Félicitations ! Votre environnement est prêt pour le développement.**
 
-*Vous pouvez maintenant commencer à coder sur AFROVIBZ !*
+_Vous pouvez maintenant commencer à coder sur AFROVIBZ !_
 
-</div> 
+</div>

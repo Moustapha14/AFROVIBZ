@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { cn } from '@/lib/utils';
 
 interface MobileCardProps {
@@ -34,7 +35,9 @@ const MobileCard: React.FC<MobileCardProps> = ({
     lg: 'p-6 sm:p-8',
   };
 
-  const hoverStyles = hover ? 'hover:shadow-lg hover:-translate-y-1 transition-all duration-200' : '';
+  const hoverStyles = hover
+    ? 'hover:shadow-lg hover:-translate-y-1 transition-all duration-200'
+    : '';
   const interactiveStyles = interactive ? 'cursor-pointer active:scale-95' : '';
 
   return (
@@ -50,16 +53,20 @@ const MobileCard: React.FC<MobileCardProps> = ({
       onClick={onClick}
       role={onClick ? 'button' : undefined}
       tabIndex={onClick ? 0 : undefined}
-      onKeyDown={onClick ? (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          onClick();
-        }
-      } : undefined}
+      onKeyDown={
+        onClick
+          ? e => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                onClick();
+              }
+            }
+          : undefined
+      }
     >
       {children}
     </div>
   );
 };
 
-export { MobileCard }; 
+export { MobileCard };

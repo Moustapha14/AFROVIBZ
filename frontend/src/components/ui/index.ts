@@ -16,4 +16,4 @@ export { ProductModal } from './ProductModal';
 export { Tabs } from './Tabs';
 export { Toast } from './Toast';
 export { TouchOptimized } from './TouchOptimized';
-export { default as InvoiceDownload } from './InvoiceDownload'; 
+export { default as InvoiceDownload } from './InvoiceDownload';

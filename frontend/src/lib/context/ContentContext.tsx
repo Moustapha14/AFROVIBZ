@@ -39,12 +39,12 @@ interface ContentContextType {
   updateFAQItem: (id: string, updates: Partial<FAQItem>) => void;
   deleteFAQItem: (id: string) => void;
   toggleFAQItemStatus: (id: string) => void;
-  
+
   // Category Management
   addFAQCategory: (category: Omit<FAQCategory, 'id'>) => void;
   updateFAQCategory: (id: string, updates: Partial<FAQCategory>) => void;
   deleteFAQCategory: (id: string) => void;
-  
+
   // Page Content Management
   pageContents: PageContent[];
   updatePageContent: (slug: string, content: any, updatedBy: string) => void;
@@ -67,62 +67,68 @@ const initialFAQItems: FAQItem[] = [
     id: '1',
     category: 'Commande',
     question: 'Comment passer une commande ?',
-    answer: 'Pour passer commande, ajoutez vos articles au panier, puis cliquez sur "Passer la commande". Vous devrez ensuite remplir vos informations de livraison et choisir votre mode de paiement.',
+    answer:
+      'Pour passer commande, ajoutez vos articles au panier, puis cliquez sur "Passer la commande". Vous devrez ensuite remplir vos informations de livraison et choisir votre mode de paiement.',
     isActive: true,
     createdAt: new Date('2024-01-15'),
     updatedAt: new Date('2024-01-15'),
-    updatedBy: 'Admin'
+    updatedBy: 'Admin',
   },
   {
     id: '2',
     category: 'Commande',
     question: 'Puis-je modifier ma commande après validation ?',
-    answer: 'Les modifications ne sont possibles que dans les 30 minutes suivant la validation, et uniquement si la commande n\'est pas encore en préparation. Contactez-nous rapidement.',
+    answer:
+      "Les modifications ne sont possibles que dans les 30 minutes suivant la validation, et uniquement si la commande n'est pas encore en préparation. Contactez-nous rapidement.",
     isActive: true,
     createdAt: new Date('2024-01-15'),
     updatedAt: new Date('2024-01-15'),
-    updatedBy: 'Admin'
+    updatedBy: 'Admin',
   },
   {
     id: '3',
     category: 'Livraison',
     question: 'Quels sont vos délais de livraison ?',
-    answer: 'Nos délais de livraison varient selon votre zone :\n• Libreville : 24-48h\n• Port-Gentil : 2-3 jours\n• Autres villes : 3-5 jours\n• Zones rurales : 5-7 jours',
+    answer:
+      'Nos délais de livraison varient selon votre zone :\n• Libreville : 24-48h\n• Port-Gentil : 2-3 jours\n• Autres villes : 3-5 jours\n• Zones rurales : 5-7 jours',
     isActive: true,
     createdAt: new Date('2024-01-15'),
     updatedAt: new Date('2024-01-15'),
-    updatedBy: 'Admin'
+    updatedBy: 'Admin',
   },
   {
     id: '4',
     category: 'Livraison',
     question: 'Livrez-vous partout au Gabon ?',
-    answer: 'Oui, nous livrons dans tout le Gabon. Les frais de livraison sont gratuits à partir de 50,000 FCFA pour Libreville et Port-Gentil.',
+    answer:
+      'Oui, nous livrons dans tout le Gabon. Les frais de livraison sont gratuits à partir de 50,000 FCFA pour Libreville et Port-Gentil.',
     isActive: true,
     createdAt: new Date('2024-01-15'),
     updatedAt: new Date('2024-01-15'),
-    updatedBy: 'Admin'
+    updatedBy: 'Admin',
   },
   {
     id: '5',
     category: 'Paiement',
     question: 'Quels moyens de paiement acceptez-vous ?',
-    answer: 'Nous acceptons :\n• Paiement à la livraison (espèces)\n• Virement bancaire\n• Mobile Money (Airtel Money, Moov Money)\n• Cartes bancaires (prochainement)',
+    answer:
+      'Nous acceptons :\n• Paiement à la livraison (espèces)\n• Virement bancaire\n• Mobile Money (Airtel Money, Moov Money)\n• Cartes bancaires (prochainement)',
     isActive: true,
     createdAt: new Date('2024-01-15'),
     updatedAt: new Date('2024-01-15'),
-    updatedBy: 'Admin'
+    updatedBy: 'Admin',
   },
   {
     id: '6',
     category: 'Compte',
     question: 'Comment créer un compte client ?',
-    answer: 'Cliquez sur "S\'inscrire" en haut de la page, remplissez vos informations personnelles et confirmez votre email. Votre compte sera créé immédiatement.',
+    answer:
+      'Cliquez sur "S\'inscrire" en haut de la page, remplissez vos informations personnelles et confirmez votre email. Votre compte sera créé immédiatement.',
     isActive: true,
     createdAt: new Date('2024-01-15'),
     updatedAt: new Date('2024-01-15'),
-    updatedBy: 'Admin'
-  }
+    updatedBy: 'Admin',
+  },
 ];
 
 const STORAGE_KEY_FAQ_ITEMS = 'afrovibz_faq_items';
@@ -221,11 +227,9 @@ export function ContentProvider({ children }: { children: ReactNode }) {
   };
 
   const updateFAQItem = (id: string, updates: Partial<FAQItem>) => {
-    setFaqItems(prev => prev.map(item => 
-      item.id === id 
-        ? { ...item, ...updates, updatedAt: new Date() }
-        : item
-    ));
+    setFaqItems(prev =>
+      prev.map(item => (item.id === id ? { ...item, ...updates, updatedAt: new Date() } : item))
+    );
     toast.success('✅ Question mise à jour');
   };
 
@@ -235,11 +239,11 @@ export function ContentProvider({ children }: { children: ReactNode }) {
   };
 
   const toggleFAQItemStatus = (id: string) => {
-    setFaqItems(prev => prev.map(item => 
-      item.id === id 
-        ? { ...item, isActive: !item.isActive, updatedAt: new Date() }
-        : item
-    ));
+    setFaqItems(prev =>
+      prev.map(item =>
+        item.id === id ? { ...item, isActive: !item.isActive, updatedAt: new Date() } : item
+      )
+    );
     const item = faqItems.find(item => item.id === id);
     toast.success(`${item?.isActive ? '❌ Question désactivée' : '✅ Question activée'}`);
   };
@@ -255,20 +259,20 @@ export function ContentProvider({ children }: { children: ReactNode }) {
   };
 
   const updateFAQCategory = (id: string, updates: Partial<FAQCategory>) => {
-    setFaqCategories(prev => prev.map(cat => 
-      cat.id === id ? { ...cat, ...updates } : cat
-    ));
+    setFaqCategories(prev => prev.map(cat => (cat.id === id ? { ...cat, ...updates } : cat)));
     toast.success('✅ Catégorie mise à jour');
   };
 
   const deleteFAQCategory = (id: string) => {
     // Vérifier s'il y a des questions dans cette catégorie
-    const hasItems = faqItems.some(item => item.category === faqCategories.find(cat => cat.id === id)?.name);
+    const hasItems = faqItems.some(
+      item => item.category === faqCategories.find(cat => cat.id === id)?.name
+    );
     if (hasItems) {
       toast.error('❌ Impossible de supprimer une catégorie contenant des questions');
       return;
     }
-    
+
     setFaqCategories(prev => prev.filter(cat => cat.id !== id));
     toast.success('🗑️ Catégorie supprimée');
   };
@@ -286,13 +290,13 @@ export function ContentProvider({ children }: { children: ReactNode }) {
     };
 
     if (existingIndex >= 0) {
-      setPageContents(prev => prev.map((page, index) => 
-        index === existingIndex ? pageData : page
-      ));
+      setPageContents(prev =>
+        prev.map((page, index) => (index === existingIndex ? pageData : page))
+      );
     } else {
       setPageContents(prev => [...prev, pageData]);
     }
-    
+
     toast.success(`✅ Page ${slug} mise à jour`);
   };
 

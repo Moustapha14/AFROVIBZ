@@ -12,29 +12,29 @@ module.exports = {
         foreground: 'var(--foreground)',
       },
       screens: {
-        'xs': '320px',
-        'sm': '640px',
-        'md': '768px',
-        'lg': '1024px',
-        'xl': '1280px',
+        xs: '320px',
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
         '2xl': '1536px',
         '3xl': '1920px',
         '4k': '2560px',
       },
       spacing: {
-        '18': '4.5rem',
-        '88': '22rem',
+        18: '4.5rem',
+        88: '22rem',
         'safe-top': 'env(safe-area-inset-top)',
         'safe-bottom': 'env(safe-area-inset-bottom)',
         'safe-left': 'env(safe-area-inset-left)',
         'safe-right': 'env(safe-area-inset-right)',
       },
       fontSize: {
-        'xs': ['clamp(0.75rem, 2vw, 0.875rem)', { lineHeight: '1.25rem' }],
-        'sm': ['clamp(0.875rem, 2.5vw, 1rem)', { lineHeight: '1.5rem' }],
-        'base': ['clamp(1rem, 3vw, 1.125rem)', { lineHeight: '1.75rem' }],
-        'lg': ['clamp(1.125rem, 3.5vw, 1.25rem)', { lineHeight: '1.75rem' }],
-        'xl': ['clamp(1.25rem, 4vw, 1.5rem)', { lineHeight: '2rem' }],
+        xs: ['clamp(0.75rem, 2vw, 0.875rem)', { lineHeight: '1.25rem' }],
+        sm: ['clamp(0.875rem, 2.5vw, 1rem)', { lineHeight: '1.5rem' }],
+        base: ['clamp(1rem, 3vw, 1.125rem)', { lineHeight: '1.75rem' }],
+        lg: ['clamp(1.125rem, 3.5vw, 1.25rem)', { lineHeight: '1.75rem' }],
+        xl: ['clamp(1.25rem, 4vw, 1.5rem)', { lineHeight: '2rem' }],
         '2xl': ['clamp(1.5rem, 5vw, 1.875rem)', { lineHeight: '2.25rem' }],
         '3xl': ['clamp(1.875rem, 6vw, 2.25rem)', { lineHeight: '2.5rem' }],
         '4xl': ['clamp(2.25rem, 7vw, 3rem)', { lineHeight: '1' }],
@@ -81,8 +81,8 @@ module.exports = {
         },
       },
       boxShadow: {
-        'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
-        'mobile': '0 4px 20px rgba(0, 0, 0, 0.1)',
+        soft: '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
+        mobile: '0 4px 20px rgba(0, 0, 0, 0.1)',
         'mobile-elevated': '0 8px 30px rgba(0, 0, 0, 0.15)',
       },
       minHeight: {
@@ -90,19 +90,19 @@ module.exports = {
         'screen-safe': 'calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom))',
       },
       maxWidth: {
-        'mobile': '100vw',
-        'content': '1200px',
-        'wide': '1400px',
+        mobile: '100vw',
+        content: '1200px',
+        wide: '1400px',
       },
       aspectRatio: {
-        'mobile': '9/16',
-        'tablet': '4/3',
-        'desktop': '16/9',
+        mobile: '9/16',
+        tablet: '4/3',
+        desktop: '16/9',
       },
     },
   },
   plugins: [
-    function({ addUtilities, addComponents, theme }) {
+    function ({ addUtilities, addComponents, theme }) {
       // Utilitaires personnalisés pour Mobile First
       const newUtilities = {
         '.line-clamp-2': {
@@ -146,10 +146,10 @@ module.exports = {
           'backface-visibility': 'hidden',
         },
         '.perspective-1000': {
-          'perspective': '1000px',
+          perspective: '1000px',
         },
-      }
-      addUtilities(newUtilities)
+      };
+      addUtilities(newUtilities);
 
       // Composants personnalisés pour Mobile First
       const components = {
@@ -250,9 +250,8 @@ module.exports = {
           width: '100%',
           height: 'auto',
         },
-      }
-      addComponents(components)
-    }
+      };
+      addComponents(components);
+    },
   ],
-}
-
+};

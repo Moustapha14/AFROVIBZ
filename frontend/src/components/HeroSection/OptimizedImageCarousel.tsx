@@ -1,8 +1,13 @@
 'use client';
 
-import { useState, useEffect, useCallback, useMemo } from 'react';
 import Image from 'next/image';
-import { getResponsiveSizes, OPTIMIZED_BLUR_DATA_URL, preloadCriticalImages } from '@/lib/utils/heroImageOptimization';
+import { useState, useEffect, useCallback, useMemo } from 'react';
+
+import {
+  getResponsiveSizes,
+  OPTIMIZED_BLUR_DATA_URL,
+  preloadCriticalImages,
+} from '@/lib/utils/heroImageOptimization';
 
 interface HeroImage {
   src: string;
@@ -64,8 +69,6 @@ const heroImages: HeroImage[] = [
   },
 ];
 
-
-
 export default function OptimizedImageCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -76,7 +79,7 @@ export default function OptimizedImageCarousel() {
 
   // Gestion du carrousel avec useCallback pour optimiser les performances
   const nextImage = useCallback(() => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % heroImages.length);
+    setCurrentIndex(prevIndex => (prevIndex + 1) % heroImages.length);
   }, []);
 
   // Gestion des erreurs de chargement
@@ -102,22 +105,22 @@ export default function OptimizedImageCarousel() {
       .filter(img => img.priority)
       .slice(0, 3)
       .map(img => img.src);
-    
+
     preloadCriticalImages(preloadImages);
   }, []);
 
   return (
-    <div className="absolute inset-0 overflow-hidden">
+    <div className='absolute inset-0 overflow-hidden'>
       {/* Indicateur de chargement */}
       {isLoading && (
-        <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 animate-pulse" />
+        <div className='absolute inset-0 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 animate-pulse' />
       )}
 
       {/* Gestion d'erreur */}
       {error && (
-        <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 flex items-center justify-center">
-          <div className="text-white text-center">
-            <p className="text-sm opacity-75">{error}</p>
+        <div className='absolute inset-0 bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 flex items-center justify-center'>
+          <div className='text-white text-center'>
+            <p className='text-sm opacity-75'>{error}</p>
           </div>
         </div>
       )}
@@ -127,34 +130,32 @@ export default function OptimizedImageCarousel() {
         <div
           key={`${image.src}-${index}`}
           className={`absolute inset-0 transition-all duration-1000 ease-in-out transform ${
-            index === currentIndex 
-              ? 'opacity-100 scale-100' 
-              : 'opacity-0 scale-105'
+            index === currentIndex ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
           }`}
         >
           <Image
             src={image.src}
             alt={image.alt}
             fill
-            className="object-cover object-center"
+            className='object-cover object-center'
             priority={image.priority || false}
             quality={90}
             sizes={responsiveSizes}
-            placeholder="blur"
+            placeholder='blur'
             blurDataURL={OPTIMIZED_BLUR_DATA_URL}
             onLoad={handleImageLoad}
             onError={() => handleImageError(index)}
             loading={image.priority ? 'eager' : 'lazy'}
             fetchPriority={image.priority ? 'high' : 'auto'}
           />
-          
+
           {/* Overlay gradient optimisé */}
-          <div className="absolute inset-0 bg-gradient-to-r from-yellow-400/40 via-orange-500/40 to-red-500/40" />
-          <div className="absolute inset-0 bg-black/30" />
+          <div className='absolute inset-0 bg-gradient-to-r from-yellow-400/40 via-orange-500/40 to-red-500/40' />
+          <div className='absolute inset-0 bg-black/30' />
         </div>
       ))}
 
       {/* Indicateurs de progression - Supprimés selon la demande utilisateur */}
     </div>
   );
-} 
+}

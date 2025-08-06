@@ -5,12 +5,14 @@
 ## 🚀 Installation et configuration
 
 ### Prérequis système
+
 - [ ] **Node.js 18+** installé (`node --version`)
 - [ ] **npm 8+** installé (`npm --version`)
 - [ ] **Git 2.30+** installé (`git --version`)
 - [ ] **VS Code** installé avec extensions recommandées
 
 ### Configuration du projet
+
 - [ ] **Repository cloné** et accessible
 - [ ] **Dépendances installées** (`npm install`)
 - [ ] **Variables d'environnement** configurées (`.env.local`)
@@ -18,6 +20,7 @@
 - [ ] **Application accessible** sur `http://localhost:3000`
 
 ### Vérifications techniques
+
 - [ ] **Page d'accueil** s'affiche correctement
 - [ ] **Console navigateur** sans erreurs
 - [ ] **Console terminal** sans erreurs de compilation
@@ -29,12 +32,14 @@
 ## 📚 Lecture et compréhension
 
 ### Documentation essentielle
+
 - [ ] **Introduction** lue et comprise (15 min)
 - [ ] **Guide de démarrage** suivi (30 min)
 - [ ] **Architecture** comprise (20 min)
 - [ ] **Composants** explorés (30 min)
 
 ### Code source exploré
+
 - [ ] **Structure des dossiers** comprise
 - [ ] **Composants principaux** identifiés
 - [ ] **Hooks personnalisés** repérés
@@ -46,18 +51,21 @@
 ## 🧪 Premiers pas pratiques
 
 ### Modification simple
+
 - [ ] **Texte modifié** dans un composant
 - [ ] **Style ajusté** avec Tailwind CSS
 - [ ] **Console log** ajouté pour debug
 - [ ] **Changement visible** dans le navigateur
 
 ### Navigation
+
 - [ ] **Routes principales** visitées
 - [ ] **Navigation entre pages** testée
 - [ ] **Paramètres d'URL** compris
 - [ ] **Erreurs 404** gérées
 
 ### Développement
+
 - [ ] **Nouveau composant** créé
 - [ ] **Props TypeScript** définies
 - [ ] **Composant intégré** dans une page
@@ -68,18 +76,21 @@
 ## 🔧 Outils maîtrisés
 
 ### VS Code
+
 - [ ] **Extensions recommandées** installées
 - [ ] **IntelliSense** fonctionne
 - [ ] **Debugger** configuré
 - [ ] **Terminal intégré** utilisé
 
 ### DevTools
+
 - [ ] **React DevTools** installé et utilisé
 - [ ] **Chrome DevTools** exploré
 - [ ] **Network tab** compris
 - [ ] **Console** utilisée pour debug
 
 ### Git
+
 - [ ] **Premier commit** effectué
 - [ ] **Branche créée** pour une fonctionnalité
 - [ ] **Push/Pull** maîtrisé
@@ -90,6 +101,7 @@
 ## 🎯 Première contribution
 
 ### Tâche simple
+
 - [ ] **Issue assignée** ou créée
 - [ ] **Branche feature** créée
 - [ ] **Code développé** et testé
@@ -98,6 +110,7 @@
 - [ ] **Commit** effectué avec bon message
 
 ### Code review
+
 - [ ] **Pull Request** créée
 - [ ] **Description** complète rédigée
 - [ ] **Screenshots** ajoutées (si UI)
@@ -110,18 +123,21 @@
 ## 📊 Monitoring et qualité
 
 ### Tests
+
 - [ ] **Tests unitaires** écrits pour le code
 - [ ] **Tests d'intégration** compris
 - [ ] **Tests E2E** explorés (si applicable)
 - [ ] **Couverture de code** vérifiée
 
 ### Performance
+
 - [ ] **Lighthouse** exécuté
 - [ ] **Bundle analyzer** utilisé
 - [ ] **Performance** mesurée
 - [ ] **Optimisations** identifiées
 
 ### Sécurité
+
 - [ ] **Vulnérabilités** vérifiées (`npm audit`)
 - [ ] **Variables sensibles** protégées
 - [ ] **Validation** des entrées comprise
@@ -132,18 +148,21 @@
 ## 🤝 Intégration équipe
 
 ### Communication
+
 - [ ] **Slack/Teams** rejoint
 - [ ] **Canaux pertinents** identifiés
 - [ ] **Première question** posée
 - [ ] **Feedback** demandé
 
 ### Processus
+
 - [ ] **Daily standup** participé
 - [ ] **Code review** d'autres PR
 - [ ] **Rétrospective** participée
 - [ ] **Processus** compris et respecté
 
 ### Documentation
+
 - [ ] **Documentation mise à jour** si nécessaire
 - [ ] **Commentaires** ajoutés au code
 - [ ] **README** amélioré si besoin
@@ -154,18 +173,21 @@
 ## 🎉 Objectifs atteints
 
 ### Autonomie
+
 - [ ] **Développement autonome** possible
 - [ ] **Problèmes courants** résolus seul
 - [ ] **Recherche de solutions** efficace
 - [ ] **Aide demandée** quand nécessaire
 
 ### Contribution
+
 - [ ] **Première fonctionnalité** livrée
 - [ ] **Code de qualité** produit
 - [ ] **Tests écrits** et maintenus
 - [ ] **Documentation** mise à jour
 
 ### Évolution
+
 - [ ] **Objectifs personnels** définis
 - [ ] **Plan de formation** établi
 - [ ] **Mentor** identifié
@@ -176,18 +198,21 @@
 ## 📝 Notes et observations
 
 ### Difficultés rencontrées
+
 - [ ] **Problèmes techniques** notés
 - [ ] **Solutions trouvées** documentées
 - [ ] **Aide reçue** remerciée
 - [ ] **Améliorations** suggérées
 
 ### Ressources utiles
+
 - [ ] **Liens bookmarkés** dans le navigateur
 - [ ] **Snippets de code** sauvegardés
 - [ ] **Outils découverts** notés
 - [ ] **Trucs et astuces** partagés
 
 ### Feedback
+
 - [ ] **Onboarding évalué** (1-5)
 - [ ] **Points d'amélioration** identifiés
 - [ ] **Suggestions** formulées
@@ -199,6 +224,6 @@
 
 **🎯 Objectif atteint : Être opérationnel et contribuer efficacement au projet AFROVIBZ !**
 
-*Cette checklist peut être réutilisée pour les futurs développeurs et améliorée avec l'expérience.*
+_Cette checklist peut être réutilisée pour les futurs développeurs et améliorée avec l'expérience._
 
-</div> 
+</div>

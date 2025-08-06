@@ -12,22 +12,22 @@ graph TB
         A[useState] --> B[Composant]
         C[useReducer] --> B
     end
-    
+
     subgraph "État partagé"
         D[Context API] --> E[Plusieurs composants]
         F[Zustand] --> E
     end
-    
+
     subgraph "État serveur"
         G[React Query] --> H[Cache API]
         I[SWR] --> H
     end
-    
+
     subgraph "État persistant"
         J[localStorage] --> K[Session]
         L[sessionStorage] --> K
     end
-    
+
     B --> D
     E --> G
     H --> J
@@ -35,13 +35,13 @@ graph TB
 
 ### Quand utiliser quoi ?
 
-| Type d'état | Quand l'utiliser | Exemple |
-|-------------|------------------|---------|
-| **useState** | État local simple | Formulaire, toggle, compteur |
-| **useReducer** | État complexe | Panier, authentification |
-| **Context** | État partagé | Thème, langue, utilisateur |
-| **React Query** | Données serveur | Produits, commandes |
-| **localStorage** | Persistance | Préférences, panier |
+| Type d'état      | Quand l'utiliser  | Exemple                      |
+| ---------------- | ----------------- | ---------------------------- |
+| **useState**     | État local simple | Formulaire, toggle, compteur |
+| **useReducer**   | État complexe     | Panier, authentification     |
+| **Context**      | État partagé      | Thème, langue, utilisateur   |
+| **React Query**  | Données serveur   | Produits, commandes          |
+| **localStorage** | Persistance       | Préférences, panier          |
 
 ---
 
@@ -69,7 +69,7 @@ export const ProductCard = ({ product }) => {
 
   return (
     <div className="product-card">
-      <button 
+      <button
         onClick={handleFavorite}
         disabled={isLoading}
       >
@@ -103,59 +103,55 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
   switch (action.type) {
     case 'ADD_ITEM': {
       const existingItem = state.items.find(item => item.id === action.payload.id);
-      
+
       if (existingItem) {
         return {
           ...state,
           items: state.items.map(item =>
-            item.id === action.payload.id
-              ? { ...item, quantity: item.quantity + 1 }
-              : item
+            item.id === action.payload.id ? { ...item, quantity: item.quantity + 1 } : item
           ),
         };
       }
-      
+
       return {
         ...state,
         items: [...state.items, { ...action.payload, quantity: 1 }],
       };
     }
-    
+
     case 'REMOVE_ITEM':
       return {
         ...state,
         items: state.items.filter(item => item.id !== action.payload),
       };
-    
+
     case 'UPDATE_QUANTITY':
       return {
         ...state,
         items: state.items.map(item =>
-          item.id === action.payload.id
-            ? { ...item, quantity: action.payload.quantity }
-            : item
+          item.id === action.payload.id ? { ...item, quantity: action.payload.quantity } : item
         ),
       };
-    
+
     case 'CLEAR_CART':
       return {
         ...state,
         items: [],
         total: 0,
       };
-    
+
     case 'SET_LOADING':
       return {
         ...state,
         loading: action.payload,
       };
-    
+
     case 'SET_ERROR':
       return {
         ...state,
         error: action.payload,
       };
-    
+
     default:
       return state;
   }
@@ -210,8 +206,8 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ 
-  children 
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
+  children
 }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
@@ -303,8 +299,8 @@ const queryClient = new QueryClient({
   },
 });
 
-export const QueryProvider: React.FC<{ children: React.ReactNode }> = ({ 
-  children 
+export const QueryProvider: React.FC<{ children: React.ReactNode }> = ({
+  children
 }) => {
   return (
     <QueryClientProvider client={queryClient}>
@@ -337,19 +333,19 @@ export const useProduct = (productId: string) => {
 
 export const useCreateProduct = () => {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
     mutationFn: createProduct,
-    onSuccess: (newProduct) => {
+    onSuccess: newProduct => {
       // Invalider le cache des produits
       queryClient.invalidateQueries({ queryKey: ['products'] });
-      
+
       // Ajouter le nouveau produit au cache
       queryClient.setQueryData(['product', newProduct.id], newProduct);
-      
+
       toast.success('Produit créé avec succès !');
     },
-    onError: (error) => {
+    onError: error => {
       toast.error('Erreur lors de la création du produit');
       console.error('Create product error:', error);
     },
@@ -358,17 +354,17 @@ export const useCreateProduct = () => {
 
 export const useUpdateProduct = () => {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
     mutationFn: updateProduct,
-    onSuccess: (updatedProduct) => {
+    onSuccess: updatedProduct => {
       // Mettre à jour le cache
       queryClient.setQueryData(['product', updatedProduct.id], updatedProduct);
       queryClient.invalidateQueries({ queryKey: ['products'] });
-      
+
       toast.success('Produit mis à jour !');
     },
-    onError: (error) => {
+    onError: error => {
       toast.error('Erreur lors de la mise à jour');
       console.error('Update product error:', error);
     },
@@ -472,19 +468,19 @@ export const useUser = (userId: string) => {
 // ✅ Mise à jour optimiste
 export const useOptimisticUpdate = () => {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
     mutationFn: updateProduct,
-    onMutate: async (updatedProduct) => {
+    onMutate: async updatedProduct => {
       // Annuler les requêtes en cours
       await queryClient.cancelQueries({ queryKey: ['product', updatedProduct.id] });
-      
+
       // Sauvegarder l'ancienne valeur
       const previousProduct = queryClient.getQueryData(['product', updatedProduct.id]);
-      
+
       // Mettre à jour optimistiquement
       queryClient.setQueryData(['product', updatedProduct.id], updatedProduct);
-      
+
       // Retourner le contexte pour rollback
       return { previousProduct };
     },
@@ -494,7 +490,7 @@ export const useOptimisticUpdate = () => {
         queryClient.setQueryData(['product', updatedProduct.id], context.previousProduct);
       }
     },
-    onSettled: (updatedProduct) => {
+    onSettled: updatedProduct => {
       // Toujours refetch pour s'assurer de la cohérence
       queryClient.invalidateQueries({ queryKey: ['product', updatedProduct.id] });
     },
@@ -540,7 +536,7 @@ persistQueryClient({
 // ✅ Hook complet pour le panier
 export const useCart = () => {
   const queryClient = useQueryClient();
-  
+
   // Récupérer le panier
   const { data: cart, isLoading } = useQuery({
     queryKey: ['cart'],
@@ -551,19 +547,19 @@ export const useCart = () => {
   // Ajouter au panier
   const addToCartMutation = useMutation({
     mutationFn: addToCart,
-    onSuccess: (updatedCart) => {
+    onSuccess: updatedCart => {
       queryClient.setQueryData(['cart'], updatedCart);
       toast.success('Produit ajouté au panier !');
     },
     onError: () => {
-      toast.error('Erreur lors de l\'ajout au panier');
+      toast.error("Erreur lors de l'ajout au panier");
     },
   });
 
   // Retirer du panier
   const removeFromCartMutation = useMutation({
     mutationFn: removeFromCart,
-    onSuccess: (updatedCart) => {
+    onSuccess: updatedCart => {
       queryClient.setQueryData(['cart'], updatedCart);
       toast.success('Produit retiré du panier');
     },
@@ -572,7 +568,7 @@ export const useCart = () => {
   // Mettre à jour la quantité
   const updateQuantityMutation = useMutation({
     mutationFn: updateCartItemQuantity,
-    onSuccess: (updatedCart) => {
+    onSuccess: updatedCart => {
       queryClient.setQueryData(['cart'], updatedCart);
     },
   });
@@ -595,7 +591,7 @@ export const useCart = () => {
 // ✅ Hook pour les favoris
 export const useFavorites = () => {
   const queryClient = useQueryClient();
-  
+
   const { data: favorites = [], isLoading } = useQuery({
     queryKey: ['favorites'],
     queryFn: fetchFavorites,
@@ -604,11 +600,11 @@ export const useFavorites = () => {
 
   const toggleFavoriteMutation = useMutation({
     mutationFn: toggleFavorite,
-    onMutate: async (productId) => {
+    onMutate: async productId => {
       await queryClient.cancelQueries({ queryKey: ['favorites'] });
-      
+
       const previousFavorites = queryClient.getQueryData(['favorites']);
-      
+
       // Mise à jour optimiste
       queryClient.setQueryData(['favorites'], (old: Product[]) => {
         const isFavorite = old.some(p => p.id === productId);
@@ -618,7 +614,7 @@ export const useFavorites = () => {
           return [...old, { id: productId }];
         }
       });
-      
+
       return { previousFavorites };
     },
     onError: (err, productId, context) => {
@@ -661,4 +657,4 @@ Maintenant que vous maîtrisez la gestion d'état :
 
 **💡 Conseil** : Commencez par l'état local, puis montez en complexité. React Query est votre ami pour les données serveur !
 
-</div> 
+</div>

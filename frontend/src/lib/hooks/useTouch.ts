@@ -41,38 +41,44 @@ export function useTouch(options: UseTouchOptions = {}) {
 
   const elementRef = useRef<HTMLElement>(null);
 
-  const handleTouchStart = useCallback((e: TouchEvent) => {
-    if (preventDefault) {
-      e.preventDefault();
-    }
+  const handleTouchStart = useCallback(
+    (e: TouchEvent) => {
+      if (preventDefault) {
+        e.preventDefault();
+      }
 
-    const touch = e.touches[0];
-    setTouchState(prev => ({
-      ...prev,
-      isTouching: true,
-      startX: touch.clientX,
-      startY: touch.clientY,
-      currentX: touch.clientX,
-      currentY: touch.clientY,
-      deltaX: 0,
-      deltaY: 0,
-    }));
-  }, [preventDefault]);
+      const touch = e.touches[0];
+      setTouchState(prev => ({
+        ...prev,
+        isTouching: true,
+        startX: touch.clientX,
+        startY: touch.clientY,
+        currentX: touch.clientX,
+        currentY: touch.clientY,
+        deltaX: 0,
+        deltaY: 0,
+      }));
+    },
+    [preventDefault]
+  );
 
-  const handleTouchMove = useCallback((e: TouchEvent) => {
-    if (preventDefault) {
-      e.preventDefault();
-    }
+  const handleTouchMove = useCallback(
+    (e: TouchEvent) => {
+      if (preventDefault) {
+        e.preventDefault();
+      }
 
-    const touch = e.touches[0];
-    setTouchState(prev => ({
-      ...prev,
-      currentX: touch.clientX,
-      currentY: touch.clientY,
-      deltaX: touch.clientX - prev.startX,
-      deltaY: touch.clientY - prev.startY,
-    }));
-  }, [preventDefault]);
+      const touch = e.touches[0];
+      setTouchState(prev => ({
+        ...prev,
+        currentX: touch.clientX,
+        currentY: touch.clientY,
+        deltaX: touch.clientX - prev.startX,
+        deltaY: touch.clientY - prev.startY,
+      }));
+    },
+    [preventDefault]
+  );
 
   const handleTouchEnd = useCallback(() => {
     const { deltaX, deltaY } = touchState;
@@ -159,4 +165,4 @@ export function useDoubleTap(callback: () => void, delay: number = 300) {
   }, [callback, delay, lastTap]);
 
   return handleTap;
-} 
+}

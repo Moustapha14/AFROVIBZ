@@ -1,7 +1,8 @@
-import sharp from 'sharp';
-import path from 'path';
-import fs from 'fs/promises';
 import crypto from 'crypto';
+import fs from 'fs/promises';
+import path from 'path';
+
+import sharp from 'sharp';
 
 /**
  * Utilitaires d'optimisation d'images haute performance
@@ -50,27 +51,30 @@ export const getResponsiveSizes = (): string => {
 };
 
 // Placeholder blur optimisé
-export const OPTIMIZED_BLUR_DATA_URL = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q==';
+export const OPTIMIZED_BLUR_DATA_URL =
+  'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q==';
 
 // Détection du support des formats modernes
 export const supportsModernFormats = (): boolean => {
   if (typeof window === 'undefined') return false;
-  
+
   const canvas = document.createElement('canvas');
   canvas.width = 1;
   canvas.height = 1;
-  
+
   // Test WebP
   const webpSupported = canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0;
-  
+
   // Test AVIF (approximatif)
   const avifSupported = 'createImageBitmap' in window;
-  
+
   return webpSupported || avifSupported;
 };
 
 // Optimisation de la qualité par breakpoint
-export const getQualityForBreakpoint = (breakpoint: keyof typeof RESPONSIVE_BREAKPOINTS): number => {
+export const getQualityForBreakpoint = (
+  breakpoint: keyof typeof RESPONSIVE_BREAKPOINTS
+): number => {
   const qualityMap = {
     mobile: 75,
     mobileLarge: 80,
@@ -81,12 +85,14 @@ export const getQualityForBreakpoint = (breakpoint: keyof typeof RESPONSIVE_BREA
     wide: 95,
     ultraWide: 98,
   };
-  
+
   return qualityMap[breakpoint] || 90;
 };
 
 // Configuration d'image optimisée par défaut
-export const getOptimizedImageConfig = (config: Partial<ImageOptimizationConfig>): ImageOptimizationConfig => {
+export const getOptimizedImageConfig = (
+  config: Partial<ImageOptimizationConfig>
+): ImageOptimizationConfig => {
   return {
     src: config.src || '',
     alt: config.alt || 'Image',
@@ -102,7 +108,7 @@ export const getOptimizedImageConfig = (config: Partial<ImageOptimizationConfig>
 // Préchargement d'images critiques
 export const preloadCriticalImages = (images: string[]): void => {
   if (typeof window === 'undefined') return;
-  
+
   images.forEach(src => {
     const link = document.createElement('link');
     link.rel = 'preload';
@@ -123,7 +129,11 @@ export const handleImageError = (src: string, fallbackSrc?: string): string => {
 export const getImageMetadata = (src: string) => {
   return {
     src,
-    alt: src.split('/').pop()?.replace(/\.[^/.]+$/, '') || 'Image',
+    alt:
+      src
+        .split('/')
+        .pop()
+        ?.replace(/\.[^/.]+$/, '') || 'Image',
     width: 1920,
     height: 1080,
   };
@@ -183,32 +193,37 @@ export class ImageOptimizer {
     config: ImageOptimizationConfig = {}
   ): Promise<{ paths: OptimizedImageSizes; metadata: ImageMetadata; stats: OptimizationStats }> {
     const startTime = Date.now();
-    
+
     const {
       quality = this.QUALITY,
       format = 'webp',
       removeExif = true,
-      compressionLevel = 6
+      compressionLevel = 6,
     } = config;
 
     // Créer les dossiers de sortie
     const baseDir = path.join(process.cwd(), 'public', 'images', 'products');
     const dirs = ['originals', 'thumbnails', 'medium', 'large', 'webp'];
-    
+
     for (const dir of dirs) {
       await fs.mkdir(path.join(baseDir, dir), { recursive: true });
     }
 
     // Lire l'image originale
     const image = sharp(inputPath);
-    
+
     // Obtenir les métadonnées originales
     const originalMetadata = await image.metadata();
     const originalStats = await fs.stat(inputPath);
-    
+
     // Validation des dimensions minimales
-    if ((originalMetadata.width || 0) < this.MIN_DIMENSIONS || (originalMetadata.height || 0) < this.MIN_DIMENSIONS) {
-      throw new Error(`Dimensions minimales requises: ${this.MIN_DIMENSIONS}x${this.MIN_DIMENSIONS}px`);
+    if (
+      (originalMetadata.width || 0) < this.MIN_DIMENSIONS ||
+      (originalMetadata.height || 0) < this.MIN_DIMENSIONS
+    ) {
+      throw new Error(
+        `Dimensions minimales requises: ${this.MIN_DIMENSIONS}x${this.MIN_DIMENSIONS}px`
+      );
     }
 
     // Générer un ID unique et un nom de fichier sécurisé
@@ -231,7 +246,7 @@ export class ImageOptimizer {
       webp: path.join(baseDir, 'webp', `${baseName}.webp`),
       webpThumbnail: path.join(baseDir, 'webp', `${baseName}-thumb.webp`),
       webpMedium: path.join(baseDir, 'webp', `${baseName}-medium.webp`),
-      webpLarge: path.join(baseDir, 'webp', `${baseName}-large.webp`)
+      webpLarge: path.join(baseDir, 'webp', `${baseName}-large.webp`),
     };
 
     // Créer un clone de l'image pour chaque version
@@ -241,12 +256,12 @@ export class ImageOptimizer {
     await image
       .resize(this.LARGE_SIZE, this.LARGE_SIZE, {
         fit: 'inside',
-        withoutEnlargement: true
+        withoutEnlargement: true,
       })
-      .jpeg({ 
+      .jpeg({
         quality: 90,
         progressive: true,
-        mozjpeg: true
+        mozjpeg: true,
       })
       .toFile(paths.original);
 
@@ -254,11 +269,11 @@ export class ImageOptimizer {
     await imageClone
       .resize(this.THUMBNAIL_SIZE, this.THUMBNAIL_SIZE, {
         fit: 'cover',
-        position: 'center'
+        position: 'center',
       })
-      .jpeg({ 
+      .jpeg({
         quality: 80,
-        progressive: true
+        progressive: true,
       })
       .toFile(paths.thumbnail);
 
@@ -266,11 +281,11 @@ export class ImageOptimizer {
     await imageClone
       .resize(this.MEDIUM_SIZE, this.MEDIUM_SIZE, {
         fit: 'inside',
-        withoutEnlargement: true
+        withoutEnlargement: true,
       })
-      .jpeg({ 
-        quality: quality,
-        progressive: true
+      .jpeg({
+        quality,
+        progressive: true,
       })
       .toFile(paths.medium);
 
@@ -278,11 +293,11 @@ export class ImageOptimizer {
     await imageClone
       .resize(this.LARGE_SIZE, this.LARGE_SIZE, {
         fit: 'inside',
-        withoutEnlargement: true
+        withoutEnlargement: true,
       })
-      .jpeg({ 
-        quality: quality,
-        progressive: true
+      .jpeg({
+        quality,
+        progressive: true,
       })
       .toFile(paths.large);
 
@@ -290,44 +305,44 @@ export class ImageOptimizer {
     await imageClone
       .resize(this.LARGE_SIZE, this.LARGE_SIZE, {
         fit: 'inside',
-        withoutEnlargement: true
+        withoutEnlargement: true,
       })
-      .webp({ 
+      .webp({
         quality: this.WEBP_QUALITY,
-        effort: compressionLevel
+        effort: compressionLevel,
       })
       .toFile(paths.webp);
 
     await imageClone
       .resize(this.THUMBNAIL_SIZE, this.THUMBNAIL_SIZE, {
         fit: 'cover',
-        position: 'center'
+        position: 'center',
       })
-      .webp({ 
+      .webp({
         quality: 75,
-        effort: compressionLevel
+        effort: compressionLevel,
       })
       .toFile(paths.webpThumbnail);
 
     await imageClone
       .resize(this.MEDIUM_SIZE, this.MEDIUM_SIZE, {
         fit: 'inside',
-        withoutEnlargement: true
+        withoutEnlargement: true,
       })
-      .webp({ 
+      .webp({
         quality: this.WEBP_QUALITY,
-        effort: compressionLevel
+        effort: compressionLevel,
       })
       .toFile(paths.webpMedium);
 
     await imageClone
       .resize(this.LARGE_SIZE, this.LARGE_SIZE, {
         fit: 'inside',
-        withoutEnlargement: true
+        withoutEnlargement: true,
       })
-      .webp({ 
+      .webp({
         quality: this.WEBP_QUALITY,
-        effort: compressionLevel
+        effort: compressionLevel,
       })
       .toFile(paths.webpLarge);
 
@@ -340,7 +355,7 @@ export class ImageOptimizer {
       optimizedSize: optimizedStats.size,
       compressionRatio: ((originalStats.size - optimizedStats.size) / originalStats.size) * 100,
       processingTime,
-      format: 'webp'
+      format: 'webp',
     };
 
     // Générer le checksum pour l'intégrité
@@ -353,13 +368,13 @@ export class ImageOptimizer {
       optimizedSize: optimizedStats.size,
       dimensions: {
         width: originalMetadata.width || 0,
-        height: originalMetadata.height || 0
+        height: originalMetadata.height || 0,
       },
       format: originalMetadata.format || 'unknown',
       uploadDate: new Date(),
       productId,
       checksum,
-      displayOrder: 0
+      displayOrder: 0,
     };
 
     return { paths, metadata, stats };
@@ -378,12 +393,12 @@ export class ImageOptimizer {
       const metadata = await sharp(filePath).metadata();
       const stats = await fs.stat(filePath);
       const suggestions: string[] = [];
-      
+
       // Vérifier la taille du fichier
       if (stats.size > this.MAX_FILE_SIZE) {
         return {
           isValid: false,
-          error: `Fichier trop volumineux (${this.formatFileSize(stats.size)}). Maximum: ${this.formatFileSize(this.MAX_FILE_SIZE)}`
+          error: `Fichier trop volumineux (${this.formatFileSize(stats.size)}). Maximum: ${this.formatFileSize(this.MAX_FILE_SIZE)}`,
         };
       }
 
@@ -391,15 +406,18 @@ export class ImageOptimizer {
       if (!metadata.format || !this.ALLOWED_FORMATS.includes(metadata.format)) {
         return {
           isValid: false,
-          error: `Format non supporté: ${metadata.format}. Formats acceptés: ${this.ALLOWED_FORMATS.join(', ')}`
+          error: `Format non supporté: ${metadata.format}. Formats acceptés: ${this.ALLOWED_FORMATS.join(', ')}`,
         };
       }
 
       // Vérifier les dimensions minimales
-      if ((metadata.width || 0) < this.MIN_DIMENSIONS || (metadata.height || 0) < this.MIN_DIMENSIONS) {
+      if (
+        (metadata.width || 0) < this.MIN_DIMENSIONS ||
+        (metadata.height || 0) < this.MIN_DIMENSIONS
+      ) {
         return {
           isValid: false,
-          error: `Dimensions insuffisantes: ${metadata.width}x${metadata.height}px. Minimum: ${this.MIN_DIMENSIONS}x${this.MIN_DIMENSIONS}px`
+          error: `Dimensions insuffisantes: ${metadata.width}x${metadata.height}px. Minimum: ${this.MIN_DIMENSIONS}x${this.MIN_DIMENSIONS}px`,
         };
       }
 
@@ -411,19 +429,20 @@ export class ImageOptimizer {
         }
       }
 
-      if (stats.size > 5 * 1024 * 1024) { // 5MB
-        suggestions.push('Fichier volumineux. L\'optimisation automatique réduira la taille');
+      if (stats.size > 5 * 1024 * 1024) {
+        // 5MB
+        suggestions.push("Fichier volumineux. L'optimisation automatique réduira la taille");
       }
 
       return {
         isValid: true,
         metadata,
-        suggestions
+        suggestions,
       };
     } catch (error) {
       return {
         isValid: false,
-        error: `Erreur lors de la validation: ${error instanceof Error ? error.message : 'Erreur inconnue'}`
+        error: `Erreur lors de la validation: ${error instanceof Error ? error.message : 'Erreur inconnue'}`,
       };
     }
   }
@@ -434,14 +453,14 @@ export class ImageOptimizer {
   static generateSafeFilename(originalName: string, productId: string, timestamp: number): string {
     const ext = path.extname(originalName).toLowerCase();
     const baseName = path.parse(originalName).name;
-    
+
     // Nettoyer le nom de fichier
     const cleanName = baseName
       .replace(/[^a-zA-Z0-9-_]/g, '-')
       .replace(/-+/g, '-')
       .replace(/^-|-$/g, '')
       .toLowerCase();
-    
+
     // Format: product-{id}-{timestamp}-{index}.{ext}
     return `product-${productId}-${timestamp}-${cleanName}${ext}`;
   }
@@ -451,7 +470,7 @@ export class ImageOptimizer {
    */
   static async deleteImageVersions(paths: OptimizedImageSizes): Promise<void> {
     const filesToDelete = Object.values(paths);
-    
+
     for (const filePath of filesToDelete) {
       try {
         await fs.unlink(filePath);
@@ -467,13 +486,13 @@ export class ImageOptimizer {
   static calculateOptimizationStats(originalSize: number, optimizedSize: number) {
     const compressionRatio = ((originalSize - optimizedSize) / originalSize) * 100;
     const sizeReduction = originalSize - optimizedSize;
-    
+
     return {
       originalSize: this.formatFileSize(originalSize),
       optimizedSize: this.formatFileSize(optimizedSize),
       compressionRatio: compressionRatio.toFixed(1),
       sizeReduction: this.formatFileSize(sizeReduction),
-      savings: `${compressionRatio.toFixed(1)}%`
+      savings: `${compressionRatio.toFixed(1)}%`,
     };
   }
 
@@ -482,12 +501,12 @@ export class ImageOptimizer {
    */
   static formatFileSize(bytes: number): string {
     if (bytes === 0) return '0 B';
-    
+
     const k = 1024;
     const sizes = ['B', 'KB', 'MB', 'GB'];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
-    
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+
+    return `${parseFloat((bytes / Math.pow(k, i)).toFixed(2))} ${sizes[i]}`;
   }
 
   /**
@@ -520,20 +539,20 @@ export class ImageOptimizer {
     preferWebP: boolean = true
   ): string {
     const baseName = path.parse(filename).name;
-    
+
     if (preferWebP) {
       return [
         `/images/products/webp/${baseName}-thumb.webp 150w`,
         `/images/products/webp/${baseName}-medium.webp 500w`,
         `/images/products/webp/${baseName}-large.webp 1200w`,
-        `/images/products/webp/${baseName}.webp 1200w`
+        `/images/products/webp/${baseName}.webp 1200w`,
       ].join(', ');
     } else {
       return [
         `/images/products/thumbnails/${baseName}-thumb.jpg 150w`,
         `/images/products/medium/${baseName}-medium.jpg 500w`,
         `/images/products/large/${baseName}-large.jpg 1200w`,
-        `/images/products/originals/${baseName}.jpg 1200w`
+        `/images/products/originals/${baseName}.jpg 1200w`,
       ].join(', ');
     }
   }
@@ -547,7 +566,7 @@ export class ImageOptimizer {
     preferWebP: boolean = true
   ): string {
     const basePath = '/images/products';
-    
+
     switch (context) {
       case 'thumbnail':
         return preferWebP ? paths.webpThumbnail : paths.thumbnail;
@@ -574,4 +593,4 @@ export class ImageOptimizer {
       }
     }
   }
-} 
+}

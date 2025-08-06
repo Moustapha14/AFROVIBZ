@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+
 import { CartItem, Product } from '@/types';
 
 export function useCart() {
@@ -29,9 +30,9 @@ export function useCart() {
   const addToCart = (product: Product, quantity: number = 1, size: string, color: string) => {
     setCart(prevCart => {
       const existingItemIndex = prevCart.findIndex(
-        item => 
-          item.productId === product.id && 
-          item.selectedSize === size && 
+        item =>
+          item.productId === product.id &&
+          item.selectedSize === size &&
           item.selectedColor === color
       );
 
@@ -65,12 +66,8 @@ export function useCart() {
       removeFromCart(itemId);
       return;
     }
-    
-    setCart(prevCart =>
-      prevCart.map(item =>
-        item.id === itemId ? { ...item, quantity } : item
-      )
-    );
+
+    setCart(prevCart => prevCart.map(item => (item.id === itemId ? { ...item, quantity } : item)));
   };
 
   const clearCart = () => {
@@ -78,7 +75,7 @@ export function useCart() {
   };
 
   const getCartTotal = () => {
-    return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
   };
 
   const getCartCount = () => {
@@ -87,10 +84,8 @@ export function useCart() {
 
   const isInCart = (productId: string, size: string, color: string) => {
     return cart.some(
-      item => 
-        item.productId === productId && 
-        item.selectedSize === size && 
-        item.selectedColor === color
+      item =>
+        item.productId === productId && item.selectedSize === size && item.selectedColor === color
     );
   };
 
@@ -105,4 +100,4 @@ export function useCart() {
     getCartCount,
     isInCart,
   };
-} 
+}

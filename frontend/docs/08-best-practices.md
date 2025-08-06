@@ -9,11 +9,7 @@
 ```javascript
 // .eslintrc.js
 module.exports = {
-  extends: [
-    'next/core-web-vitals',
-    '@typescript-eslint/recommended',
-    'prettier',
-  ],
+  extends: ['next/core-web-vitals', '@typescript-eslint/recommended', 'prettier'],
   plugins: ['@typescript-eslint', 'react-hooks'],
   rules: {
     // TypeScript
@@ -21,31 +17,24 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'warn',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
-    
+
     // React
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     'react/prop-types': 'off', // On utilise TypeScript
     'react/react-in-jsx-scope': 'off', // Next.js 13+
-    
+
     // Général
     'no-console': 'warn',
     'no-debugger': 'error',
     'prefer-const': 'error',
     'no-var': 'error',
-    
+
     // Import/Export
     'import/order': [
       'error',
       {
-        groups: [
-          'builtin',
-          'external',
-          'internal',
-          'parent',
-          'sibling',
-          'index',
-        ],
+        groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
         'newlines-between': 'always',
         alphabetize: {
           order: 'asc',
@@ -121,18 +110,18 @@ module.exports = {
 
 ### Types de commits
 
-| Type | Description | Exemple |
-|------|-------------|---------|
-| `feat` | Nouvelle fonctionnalité | `feat: ajouter la pagination des produits` |
-| `fix` | Correction de bug | `fix: corriger l'affichage du panier vide` |
-| `docs` | Documentation | `docs: mettre à jour le README` |
-| `style` | Formatage, style | `style: formater le code avec Prettier` |
-| `refactor` | Refactoring | `refactor: simplifier la logique d'authentification` |
-| `test` | Tests | `test: ajouter des tests pour ProductCard` |
-| `chore` | Tâches de maintenance | `chore: mettre à jour les dépendances` |
-| `perf` | Amélioration de performance | `perf: optimiser le chargement des images` |
-| `ci` | Configuration CI/CD | `ci: configurer GitHub Actions` |
-| `build` | Build système | `build: configurer Vercel` |
+| Type       | Description                 | Exemple                                              |
+| ---------- | --------------------------- | ---------------------------------------------------- |
+| `feat`     | Nouvelle fonctionnalité     | `feat: ajouter la pagination des produits`           |
+| `fix`      | Correction de bug           | `fix: corriger l'affichage du panier vide`           |
+| `docs`     | Documentation               | `docs: mettre à jour le README`                      |
+| `style`    | Formatage, style            | `style: formater le code avec Prettier`              |
+| `refactor` | Refactoring                 | `refactor: simplifier la logique d'authentification` |
+| `test`     | Tests                       | `test: ajouter des tests pour ProductCard`           |
+| `chore`    | Tâches de maintenance       | `chore: mettre à jour les dépendances`               |
+| `perf`     | Amélioration de performance | `perf: optimiser le chargement des images`           |
+| `ci`       | Configuration CI/CD         | `ci: configurer GitHub Actions`                      |
+| `build`    | Build système               | `build: configurer Vercel`                           |
 
 ### Exemples de commits
 
@@ -235,7 +224,7 @@ describe('ProductCard', () => {
 
   it('affiche les informations du produit', () => {
     render(<ProductCard {...defaultProps} />);
-    
+
     expect(screen.getByText(mockProduct.name)).toBeInTheDocument();
     expect(screen.getByText(mockProduct.price.toString())).toBeInTheDocument();
     expect(screen.getByAltText(mockProduct.name)).toBeInTheDocument();
@@ -243,10 +232,10 @@ describe('ProductCard', () => {
 
   it('appelle onAddToCart quand on clique sur le bouton', async () => {
     render(<ProductCard {...defaultProps} />);
-    
+
     const addButton = screen.getByRole('button', { name: /ajouter au panier/i });
     fireEvent.click(addButton);
-    
+
     await waitFor(() => {
       expect(defaultProps.onAddToCart).toHaveBeenCalledWith(mockProduct.id);
     });
@@ -254,7 +243,7 @@ describe('ProductCard', () => {
 
   it('affiche un état de chargement', () => {
     render(<ProductCard {...defaultProps} loading={true} />);
-    
+
     expect(screen.getByText(/chargement/i)).toBeInTheDocument();
   });
 
@@ -263,12 +252,12 @@ describe('ProductCard', () => {
       ...mockProduct,
       image: 'broken-image.jpg',
     };
-    
+
     render(<ProductCard {...defaultProps} product={productWithBrokenImage} />);
-    
+
     const image = screen.getByAltText(mockProduct.name);
     fireEvent.error(image);
-    
+
     expect(image).toHaveAttribute('src', '/placeholder.jpg');
   });
 });
@@ -302,7 +291,7 @@ afterAll(() => server.close());
 describe('ProductsPage', () => {
   it('affiche la liste des produits', async () => {
     render(<ProductsPage />);
-    
+
     await waitFor(() => {
       expect(screen.getByText('Robe africaine')).toBeInTheDocument();
       expect(screen.getByText('Pantalon wax')).toBeInTheDocument();
@@ -317,7 +306,7 @@ describe('ProductsPage', () => {
     );
 
     render(<ProductsPage />);
-    
+
     await waitFor(() => {
       expect(screen.getByText(/erreur de chargement/i)).toBeInTheDocument();
     });
@@ -335,34 +324,34 @@ import { useCart } from '@/hooks/useCart';
 describe('useCart', () => {
   it('ajoute un produit au panier', () => {
     const { result } = renderHook(() => useCart());
-    
+
     act(() => {
       result.current.addToCart({ id: '1', name: 'Test', price: 10 });
     });
-    
+
     expect(result.current.items).toHaveLength(1);
     expect(result.current.items[0].id).toBe('1');
   });
 
-  it('met à jour la quantité d\'un produit existant', () => {
+  it("met à jour la quantité d'un produit existant", () => {
     const { result } = renderHook(() => useCart());
-    
+
     act(() => {
       result.current.addToCart({ id: '1', name: 'Test', price: 10 });
       result.current.addToCart({ id: '1', name: 'Test', price: 10 });
     });
-    
+
     expect(result.current.items[0].quantity).toBe(2);
   });
 
   it('calcule le total correctement', () => {
     const { result } = renderHook(() => useCart());
-    
+
     act(() => {
       result.current.addToCart({ id: '1', name: 'Test', price: 10 });
       result.current.addToCart({ id: '2', name: 'Test2', price: 20 });
     });
-    
+
     expect(result.current.total).toBe(30);
   });
 });
@@ -471,10 +460,10 @@ export const LazyProductCard = ({ product }: { product: Product }) => {
 
 ```typescript
 // Composant optimisé avec React.memo
-export const ProductCard = React.memo<ProductCardProps>(({ 
-  product, 
+export const ProductCard = React.memo<ProductCardProps>(({
+  product,
   onAddToCart,
-  variant = 'default' 
+  variant = 'default'
 }) => {
   const handleAddToCart = useCallback(() => {
     onAddToCart?.(product.id);
@@ -587,7 +576,7 @@ export const useKeyboardNavigation = () => {
       );
 
       const currentIndex = Array.from(focusableElements).findIndex(
-        (el) => el === document.activeElement
+        el => el === document.activeElement
       );
 
       switch (event.key) {
@@ -601,9 +590,7 @@ export const useKeyboardNavigation = () => {
         case 'ArrowUp':
         case 'ArrowLeft':
           event.preventDefault();
-          const prevIndex = currentIndex <= 0 
-            ? focusableElements.length - 1 
-            : currentIndex - 1;
+          const prevIndex = currentIndex <= 0 ? focusableElements.length - 1 : currentIndex - 1;
           (focusableElements[prevIndex] as HTMLElement)?.focus();
           break;
 
@@ -640,7 +627,7 @@ expect.extend(toHaveNoViolations);
 describe('ProductCard Accessibility', () => {
   it('should not have accessibility violations', async () => {
     const { container } = render(
-      <ProductCard 
+      <ProductCard
         product={mockProduct}
         onAddToCart={jest.fn()}
       />
@@ -652,7 +639,7 @@ describe('ProductCard Accessibility', () => {
 
   it('should have proper ARIA labels', () => {
     render(
-      <ProductCard 
+      <ProductCard
         product={mockProduct}
         onAddToCart={jest.fn()}
       />
@@ -664,7 +651,7 @@ describe('ProductCard Accessibility', () => {
 
   it('should be keyboard navigable', () => {
     render(
-      <ProductCard 
+      <ProductCard
         product={mockProduct}
         onAddToCart={jest.fn()}
       />
@@ -731,7 +718,7 @@ export const SafeHtml: React.FC<{ content: string }> = ({ content }) => {
   const sanitizedContent = useMemo(() => sanitizeHtml(content), [content]);
 
   return (
-    <div 
+    <div
       dangerouslySetInnerHTML={{ __html: sanitizedContent }}
       className="prose prose-sm max-w-none"
     />
@@ -790,4 +777,4 @@ Maintenant que vous maîtrisez les bonnes pratiques :
 
 **💡 Conseil** : Appliquez ces bonnes pratiques progressivement. La qualité du code s'améliore avec le temps et l'expérience !
 
-</div> 
+</div>

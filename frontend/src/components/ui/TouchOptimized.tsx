@@ -15,7 +15,7 @@ interface TouchOptimizedProps {
 
 export function TouchOptimized({
   children,
-  className = "",
+  className = '',
   onClick,
   disabled = false,
   as = 'div',
@@ -24,18 +24,13 @@ export function TouchOptimized({
   rel,
   ...props
 }: TouchOptimizedProps) {
-  const baseClasses = "touch-manipulation select-none";
+  const baseClasses = 'touch-manipulation select-none';
   const combinedClasses = `${baseClasses} ${className}`;
 
   // Composant bouton
   if (as === 'button') {
     return (
-      <button
-        className={combinedClasses}
-        onClick={onClick}
-        disabled={disabled}
-        {...props}
-      >
+      <button className={combinedClasses} onClick={onClick} disabled={disabled} {...props}>
         {children}
       </button>
     );
@@ -64,15 +59,19 @@ export function TouchOptimized({
       onClick={onClick}
       role={onClick ? 'button' : undefined}
       tabIndex={onClick ? 0 : undefined}
-      onKeyDown={onClick ? (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          onClick();
-        }
-      } : undefined}
+      onKeyDown={
+        onClick
+          ? e => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                onClick();
+              }
+            }
+          : undefined
+      }
       {...props}
     >
       {children}
     </div>
   );
-} 
+}

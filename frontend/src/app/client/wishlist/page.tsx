@@ -1,30 +1,31 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { useAuth } from '@/lib/hooks/useAuth';
-import { useWishlist } from '@/lib/hooks/useWishlist';
-import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/Button';
-import { Input } from '@/components/ui/Input';
-import { WishlistButton } from '@/components/ui/WishlistButton';
-import { 
-  Heart, 
-  Trash2, 
-  Eye, 
-  ShoppingBag, 
-  Share2, 
+import {
+  Heart,
+  Trash2,
+  Eye,
+  ShoppingBag,
+  Share2,
   Filter,
   SortAsc,
   SortDesc,
   ArrowLeft,
   Search,
   Grid3X3,
-  List
+  List,
 } from 'lucide-react';
-import { toast } from 'react-hot-toast';
-import { Product } from '@/types';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import React, { useState, useEffect } from 'react';
+import { toast } from 'react-hot-toast';
+
+import { Button } from '@/components/ui/Button';
+import { Input } from '@/components/ui/Input';
+import { WishlistButton } from '@/components/ui/WishlistButton';
+import { useAuth } from '@/lib/hooks/useAuth';
+import { useWishlist } from '@/lib/hooks/useWishlist';
 import { cn } from '@/lib/utils';
+import { Product } from '@/types';
 
 // Données mockées pour la liste de souhaits (utilisées si aucun favori n'est sauvegardé)
 const mockWishlist: Product[] = [
@@ -119,8 +120,9 @@ export default function ClientWishlistPage() {
   }, [user, loading, router]);
 
   const filteredWishlist = wishlist.filter(product => {
-    const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         product.description.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch =
+      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.description.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
@@ -172,10 +174,10 @@ export default function ClientWishlistPage() {
 
   if (loading || wishlistLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-500 mx-auto"></div>
-          <p className="mt-2 text-gray-600">Chargement...</p>
+      <div className='min-h-screen bg-gray-50 flex items-center justify-center'>
+        <div className='text-center'>
+          <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-red-500 mx-auto' />
+          <p className='mt-2 text-gray-600'>Chargement...</p>
         </div>
       </div>
     );
@@ -186,82 +188,82 @@ export default function ClientWishlistPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className='min-h-screen bg-gray-50'>
       {/* Header Mobile-First */}
-      <div className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-10">
-        <div className="px-4 py-3">
-          <div className="flex items-center justify-between">
+      <div className='bg-white shadow-sm border-b border-gray-200 sticky top-0 z-10'>
+        <div className='px-4 py-3'>
+          <div className='flex items-center justify-between'>
             <button
               onClick={() => router.back()}
-              className="p-2 -ml-2 rounded-full hover:bg-gray-100 transition-colors"
+              className='p-2 -ml-2 rounded-full hover:bg-gray-100 transition-colors'
             >
-              <ArrowLeft className="h-5 w-5 text-gray-600" />
+              <ArrowLeft className='h-5 w-5 text-gray-600' />
             </button>
-            <h1 className="text-lg font-semibold text-gray-900">Mes Favoris</h1>
-            <div className="flex items-center gap-2">
+            <h1 className='text-lg font-semibold text-gray-900'>Mes Favoris</h1>
+            <div className='flex items-center gap-2'>
               <button
                 onClick={() => setShowFilters(!showFilters)}
-                className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+                className='p-2 rounded-full hover:bg-gray-100 transition-colors'
               >
-                <Filter className="h-5 w-5 text-gray-600" />
+                <Filter className='h-5 w-5 text-gray-600' />
               </button>
               <button
                 onClick={() => setViewMode(viewMode === 'grid' ? 'list' : 'grid')}
-                className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+                className='p-2 rounded-full hover:bg-gray-100 transition-colors'
               >
                 {viewMode === 'grid' ? (
-                  <List className="h-5 w-5 text-gray-600" />
+                  <List className='h-5 w-5 text-gray-600' />
                 ) : (
-                  <Grid3X3 className="h-5 w-5 text-gray-600" />
+                  <Grid3X3 className='h-5 w-5 text-gray-600' />
                 )}
               </button>
             </div>
           </div>
-          
+
           {/* Compteur */}
-          <div className="mt-2 text-sm text-gray-600">
+          <div className='mt-2 text-sm text-gray-600'>
             {wishlist.length} article(s) dans vos favoris
           </div>
         </div>
 
         {/* Barre de recherche mobile */}
-        <div className="px-4 pb-3">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+        <div className='px-4 pb-3'>
+          <div className='relative'>
+            <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400' />
             <Input
-              placeholder="Rechercher dans vos favoris..."
+              placeholder='Rechercher dans vos favoris...'
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 w-full"
+              onChange={e => setSearchTerm(e.target.value)}
+              className='pl-10 w-full'
             />
           </div>
         </div>
 
         {/* Filtres mobiles */}
         {showFilters && (
-          <div className="px-4 pb-3 border-t border-gray-100">
-            <div className="flex gap-2 pt-3">
+          <div className='px-4 pb-3 border-t border-gray-100'>
+            <div className='flex gap-2 pt-3'>
               <select
                 value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="flex-1 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                onChange={e => setSelectedCategory(e.target.value)}
+                className='flex-1 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500'
               >
-                <option value="all">Toutes catégories</option>
-                <option value="femmes">Femmes</option>
-                <option value="hommes">Hommes</option>
-                <option value="enfants">Enfants</option>
-                <option value="tech">Tech</option>
-                <option value="accessoires">Accessoires</option>
+                <option value='all'>Toutes catégories</option>
+                <option value='femmes'>Femmes</option>
+                <option value='hommes'>Hommes</option>
+                <option value='enfants'>Enfants</option>
+                <option value='tech'>Tech</option>
+                <option value='accessoires'>Accessoires</option>
               </select>
               <select
                 value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="flex-1 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                onChange={e => setSortBy(e.target.value)}
+                className='flex-1 px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500'
               >
-                <option value="date">Plus récents</option>
-                <option value="name">Nom A-Z</option>
-                <option value="price-low">Prix croissant</option>
-                <option value="price-high">Prix décroissant</option>
+                <option value='date'>Plus récents</option>
+                <option value='name'>Nom A-Z</option>
+                <option value='price-low'>Prix croissant</option>
+                <option value='price-high'>Prix décroissant</option>
               </select>
             </div>
           </div>
@@ -269,58 +271,57 @@ export default function ClientWishlistPage() {
       </div>
 
       {/* Contenu principal */}
-      <div className="px-4 py-4">
+      <div className='px-4 py-4'>
         {/* Liste des produits */}
         {sortedWishlist.length > 0 ? (
-          <div className={viewMode === 'grid' 
-            ? "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4" 
-            : "space-y-3"
-          }>
-            {sortedWishlist.map((product) => (
-              <div key={product.id} className={cn(
-                "bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden",
-                viewMode === 'list' && "flex"
-              )}>
+          <div
+            className={
+              viewMode === 'grid'
+                ? 'grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4'
+                : 'space-y-3'
+            }
+          >
+            {sortedWishlist.map(product => (
+              <div
+                key={product.id}
+                className={cn(
+                  'bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden',
+                  viewMode === 'list' && 'flex'
+                )}
+              >
                 {/* Image du produit */}
-                <div className={cn(
-                  "relative",
-                  viewMode === 'list' && "w-24 h-24 flex-shrink-0"
-                )}>
+                <div className={cn('relative', viewMode === 'list' && 'w-24 h-24 flex-shrink-0')}>
                   <Image
                     src={product.images[0]}
                     alt={product.name}
                     width={viewMode === 'list' ? 96 : 300}
                     height={viewMode === 'list' ? 96 : 200}
                     className={cn(
-                      "object-cover",
-                      viewMode === 'list' ? "w-full h-full" : "w-full h-32 sm:h-40"
+                      'object-cover',
+                      viewMode === 'list' ? 'w-full h-full' : 'w-full h-32 sm:h-40'
                     )}
                   />
-                  
+
                   {/* Badge de réduction */}
                   {product.originalPrice && product.originalPrice > product.price && (
-                    <div className="absolute top-1 left-1 bg-red-500 text-white px-1.5 py-0.5 rounded text-xs font-semibold">
+                    <div className='absolute top-1 left-1 bg-red-500 text-white px-1.5 py-0.5 rounded text-xs font-semibold'>
                       -{getDiscountPercentage(product.originalPrice, product.price)}%
                     </div>
                   )}
 
                   {/* Bouton favoris */}
-                  <div className="absolute top-1 right-1">
-                    <WishlistButton 
-                      product={product} 
-                      size="sm" 
-                      variant="default"
-                    />
+                  <div className='absolute top-1 right-1'>
+                    <WishlistButton product={product} size='sm' variant='default' />
                   </div>
 
                   {/* Indicateur de stock */}
-                  <div className="absolute bottom-1 left-1">
+                  <div className='absolute bottom-1 left-1'>
                     {product.stock > 0 ? (
-                      <span className="bg-green-500 text-white px-1.5 py-0.5 rounded text-xs">
+                      <span className='bg-green-500 text-white px-1.5 py-0.5 rounded text-xs'>
                         En stock
                       </span>
                     ) : (
-                      <span className="bg-red-500 text-white px-1.5 py-0.5 rounded text-xs">
+                      <span className='bg-red-500 text-white px-1.5 py-0.5 rounded text-xs'>
                         Rupture
                       </span>
                     )}
@@ -328,35 +329,41 @@ export default function ClientWishlistPage() {
                 </div>
 
                 {/* Informations du produit */}
-                <div className={cn(
-                  "p-3",
-                  viewMode === 'list' && "flex-1 flex flex-col justify-between"
-                )}>
+                <div
+                  className={cn(
+                    'p-3',
+                    viewMode === 'list' && 'flex-1 flex flex-col justify-between'
+                  )}
+                >
                   <div>
-                    <h3 className={cn(
-                      "font-semibold text-gray-900 mb-1",
-                      viewMode === 'list' ? "text-sm" : "text-sm sm:text-base",
-                      "line-clamp-2"
-                    )}>
+                    <h3
+                      className={cn(
+                        'font-semibold text-gray-900 mb-1',
+                        viewMode === 'list' ? 'text-sm' : 'text-sm sm:text-base',
+                        'line-clamp-2'
+                      )}
+                    >
                       {product.name}
                     </h3>
-                    
+
                     {viewMode === 'list' && (
-                      <p className="text-xs text-gray-600 mb-2 line-clamp-2">
+                      <p className='text-xs text-gray-600 mb-2 line-clamp-2'>
                         {product.description}
                       </p>
                     )}
 
                     {/* Prix */}
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className={cn(
-                        "font-bold text-gray-900",
-                        viewMode === 'list' ? "text-sm" : "text-base"
-                      )}>
+                    <div className='flex items-center gap-2 mb-2'>
+                      <span
+                        className={cn(
+                          'font-bold text-gray-900',
+                          viewMode === 'list' ? 'text-sm' : 'text-base'
+                        )}
+                      >
                         {formatCurrency(product.price)}
                       </span>
                       {product.originalPrice && product.originalPrice > product.price && (
-                        <span className="text-xs sm:text-sm text-gray-500 line-through font-medium">
+                        <span className='text-xs sm:text-sm text-gray-500 line-through font-medium'>
                           {formatCurrency(product.originalPrice)}
                         </span>
                       )}
@@ -364,18 +371,20 @@ export default function ClientWishlistPage() {
 
                     {/* Couleurs disponibles - seulement en mode grille */}
                     {viewMode === 'grid' && product.colors.length > 0 && (
-                      <div className="mb-2">
-                        <div className="flex gap-1">
+                      <div className='mb-2'>
+                        <div className='flex gap-1'>
                           {product.colors.slice(0, 3).map((color, index) => (
                             <div
                               key={index}
-                              className="w-3 h-3 rounded-full border border-gray-300"
+                              className='w-3 h-3 rounded-full border border-gray-300'
                               style={{ backgroundColor: color.hex }}
                               title={color.name}
                             />
                           ))}
                           {product.colors.length > 3 && (
-                            <span className="text-xs text-gray-500">+{product.colors.length - 3}</span>
+                            <span className='text-xs text-gray-500'>
+                              +{product.colors.length - 3}
+                            </span>
                           )}
                         </div>
                       </div>
@@ -383,23 +392,23 @@ export default function ClientWishlistPage() {
                   </div>
 
                   {/* Boutons d'action */}
-                  <div className="flex gap-2">
+                  <div className='flex gap-2'>
                     <Button
                       onClick={() => handleViewProduct(product.id)}
-                      variant="outline"
-                      size="sm"
-                      className="flex-1 text-xs"
+                      variant='outline'
+                      size='sm'
+                      className='flex-1 text-xs'
                     >
-                      <Eye className="h-3 w-3 mr-1" />
+                      <Eye className='h-3 w-3 mr-1' />
                       Voir
                     </Button>
                     <Button
                       onClick={() => handleAddToCart(product)}
-                      size="sm"
-                      className="flex-1 text-xs"
+                      size='sm'
+                      className='flex-1 text-xs'
                       disabled={product.stock === 0}
                     >
-                      <ShoppingBag className="h-3 w-3 mr-1" />
+                      <ShoppingBag className='h-3 w-3 mr-1' />
                       Panier
                     </Button>
                   </div>
@@ -409,20 +418,16 @@ export default function ClientWishlistPage() {
           </div>
         ) : (
           /* État vide */
-          <div className="text-center py-12">
-            <Heart className="mx-auto h-16 w-16 text-gray-300" />
-            <h3 className="mt-4 text-lg font-medium text-gray-900">Vos favoris sont vides</h3>
-            <p className="mt-2 text-sm text-gray-500 px-4">
-              {searchTerm || selectedCategory !== 'all' 
+          <div className='text-center py-12'>
+            <Heart className='mx-auto h-16 w-16 text-gray-300' />
+            <h3 className='mt-4 text-lg font-medium text-gray-900'>Vos favoris sont vides</h3>
+            <p className='mt-2 text-sm text-gray-500 px-4'>
+              {searchTerm || selectedCategory !== 'all'
                 ? 'Aucun produit ne correspond à vos critères de recherche.'
-                : 'Commencez à ajouter des produits que vous aimeriez acheter.'
-              }
+                : 'Commencez à ajouter des produits que vous aimeriez acheter.'}
             </p>
-            <div className="mt-6 px-4">
-              <Button 
-                onClick={() => router.push('/products')}
-                className="w-full sm:w-auto"
-              >
+            <div className='mt-6 px-4'>
+              <Button onClick={() => router.push('/products')} className='w-full sm:w-auto'>
                 Découvrir nos produits
               </Button>
             </div>
@@ -431,27 +436,27 @@ export default function ClientWishlistPage() {
 
         {/* Actions en bas de page */}
         {sortedWishlist.length > 0 && (
-          <div className="mt-6 bg-white rounded-lg shadow-sm border border-gray-200 p-4">
-            <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-              <div className="text-sm text-gray-600">
+          <div className='mt-6 bg-white rounded-lg shadow-sm border border-gray-200 p-4'>
+            <div className='flex flex-col sm:flex-row justify-between items-center gap-4'>
+              <div className='text-sm text-gray-600'>
                 {sortedWishlist.length} article(s) dans vos favoris
               </div>
-              <div className="flex gap-2 w-full sm:w-auto">
+              <div className='flex gap-2 w-full sm:w-auto'>
                 <Button
                   onClick={handleShareWishlist}
-                  variant="outline"
-                  size="sm"
-                  className="flex-1 sm:flex-none text-xs"
+                  variant='outline'
+                  size='sm'
+                  className='flex-1 sm:flex-none text-xs'
                 >
-                  <Share2 className="h-3 w-3 mr-1" />
+                  <Share2 className='h-3 w-3 mr-1' />
                   Partager
                 </Button>
                 <Button
                   onClick={() => router.push('/products')}
-                  size="sm"
-                  className="flex-1 sm:flex-none text-xs"
+                  size='sm'
+                  className='flex-1 sm:flex-none text-xs'
                 >
-                  <ShoppingBag className="h-3 w-3 mr-1" />
+                  <ShoppingBag className='h-3 w-3 mr-1' />
                   Continuer
                 </Button>
               </div>
@@ -461,4 +466,4 @@ export default function ClientWishlistPage() {
       </div>
     </div>
   );
-} 
+}

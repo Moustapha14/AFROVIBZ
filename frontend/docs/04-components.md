@@ -40,7 +40,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   // Handlers
   const handleAddToCart = async () => {
     if (!onAddToCart) return;
-    
+
     setIsLoading(true);
     try {
       await onAddToCart(product.id);
@@ -91,7 +91,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       <div className="product-info">
         <h3 className="product-title">{product.name}</h3>
         <p className="product-price">{formatPrice(product.price)}</p>
-        
+
         {/* Actions */}
         <div className="product-actions">
           <Button
@@ -134,20 +134,20 @@ graph TB
         A[ProductPage] --> B[ProductList]
         C[CartPage] --> D[CartItems]
     end
-    
+
     subgraph "Composants métier"
         B --> E[ProductCard]
         D --> F[CartItem]
         G[ProductModal] --> H[ProductDetails]
     end
-    
+
     subgraph "Composants UI"
         E --> I[Button]
         E --> J[Image]
         F --> K[QuantitySelector]
         H --> L[PriceDisplay]
     end
-    
+
     subgraph "Layout"
         M[Header] --> N[Navigation]
         O[Footer] --> P[Links]
@@ -157,6 +157,7 @@ graph TB
 ### Exemples de hiérarchie
 
 #### Page de produits
+
 ```typescript
 // ProductPage (Page)
 export default function ProductPage() {
@@ -284,7 +285,7 @@ export const withAuth = <P extends WithAuthProps>(
 ) => {
   return (props: Omit<P, keyof WithAuthProps>) => {
     const { user, isAuthenticated } = useAuth();
-    
+
     return (
       <Component
         {...(props as P)}
@@ -314,7 +315,7 @@ interface ButtonProps {
   // Props obligatoires
   children: React.ReactNode;
   onClick: () => void;
-  
+
   // Props optionnelles avec valeurs par défaut
   variant?: 'primary' | 'secondary' | 'outline';
   size?: 'sm' | 'md' | 'lg';
@@ -441,7 +442,7 @@ export const ProductPage = () => {
 // Composant de filtres
 export const ProductFilters = () => {
   const { filters, setFilters } = useProductFilters();
-  
+
   return (
     <div className="filters">
       <FilterCategory />
@@ -454,10 +455,10 @@ export const ProductFilters = () => {
 // Composant de liste
 export const ProductList = () => {
   const { products, loading, error } = useProducts();
-  
+
   if (loading) return <ProductSkeleton />;
   if (error) return <ErrorMessage error={error} />;
-  
+
   return (
     <div className="product-grid">
       {products.map(product => (
@@ -474,7 +475,7 @@ export const ProductList = () => {
 // ❌ Logique métier dans le composant
 export const ProductCard = ({ product }) => {
   const [isFavorite, setIsFavorite] = useState(false);
-  
+
   const handleFavorite = async () => {
     try {
       const response = await fetch('/api/favorites', {
@@ -526,10 +527,10 @@ export const useFavorite = (productId: string) => {
 // Composant simplifié
 export const ProductCard = ({ product }) => {
   const { isFavorite, loading, toggleFavorite } = useFavorite(product.id);
-  
+
   return (
     <div>
-      <button 
+      <button
         onClick={toggleFavorite}
         disabled={loading}
       >
@@ -556,4 +557,4 @@ Maintenant que vous maîtrisez les composants :
 
 **💡 Conseil** : Commencez par créer des composants simples, puis complexifiez progressivement. La réutilisabilité est la clé !
 
-</div> 
+</div>

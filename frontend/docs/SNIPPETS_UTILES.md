@@ -51,7 +51,7 @@ export const ComponentWithState: React.FC<ComponentWithStateProps> = ({
   useEffect(() => {
     // Effet au montage
     console.log('Component mounted');
-    
+
     return () => {
       // Cleanup au démontage
       console.log('Component unmounted');
@@ -119,10 +119,7 @@ interface UseApiOptions {
   headers?: Record<string, string>;
 }
 
-export const useApi = <T>(
-  url: string,
-  options: UseApiOptions = {}
-) => {
+export const useApi = <T>(url: string, options: UseApiOptions = {}) => {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
@@ -168,10 +165,7 @@ export const useApi = <T>(
 // Snippet: use-local-storage-hook
 import { useState, useEffect } from 'react';
 
-export const useLocalStorage = <T>(
-  key: string,
-  initialValue: T
-): [T, (value: T) => void] => {
+export const useLocalStorage = <T>(key: string, initialValue: T): [T, (value: T) => void] => {
   const [storedValue, setStoredValue] = useState<T>(() => {
     if (typeof window === 'undefined') {
       return initialValue;
@@ -222,39 +216,42 @@ export const useForm = <T extends Record<string, any>>({
   const [errors, setErrors] = useState<Partial<Record<keyof T, string>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleChange = useCallback((
-    name: keyof T,
-    value: T[keyof T]
-  ) => {
-    setValues(prev => ({ ...prev, [name]: value }));
-    
-    // Clear error when user starts typing
-    if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
-    }
-  }, [errors]);
+  const handleChange = useCallback(
+    (name: keyof T, value: T[keyof T]) => {
+      setValues(prev => ({ ...prev, [name]: value }));
 
-  const handleSubmit = useCallback(async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    if (validation) {
-      const validationErrors = validation(values);
-      setErrors(validationErrors);
-      
-      if (Object.keys(validationErrors).length > 0) {
-        return;
+      // Clear error when user starts typing
+      if (errors[name]) {
+        setErrors(prev => ({ ...prev, [name]: '' }));
       }
-    }
+    },
+    [errors]
+  );
 
-    setIsSubmitting(true);
-    try {
-      await onSubmit(values);
-    } catch (error) {
-      console.error('Form submission error:', error);
-    } finally {
-      setIsSubmitting(false);
-    }
-  }, [values, validation, onSubmit]);
+  const handleSubmit = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault();
+
+      if (validation) {
+        const validationErrors = validation(values);
+        setErrors(validationErrors);
+
+        if (Object.keys(validationErrors).length > 0) {
+          return;
+        }
+      }
+
+      setIsSubmitting(true);
+      try {
+        await onSubmit(values);
+      } catch (error) {
+        console.error('Form submission error:', error);
+      } finally {
+        setIsSubmitting(false);
+      }
+    },
+    [values, validation, onSubmit]
+  );
 
   const reset = useCallback(() => {
     setValues(initialValues);
@@ -285,26 +282,29 @@ export const tailwindClasses = {
   container: 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8',
   grid: 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6',
   flex: 'flex items-center justify-between',
-  
+
   // Cards
   card: 'bg-white rounded-lg shadow-sm border border-gray-200 p-6',
   cardHover: 'hover:shadow-md transition-shadow duration-200',
-  
+
   // Buttons
-  button: 'inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm',
-  buttonPrimary: 'text-white bg-primary-600 hover:bg-primary-700 focus:ring-2 focus:ring-offset-2 focus:ring-primary-500',
+  button:
+    'inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm',
+  buttonPrimary:
+    'text-white bg-primary-600 hover:bg-primary-700 focus:ring-2 focus:ring-offset-2 focus:ring-primary-500',
   buttonSecondary: 'text-gray-700 bg-white border-gray-300 hover:bg-gray-50',
-  
+
   // Forms
-  input: 'block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm',
+  input:
+    'block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm',
   label: 'block text-sm font-medium text-gray-700',
   error: 'mt-2 text-sm text-red-600',
-  
+
   // Text
   heading: 'text-2xl font-bold text-gray-900',
   subheading: 'text-lg font-medium text-gray-700',
   body: 'text-sm text-gray-600',
-  
+
   // Spacing
   section: 'py-12',
   container: 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8',
@@ -425,7 +425,7 @@ export const ErrorDisplay: React.FC<ErrorProps> = ({
 // Snippet: date-utils
 export const formatDate = (date: Date | string, options?: Intl.DateTimeFormatOptions) => {
   const dateObj = typeof date === 'string' ? new Date(date) : date;
-  
+
   const defaultOptions: Intl.DateTimeFormatOptions = {
     year: 'numeric',
     month: 'long',
@@ -443,11 +443,11 @@ export const formatRelativeTime = (date: Date | string) => {
   const now = new Date();
   const diffInSeconds = Math.floor((now.getTime() - dateObj.getTime()) / 1000);
 
-  if (diffInSeconds < 60) return 'À l\'instant';
+  if (diffInSeconds < 60) return "À l'instant";
   if (diffInSeconds < 3600) return `Il y a ${Math.floor(diffInSeconds / 60)} min`;
   if (diffInSeconds < 86400) return `Il y a ${Math.floor(diffInSeconds / 3600)}h`;
   if (diffInSeconds < 2592000) return `Il y a ${Math.floor(diffInSeconds / 86400)}j`;
-  
+
   return formatDate(dateObj);
 };
 ```
@@ -456,11 +456,7 @@ export const formatRelativeTime = (date: Date | string) => {
 
 ```typescript
 // Snippet: price-utils
-export const formatPrice = (
-  price: number,
-  currency: string = 'EUR',
-  locale: string = 'fr-FR'
-) => {
+export const formatPrice = (price: number, currency: string = 'EUR', locale: string = 'fr-FR') => {
   return new Intl.NumberFormat(locale, {
     style: 'currency',
     currency,
@@ -468,15 +464,11 @@ export const formatPrice = (
   }).format(price);
 };
 
-export const formatPriceRange = (
-  minPrice: number,
-  maxPrice: number,
-  currency: string = 'EUR'
-) => {
+export const formatPriceRange = (minPrice: number, maxPrice: number, currency: string = 'EUR') => {
   if (minPrice === maxPrice) {
     return formatPrice(minPrice, currency);
   }
-  
+
   return `${formatPrice(minPrice, currency)} - ${formatPrice(maxPrice, currency)}`;
 };
 ```
@@ -559,10 +551,10 @@ describe('ComponentName', () => {
   it('handles user interaction', async () => {
     const mockOnClick = jest.fn();
     render(<ComponentName {...defaultProps} onClick={mockOnClick} />);
-    
+
     const button = screen.getByRole('button');
     fireEvent.click(button);
-    
+
     await waitFor(() => {
       expect(mockOnClick).toHaveBeenCalledTimes(1);
     });
@@ -728,6 +720,6 @@ export const ResponsiveComponent: React.FC<ResponsiveComponentProps> = ({
 
 **💡 Conseil** : Utilisez ces snippets comme point de départ et adaptez-les à vos besoins spécifiques !
 
-*N'hésitez pas à contribuer vos propres snippets à cette collection.*
+_N'hésitez pas à contribuer vos propres snippets à cette collection._
 
-</div> 
+</div>

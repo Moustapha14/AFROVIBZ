@@ -48,9 +48,9 @@ module.exports = {
         display: ['Poppins', 'system-ui', 'sans-serif'],
       },
       spacing: {
-        '18': '4.5rem',
-        '88': '22rem',
-        '128': '32rem',
+        18: '4.5rem',
+        88: '22rem',
+        128: '32rem',
       },
       borderRadius: {
         '4xl': '2rem',
@@ -76,10 +76,7 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require('@tailwindcss/forms'),
-    require('@tailwindcss/typography'),
-  ],
+  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
 };
 ```
 
@@ -106,7 +103,9 @@ module.exports = {
 
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings:
+      'rlig' 1,
+      'calt' 1;
   }
 }
 
@@ -168,24 +167,24 @@ export const designTokens = {
     },
   },
   spacing: {
-    xs: '0.25rem',    // 4px
-    sm: '0.5rem',     // 8px
-    md: '1rem',       // 16px
-    lg: '1.5rem',     // 24px
-    xl: '2rem',       // 32px
-    '2xl': '3rem',    // 48px
-    '3xl': '4rem',    // 64px
+    xs: '0.25rem', // 4px
+    sm: '0.5rem', // 8px
+    md: '1rem', // 16px
+    lg: '1.5rem', // 24px
+    xl: '2rem', // 32px
+    '2xl': '3rem', // 48px
+    '3xl': '4rem', // 64px
   },
   typography: {
     fontSizes: {
-      xs: '0.75rem',   // 12px
-      sm: '0.875rem',  // 14px
-      base: '1rem',    // 16px
-      lg: '1.125rem',  // 18px
-      xl: '1.25rem',   // 20px
+      xs: '0.75rem', // 12px
+      sm: '0.875rem', // 14px
+      base: '1rem', // 16px
+      lg: '1.125rem', // 18px
+      xl: '1.25rem', // 20px
       '2xl': '1.5rem', // 24px
       '3xl': '1.875rem', // 30px
-      '4xl': '2.25rem',  // 36px
+      '4xl': '2.25rem', // 36px
     },
     fontWeights: {
       normal: '400',
@@ -224,7 +223,7 @@ export const designTokens = {
   .container-narrow {
     @apply max-w-4xl mx-auto px-4;
   }
-  
+
   .container-wide {
     @apply max-w-7xl mx-auto px-4;
   }
@@ -644,7 +643,7 @@ export const useTheme = () => {
 
   useEffect(() => {
     const root = window.document.documentElement;
-    
+
     if (theme === 'system') {
       const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
         ? 'dark'
@@ -689,7 +688,7 @@ export const ThemeToggle = () => {
       >
         <SunIcon className="h-5 w-5" />
       </button>
-      
+
       <button
         onClick={() => updateTheme('dark')}
         className={`p-2 rounded-md ${
@@ -701,7 +700,7 @@ export const ThemeToggle = () => {
       >
         <MoonIcon className="h-5 w-5" />
       </button>
-      
+
       <button
         onClick={() => updateTheme('system')}
         className={`p-2 rounded-md ${
@@ -786,4 +785,4 @@ Maintenant que vous maîtrisez le styling :
 
 **💡 Conseil** : Utilisez les classes Tailwind de manière cohérente. Créez des composants réutilisables pour éviter la duplication !
 
-</div> 
+</div>

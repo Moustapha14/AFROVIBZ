@@ -1,15 +1,16 @@
 'use client';
 
-import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { Button } from '@/components/ui/Button';
 import { ArrowRight, Star, ShoppingBag, Heart, Truck, Shield } from 'lucide-react';
-import { formatPrice, formatCompactPrice } from '@/lib/utils';
-import { useWishlist } from '@/lib/hooks/useWishlist';
-import { useCart } from '@/lib/hooks/useCart';
-import OptimizedImageCarousel from '@/components/HeroSection/OptimizedImageCarousel';
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
 import toast from 'react-hot-toast';
+
+import OptimizedImageCarousel from '@/components/HeroSection/OptimizedImageCarousel';
+import { Button } from '@/components/ui/Button';
+import { useCart } from '@/lib/hooks/useCart';
+import { useWishlist } from '@/lib/hooks/useWishlist';
+import { formatPrice, formatCompactPrice } from '@/lib/utils';
 
 // Données temporaires pour la démo
 const featuredProducts = [
@@ -178,7 +179,7 @@ const featuredProducts = [
   {
     id: '10',
     name: 'Accessoires Élégants',
-    description: 'Collection d\'accessoires élégants africains',
+    description: "Collection d'accessoires élégants africains",
     price: 8000,
     originalPrice: 12000,
     category: 'accessoires',
@@ -266,13 +267,13 @@ export default function HomePage() {
   const handleAddToCart = (product: any, e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     // Utiliser les valeurs par défaut pour la démo
     const defaultSize = product.sizes?.[0] || 'Unique';
     const defaultColor = product.colors?.[0]?.name || 'Standard';
-    
+
     addToCart(product, 1, defaultSize, defaultColor);
-    
+
     // Afficher une notification de confirmation
     toast.success(`${product.name} ajouté au panier !`, {
       duration: 2000,
@@ -287,33 +288,33 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen-mobile">
+    <div className='min-h-screen-mobile'>
       {/* Hero Section - Mobile First */}
-      <section className="relative h-[60vh] sm:h-[70vh] md:h-[75vh] lg:h-[80vh] xl:h-[85vh] overflow-hidden">
+      <section className='relative h-[60vh] sm:h-[70vh] md:h-[75vh] lg:h-[80vh] xl:h-[85vh] overflow-hidden'>
         <OptimizedImageCarousel />
-        <div className="relative z-10 flex items-center justify-center h-full text-center text-white px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold mb-4 sm:mb-6 leading-tight text-balance">
+        <div className='relative z-10 flex items-center justify-center h-full text-center text-white px-4 sm:px-6 lg:px-8'>
+          <div className='max-w-4xl mx-auto'>
+            <h1 className='text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-bold mb-4 sm:mb-6 leading-tight text-balance'>
               Découvrez la Mode Africaine
             </h1>
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl mb-6 sm:mb-8 opacity-90 max-w-2xl mx-auto px-2 text-balance">
+            <p className='text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl mb-6 sm:mb-8 opacity-90 max-w-2xl mx-auto px-2 text-balance'>
               Les dernières tendances avec livraison rapide au Gabon
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center">
-              <Link href="/products" className="w-full sm:w-auto min-w-[200px]">
-                <Button 
-                  size="lg" 
-                  className="w-full sm:w-auto text-sm sm:text-base lg:text-lg px-4 sm:px-6 lg:px-8 py-3 sm:py-4 h-12 sm:h-14 mobile-button"
+            <div className='flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center'>
+              <Link href='/products' className='w-full sm:w-auto min-w-[200px]'>
+                <Button
+                  size='lg'
+                  className='w-full sm:w-auto text-sm sm:text-base lg:text-lg px-4 sm:px-6 lg:px-8 py-3 sm:py-4 h-12 sm:h-14 mobile-button'
                 >
                   Acheter Maintenant
-                  <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
+                  <ArrowRight className='ml-2 h-4 w-4 sm:h-5 sm:w-5' />
                 </Button>
               </Link>
-              <Link href="/products" className="w-full sm:w-auto min-w-[200px]">
-                <Button 
-                  variant="outline" 
-                  size="lg" 
-                  className="w-full sm:w-auto text-sm sm:text-base lg:text-lg px-4 sm:px-6 lg:px-8 py-3 sm:py-4 bg-white text-black hover:bg-gray-100 h-12 sm:h-14 mobile-button"
+              <Link href='/products' className='w-full sm:w-auto min-w-[200px]'>
+                <Button
+                  variant='outline'
+                  size='lg'
+                  className='w-full sm:w-auto text-sm sm:text-base lg:text-lg px-4 sm:px-6 lg:px-8 py-3 sm:py-4 bg-white text-black hover:bg-gray-100 h-12 sm:h-14 mobile-button'
                 >
                   Voir les Collections
                 </Button>
@@ -324,39 +325,35 @@ export default function HomePage() {
       </section>
 
       {/* Categories Section - Mobile First */}
-      <section className="py-8 sm:py-12 md:py-16 lg:py-20 bg-white">
-        <div className="mobile-container">
-          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 lg:mb-6 text-balance">
+      <section className='py-8 sm:py-12 md:py-16 lg:py-20 bg-white'>
+        <div className='mobile-container'>
+          <div className='text-center mb-8 sm:mb-12 lg:mb-16'>
+            <h2 className='text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 lg:mb-6 text-balance'>
               Explorez nos Catégories
             </h2>
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto px-2 text-balance">
+            <p className='text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto px-2 text-balance'>
               Trouvez votre style parmi nos collections variées
             </p>
           </div>
-          
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
+
+          <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-6 lg:gap-8'>
             {categories.map((category, index) => (
-              <Link 
-                key={index} 
-                href={category.href} 
-                className="group block tap-highlight-none"
-              >
-                <div className="relative overflow-hidden rounded-lg bg-gray-200 mobile-aspect-square">
+              <Link key={index} href={category.href} className='group block tap-highlight-none'>
+                <div className='relative overflow-hidden rounded-lg bg-gray-200 mobile-aspect-square'>
                   <Image
                     src={category.image}
                     alt={`Catégorie ${category.name}`}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
+                    className='object-cover group-hover:scale-105 transition-transform duration-300'
+                    sizes='(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw'
                     priority={index < 4}
                     quality={85}
-                    placeholder="blur"
-                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                    placeholder='blur'
+                    blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=='
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-                  <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4">
-                    <h3 className="text-white font-semibold text-sm sm:text-base md:text-lg group-hover:scale-105 transition-transform duration-200 text-balance">
+                  <div className='absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent' />
+                  <div className='absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4'>
+                    <h3 className='text-white font-semibold text-sm sm:text-base md:text-lg group-hover:scale-105 transition-transform duration-200 text-balance'>
                       {category.name}
                     </h3>
                   </div>
@@ -368,35 +365,38 @@ export default function HomePage() {
       </section>
 
       {/* Featured Products - Mobile First */}
-      <section className="py-8 sm:py-12 md:py-16 lg:py-20 bg-gray-50">
-        <div className="mobile-container">
-          <div className="text-center mb-8 sm:mb-12 lg:mb-16">
-            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 lg:mb-6 text-balance">
+      <section className='py-8 sm:py-12 md:py-16 lg:py-20 bg-gray-50'>
+        <div className='mobile-container'>
+          <div className='text-center mb-8 sm:mb-12 lg:mb-16'>
+            <h2 className='text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-3 sm:mb-4 lg:mb-6 text-balance'>
               Produits Vedettes
             </h2>
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto px-2 text-balance">
+            <p className='text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto px-2 text-balance'>
               Les articles les plus populaires de notre collection
             </p>
           </div>
-          
-          <div className="mobile-grid">
-            {featuredProducts.map((product) => (
-              <div key={product.id} className="mobile-card group hover:shadow-mobile-elevated transition-all duration-300">
-                <div className="relative mobile-aspect-square overflow-hidden bg-gray-200">
+
+          <div className='mobile-grid'>
+            {featuredProducts.map(product => (
+              <div
+                key={product.id}
+                className='mobile-card group hover:shadow-mobile-elevated transition-all duration-300'
+              >
+                <div className='relative mobile-aspect-square overflow-hidden bg-gray-200'>
                   <Image
                     src={product.images[0]}
                     alt={product.name}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    className='object-cover group-hover:scale-105 transition-transform duration-300'
+                    sizes='(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw'
                     priority={featuredProducts.indexOf(product) < 4}
                     quality={90}
-                    placeholder="blur"
-                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
+                    placeholder='blur'
+                    blurDataURL='data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=='
                   />
-                  <div className="absolute top-3 right-3 z-10">
-                    <button 
-                      onClick={(e) => {
+                  <div className='absolute top-3 right-3 z-10'>
+                    <button
+                      onClick={e => {
                         e.preventDefault();
                         e.stopPropagation();
                         if (isInWishlist(product.id)) {
@@ -408,30 +408,34 @@ export default function HomePage() {
                       className={`p-2 bg-white rounded-full shadow-sm hover:bg-gray-50 transition-colors action-button ${
                         isInWishlist(product.id) ? 'text-red-500' : 'text-gray-600'
                       }`}
-                      aria-label={isInWishlist(product.id) ? 'Retirer des favoris' : 'Ajouter aux favoris'}
+                      aria-label={
+                        isInWishlist(product.id) ? 'Retirer des favoris' : 'Ajouter aux favoris'
+                      }
                     >
-                      <Heart className={`h-4 w-4 ${isInWishlist(product.id) ? 'fill-current' : 'fill-none'}`} />
+                      <Heart
+                        className={`h-4 w-4 ${isInWishlist(product.id) ? 'fill-current' : 'fill-none'}`}
+                      />
                     </button>
                   </div>
-                  <div className="absolute bottom-3 left-3 right-3">
-                    <button 
-                      onClick={(e) => handleAddToCart(product, e)}
-                      className="w-full bg-black text-white py-2 px-4 rounded-lg text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center mobile-button"
+                  <div className='absolute bottom-3 left-3 right-3'>
+                    <button
+                      onClick={e => handleAddToCart(product, e)}
+                      className='w-full bg-black text-white py-2 px-4 rounded-lg text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center mobile-button'
                       aria-label={`Ajouter ${product.name} au panier`}
                     >
-                      <ShoppingBag className="h-4 w-4 mr-2" />
+                      <ShoppingBag className='h-4 w-4 mr-2' />
                       Ajouter au Panier
                     </button>
                   </div>
                 </div>
-                
-                <div className="p-3 sm:p-4">
-                  <h3 className="font-medium text-gray-900 mb-2 line-clamp-2 text-sm sm:text-base text-balance">
+
+                <div className='p-3 sm:p-4'>
+                  <h3 className='font-medium text-gray-900 mb-2 line-clamp-2 text-sm sm:text-base text-balance'>
                     {product.name}
                   </h3>
-                  
-                  <div className="flex items-center mb-2">
-                    <div className="flex items-center">
+
+                  <div className='flex items-center mb-2'>
+                    <div className='flex items-center'>
                       {[...Array(5)].map((_, i) => (
                         <Star
                           key={i}
@@ -443,22 +447,20 @@ export default function HomePage() {
                         />
                       ))}
                     </div>
-                    <span className="text-xs text-gray-500 ml-2">
-                      ({product.reviews})
-                    </span>
+                    <span className='text-xs text-gray-500 ml-2'>({product.reviews})</span>
                   </div>
-                  
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-2 xs:space-x-3 min-w-0 flex-1 max-w-full overflow-hidden">
-                      <span className="text-sm sm:text-base md:text-lg font-bold text-gray-900 flex-shrink-0">
+
+                  <div className='flex items-center justify-between'>
+                    <div className='flex items-center space-x-2 xs:space-x-3 min-w-0 flex-1 max-w-full overflow-hidden'>
+                      <span className='text-sm sm:text-base md:text-lg font-bold text-gray-900 flex-shrink-0'>
                         {formatPrice(product.price)}
                       </span>
                       {product.originalPrice && (
                         <>
-                          <span className="sm:hidden text-base text-gray-500 line-through flex-shrink-0 font-semibold whitespace-nowrap">
+                          <span className='sm:hidden text-base text-gray-500 line-through flex-shrink-0 font-semibold whitespace-nowrap'>
                             {formatCompactPrice(product.originalPrice)}
                           </span>
-                          <span className="hidden sm:inline text-xs sm:text-sm text-gray-500 line-through flex-shrink-0 font-medium">
+                          <span className='hidden sm:inline text-xs sm:text-sm text-gray-500 line-through flex-shrink-0 font-medium'>
                             {formatPrice(product.originalPrice)}
                           </span>
                         </>
@@ -469,15 +471,15 @@ export default function HomePage() {
               </div>
             ))}
           </div>
-          
-          <div className="text-center mt-8 sm:mt-12 lg:mt-16">
-            <Link href="/products">
-              <Button 
-                size="lg" 
-                className="text-base sm:text-lg lg:text-xl px-6 sm:px-8 lg:px-10 py-3 sm:py-4 mobile-button"
+
+          <div className='text-center mt-8 sm:mt-12 lg:mt-16'>
+            <Link href='/products'>
+              <Button
+                size='lg'
+                className='text-base sm:text-lg lg:text-xl px-6 sm:px-8 lg:px-10 py-3 sm:py-4 mobile-button'
               >
                 Voir Tous les Produits
-                <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
+                <ArrowRight className='ml-2 h-4 w-4 sm:h-5 sm:w-5' />
               </Button>
             </Link>
           </div>
@@ -485,34 +487,32 @@ export default function HomePage() {
       </section>
 
       {/* Features Section - Mobile First */}
-      <section className="py-12 sm:py-16 md:py-20 lg:py-24 bg-white">
-        <div className="mobile-container">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 max-w-4xl mx-auto">
-            <div className="text-center">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
-                <Truck className="w-8 h-8 sm:w-10 sm:h-10 text-yellow-600" />
+      <section className='py-12 sm:py-16 md:py-20 lg:py-24 bg-white'>
+        <div className='mobile-container'>
+          <div className='grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 max-w-4xl mx-auto'>
+            <div className='text-center'>
+              <div className='w-16 h-16 sm:w-20 sm:h-20 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6'>
+                <Truck className='w-8 h-8 sm:w-10 sm:h-10 text-yellow-600' />
               </div>
-              <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 mb-2 sm:mb-3 text-balance">
+              <h3 className='text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 mb-2 sm:mb-3 text-balance'>
                 Livraison Rapide
               </h3>
-              <p className="text-sm sm:text-base md:text-lg text-gray-600 text-balance">
+              <p className='text-sm sm:text-base md:text-lg text-gray-600 text-balance'>
                 Livraison gratuite au Gabon à partir de 50,000 FCFA
               </p>
             </div>
-            
-            <div className="text-center">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
-                <Shield className="w-8 h-8 sm:w-10 sm:h-10 text-green-600" />
+
+            <div className='text-center'>
+              <div className='w-16 h-16 sm:w-20 sm:h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6'>
+                <Shield className='w-8 h-8 sm:w-10 sm:h-10 text-green-600' />
               </div>
-              <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 mb-2 sm:mb-3 text-balance">
+              <h3 className='text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 mb-2 sm:mb-3 text-balance'>
                 Qualité Garantie
               </h3>
-              <p className="text-sm sm:text-base md:text-lg text-gray-600 text-balance">
+              <p className='text-sm sm:text-base md:text-lg text-gray-600 text-balance'>
                 Produits de qualité premium sélectionnés avec soin
               </p>
             </div>
-            
-
           </div>
         </div>
       </section>

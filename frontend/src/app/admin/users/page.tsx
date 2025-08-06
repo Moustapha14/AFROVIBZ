@@ -1,21 +1,14 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { useAuth } from '@/lib/hooks/useAuth';
+import { UserPlus, Search, UserIcon, Edit, Trash2, Shield, ShoppingBag } from 'lucide-react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import React, { useState, useEffect } from 'react';
+import { toast } from 'react-hot-toast';
+
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
-import { 
-  UserPlus, 
-  Search, 
-  UserIcon, 
-  Edit, 
-  Trash2,
-  Shield,
-  ShoppingBag
-} from 'lucide-react';
-import Image from 'next/image';
-import { toast } from 'react-hot-toast';
+import { useAuth } from '@/lib/hooks/useAuth';
 
 // Données mockées pour les utilisateurs
 const mockUsers: any[] = [
@@ -63,18 +56,19 @@ export default function AdminUsersPage() {
   }, [user, loading, router]);
 
   const filteredUsers = users.filter(user => {
-    const matchesSearch = user.displayName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         user.email?.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch =
+      user.displayName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      user.email?.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesRole = selectedRole === 'all' || user.role === selectedRole;
     return matchesSearch && matchesRole;
   });
 
   const getRoleBadge = (role: string) => {
     const roleConfig = {
-      'super_admin': { color: 'bg-red-100 text-red-800', label: 'Super Admin' },
-      'admin': { color: 'bg-purple-100 text-purple-800', label: 'Admin' },
-      'vendeuse': { color: 'bg-blue-100 text-blue-800', label: 'Vendeuse' },
-      'user': { color: 'bg-gray-100 text-gray-800', label: 'Client' },
+      super_admin: { color: 'bg-red-100 text-red-800', label: 'Super Admin' },
+      admin: { color: 'bg-purple-100 text-purple-800', label: 'Admin' },
+      vendeuse: { color: 'bg-blue-100 text-blue-800', label: 'Vendeuse' },
+      user: { color: 'bg-gray-100 text-gray-800', label: 'Client' },
     };
     const config = roleConfig[role as keyof typeof roleConfig] || roleConfig.user;
     return (
@@ -92,7 +86,9 @@ export default function AdminUsersPage() {
   };
 
   if (loading) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Chargement...</div>;
+    return (
+      <div className='min-h-screen bg-gray-50 flex items-center justify-center'>Chargement...</div>
+    );
   }
 
   if (!user || user.role !== 'super_admin') {
@@ -100,123 +96,120 @@ export default function AdminUsersPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className='min-h-screen bg-gray-50'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8'>
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Gestion des Utilisateurs</h1>
-          <p className="mt-2 text-gray-600">Gérez les comptes utilisateurs de votre plateforme</p>
+        <div className='mb-8'>
+          <h1 className='text-3xl font-bold text-gray-900'>Gestion des Utilisateurs</h1>
+          <p className='mt-2 text-gray-600'>Gérez les comptes utilisateurs de votre plateforme</p>
         </div>
 
         {/* Actions Bar */}
-        <div className="bg-white rounded-lg shadow p-6 mb-6">
-          <div className="flex flex-col sm:flex-row gap-4 items-center justify-between">
-            <div className="flex flex-col sm:flex-row gap-4 flex-1">
+        <div className='bg-white rounded-lg shadow p-6 mb-6'>
+          <div className='flex flex-col sm:flex-row gap-4 items-center justify-between'>
+            <div className='flex flex-col sm:flex-row gap-4 flex-1'>
               {/* Search */}
-              <div className="relative flex-1 max-w-md">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+              <div className='relative flex-1 max-w-md'>
+                <Search className='absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4' />
                 <Input
-                  type="text"
-                  placeholder="Rechercher un utilisateur..."
+                  type='text'
+                  placeholder='Rechercher un utilisateur...'
                   value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10"
+                  onChange={e => setSearchTerm(e.target.value)}
+                  className='pl-10'
                 />
               </div>
 
               {/* Role Filter */}
               <select
                 value={selectedRole}
-                onChange={(e) => setSelectedRole(e.target.value)}
-                className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+                onChange={e => setSelectedRole(e.target.value)}
+                className='px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black'
               >
-                <option value="all">Tous les rôles</option>
-                <option value="super_admin">Super Admin</option>
-                <option value="admin">Admin</option>
-                <option value="vendeuse">Vendeuse</option>
-                <option value="user">Client</option>
+                <option value='all'>Tous les rôles</option>
+                <option value='super_admin'>Super Admin</option>
+                <option value='admin'>Admin</option>
+                <option value='vendeuse'>Vendeuse</option>
+                <option value='user'>Client</option>
               </select>
             </div>
 
             {/* Add User Button */}
-            <Button
-              onClick={() => setIsAddModalOpen(true)}
-              className="flex items-center gap-2"
-            >
-              <UserPlus className="h-4 w-4" />
+            <Button onClick={() => setIsAddModalOpen(true)} className='flex items-center gap-2'>
+              <UserPlus className='h-4 w-4' />
               Ajouter un utilisateur
             </Button>
           </div>
         </div>
 
         {/* Users Table */}
-        <div className="bg-white rounded-lg shadow overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
+        <div className='bg-white rounded-lg shadow overflow-hidden'>
+          <div className='overflow-x-auto'>
+            <table className='min-w-full divide-y divide-gray-200'>
+              <thead className='bg-gray-50'>
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
                     Utilisateur
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
                     Email
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
                     Rôle
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
                     Date d'inscription
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  <th className='px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider'>
                     Actions
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {filteredUsers.map((userItem) => (
-                  <tr key={userItem.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center">
-                        <div className="h-10 w-10 flex-shrink-0">
+              <tbody className='bg-white divide-y divide-gray-200'>
+                {filteredUsers.map(userItem => (
+                  <tr key={userItem.id} className='hover:bg-gray-50'>
+                    <td className='px-6 py-4 whitespace-nowrap'>
+                      <div className='flex items-center'>
+                        <div className='h-10 w-10 flex-shrink-0'>
                           <Image
                             src={userItem.photoURL || '/images/avatar-placeholder.svg'}
                             alt={userItem.displayName || 'Utilisateur'}
                             width={40}
                             height={40}
-                            className="h-10 w-10 rounded-full object-cover"
+                            className='h-10 w-10 rounded-full object-cover'
                           />
                         </div>
-                        <div className="ml-4">
-                          <div className="text-sm font-medium text-gray-900">
+                        <div className='ml-4'>
+                          <div className='text-sm font-medium text-gray-900'>
                             {userItem.displayName || 'Nom non défini'}
                           </div>
-                          <div className="text-sm text-gray-500">ID: {userItem.id}</div>
+                          <div className='text-sm text-gray-500'>ID: {userItem.id}</div>
                         </div>
                       </div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
                       {userItem.email || 'Email non défini'}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {getRoleBadge(userItem.role)}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <td className='px-6 py-4 whitespace-nowrap'>{getRoleBadge(userItem.role)}</td>
+                    <td className='px-6 py-4 whitespace-nowrap text-sm text-gray-900'>
                       {userItem.createdAt.toLocaleDateString('fr-FR')}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                      <div className="flex items-center space-x-2">
+                    <td className='px-6 py-4 whitespace-nowrap text-sm font-medium'>
+                      <div className='flex items-center space-x-2'>
                         <button
-                          onClick={() => {/* TODO: Edit user */}}
-                          className="text-blue-600 hover:text-blue-900"
+                          onClick={() => {
+                            /* TODO: Edit user */
+                          }}
+                          className='text-blue-600 hover:text-blue-900'
                         >
-                          <Edit className="h-4 w-4" />
+                          <Edit className='h-4 w-4' />
                         </button>
                         {userItem.id !== user.id && (
                           <button
                             onClick={() => handleDeleteUser(userItem.id)}
-                            className="text-red-600 hover:text-red-900"
+                            className='text-red-600 hover:text-red-900'
                           >
-                            <Trash2 className="h-4 w-4" />
+                            <Trash2 className='h-4 w-4' />
                           </button>
                         )}
                       </div>
@@ -230,15 +223,17 @@ export default function AdminUsersPage() {
 
         {/* Empty State */}
         {filteredUsers.length === 0 && (
-          <div className="text-center py-12">
-            <div className="text-gray-400 mb-4">
-              <UserIcon className="h-12 w-12 mx-auto" />
+          <div className='text-center py-12'>
+            <div className='text-gray-400 mb-4'>
+              <UserIcon className='h-12 w-12 mx-auto' />
             </div>
-            <h3 className="text-lg font-medium text-gray-900 mb-2">Aucun utilisateur trouvé</h3>
-            <p className="text-gray-500">Aucun utilisateur ne correspond à vos critères de recherche.</p>
+            <h3 className='text-lg font-medium text-gray-900 mb-2'>Aucun utilisateur trouvé</h3>
+            <p className='text-gray-500'>
+              Aucun utilisateur ne correspond à vos critères de recherche.
+            </p>
           </div>
         )}
       </div>
     </div>
   );
-} 
+}

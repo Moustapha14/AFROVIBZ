@@ -48,14 +48,14 @@ src/app/
 
 ### Fichiers spéciaux
 
-| Fichier | Rôle | Exemple |
-|---------|------|---------|
-| `page.tsx` | Page de la route | `/products/page.tsx` → `/products` |
-| `layout.tsx` | Layout partagé | `/admin/layout.tsx` → Layout admin |
-| `loading.tsx` | Page de chargement | Affichée pendant le chargement |
-| `error.tsx` | Page d'erreur | Gestion des erreurs |
-| `not-found.tsx` | Page 404 | Page non trouvée |
-| `route.ts` | API Route | Endpoints API |
+| Fichier         | Rôle               | Exemple                            |
+| --------------- | ------------------ | ---------------------------------- |
+| `page.tsx`      | Page de la route   | `/products/page.tsx` → `/products` |
+| `layout.tsx`    | Layout partagé     | `/admin/layout.tsx` → Layout admin |
+| `loading.tsx`   | Page de chargement | Affichée pendant le chargement     |
+| `error.tsx`     | Page d'erreur      | Gestion des erreurs                |
+| `not-found.tsx` | Page 404           | Page non trouvée                   |
+| `route.ts`      | API Route          | Endpoints API                      |
 
 ---
 
@@ -89,9 +89,9 @@ interface ProductPageProps {
   };
 }
 
-export default async function ProductPage({ 
-  params, 
-  searchParams 
+export default async function ProductPage({
+  params,
+  searchParams
 }: ProductPageProps) {
   const { id } = params;
   const { variant, size } = searchParams;
@@ -101,8 +101,8 @@ export default async function ProductPage({
 
   return (
     <div className="product-page">
-      <ProductDetails 
-        product={product} 
+      <ProductDetails
+        product={product}
         selectedVariant={variant}
         selectedSize={size}
       />
@@ -176,7 +176,7 @@ export const ProductFilters = () => {
 
   const updateFilters = (newFilters: FilterParams) => {
     const params = new URLSearchParams(searchParams);
-    
+
     // Mettre à jour les paramètres
     Object.entries(newFilters).forEach(([key, value]) => {
       if (value) {
@@ -256,16 +256,16 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
       <div className="error-content">
         <h1>Oups ! Quelque chose s'est mal passé</h1>
         <p>Une erreur inattendue s'est produite.</p>
-        
+
         <div className="error-actions">
-          <button 
+          <button
             onClick={reset}
             className="btn btn-primary"
           >
             Réessayer
           </button>
-          
-          <button 
+
+          <button
             onClick={() => window.location.href = '/'}
             className="btn btn-secondary"
           >
@@ -298,12 +298,12 @@ export default function NotFoundPage() {
       <div className="not-found-content">
         <h1>404 - Page non trouvée</h1>
         <p>La page que vous recherchez n'existe pas.</p>
-        
+
         <div className="not-found-actions">
           <Link href="/" className="btn btn-primary">
             Retour à l'accueil
           </Link>
-          
+
           <Link href="/products" className="btn btn-secondary">
             Voir nos produits
           </Link>
@@ -320,18 +320,18 @@ export default function NotFoundPage() {
 // src/app/admin/products/error.tsx
 'use client';
 
-export default function AdminProductsError({ 
-  error, 
-  reset 
-}: { 
-  error: Error; 
-  reset: () => void; 
+export default function AdminProductsError({
+  error,
+  reset
+}: {
+  error: Error;
+  reset: () => void;
 }) {
   return (
     <div className="admin-error">
       <h2>Erreur dans la gestion des produits</h2>
       <p>Impossible de charger la liste des produits.</p>
-      
+
       <button onClick={reset} className="btn btn-primary">
         Réessayer
       </button>
@@ -376,8 +376,8 @@ interface GenerateMetadataProps {
   params: { id: string };
 }
 
-export async function generateMetadata({ 
-  params 
+export async function generateMetadata({
+  params
 }: GenerateMetadataProps): Promise<Metadata> {
   const product = await fetchProduct(params.id);
 
@@ -457,14 +457,14 @@ const nextConfig = {
         destination: '/products',
         permanent: true, // 308
       },
-      
+
       // Redirection avec paramètres
       {
         source: '/product/:id',
         destination: '/products/:id',
         permanent: false, // 307
       },
-      
+
       // Redirection conditionnelle
       {
         source: '/admin',
@@ -538,4 +538,4 @@ Maintenant que vous maîtrisez le routing :
 
 **💡 Conseil** : Utilisez les layouts pour partager des éléments communs entre les pages. Cela évite la duplication de code !
 
-</div> 
+</div>

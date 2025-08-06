@@ -1,10 +1,11 @@
 'use client';
 
-import React from 'react';
 import { Heart } from 'lucide-react';
+import React from 'react';
+
 import { useWishlist } from '@/lib/hooks/useWishlist';
-import { Product } from '@/types';
 import { cn } from '@/lib/utils';
+import { Product } from '@/types';
 
 interface WishlistButtonProps {
   product: Product;
@@ -14,12 +15,12 @@ interface WishlistButtonProps {
   showText?: boolean;
 }
 
-export function WishlistButton({ 
-  product, 
-  size = 'md', 
+export function WishlistButton({
+  product,
+  size = 'md',
   variant = 'default',
   className,
-  showText = false 
+  showText = false,
 }: WishlistButtonProps) {
   const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist();
   const isFavorited = isInWishlist(product.id);
@@ -27,7 +28,7 @@ export function WishlistButton({
   const handleToggleWishlist = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     if (isFavorited) {
       removeFromWishlist(product.id);
     } else {
@@ -38,19 +39,19 @@ export function WishlistButton({
   const sizeClasses = {
     sm: 'p-1.5 text-xs',
     md: 'p-2 text-sm',
-    lg: 'p-3 text-base'
+    lg: 'p-3 text-base',
   };
 
   const variantClasses = {
     default: 'bg-white shadow-md hover:shadow-lg',
     outline: 'border border-gray-300 bg-white hover:bg-gray-50',
-    ghost: 'bg-transparent hover:bg-gray-100'
+    ghost: 'bg-transparent hover:bg-gray-100',
   };
 
   const iconSizes = {
     sm: 'h-3 w-3',
     md: 'h-4 w-4',
-    lg: 'h-5 w-5'
+    lg: 'h-5 w-5',
   };
 
   return (
@@ -68,18 +69,16 @@ export function WishlistButton({
       )}
       aria-label={isFavorited ? 'Retirer des favoris' : 'Ajouter aux favoris'}
     >
-      <Heart 
+      <Heart
         className={cn(
           iconSizes[size],
           isFavorited ? 'fill-current' : 'fill-none',
           'transition-all duration-200'
-        )} 
+        )}
       />
       {showText && (
-        <span className="ml-1.5 font-medium">
-          {isFavorited ? 'Retirer' : 'Favoris'}
-        </span>
+        <span className='ml-1.5 font-medium'>{isFavorited ? 'Retirer' : 'Favoris'}</span>
       )}
     </button>
   );
-} 
+}

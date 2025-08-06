@@ -1,7 +1,9 @@
-import React from 'react';
 import { ChevronLeft, ChevronRight, MoreHorizontal } from 'lucide-react';
-import { Button } from './Button';
+import React from 'react';
+
 import { cn } from '@/lib/utils';
+
+import { Button } from './Button';
 
 interface PaginationProps {
   currentPage: number;
@@ -71,35 +73,35 @@ export function Pagination({
   const visiblePages = getVisiblePages();
 
   return (
-    <div className={cn("flex items-center justify-center space-x-1", className)}>
+    <div className={cn('flex items-center justify-center space-x-1', className)}>
       {/* Bouton Précédent */}
       <Button
-        variant="outline"
-        size="sm"
+        variant='outline'
+        size='sm'
         onClick={() => onPageChange(Math.max(1, currentPage - 1))}
         disabled={currentPage === 1}
-        className="px-2 xs:px-3 h-10"
-        aria-label="Page précédente"
+        className='px-2 xs:px-3 h-10'
+        aria-label='Page précédente'
       >
-        <ChevronLeft className="h-4 w-4" />
-        <span className="hidden xs:inline ml-1">Précédent</span>
+        <ChevronLeft className='h-4 w-4' />
+        <span className='hidden xs:inline ml-1'>Précédent</span>
       </Button>
 
       {/* Numéros de pages */}
       {showPageNumbers && (
-        <div className="flex items-center space-x-1">
+        <div className='flex items-center space-x-1'>
           {visiblePages.map((page, index) => (
             <React.Fragment key={index}>
               {page === '...' ? (
-                <div className="flex items-center justify-center w-8 h-8">
-                  <MoreHorizontal className="h-4 w-4 text-gray-400" />
+                <div className='flex items-center justify-center w-8 h-8'>
+                  <MoreHorizontal className='h-4 w-4 text-gray-400' />
                 </div>
               ) : (
                 <Button
                   variant={currentPage === page ? 'primary' : 'outline'}
-                  size="sm"
+                  size='sm'
                   onClick={() => onPageChange(page as number)}
-                  className="w-8 h-8 p-0 text-xs xs:text-sm h-10"
+                  className='w-8 h-8 p-0 text-xs xs:text-sm h-10'
                   aria-label={`Page ${page}`}
                   aria-current={currentPage === page ? 'page' : undefined}
                 >
@@ -113,15 +115,15 @@ export function Pagination({
 
       {/* Bouton Suivant */}
       <Button
-        variant="outline"
-        size="sm"
+        variant='outline'
+        size='sm'
         onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
         disabled={currentPage === totalPages}
-        className="px-2 xs:px-3 h-10"
-        aria-label="Page suivante"
+        className='px-2 xs:px-3 h-10'
+        aria-label='Page suivante'
       >
-        <span className="hidden xs:inline mr-1">Suivant</span>
-        <ChevronRight className="h-4 w-4" />
+        <span className='hidden xs:inline mr-1'>Suivant</span>
+        <ChevronRight className='h-4 w-4' />
       </Button>
     </div>
   );
@@ -137,34 +139,34 @@ export function SimplePagination({
   if (totalPages <= 1) return null;
 
   return (
-    <div className={cn("flex items-center justify-between", className)}>
+    <div className={cn('flex items-center justify-between', className)}>
       <Button
-        variant="outline"
-        size="sm"
+        variant='outline'
+        size='sm'
         onClick={() => onPageChange(Math.max(1, currentPage - 1))}
         disabled={currentPage === 1}
-        className="flex-1 sm:flex-none"
+        className='flex-1 sm:flex-none'
       >
-        <ChevronLeft className="h-4 w-4 mr-1" />
+        <ChevronLeft className='h-4 w-4 mr-1' />
         Précédent
       </Button>
 
-      <div className="hidden sm:flex items-center space-x-2">
-        <span className="text-sm text-gray-600">
+      <div className='hidden sm:flex items-center space-x-2'>
+        <span className='text-sm text-gray-600'>
           Page {currentPage} sur {totalPages}
         </span>
       </div>
 
       <Button
-        variant="outline"
-        size="sm"
+        variant='outline'
+        size='sm'
         onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
         disabled={currentPage === totalPages}
-        className="flex-1 sm:flex-none"
+        className='flex-1 sm:flex-none'
       >
         Suivant
-        <ChevronRight className="h-4 w-4 ml-1" />
+        <ChevronRight className='h-4 w-4 ml-1' />
       </Button>
     </div>
   );
-} 
+}

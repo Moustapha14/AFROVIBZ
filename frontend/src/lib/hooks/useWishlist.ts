@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Product } from '@/types';
 import { toast } from 'react-hot-toast';
+
+import { Product } from '@/types';
 
 interface UseWishlistReturn {
   wishlist: Product[];
@@ -73,6 +74,6 @@ export function useWishlist(): UseWishlistReturn {
     removeFromWishlist,
     isInWishlist,
     clearWishlist,
-    loading
+    loading,
   };
-} 
+}

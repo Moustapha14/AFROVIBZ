@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { cn } from '@/lib/utils';
 
 interface MobileGridProps {
@@ -49,19 +50,7 @@ const MobileGrid: React.FC<MobileGridProps> = ({
     return `gap-4 sm:gap-6 md:gap-8`;
   };
 
-  return (
-    <div
-      className={cn(
-        'grid',
-        getGridCols(),
-        getGap(),
-        'w-full',
-        className
-      )}
-    >
-      {children}
-    </div>
-  );
+  return <div className={cn('grid', getGridCols(), getGap(), 'w-full', className)}>{children}</div>;
 };
 
-export { MobileGrid }; 
+export { MobileGrid };

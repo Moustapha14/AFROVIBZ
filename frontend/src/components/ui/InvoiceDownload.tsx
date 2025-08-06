@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
 import { Download, FileText, Loader2, CheckCircle, AlertCircle } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
+import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
+
+import { Button } from '@/components/ui/Button';
 
 interface InvoiceDownloadProps {
   invoiceId: string;
@@ -24,7 +25,7 @@ export default function InvoiceDownload({
   showIcon = true,
   showText = true,
   onSuccess,
-  onError
+  onError,
 }: InvoiceDownloadProps) {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -46,7 +47,7 @@ export default function InvoiceDownload({
       const response = await fetch(`/api/invoices/${invoiceId}/download`, {
         method: 'GET',
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
         },
       });
@@ -74,7 +75,6 @@ export default function InvoiceDownload({
 
       // Reset success state after 2 seconds
       setTimeout(() => setSuccess(false), 2000);
-
     } catch (error) {
       console.error('Erreur lors du téléchargement:', error);
       const errorMessage = error instanceof Error ? error.message : 'Erreur lors du téléchargement';
@@ -89,7 +89,7 @@ export default function InvoiceDownload({
     if (success) {
       return (
         <>
-          <CheckCircle className="h-4 w-4" />
+          <CheckCircle className='h-4 w-4' />
           {showText && <span>Téléchargé</span>}
         </>
       );
@@ -98,7 +98,7 @@ export default function InvoiceDownload({
     if (loading) {
       return (
         <>
-          <Loader2 className="h-4 w-4 animate-spin" />
+          <Loader2 className='h-4 w-4 animate-spin' />
           {showText && <span>Téléchargement...</span>}
         </>
       );
@@ -106,7 +106,7 @@ export default function InvoiceDownload({
 
     return (
       <>
-        {showIcon && <Download className="h-4 w-4" />}
+        {showIcon && <Download className='h-4 w-4' />}
         {showText && <span>Télécharger PDF</span>}
       </>
     );
@@ -156,19 +156,19 @@ export function InvoiceDownloadCompact({ invoiceId }: { invoiceId: string }) {
   return (
     <InvoiceDownload
       invoiceId={invoiceId}
-      variant="ghost"
-      size="sm"
+      variant='ghost'
+      size='sm'
       showText={false}
-      className="p-2 hover:bg-gray-100"
+      className='p-2 hover:bg-gray-100'
     />
   );
 }
 
 // Composant avec statut avancé
-export function InvoiceDownloadWithStatus({ 
-  invoiceId, 
-  status = 'available' 
-}: { 
+export function InvoiceDownloadWithStatus({
+  invoiceId,
+  status = 'available',
+}: {
   invoiceId: string;
   status?: 'available' | 'processing' | 'error' | 'unavailable';
 }) {
@@ -177,7 +177,7 @@ export function InvoiceDownloadWithStatus({
   const handleDownload = async () => {
     if (status !== 'available' || loading) return;
     setLoading(true);
-    
+
     try {
       const token = localStorage.getItem('token');
       if (!token) {
@@ -186,7 +186,7 @@ export function InvoiceDownloadWithStatus({
       }
 
       const response = await fetch(`/api/invoices/${invoiceId}/download`, {
-        headers: { 'Authorization': `Bearer ${token}` }
+        headers: { Authorization: `Bearer ${token}` },
       });
 
       if (!response.ok) {
@@ -200,7 +200,7 @@ export function InvoiceDownloadWithStatus({
       a.download = `facture-${invoiceId}.pdf`;
       a.click();
       window.URL.revokeObjectURL(url);
-      
+
       toast.success('Facture téléchargée');
     } catch (error) {
       toast.error('Erreur lors du téléchargement');
@@ -216,35 +216,35 @@ export function InvoiceDownloadWithStatus({
           icon: Download,
           text: 'Télécharger',
           className: 'text-blue-600 hover:text-blue-700',
-          disabled: false
+          disabled: false,
         };
       case 'processing':
         return {
           icon: Loader2,
           text: 'Génération...',
           className: 'text-yellow-600',
-          disabled: true
+          disabled: true,
         };
       case 'error':
         return {
           icon: AlertCircle,
           text: 'Erreur',
           className: 'text-red-600',
-          disabled: true
+          disabled: true,
         };
       case 'unavailable':
         return {
           icon: FileText,
           text: 'Non disponible',
           className: 'text-gray-400',
-          disabled: true
+          disabled: true,
         };
       default:
         return {
           icon: Download,
           text: 'Télécharger',
           className: 'text-blue-600',
-          disabled: false
+          disabled: false,
         };
     }
   };
@@ -269,4 +269,4 @@ export function InvoiceDownloadWithStatus({
       <span>{loading ? 'Téléchargement...' : config.text}</span>
     </button>
   );
-} 
+}

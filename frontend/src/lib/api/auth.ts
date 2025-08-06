@@ -1,5 +1,6 @@
-import { apiClient } from './client';
 import { User } from '@/types';
+
+import { apiClient } from './client';
 
 export interface AuthResponse {
   success: boolean;
@@ -23,21 +24,21 @@ export interface RegisterData {
 export class AuthService {
   static async login(data: LoginData): Promise<AuthResponse> {
     const response = await apiClient.post<AuthResponse>('/auth/login', data);
-    
+
     if (response.success && response.token) {
       localStorage.setItem('afrovibz-token', response.token);
     }
-    
+
     return response;
   }
 
   static async register(data: RegisterData): Promise<AuthResponse> {
     const response = await apiClient.post<AuthResponse>('/auth/register', data);
-    
+
     if (response.success && response.token) {
       localStorage.setItem('afrovibz-token', response.token);
     }
-    
+
     return response;
   }
 
@@ -70,4 +71,4 @@ export class AuthService {
   static clearToken(): void {
     localStorage.removeItem('afrovibz-token');
   }
-} 
+}

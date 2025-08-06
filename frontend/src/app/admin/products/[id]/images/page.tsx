@@ -1,24 +1,25 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { useParams, useRouter } from 'next/navigation';
-import { useAuth } from '@/lib/hooks/useAuth';
-import { Button } from '@/components/ui/Button';
-import { ProductImageUpload } from '@/components/admin/ProductImageUpload';
-import { ProductImagesService, OptimizedImageResponse } from '@/lib/api/productImages';
-import { 
-  ArrowLeft, 
-  Image as ImageIcon, 
-  Settings, 
+import {
+  ArrowLeft,
+  Image as ImageIcon,
+  Settings,
   BarChart3,
   Download,
   Trash2,
   Move,
   CheckCircle,
-  AlertCircle
+  AlertCircle,
 } from 'lucide-react';
 import Image from 'next/image';
+import { useParams, useRouter } from 'next/navigation';
+import React, { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
+
+import { ProductImageUpload } from '@/components/admin/ProductImageUpload';
+import { Button } from '@/components/ui/Button';
+import { ProductImagesService, OptimizedImageResponse } from '@/lib/api/productImages';
+import { useAuth } from '@/lib/hooks/useAuth';
 
 export default function ProductImagesPage() {
   const params = useParams();
@@ -47,7 +48,7 @@ export default function ProductImagesPage() {
     try {
       setIsLoading(true);
       const response = await ProductImagesService.getProductImages(productId);
-      
+
       if (response.success) {
         setImages(response.images);
       } else {
@@ -80,7 +81,7 @@ export default function ProductImagesPage() {
       }
     } catch (error) {
       console.error('Erreur upload:', error);
-      toast.error('Erreur lors de l\'upload');
+      toast.error("Erreur lors de l'upload");
     } finally {
       setIsUploading(false);
     }
@@ -93,7 +94,7 @@ export default function ProductImagesPage() {
 
     try {
       const response = await ProductImagesService.deleteImage(productId, imageId);
-      
+
       if (response.success) {
         setImages(prev => prev.filter(img => img.id !== imageId));
         toast.success('Image supprimée avec succès');
@@ -109,7 +110,7 @@ export default function ProductImagesPage() {
   const handleReorderImages = async (newOrder: string[]) => {
     try {
       const response = await ProductImagesService.reorderImages(productId, newOrder);
-      
+
       if (response.success) {
         // Recharger les images pour avoir le bon ordre
         await loadProductImages();
@@ -144,15 +145,15 @@ export default function ProductImagesPage() {
       totalOriginalSize: ProductImagesService.formatFileSize(totalOriginalSize),
       totalOptimizedSize: ProductImagesService.formatFileSize(totalOptimizedSize),
       totalReduction: Math.round(totalReduction * 100) / 100,
-      savedSpace: ProductImagesService.formatFileSize(totalOriginalSize - totalOptimizedSize)
+      savedSpace: ProductImagesService.formatFileSize(totalOriginalSize - totalOptimizedSize),
     };
   };
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-black mx-auto mb-4"></div>
+      <div className='min-h-screen bg-gray-50 flex items-center justify-center'>
+        <div className='text-center'>
+          <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-black mx-auto mb-4' />
           <p>Chargement...</p>
         </div>
       </div>
@@ -166,37 +167,33 @@ export default function ProductImagesPage() {
   const stats = calculateStats();
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className='min-h-screen bg-gray-50'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8'>
         {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
+        <div className='mb-8'>
+          <div className='flex items-center justify-between'>
+            <div className='flex items-center space-x-4'>
               <Button
-                variant="outline"
+                variant='outline'
                 onClick={() => router.back()}
-                className="flex items-center gap-2"
+                className='flex items-center gap-2'
               >
-                <ArrowLeft className="h-4 w-4" />
+                <ArrowLeft className='h-4 w-4' />
                 Retour
               </Button>
               <div>
-                <h1 className="text-3xl font-bold text-gray-900">
-                  Gestion des Images Produit
-                </h1>
-                <p className="text-gray-600 mt-1">
-                  ID Produit: {productId}
-                </p>
+                <h1 className='text-3xl font-bold text-gray-900'>Gestion des Images Produit</h1>
+                <p className='text-gray-600 mt-1'>ID Produit: {productId}</p>
               </div>
             </div>
 
-            <div className="flex items-center space-x-3">
+            <div className='flex items-center space-x-3'>
               <Button
-                variant="outline"
+                variant='outline'
                 onClick={() => setShowStats(!showStats)}
-                className="flex items-center gap-2"
+                className='flex items-center gap-2'
               >
-                <BarChart3 className="h-4 w-4" />
+                <BarChart3 className='h-4 w-4' />
                 Statistiques
               </Button>
             </div>
@@ -205,43 +202,43 @@ export default function ProductImagesPage() {
 
         {/* Statistiques */}
         {showStats && (
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">
+          <div className='bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-8'>
+            <h3 className='text-lg font-semibold text-gray-900 mb-4'>
               Statistiques d'Optimisation
             </h3>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-              <div className="text-center">
-                <div className="text-2xl font-bold text-blue-600">{stats.totalImages}</div>
-                <div className="text-sm text-gray-600">Images</div>
+            <div className='grid grid-cols-2 md:grid-cols-5 gap-4'>
+              <div className='text-center'>
+                <div className='text-2xl font-bold text-blue-600'>{stats.totalImages}</div>
+                <div className='text-sm text-gray-600'>Images</div>
               </div>
-              <div className="text-center">
-                <div className="text-lg font-semibold text-gray-900">{stats.totalOriginalSize}</div>
-                <div className="text-sm text-gray-600">Taille originale</div>
+              <div className='text-center'>
+                <div className='text-lg font-semibold text-gray-900'>{stats.totalOriginalSize}</div>
+                <div className='text-sm text-gray-600'>Taille originale</div>
               </div>
-              <div className="text-center">
-                <div className="text-lg font-semibold text-green-600">{stats.totalOptimizedSize}</div>
-                <div className="text-sm text-gray-600">Taille optimisée</div>
+              <div className='text-center'>
+                <div className='text-lg font-semibold text-green-600'>
+                  {stats.totalOptimizedSize}
+                </div>
+                <div className='text-sm text-gray-600'>Taille optimisée</div>
               </div>
-              <div className="text-center">
-                <div className="text-lg font-semibold text-purple-600">{stats.totalReduction}%</div>
-                <div className="text-sm text-gray-600">Réduction</div>
+              <div className='text-center'>
+                <div className='text-lg font-semibold text-purple-600'>{stats.totalReduction}%</div>
+                <div className='text-sm text-gray-600'>Réduction</div>
               </div>
-              <div className="text-center">
-                <div className="text-lg font-semibold text-orange-600">{stats.savedSpace}</div>
-                <div className="text-sm text-gray-600">Espace économisé</div>
+              <div className='text-center'>
+                <div className='text-lg font-semibold text-orange-600'>{stats.savedSpace}</div>
+                <div className='text-sm text-gray-600'>Espace économisé</div>
               </div>
             </div>
           </div>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className='grid grid-cols-1 lg:grid-cols-3 gap-8'>
           {/* Zone d'Upload */}
-          <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                Ajouter des Images
-              </h3>
-              
+          <div className='lg:col-span-1'>
+            <div className='bg-white rounded-lg shadow-sm border border-gray-200 p-6'>
+              <h3 className='text-lg font-semibold text-gray-900 mb-4'>Ajouter des Images</h3>
+
               <ProductImageUpload
                 productId={productId}
                 onImagesChange={handleImagesChange}
@@ -250,9 +247,9 @@ export default function ProductImagesPage() {
               />
 
               {isUploading && (
-                <div className="mt-4 text-center">
-                  <div className="inline-flex items-center gap-2 text-blue-600">
-                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600"></div>
+                <div className='mt-4 text-center'>
+                  <div className='inline-flex items-center gap-2 text-blue-600'>
+                    <div className='animate-spin rounded-full h-4 w-4 border-b-2 border-blue-600' />
                     Optimisation en cours...
                   </div>
                 </div>
@@ -261,83 +258,80 @@ export default function ProductImagesPage() {
           </div>
 
           {/* Galerie d'Images */}
-          <div className="lg:col-span-2">
-            <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-semibold text-gray-900">
+          <div className='lg:col-span-2'>
+            <div className='bg-white rounded-lg shadow-sm border border-gray-200 p-6'>
+              <div className='flex items-center justify-between mb-6'>
+                <h3 className='text-lg font-semibold text-gray-900'>
                   Images du Produit ({images.length})
                 </h3>
                 {images.length > 0 && (
-                  <div className="text-sm text-gray-500">
-                    Glissez-déposez pour réorganiser
-                  </div>
+                  <div className='text-sm text-gray-500'>Glissez-déposez pour réorganiser</div>
                 )}
               </div>
 
               {isLoading ? (
-                <div className="text-center py-12">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 mx-auto mb-4"></div>
-                  <p className="text-gray-600">Chargement des images...</p>
+                <div className='text-center py-12'>
+                  <div className='animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900 mx-auto mb-4' />
+                  <p className='text-gray-600'>Chargement des images...</p>
                 </div>
               ) : images.length === 0 ? (
-                <div className="text-center py-12">
-                  <ImageIcon className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                  <h3 className="text-lg font-medium text-gray-900 mb-2">
-                    Aucune image
-                  </h3>
-                  <p className="text-gray-500">
-                    Commencez par ajouter des images à votre produit
-                  </p>
+                <div className='text-center py-12'>
+                  <ImageIcon className='h-12 w-12 text-gray-400 mx-auto mb-4' />
+                  <h3 className='text-lg font-medium text-gray-900 mb-2'>Aucune image</h3>
+                  <p className='text-gray-500'>Commencez par ajouter des images à votre produit</p>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
                   {images.map((image, index) => (
                     <div
                       key={image.id}
-                      className="relative group border border-gray-200 rounded-lg overflow-hidden"
+                      className='relative group border border-gray-200 rounded-lg overflow-hidden'
                     >
                       {/* Image principale */}
-                      <div className="aspect-square bg-gray-100">
+                      <div className='aspect-square bg-gray-100'>
                         <Image
-                          src={ProductImagesService.getOptimalImageUrl(image.optimizedPaths, 'medium')}
+                          src={ProductImagesService.getOptimalImageUrl(
+                            image.optimizedPaths,
+                            'medium'
+                          )}
                           alt={image.originalName}
                           fill
-                          className="object-cover"
-                          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+                          className='object-cover'
+                          sizes='(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw'
                         />
                       </div>
 
                       {/* Overlay avec actions */}
-                      <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-200">
-                        <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className='absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-200'>
+                        <div className='absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity'>
                           <button
                             onClick={() => handleDeleteImage(image.id)}
-                            className="p-1 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors"
-                            title="Supprimer"
+                            className='p-1 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors'
+                            title='Supprimer'
                           >
-                            <Trash2 className="h-3 w-3" />
+                            <Trash2 className='h-3 w-3' />
                           </button>
                         </div>
 
                         {/* Boutons de réorganisation */}
-                        <div className="absolute top-2 left-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <div className="flex gap-1">
+                        <div className='absolute top-2 left-2 opacity-0 group-hover:opacity-100 transition-opacity'>
+                          <div className='flex gap-1'>
                             {index > 0 && (
                               <button
                                 onClick={() => moveImage(index, index - 1)}
-                                className="p-1 bg-gray-700 text-white rounded-full hover:bg-gray-800 transition-colors"
-                                title="Déplacer vers la gauche"
+                                className='p-1 bg-gray-700 text-white rounded-full hover:bg-gray-800 transition-colors'
+                                title='Déplacer vers la gauche'
                               >
-                                <Move className="h-3 w-3 rotate-90" />
+                                <Move className='h-3 w-3 rotate-90' />
                               </button>
                             )}
                             {index < images.length - 1 && (
                               <button
                                 onClick={() => moveImage(index, index + 1)}
-                                className="p-1 bg-gray-700 text-white rounded-full hover:bg-gray-800 transition-colors"
-                                title="Déplacer vers la droite"
+                                className='p-1 bg-gray-700 text-white rounded-full hover:bg-gray-800 transition-colors'
+                                title='Déplacer vers la droite'
                               >
-                                <Move className="h-3 w-3 -rotate-90" />
+                                <Move className='h-3 w-3 -rotate-90' />
                               </button>
                             )}
                           </div>
@@ -345,20 +339,20 @@ export default function ProductImagesPage() {
                       </div>
 
                       {/* Informations de l'image */}
-                      <div className="p-3">
-                        <p className="text-xs text-gray-600 truncate" title={image.originalName}>
+                      <div className='p-3'>
+                        <p className='text-xs text-gray-600 truncate' title={image.originalName}>
                           {image.originalName}
                         </p>
-                        <div className="flex items-center justify-between mt-1">
-                          <p className="text-xs text-gray-500">
+                        <div className='flex items-center justify-between mt-1'>
+                          <p className='text-xs text-gray-500'>
                             {ProductImagesService.formatFileSize(image.metadata.optimizedSize)}
                           </p>
-                          <div className="flex items-center gap-1">
-                            <CheckCircle className="h-3 w-3 text-green-500" />
-                            <span className="text-xs text-green-600">Optimisée</span>
+                          <div className='flex items-center gap-1'>
+                            <CheckCircle className='h-3 w-3 text-green-500' />
+                            <span className='text-xs text-green-600'>Optimisée</span>
                           </div>
                         </div>
-                        <p className="text-xs text-gray-500 mt-1">
+                        <p className='text-xs text-gray-500 mt-1'>
                           {image.metadata.dimensions.width} × {image.metadata.dimensions.height}px
                         </p>
                       </div>
@@ -372,4 +366,4 @@ export default function ProductImagesPage() {
       </div>
     </div>
   );
-} 
+}

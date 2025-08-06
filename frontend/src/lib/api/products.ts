@@ -36,7 +36,7 @@ export class ProductsService {
       if (params?.sortBy) searchParams.append('sortBy', params.sortBy);
 
       const response = await fetch(`${this.baseUrl}?${searchParams.toString()}`);
-      
+
       if (!response.ok) {
         throw new Error('Erreur lors de la récupération des produits');
       }
@@ -52,7 +52,7 @@ export class ProductsService {
   static async getProductById(id: string): Promise<Product> {
     try {
       const response = await fetch(`${this.baseUrl}/${id}`);
-      
+
       if (!response.ok) {
         throw new Error('Produit non trouvé');
       }
@@ -66,7 +66,9 @@ export class ProductsService {
   }
 
   // Créer un nouveau produit (SuperAdmin)
-  static async createProduct(productData: Omit<Product, 'id' | 'createdAt' | 'updatedAt'>): Promise<ProductResponse> {
+  static async createProduct(
+    productData: Omit<Product, 'id' | 'createdAt' | 'updatedAt'>
+  ): Promise<ProductResponse> {
     try {
       const response = await fetch(`${this.baseUrl}`, {
         method: 'POST',
@@ -153,7 +155,7 @@ export class ProductsService {
   static async getProductsByCategory(category: string): Promise<Product[]> {
     try {
       const response = await fetch(`${this.baseUrl}/category/${category}`);
-      
+
       if (!response.ok) {
         throw new Error('Erreur lors de la récupération des produits par catégorie');
       }
@@ -170,7 +172,7 @@ export class ProductsService {
   static async searchProducts(query: string): Promise<Product[]> {
     try {
       const response = await fetch(`${this.baseUrl}/search?q=${encodeURIComponent(query)}`);
-      
+
       if (!response.ok) {
         throw new Error('Erreur lors de la recherche');
       }
@@ -182,4 +184,4 @@ export class ProductsService {
       throw error;
     }
   }
-} 
+}

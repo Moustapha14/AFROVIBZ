@@ -1,23 +1,24 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useAuth } from '@/lib/hooks/useAuth';
-import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/Button';
-import { Input } from '@/components/ui/Input';
-import { 
-  MapPin, 
-  Plus, 
-  Edit, 
-  Trash2, 
-  CheckCircle, 
-  Home, 
-  Building, 
+import {
+  MapPin,
+  Plus,
+  Edit,
+  Trash2,
+  CheckCircle,
+  Home,
+  Building,
   User,
   Phone,
-  Mail
+  Mail,
 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
+
+import { Button } from '@/components/ui/Button';
+import { Input } from '@/components/ui/Input';
+import { useAuth } from '@/lib/hooks/useAuth';
 
 interface Address {
   id: string;
@@ -52,7 +53,7 @@ const mockAddresses: Address[] = [
     country: 'Gabon',
     isDefault: true,
     isDefaultBilling: true,
-    notes: 'Code d\'entrée: 1234',
+    notes: "Code d'entrée: 1234",
   },
   {
     id: '2',
@@ -106,7 +107,13 @@ export default function ClientAddressesPage() {
   };
 
   const handleAddAddress = () => {
-    if (!formData.name || !formData.firstName || !formData.lastName || !formData.address || !formData.city) {
+    if (
+      !formData.name ||
+      !formData.firstName ||
+      !formData.lastName ||
+      !formData.address ||
+      !formData.city
+    ) {
       toast.error('Veuillez remplir tous les champs obligatoires');
       return;
     }
@@ -133,7 +140,13 @@ export default function ClientAddressesPage() {
   const handleEditAddress = () => {
     if (!selectedAddress) return;
 
-    if (!formData.name || !formData.firstName || !formData.lastName || !formData.address || !formData.city) {
+    if (
+      !formData.name ||
+      !formData.firstName ||
+      !formData.lastName ||
+      !formData.address ||
+      !formData.city
+    ) {
       toast.error('Veuillez remplir tous les champs obligatoires');
       return;
     }
@@ -146,9 +159,9 @@ export default function ClientAddressesPage() {
       setAddresses(prev => prev.map(addr => ({ ...addr, isDefaultBilling: false })));
     }
 
-    setAddresses(prev => prev.map(addr => 
-      addr.id === selectedAddress.id ? { ...addr, ...formData } : addr
-    ));
+    setAddresses(prev =>
+      prev.map(addr => (addr.id === selectedAddress.id ? { ...addr, ...formData } : addr))
+    );
     setIsEditModalOpen(false);
     setSelectedAddress(null);
     resetForm();
@@ -163,12 +176,16 @@ export default function ClientAddressesPage() {
   };
 
   const handleSetDefault = (addressId: string, type: 'shipping' | 'billing') => {
-    setAddresses(prev => prev.map(addr => ({
-      ...addr,
-      isDefault: type === 'shipping' ? addr.id === addressId : addr.isDefault,
-      isDefaultBilling: type === 'billing' ? addr.id === addressId : addr.isDefaultBilling,
-    })));
-    toast.success(`Adresse définie comme ${type === 'shipping' ? 'livraison' : 'facturation'} par défaut`);
+    setAddresses(prev =>
+      prev.map(addr => ({
+        ...addr,
+        isDefault: type === 'shipping' ? addr.id === addressId : addr.isDefault,
+        isDefaultBilling: type === 'billing' ? addr.id === addressId : addr.isDefaultBilling,
+      }))
+    );
+    toast.success(
+      `Adresse définie comme ${type === 'shipping' ? 'livraison' : 'facturation'} par défaut`
+    );
   };
 
   const openEditModal = (address: Address) => {
@@ -212,11 +229,11 @@ export default function ClientAddressesPage() {
   const getTypeIcon = (type: string) => {
     switch (type) {
       case 'home':
-        return <Home className="h-5 w-5" />;
+        return <Home className='h-5 w-5' />;
       case 'work':
-        return <Building className="h-5 w-5" />;
+        return <Building className='h-5 w-5' />;
       default:
-        return <MapPin className="h-5 w-5" />;
+        return <MapPin className='h-5 w-5' />;
     }
   };
 
@@ -232,7 +249,9 @@ export default function ClientAddressesPage() {
   };
 
   if (loading) {
-    return <div className="min-h-screen bg-gray-50 flex items-center justify-center">Chargement...</div>;
+    return (
+      <div className='min-h-screen bg-gray-50 flex items-center justify-center'>Chargement...</div>
+    );
   }
 
   if (!user || user.role !== 'user') {
@@ -240,127 +259,129 @@ export default function ClientAddressesPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className='min-h-screen bg-gray-50'>
+      <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8'>
         {/* Header */}
-        <div className="mb-8">
-          <div className="flex justify-between items-center">
+        <div className='mb-8'>
+          <div className='flex justify-between items-center'>
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Mes Adresses</h1>
-              <p className="mt-2 text-gray-600">Gérez vos adresses de livraison et de facturation</p>
+              <h1 className='text-3xl font-bold text-gray-900'>Mes Adresses</h1>
+              <p className='mt-2 text-gray-600'>
+                Gérez vos adresses de livraison et de facturation
+              </p>
             </div>
-            <Button
-              onClick={() => setIsAddModalOpen(true)}
-              className="flex items-center gap-2"
-            >
-              <Plus className="h-4 w-4" />
+            <Button onClick={() => setIsAddModalOpen(true)} className='flex items-center gap-2'>
+              <Plus className='h-4 w-4' />
               Ajouter une adresse
             </Button>
           </div>
         </div>
 
         {/* Liste des adresses */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {addresses.map((address) => (
-            <div key={address.id} className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
+          {addresses.map(address => (
+            <div
+              key={address.id}
+              className='bg-white rounded-lg shadow-sm border border-gray-200 p-6'
+            >
               {/* En-tête de la carte */}
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2">
-                  <div className="p-2 bg-blue-100 rounded-lg">
-                    {getTypeIcon(address.type)}
-                  </div>
+              <div className='flex items-center justify-between mb-4'>
+                <div className='flex items-center gap-2'>
+                  <div className='p-2 bg-blue-100 rounded-lg'>{getTypeIcon(address.type)}</div>
                   <div>
-                    <h3 className="font-semibold text-gray-900">{address.name}</h3>
-                    <p className="text-sm text-gray-500">{getTypeLabel(address.type)}</p>
+                    <h3 className='font-semibold text-gray-900'>{address.name}</h3>
+                    <p className='text-sm text-gray-500'>{getTypeLabel(address.type)}</p>
                   </div>
                 </div>
-                <div className="flex gap-1">
+                <div className='flex gap-1'>
                   <button
                     onClick={() => openEditModal(address)}
-                    className="p-1 text-gray-400 hover:text-blue-600 transition-colors"
-                    title="Modifier"
+                    className='p-1 text-gray-400 hover:text-blue-600 transition-colors'
+                    title='Modifier'
                   >
-                    <Edit className="h-4 w-4" />
+                    <Edit className='h-4 w-4' />
                   </button>
                   <button
                     onClick={() => handleDeleteAddress(address.id)}
-                    className="p-1 text-gray-400 hover:text-red-600 transition-colors"
-                    title="Supprimer"
+                    className='p-1 text-gray-400 hover:text-red-600 transition-colors'
+                    title='Supprimer'
                   >
-                    <Trash2 className="h-4 w-4" />
+                    <Trash2 className='h-4 w-4' />
                   </button>
                 </div>
               </div>
 
               {/* Informations de l'adresse */}
-              <div className="space-y-2 mb-4">
-                <div className="flex items-center gap-2 text-sm">
-                  <User className="h-4 w-4 text-gray-400" />
-                  <span className="text-gray-900">
+              <div className='space-y-2 mb-4'>
+                <div className='flex items-center gap-2 text-sm'>
+                  <User className='h-4 w-4 text-gray-400' />
+                  <span className='text-gray-900'>
                     {address.firstName} {address.lastName}
                   </span>
                 </div>
-                
-                <div className="flex items-center gap-2 text-sm">
-                  <Phone className="h-4 w-4 text-gray-400" />
-                  <span className="text-gray-900">{address.phone}</span>
+
+                <div className='flex items-center gap-2 text-sm'>
+                  <Phone className='h-4 w-4 text-gray-400' />
+                  <span className='text-gray-900'>{address.phone}</span>
                 </div>
-                
-                <div className="flex items-center gap-2 text-sm">
-                  <Mail className="h-4 w-4 text-gray-400" />
-                  <span className="text-gray-900">{address.email}</span>
+
+                <div className='flex items-center gap-2 text-sm'>
+                  <Mail className='h-4 w-4 text-gray-400' />
+                  <span className='text-gray-900'>{address.email}</span>
                 </div>
-                
-                <div className="flex items-start gap-2 text-sm">
-                  <MapPin className="h-4 w-4 text-gray-400 mt-0.5" />
-                  <div className="text-gray-900">
+
+                <div className='flex items-start gap-2 text-sm'>
+                  <MapPin className='h-4 w-4 text-gray-400 mt-0.5' />
+                  <div className='text-gray-900'>
                     <div>{address.address}</div>
-                    <div>{address.postalCode} {address.city}</div>
+                    <div>
+                      {address.postalCode} {address.city}
+                    </div>
                     <div>{address.country}</div>
                   </div>
                 </div>
 
                 {address.notes && (
-                  <div className="text-sm text-gray-600 bg-gray-50 p-2 rounded">
+                  <div className='text-sm text-gray-600 bg-gray-50 p-2 rounded'>
                     <strong>Note :</strong> {address.notes}
                   </div>
                 )}
               </div>
 
               {/* Badges par défaut */}
-              <div className="flex flex-wrap gap-2 mb-4">
+              <div className='flex flex-wrap gap-2 mb-4'>
                 {address.isDefault && (
-                  <span className="inline-flex items-center px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
-                    <CheckCircle className="h-3 w-3 mr-1" />
+                  <span className='inline-flex items-center px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800'>
+                    <CheckCircle className='h-3 w-3 mr-1' />
                     Livraison par défaut
                   </span>
                 )}
                 {address.isDefaultBilling && (
-                  <span className="inline-flex items-center px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
-                    <CheckCircle className="h-3 w-3 mr-1" />
+                  <span className='inline-flex items-center px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800'>
+                    <CheckCircle className='h-3 w-3 mr-1' />
                     Facturation par défaut
                   </span>
                 )}
               </div>
 
               {/* Actions */}
-              <div className="flex gap-2">
+              <div className='flex gap-2'>
                 {!address.isDefault && (
                   <Button
-                    variant="outline"
-                    size="sm"
+                    variant='outline'
+                    size='sm'
                     onClick={() => handleSetDefault(address.id, 'shipping')}
-                    className="flex-1"
+                    className='flex-1'
                   >
                     Définir livraison
                   </Button>
                 )}
                 {!address.isDefaultBilling && (
                   <Button
-                    variant="outline"
-                    size="sm"
+                    variant='outline'
+                    size='sm'
                     onClick={() => handleSetDefault(address.id, 'billing')}
-                    className="flex-1"
+                    className='flex-1'
                   >
                     Définir facturation
                   </Button>
@@ -372,190 +393,184 @@ export default function ClientAddressesPage() {
 
         {/* État vide */}
         {addresses.length === 0 && (
-          <div className="text-center py-12">
-            <MapPin className="mx-auto h-12 w-12 text-gray-400" />
-            <h3 className="mt-2 text-sm font-medium text-gray-900">Aucune adresse enregistrée</h3>
-            <p className="mt-1 text-sm text-gray-500">
+          <div className='text-center py-12'>
+            <MapPin className='mx-auto h-12 w-12 text-gray-400' />
+            <h3 className='mt-2 text-sm font-medium text-gray-900'>Aucune adresse enregistrée</h3>
+            <p className='mt-1 text-sm text-gray-500'>
               Ajoutez votre première adresse pour faciliter vos commandes.
             </p>
-            <div className="mt-6">
-              <Button onClick={() => setIsAddModalOpen(true)}>
-                Ajouter une adresse
-              </Button>
+            <div className='mt-6'>
+              <Button onClick={() => setIsAddModalOpen(true)}>Ajouter une adresse</Button>
             </div>
           </div>
         )}
 
         {/* Modal d'ajout/modification */}
         {(isAddModalOpen || isEditModalOpen) && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-            <div className="bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto">
-              <div className="p-6">
-                <h2 className="text-xl font-semibold text-gray-900 mb-6">
-                  {isAddModalOpen ? 'Ajouter une adresse' : 'Modifier l\'adresse'}
+          <div className='fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50'>
+            <div className='bg-white rounded-lg max-w-md w-full max-h-[90vh] overflow-y-auto'>
+              <div className='p-6'>
+                <h2 className='text-xl font-semibold text-gray-900 mb-6'>
+                  {isAddModalOpen ? 'Ajouter une adresse' : "Modifier l'adresse"}
                 </h2>
 
-                <div className="space-y-4">
+                <div className='space-y-4'>
                   {/* Type d'adresse */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className='block text-sm font-medium text-gray-700 mb-2'>
                       Type d'adresse *
                     </label>
                     <select
                       value={formData.type}
-                      onChange={(e) => handleInputChange('type', e.target.value as 'home' | 'work' | 'other')}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      onChange={e =>
+                        handleInputChange('type', e.target.value as 'home' | 'work' | 'other')
+                      }
+                      className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
                     >
-                      <option value="home">Domicile</option>
-                      <option value="work">Bureau</option>
-                      <option value="other">Autre</option>
+                      <option value='home'>Domicile</option>
+                      <option value='work'>Bureau</option>
+                      <option value='other'>Autre</option>
                     </select>
                   </div>
 
                   {/* Nom de l'adresse */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className='block text-sm font-medium text-gray-700 mb-2'>
                       Nom de l'adresse *
                     </label>
                     <Input
                       value={formData.name}
-                      onChange={(e) => handleInputChange('name', e.target.value)}
-                      placeholder="Ex: Domicile, Bureau, etc."
+                      onChange={e => handleInputChange('name', e.target.value)}
+                      placeholder='Ex: Domicile, Bureau, etc.'
                     />
                   </div>
 
                   {/* Prénom et nom */}
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className='grid grid-cols-2 gap-4'>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className='block text-sm font-medium text-gray-700 mb-2'>
                         Prénom *
                       </label>
                       <Input
                         value={formData.firstName}
-                        onChange={(e) => handleInputChange('firstName', e.target.value)}
-                        placeholder="Prénom"
+                        onChange={e => handleInputChange('firstName', e.target.value)}
+                        placeholder='Prénom'
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Nom *
-                      </label>
+                      <label className='block text-sm font-medium text-gray-700 mb-2'>Nom *</label>
                       <Input
                         value={formData.lastName}
-                        onChange={(e) => handleInputChange('lastName', e.target.value)}
-                        placeholder="Nom"
+                        onChange={e => handleInputChange('lastName', e.target.value)}
+                        placeholder='Nom'
                       />
                     </div>
                   </div>
 
                   {/* Téléphone et email */}
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className='grid grid-cols-2 gap-4'>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className='block text-sm font-medium text-gray-700 mb-2'>
                         Téléphone
                       </label>
                       <Input
                         value={formData.phone}
-                        onChange={(e) => handleInputChange('phone', e.target.value)}
-                        placeholder="+241 01 23 45 67"
+                        onChange={e => handleInputChange('phone', e.target.value)}
+                        placeholder='+241 01 23 45 67'
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Email
-                      </label>
+                      <label className='block text-sm font-medium text-gray-700 mb-2'>Email</label>
                       <Input
                         value={formData.email}
-                        onChange={(e) => handleInputChange('email', e.target.value)}
-                        placeholder="email@example.com"
-                        type="email"
+                        onChange={e => handleInputChange('email', e.target.value)}
+                        placeholder='email@example.com'
+                        type='email'
                       />
                     </div>
                   </div>
 
                   {/* Adresse */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className='block text-sm font-medium text-gray-700 mb-2'>
                       Adresse *
                     </label>
                     <Input
                       value={formData.address}
-                      onChange={(e) => handleInputChange('address', e.target.value)}
-                      placeholder="123 Rue de la Paix"
+                      onChange={e => handleInputChange('address', e.target.value)}
+                      placeholder='123 Rue de la Paix'
                     />
                   </div>
 
                   {/* Ville et code postal */}
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className='grid grid-cols-2 gap-4'>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className='block text-sm font-medium text-gray-700 mb-2'>
                         Ville *
                       </label>
                       <Input
                         value={formData.city}
-                        onChange={(e) => handleInputChange('city', e.target.value)}
-                        placeholder="Libreville"
+                        onChange={e => handleInputChange('city', e.target.value)}
+                        placeholder='Libreville'
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className='block text-sm font-medium text-gray-700 mb-2'>
                         Code postal
                       </label>
                       <Input
                         value={formData.postalCode}
-                        onChange={(e) => handleInputChange('postalCode', e.target.value)}
-                        placeholder="0000"
+                        onChange={e => handleInputChange('postalCode', e.target.value)}
+                        placeholder='0000'
                       />
                     </div>
                   </div>
 
                   {/* Pays */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Pays
-                    </label>
+                    <label className='block text-sm font-medium text-gray-700 mb-2'>Pays</label>
                     <Input
                       value={formData.country}
-                      onChange={(e) => handleInputChange('country', e.target.value)}
-                      placeholder="Gabon"
+                      onChange={e => handleInputChange('country', e.target.value)}
+                      placeholder='Gabon'
                     />
                   </div>
 
                   {/* Notes */}
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className='block text-sm font-medium text-gray-700 mb-2'>
                       Notes (optionnel)
                     </label>
                     <textarea
                       value={formData.notes}
-                      onChange={(e) => handleInputChange('notes', e.target.value)}
+                      onChange={e => handleInputChange('notes', e.target.value)}
                       rows={3}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className='w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500'
                       placeholder="Code d'entrée, instructions de livraison, etc."
                     />
                   </div>
 
                   {/* Options par défaut */}
-                  <div className="space-y-3">
-                    <label className="flex items-center">
+                  <div className='space-y-3'>
+                    <label className='flex items-center'>
                       <input
-                        type="checkbox"
+                        type='checkbox'
                         checked={formData.isDefault}
-                        onChange={(e) => handleInputChange('isDefault', e.target.checked)}
-                        className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                        onChange={e => handleInputChange('isDefault', e.target.checked)}
+                        className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
                       />
-                      <span className="ml-2 text-sm text-gray-700">
+                      <span className='ml-2 text-sm text-gray-700'>
                         Définir comme adresse de livraison par défaut
                       </span>
                     </label>
-                    <label className="flex items-center">
+                    <label className='flex items-center'>
                       <input
-                        type="checkbox"
+                        type='checkbox'
                         checked={formData.isDefaultBilling}
-                        onChange={(e) => handleInputChange('isDefaultBilling', e.target.checked)}
-                        className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                        onChange={e => handleInputChange('isDefaultBilling', e.target.checked)}
+                        className='rounded border-gray-300 text-blue-600 focus:ring-blue-500'
                       />
-                      <span className="ml-2 text-sm text-gray-700">
+                      <span className='ml-2 text-sm text-gray-700'>
                         Définir comme adresse de facturation par défaut
                       </span>
                     </label>
@@ -563,22 +578,22 @@ export default function ClientAddressesPage() {
                 </div>
 
                 {/* Boutons d'action */}
-                <div className="flex gap-3 mt-6">
+                <div className='flex gap-3 mt-6'>
                   <Button
-                    variant="outline"
+                    variant='outline'
                     onClick={() => {
                       setIsAddModalOpen(false);
                       setIsEditModalOpen(false);
                       setSelectedAddress(null);
                       resetForm();
                     }}
-                    className="flex-1"
+                    className='flex-1'
                   >
                     Annuler
                   </Button>
                   <Button
                     onClick={isAddModalOpen ? handleAddAddress : handleEditAddress}
-                    className="flex-1"
+                    className='flex-1'
                   >
                     {isAddModalOpen ? 'Ajouter' : 'Modifier'}
                   </Button>
@@ -590,4 +605,4 @@ export default function ClientAddressesPage() {
       </div>
     </div>
   );
-} 
+}
