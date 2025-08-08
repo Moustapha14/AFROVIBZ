@@ -25,8 +25,9 @@ import { formatPrice } from '@/lib/utils';
 
 export function Header() {
   const { user, logout } = useAuth();
-  const { getCartCount } = useCart();
+  const { getCartCount, onCartUpdate } = useCart();
   const { wishlist } = useWishlist();
+  const [cartCounterAnimating, setCartCounterAnimating] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
@@ -65,6 +66,15 @@ export function Header() {
     document.addEventListener('keydown', handleEscape);
     return () => document.removeEventListener('keydown', handleEscape);
   }, []);
+
+  // Animate cart counter on cart updates
+  useEffect(() => {
+    const unsubscribe = onCartUpdate(() => {
+      setCartCounterAnimating(true);
+      setTimeout(() => setCartCounterAnimating(false), 500);
+    });
+    return unsubscribe;
+  }, [onCartUpdate]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -180,7 +190,12 @@ export function Header() {
             >
               <ShoppingBag className='h-5 w-5 sm:h-6 sm:w-6' />
               {getCartCount() > 0 && (
-                <span className='absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 sm:h-6 sm:w-6 flex items-center justify-center font-medium'>
+                <span 
+                  className={`absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 sm:h-6 sm:w-6 flex items-center justify-center font-medium transition-transform ${
+                    cartCounterAnimating ? 'cart-counter-update' : ''
+                  }`}
+                  data-testid='cart-counter'
+                >
                   {getCartCount() > 99 ? '99+' : getCartCount()}
                 </span>
               )}

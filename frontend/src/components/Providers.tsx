@@ -3,6 +3,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { ContentProvider } from '@/lib/context/ContentContext';
+import { ToastProvider } from '@/lib/context/ToastContext';
 import { TrackingProvider } from '@/lib/context/TrackingContext';
 import { AuthProvider } from '@/lib/hooks/useAuth';
 
@@ -18,9 +19,11 @@ export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <TrackingProvider>
-          <ContentProvider>{children}</ContentProvider>
-        </TrackingProvider>
+        <ToastProvider>
+          <TrackingProvider>
+            <ContentProvider>{children}</ContentProvider>
+          </TrackingProvider>
+        </ToastProvider>
       </AuthProvider>
     </QueryClientProvider>
   );

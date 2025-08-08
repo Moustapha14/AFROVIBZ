@@ -2,6 +2,7 @@ import Image from 'next/image';
 import React, { useMemo } from 'react';
 
 import { Button } from '@/components/ui/Button';
+import { useToast } from '@/lib/context/ToastContext';
 import { useCart } from '@/lib/hooks/useCart';
 import { useDebounce, useMemoizedValue, useStableCallback } from '@/lib/hooks/usePerformance';
 import { useWishlist } from '@/lib/hooks/useWishlist';
@@ -20,12 +21,27 @@ const ProductItem = React.memo<{
 }>(({ product, onProductClick }) => {
   const { addToCart, getCartCount } = useCart();
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
+  const { showToast } = useToast();
 
   const cartCount = getCartCount();
   const isWishlisted = isInWishlist(product.id);
 
   const handleAddToCart = useStableCallback(() => {
+    const prevCartCount = getCartCount();
     addToCart(product, 1, product.sizes[0] || 'M', product.colors[0]?.name || 'default');
+    
+    // Use setTimeout to ensure cart state is updated
+    setTimeout(() => {
+      const newCartCount = getCartCount();
+      if (newCartCount > prevCartCount) {
+        showToast({
+          type: 'success',
+          title: 'Produit ajouté !',
+          message: `${product.name} a été ajouté à votre panier`,
+          duration: 3000
+        });
+      }
+    }, 100);
   });
 
   const handleWishlistToggle = useStableCallback(() => {

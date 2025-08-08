@@ -4,7 +4,8 @@ import { ArrowRight, Star, ShoppingBag, Heart, Truck, Shield } from 'lucide-reac
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import toast from 'react-hot-toast';
+
+import { useToast } from '@/lib/context/ToastContext';
 
 import OptimizedImageCarousel from '@/components/HeroSection/OptimizedImageCarousel';
 import { Button } from '@/components/ui/Button';
@@ -262,7 +263,8 @@ const categories = [
 
 export default function HomePage() {
   const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist();
-  const { addToCart } = useCart();
+  const { addToCart, getCartCount } = useCart();
+  const { showToast } = useToast();
 
   const handleAddToCart = (product: any, e: React.MouseEvent) => {
     e.preventDefault();
@@ -272,19 +274,21 @@ export default function HomePage() {
     const defaultSize = product.sizes?.[0] || 'Unique';
     const defaultColor = product.colors?.[0]?.name || 'Standard';
 
+    const prevCartCount = getCartCount();
     addToCart(product, 1, defaultSize, defaultColor);
-
-    // Afficher une notification de confirmation
-    toast.success(`${product.name} ajouté au panier !`, {
-      duration: 2000,
-      position: 'top-center',
-      style: {
-        background: '#10B981',
-        color: '#fff',
-        borderRadius: '8px',
-        fontSize: '14px',
-      },
-    });
+    
+    // Use setTimeout to ensure cart state is updated
+    setTimeout(() => {
+      const newCartCount = getCartCount();
+      if (newCartCount > prevCartCount) {
+        showToast({
+          type: 'success',
+          title: 'Produit ajouté !',
+          message: `${product.name} a été ajouté à votre panier`,
+          duration: 3000
+        });
+      }
+    }, 100);
   };
 
   return (

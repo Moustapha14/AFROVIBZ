@@ -20,6 +20,7 @@ import { Pagination } from '@/components/ui/Pagination';
 import { ProductImage } from '@/components/ui/ProductImage';
 import { ProductModal } from '@/components/ui/ProductModal';
 import { ProductsService, ProductsResponse } from '@/lib/api/products';
+import { useToast } from '@/lib/context/ToastContext';
 import { useCart } from '@/lib/hooks/useCart';
 import { useWishlist } from '@/lib/hooks/useWishlist';
 import { formatPrice, formatCompactPrice } from '@/lib/utils';
@@ -42,8 +43,9 @@ const priceRanges = [
 
 function ProductsPageContent() {
   const searchParams = useSearchParams();
-  const { addToCart } = useCart();
+  const { addToCart, getCartCount } = useCart();
   const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist();
+  const { showToast } = useToast();
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [showFilters, setShowFilters] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string>('');
@@ -129,8 +131,21 @@ function ProductsPageContent() {
   });
 
   const handleAddToCart = (product: Product, quantity: number, size: string, color: string) => {
+    const prevCartCount = getCartCount();
     addToCart(product, quantity, size, color);
-    alert(`${product.name} ajouté au panier !`);
+    
+    // Use setTimeout to ensure cart state is updated
+    setTimeout(() => {
+      const newCartCount = getCartCount();
+      if (newCartCount > prevCartCount) {
+        showToast({
+          type: 'success',
+          title: 'Produit ajouté !',
+          message: `${product.name} a été ajouté à votre panier`,
+          duration: 3000
+        });
+      }
+    }, 100);
   };
 
   const openProductModal = (product: Product) => {
@@ -320,6 +335,7 @@ function ProductsPageContent() {
               <div
                 key={product.id}
                 className='bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-200 group'
+                data-testid='product-card'
               >
                 <div className='relative aspect-square overflow-hidden rounded-t-lg bg-gray-200'>
                   <ProductImage
@@ -355,6 +371,7 @@ function ProductsPageContent() {
                       onClick={() => openProductModal(product)}
                       className='w-full bg-black text-white py-2 px-3 xs:px-4 rounded-md text-xs xs:text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center h-10'
                       aria-label={`Ajouter ${product.name} au panier`}
+                      data-testid='add-to-cart-button'
                     >
                       <ShoppingBag className='h-3 w-3 xs:h-4 xs:w-4 mr-1 xs:mr-2' />
                       <span className='hidden xs:inline'>Ajouter</span>
@@ -390,7 +407,7 @@ function ProductsPageContent() {
                       </span>
                       {product.originalPrice && (
                         <>
-                          <span className='sm:hidden text-base text-gray-500 line-through flex-shrink-0 font-semibold whitespace-nowrap'>
+                          <span className='xs:inline sm:hidden text-xs xs:text-sm text-gray-500 line-through flex-shrink-0 font-medium whitespace-nowrap'>
                             {formatCompactPrice(product.originalPrice)}
                           </span>
                           <span className='hidden sm:inline text-xs sm:text-sm text-gray-500 line-through flex-shrink-0 font-medium'>
@@ -470,7 +487,7 @@ function ProductsPageContent() {
                       </span>
                       {product.originalPrice && (
                         <>
-                          <span className='sm:hidden text-base text-gray-500 line-through flex-shrink-0 font-semibold whitespace-nowrap'>
+                          <span className='xs:inline sm:hidden text-xs xs:text-sm text-gray-500 line-through flex-shrink-0 font-medium whitespace-nowrap'>
                             {formatCompactPrice(product.originalPrice)}
                           </span>
                           <span className='hidden sm:inline text-xs sm:text-sm text-gray-500 line-through flex-shrink-0 font-medium'>
@@ -483,6 +500,7 @@ function ProductsPageContent() {
                       onClick={() => openProductModal(product)}
                       size='sm'
                       className='w-full xs:w-auto h-10'
+                      data-testid='add-to-cart-button'
                     >
                       <ShoppingBag className='h-3 w-3 xs:h-4 xs:w-4 mr-1 xs:mr-2' />
                       <span className='text-xs xs:text-sm'>Ajouter</span>

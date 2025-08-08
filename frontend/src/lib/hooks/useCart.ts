@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 
 import { CartItem, Product } from '@/types';
 
 export function useCart() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [lastAddedItem, setLastAddedItem] = useState<CartItem | null>(null);
+  const cartUpdateCallbacks = useRef<Set<() => void>>(new Set());
 
   useEffect(() => {
     // Load cart from localStorage
@@ -27,7 +29,9 @@ export function useCart() {
     }
   }, [cart, loading]);
 
-  const addToCart = (product: Product, quantity: number = 1, size: string, color: string) => {
+  const addToCart = useCallback((product: Product, quantity: number = 1, size: string, color: string) => {
+    let addedItem: CartItem;
+    
     setCart(prevCart => {
       const existingItemIndex = prevCart.findIndex(
         item =>
@@ -40,6 +44,14 @@ export function useCart() {
         // Update existing item
         const updatedCart = [...prevCart];
         updatedCart[existingItemIndex].quantity += quantity;
+        addedItem = updatedCart[existingItemIndex];
+        setLastAddedItem(addedItem);
+        
+        // Trigger cart update callbacks
+        setTimeout(() => {
+          cartUpdateCallbacks.current.forEach(callback => callback());
+        }, 0);
+        
         return updatedCart;
       } else {
         // Add new item
@@ -52,10 +64,18 @@ export function useCart() {
           selectedColor: color,
           price: product.price,
         };
+        addedItem = newItem;
+        setLastAddedItem(addedItem);
+        
+        // Trigger cart update callbacks
+        setTimeout(() => {
+          cartUpdateCallbacks.current.forEach(callback => callback());
+        }, 0);
+        
         return [...prevCart, newItem];
       }
     });
-  };
+  }, []);
 
   const removeFromCart = (itemId: string) => {
     setCart(prevCart => prevCart.filter(item => item.id !== itemId));
@@ -89,6 +109,13 @@ export function useCart() {
     );
   };
 
+  const onCartUpdate = useCallback((callback: () => void) => {
+    cartUpdateCallbacks.current.add(callback);
+    return () => {
+      cartUpdateCallbacks.current.delete(callback);
+    };
+  }, []);
+
   return {
     cart,
     loading,
@@ -99,5 +126,7 @@ export function useCart() {
     getCartTotal,
     getCartCount,
     isInCart,
+    lastAddedItem,
+    onCartUpdate,
   };
 }
